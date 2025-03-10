@@ -1,0 +1,35 @@
+
+
+name: Extract ZIP and Push Contents
+
+on:
+  workflow_dispatch: # Manual trigger from GitHub interface
+
+jobs:
+  extract-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download ZIP (optional if remote)
+        run: |
+          curl -L -o archive.zip https://github.com/extrinsicBox/KCD2-Scripting/blob/main/KCD2_Scripts.zip
+
+      - name: Unzip the archive
+        run: |
+          unzip archive.zip -d extracted_files
+          ls extracted_files
+
+      - name: Move files into repo
+        run: |
+          mv extracted_files/* .
+          rm -rf extracted_files
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Extracted and added files from zip"
+          git push

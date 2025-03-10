@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="custom_follow">
+			<Ports>
+				<Port Name="isinanyactivestate" Direction="In" Type="bool">
+					<DesignName StringName="custom_fo_isinanyactivest_cQjn" Text="IsInAnyActiveState" />
+				</Port>
+				<Port Name="finishfollow" Direction="In" Type="trigger">
+					<DesignName StringName="custom_fo_finishfollow_SQyv" Text="FinishFollow" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<State Name="customFollow" PositionY="-370" PositionX="460" TypeT="CustomFollow">
+					<Edge From="finishfollow" To="SetDone">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="stancetrigger2.OnStanceMatched" To="SetActive" />
+					<Edge From="stancetrigger2.OnStanceUnmatched" To="SetInactive" />
+				</State>
+				<StanceTrigger Name="stancetrigger2" PositionY="-230" PositionX="-40">
+					<Asset Name="Souls" Alias="hetman" />
+					<Constant Name="Stance" Value="horse" />
+					<Edge From="isinanyactivestate" To="IsActive" />
+				</StanceTrigger>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex3" PositionY="140" PositionX="-60" />
+				<EdgeVertex Name="vertex5" PositionY="140" PositionX="270" />
+			</EdgeVertices>
+			<Text StringName="custom_follow_zwKx" Text="Custom Follow" />
+		</Module>
+	</Skald>
+</Database>

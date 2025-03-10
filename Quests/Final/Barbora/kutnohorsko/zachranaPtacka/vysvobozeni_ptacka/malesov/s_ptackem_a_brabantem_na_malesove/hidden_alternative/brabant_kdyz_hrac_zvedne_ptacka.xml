@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="brabant_kdyz_hrac_zvedne_ptacka">
+			<Text StringName="brabant_kdyz_hrac_zvedne__Q7pp" Text="Brabant když hráč zvedne Ptáčka" />
+			<Dialogue Type="ingame monolog" TechnicalStatus="Enabled" Initiator="NonPlayer">
+				<Decision Name="dec1" Priority="MainQuestSubmission" Alias="zachranaPtacka_brabantKdyzHracZvednePtacka">
+					<Sequences>
+						<Sequence EndType="Decision" Name="seq1">
+							<DesignName StringName="brabant_k_seq1_YYqX" Text="seq1" />
+							<Elements>
+								<Response Role="BRABANT" />
+							</Elements>
+							<Decision Name="dec2" Priority="MainQuestSubmission">
+								<Sequences>
+									<Sequence EndType="EndDialogue" Name="seq2">
+										<DesignName StringName="brabant_k_seq2_1Dle" Text="seq2" />
+										<Elements>
+											<Response Role="BRABANT">
+												<Parenthetical>
+													<Text StringName="brab_brabant_popohani_str_HXcw" Text="popohání, stressful, polohlasem" />
+												</Parenthetical>
+												<Text StringName="brab_brabant_rychle_do_ch_mVAd" Text="Rychle do chodby, než se nám pán z Lipý probere!" />
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="EndDialogue" Name="seq3">
+										<DesignName StringName="brabant_k_seq3_hCyt" Text="seq3" />
+										<Elements>
+											<Response Role="BRABANT">
+												<Parenthetical>
+													<Text StringName="brab_brabant_popohani_str_rIK3" Text="popohání, stressful, polohlasem" />
+												</Parenthetical>
+												<Text StringName="brab_brabant_vlastne_dobr_YlVY" Text="Vlastně nakonec dobrej nápad, ta chodba bude bezpečnější." />
+											</Response>
+											<Response Role="BRABANT">
+												<Parenthetical>
+													<Text StringName="brab_brabant_popohani_str_CF5g" Text="popohání, stressful, polohlasem" />
+												</Parenthetical>
+												<Text StringName="brab_brabant_tak_rychle_qw5d" Text="Tak rychle!" />
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

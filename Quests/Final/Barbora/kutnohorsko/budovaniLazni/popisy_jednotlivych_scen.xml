@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Scene Name="popisy_jednotlivych_scen" IsLocked="true">
+			<Ports>
+				<Port Name="start_party" Direction="In" Type="trigger">
+					<DesignName StringName="popisy_je_start_party_7yuV" Text="start party" />
+				</Port>
+				<Port Name="po_party" Direction="Out" Type="trigger">
+					<DesignName StringName="popisy_je_po_party_wFiV" Text="po párty" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<CutsceneHandler Name="cutscenehandler1" PositionY="-79" PositionX="99">
+					<Asset Name="CutsceneHolder" Alias="velkaParty" />
+					<Edge From="start_party" To="EnqueueCutscene" />
+				</CutsceneHandler>
+				<Output Name="Output">
+					<Edge From="cutscenehandler1.OnQueued" To="po_party" />
+				</Output>
+			</Nodes>
+			<Assets>
+				<CutsceneHolderAsset Name="velkaParty" />
+			</Assets>
+			<Text StringName="popisy_jednotlivych_scen_ZtC2" Text="popisy jednotlivých scén" />
+			<Elements>
+				<DescriptionElement>
+					<Text StringName="popisy_je_puvodne_jsem_na_q1WT" Text="Původně jsem napsal hodně podrobný popis jednotlivých scén, s tím co přesně by s v nich mělo dít. Danovi přišlo, že toho je hodně a bude to celé dlouhé. Můj původní záměr ale byl aby to bylo kratší, ale na obrazovce se toho dělo víc v jednu a tu samou chvíli. (proto dlouhý popis) Takže tady nechám původní znění celé hodně podrobně vymyšlené a v druhé krabičce bude finální podobna cutscény tak, jak ji Dan schválil." />
+				</DescriptionElement>
+				<DescriptionElement>
+					<Text StringName="popisy_je_tenhle_popis_mu_eY2q" Text="Tenhle popis může sloužit jako inpirace cutscénářům, případně jako bližší popis toho, co se děje v jednotlivých scénách a jak jsem si to představoval. Opravdu tohle je jen pro inspiraci jak mohou scény vypadat." />
+				</DescriptionElement>
+				<DescriptionElement>
+					<Text StringName="popisy_je_httpswarhorsest_ggjx" Text="https://warhorsest.sharepoint.com/:w:/r/_layouts/15/Doc.aspx?sourcedoc=%7B085426FA-699F-401C-9C30-22C0494E2FB6%7D&amp;file=Cutscene%20PARTY.docx&amp;action=default&amp;mobileredirect=true&amp;cid=5b80c136-7699-4ee7-82f3-cb177d2a7b8c&amp;CID=7B949EA1-E16F-434A-B685-FC5D532E81F5&amp;wdLOR=c16A3C65B-3B79-4769-9C56-2791958EF1DC" />
+				</DescriptionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_1_u_stolu_l5vN" Text="Scéna 1: u stolu sedí víc lidí, všichni koukaj na jednoho vypraveče, kterej je opřenej o stůl a něco zaníceně vypravuje. Všichni mu to hrozně žerou. Vypraveč tam hodí pointu a všichni se rozesmějou. Henry, během toho dolejvá posluchačům. Jakmile vypravěč, řekl pointu, tak &quot;číšník&quot; Henry něco zahlásí a přidá další vtip a všichni kolem dostanou ještě větší výtlem. Na to, vypraveč rozjařeně stáhne Henryho k sobě na lavici a nacpe mu do ruky korbel a ťukne si s ním." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_2_henry_u_XQyL" Text="Scéna 2: Henry už neroznáší ale chlastá u stolu s ostatnímá. Jeden z hostů přijde zezadu k jedný z lezebnic, která sedí u stolu vedle Henryho. Zazade jí oplzle obejme a začne jí vošmatlávat. Lazebnice se ošije. Henryho si rychle stoupne, aby jako bránil lazebnici, před prasákem. Může ho i odstrčit. Oplzloň mávne rukou a dá si odchod. Henryho rychlý stoupnutí od stolu viděl i jeden z hostů, ale vyložil si to jako, že Henry si stoupá na přípitek. Takže si hnedka stoupne taky, popadne korbel a zvedne ho do vejšky a všichni ho následujou a Henry s lazebnicí nakonec taky. A pijou na ex." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_3_ve_dver_ZTk3" Text="scéna 3: ve dveřích stojí podle oblečení ponocný a baví se s Bětou. Mává rukou směrem k lidem (&quot;A co je tohleto proboha, víte kolik je hodin?&quot;). Běta na něho mluví (&quot;ještě chvíli, přece nebude tak zle&quot;) a pak ho zve ho pokynutím ruky dovnitř. Kolem jde jedna z lazebnic, rovnou se zavěsí do ponocného, dá mu korbel, co nesla, a vede ho přímo doprostřed zábavy. Ponocný má zvednutou ruku, jako &quot;Ale jen na chvíli, pak to tu ukončíme&quot;. Lazebnice horlivě kýve hlavou (&quot;To víš že jo, ty můj čumáčku&quot;)." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_4_chlapic_vijs" Text="scéna 4: Chlapíci s Henrym stojej někde spolu. Všichni maj korbel, ťuknou si, napijou se, jeden z nich pije tak hluboka, že se převáží dozadu. Plácne sebou na zem, ale nevylil korbel. Zbylý chlápci s Henrym se ně něj kouknout a pak ho oceněj zatnutýma pěstma a zařváním &quot;JOOOOOO!&quot; A pak se vrátěj ke svým korbelům a lejou dál." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_5_v_prazd_K6AL" Text="scéna 5: V prázdné kádi leží ponocný, ruce a nohy má ven, hlavu zakloněnou. Je namol. Henry sedí v druhý kádi vedle něj, má na hlavě ponocnýho helmu, má jeho halapartnu a zuřivě s ní pádluje, jako kdyby byl ve člunu a snažil se ujet s kádi ponocnýmu. Kolem na to čučej lidi a můžou se potrhat smíchy." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_6_henry_s_Xzxd" Text="scéna 6: Henry sedí na kádí otočený dnem vzhůru a něco špitá lazebnici, která sedí vedle něj a chichotá se. Přisedne se k nim ten oplzlo od minule a začne jí hruběji točit k sobě, od Henryho. Henry se nasere a strčí do něj. Lazebnice vyskočí. Oplzlo se nasere, stoupne si a Henryho málem schodí na zem z tý kádě, na který seděl. Henry to vyrovná a taky si stoupá a že mu dá rovnou ránu. A jak se zvedne rychle, tak máchne rukou korbelem, aby to vyrovnal. A tím korbelem zespoda do brady natáhne toho oplzla, kterej se skácí na zem. A Henry se podívá dovnitř korbelu, páč si tím pohybem asi vylil pivo." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_7_rychlej_VTND" Text="scéna 7: rychlej záběr jak chlapík (už trochu vesele) odsouvá stůl stranou, aby udělal místo pro tancování. Lidi stojej v kruhu a povzbuzujou, kolem &quot;parketu&quot;. Na ten vběhli dvě holky, který tancujou sladěnou sestavu. Nejsou dokonalý, ale hrozně je to baví (nějaký poskakování a házení sukní ve stylu country/kankán by bylo super)." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_8_ozralej_qIUX" Text="scéna 8: Ožralej chlápek spí čelem přitisklej na stůl. Henry s kámošem mu stavěj na hlavě věž z různějch věcí, který našli na stole. V pozadí tancujou ty holky. Mezitím, tam jeden chlapík u stolu prozkoumává korbely a dojíždí zbytky." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_9_mezi_ta_J1I1" Text="scéna 9: Mezi tancující holky se vpletla třetí a rovnou vypálila facku jedný z nich. Přestalo se tancovat. Holky se rvou. Chlapi kolem na to koukaj dost pobaveně a začnou dost povzbuzovat, když maj holky na sobě míň a míň oblečení. A pak velký TRRRRRHHHHH a jedna holka čučí jak puk, celý prso (nebo klidně obě dvě v celé kráse) venku. A chlapi ryčej nadšením." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scena_10_henry__hAfB" Text="scéna 10: Henry se zvedl od stolu a chce taky vidět, co se děje, že chlapi tak vyváděj. Vidí, že se perou holky, probudí se v něm záchranář, tak je jde od sebe odtrhnout. Jeho snažení, je ale dost naprd, protože holky jsou do boje dost zabraný. A pak mu přiletí odněkud do brady loket jedný z holek. Henry sebou pleskne na zem." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_scene_11_holky__dNhp" Text="Scéne 11: Holky co se prali klečej u Henryho na zemi. Henryho dostanou do polohy v sedě a straraj se o něj jestli je v pohodě. Holky jsou ke kameře zádama a vidíme Henrymu do obličeje, jak se rozzáří. Jedna z holek má přece pořád ty roztrhlý šaty. Henry se přiblble zašklebí. A ta holka s roztrženejma šatama ho ze sranda plácne (&quot;Ty seš blbec JIndřichu&quot;) Zatmívačka." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_rano_je_stale_c_01Xd" Text="RÁNO: Je stále černá obrazovka." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="popisy_je_seq1_gyO1" Text="seq1" />
+									<Elements>
+										<Response Role="LAZEBNICE_BETY_1">
+											<Parenthetical>
+												<Text StringName="popi_lazebnice_jakoby_z_d_skiJ" Text="jakoby z dálky" />
+											</Parenthetical>
+											<Text StringName="popi_lazebnice_jindro_jin_haDT" Text="Jindro? Jindro?" />
+										</Response>
+										<Response Role="LAZEBNICE_BETY_1">
+											<Parenthetical>
+												<Text StringName="popi_lazebnice_nalehave_WPH2" Text="naléhavě" />
+											</Parenthetical>
+											<Text StringName="popi_lazebnice_vstavejte__Nj0y" Text="Vstávejte vy dva!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_rozetmiva_se_ji_URO7" Text="Rozetmívá se. Jindra sedí na lavici v koutě. Jednou rukou drží lazebnici, druhou rukou korbel. Lazebnice spí u něj. Ležela o něj opřená a teď se probouzí a docela rychle se zvedá, aby si toho jako nikdo nevšimnul. " />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="popisy_je_seq1_A7bs" Text="seq1" />
+									<Elements>
+										<Response Role="HENRY">
+											<Parenthetical>
+												<Text StringName="popi_henry_polohlasem_zni_WQkH" Text="polohlasem, zničeně" />
+											</Parenthetical>
+											<Text StringName="popi_henry_ja_tu_nejsem_0e3a" Text="Já tu nejsem..." />
+										</Response>
+										<Response Role="LAZEBNICE_BETY_1">
+											<Parenthetical>
+												<Text StringName="popi_lazebnice_hlasite_se_MqS9" Text="hlasitě, sebere mu korbel z ruky" />
+											</Parenthetical>
+											<Text StringName="popi_lazebnice_vstavej_ty_bacw" Text="Vstávej ty dřevo. Máme průšvih! Tak dělej vstaň." />
+										</Response>
+										<Response Role="HENRY">
+											<Parenthetical>
+												<Text StringName="popi_henry_zoufale_3Hj0" Text="zoufale" />
+											</Parenthetical>
+											<Text StringName="popi_henry_nervi_tolik_pr_tvx5" Text="Neřvi tolik proboha!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="popisy_je_seq1_C534" Text="seq1" />
+									<Elements>
+										<Response Role="LAZEBNICE_BETY_1">
+											<Parenthetical>
+												<Text StringName="popi_lazebnice_intenzivne_TQOg" Text="intenzivně" />
+											</Parenthetical>
+											<Text StringName="popi_lazebnice_venku_je_k_Yb4f" Text="Venku je konšel. Přišel na kontrolu!" />
+										</Response>
+										<Response Role="HENRY">
+											<Parenthetical>
+												<Text StringName="popi_henry_instantni_vyst_eFM5" Text="instantní vystřízlivění" />
+											</Parenthetical>
+											<Text StringName="popi_henry_coze_b6OB" Text="Cože?!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_jindrich_se_mat_PjxU" Text="Jindřich se mátožně zvedne. Těžce opilecky si odfoukne. Pak se koukne kolem sebe. Hotová Sodoma Gomora. Lidi seděj jak v ragdollu na lavicích, na zemi. a celkově je tam bordel. Některý lazebnice už tam uklízej a posouvaj stoly. Zatím jedna lazebnice stojí u něj s rukou v bok." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="popisy_je_seq1_aXsb" Text="seq1" />
+									<Elements>
+										<Response Role="HENRY">
+											<Parenthetical>
+												<Text StringName="popi_henry_a_pak_to_nas_h_nSrt" Text="a pak to náš hrdina znalecky zhodnotí" />
+											</Parenthetical>
+											<Text StringName="popi_henry_sakra_c682" Text="Sakra...." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="popisy_je_navazujeme_dial_en4q" Text="Navazujeme dialogem s lazebnicí, která hráči vysvětluje, že Běta venku zdržuje konšela a hráč musí pomoct s úklidem, jinak je všechno v prdeli.Protože jestli tohle uvidí konšel, tak jsou namydlený." />
+				</SceneActionElement>
+			</Elements>
+		</Scene>
+	</Skald>
+</Database>

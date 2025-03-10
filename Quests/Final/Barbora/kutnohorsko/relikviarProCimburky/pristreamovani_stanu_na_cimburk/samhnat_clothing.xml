@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="samhnat_clothing">
+			<Ports>
+				<Port Name="cloathe" Direction="In" Type="trigger">
+					<DesignName StringName="samhnat_c_cloathe_JU1n" Text="Cloathe" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AddSoulDefaultItem Name="addsouldefaultitem24" PositionY="220" PositionX="940">
+					<Constant Name="ItemClass" Value="00cca9e3-8ef2-46db-8cbf-86ec51930919" />
+					<Constant Name="Purpose" Value="EquipPreset" />
+					<Constant Name="Mode" Value="EnsureThenKeep" />
+					<Asset Name="Souls" Alias="miroslav" />
+					<Constant Name="Quality" Value="3" />
+					<Edge From="state21.State" To="IsActive" />
+				</AddSoulDefaultItem>
+				<ClothingPresetOverride Name="clothingpresetoverride22" PositionY="647" PositionX="943">
+					<Asset Name="Souls" Alias="miroslav" />
+					<Constant Name="ClothingPreset" Value="0a6773ff-7e8b-4c80-869c-f8cdbb744fd8" />
+					<Edge From="state21.State" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride23" PositionY="877" PositionX="943">
+					<Asset Name="Souls" Alias="samhnatHorse" />
+					<Constant Name="ClothingPreset" Value="3db48ae2-7b53-494f-bd4d-691dd3d2fa50" />
+					<Edge From="state21.State" To="IsActive" />
+				</ClothingPresetOverride>
+				<HasteTrigger Name="miroslavPreset" PositionY="470" PositionX="50">
+					<Constant Name="IsHidden" Value="true" />
+				</HasteTrigger>
+				<State Name="state21" PositionY="310" PositionX="390" TypeT="bool">
+					<Edge From="miroslavPreset.OnTrigger" To="SetTrue" />
+					<Edge From="cloathe" To="SetTrue" />
+				</State>
+			</Nodes>
+			<Text StringName="samhnat_clothing_E1oA" Text="Samhnat clothing" />
+		</Module>
+	</Skald>
+</Database>

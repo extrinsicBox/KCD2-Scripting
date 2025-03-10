@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="objective__otevri_bednu_s_jablky">
+			<Ports>
+				<Port Name="jindra_otevrel_bednu" Direction="Out" Type="bool">
+					<DesignName StringName="otevrit_b_jindra_otevrel__6caT" Text="Jindra otevřel bednu" />
+				</Port>
+				<Port Name="hrac_mluvil_s_kucharkou" Direction="In" Type="trigger">
+					<DesignName StringName="objective_hrac_mluvil_s_k_4zgD" Text="Hráč mluvil s kuchařkou" />
+				</Port>
+				<Port Name="hrac_bednu_neotevrel" Direction="In" Type="trigger">
+					<DesignName StringName="objective_hrac_bednu_neot_2QoB" Text="Hráč bednu neotevřel" />
+				</Port>
+				<Port Name="mezi_tim_hrac_okradl_kucharku" Direction="Out" Type="trigger">
+					<DesignName StringName="objective_mezi_tim_hrac_o_G9Sl" Text="mezi tím hráč okradl kuchařku" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory" PositionY="590" PositionX="-100" Namespace="utils.item">
+					<Constant Name="itemclass" Value="08c35fd2-9f7d-427e-bbfa-007d51773940" />
+					<Constant Name="amount" Value="1" />
+					<Edge From="unlockChest.Started" To="isactive" />
+				</itemclasstrigger_playerinventory>
+				<otevri_bednu_s_jablky Name="objectiveVisual6" PositionY="-160" PositionX="-100" RequiredForOutput="trosecko">
+					<Edge From="unlockChest.State" To="Progress" />
+				</otevri_bednu_s_jablky>
+				<Function Name="or14" PositionY="430" PositionX="-100" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="unlockChest.Started" To="A" />
+					<Edge From="unlockChest.Completed" To="B" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="unlockChest.Completed" To="jindra_otevrel_bednu">
+						<Vertex>R96HWYxL</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+					<Edge From="itemclasstrigger_playerinventory.onacquire" To="mezi_tim_hrac_okradl_kucharku">
+						<Vertex>tN61uNzR</Vertex>
+						<Vertex>XT0CgGHw</Vertex>
+					</Edge>
+				</Output>
+				<SetOwner Name="setowner13" PositionY="430" PositionX="170">
+					<Asset Name="What" Alias="kitchen_stash" />
+					<Asset Name="Who" Alias="player" />
+					<Edge From="or14.bool" To="IsActive" />
+				</SetOwner>
+				<StashTrigger Name="stashtrigger12" PositionY="20" PositionX="-100">
+					<Asset Name="Stash" Alias="kitchen_stash" />
+					<Edge From="unlockChest.Started" To="IsActive" />
+				</StashTrigger>
+				<State Name="unlockChest" PositionY="-140" PositionX="-430" RequiredForOutput="trosecko" TypeT="ProgressFailableAbortable">
+					<Edge From="hrac_mluvil_s_kucharkou" To="SetStarted" />
+					<Edge From="hrac_bednu_neotevrel" To="SetFailed" />
+					<Edge From="stashtrigger12.OnUnlocked" To="SetCompleted">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="stashtrigger12.OnOpened" To="SetCompleted">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="itemclasstrigger_playerinventory.onacquire" To="SetAborted">
+						<Vertex>tN61uNzR</Vertex>
+						<Vertex>XT0CgGHw</Vertex>
+						<Vertex>9TkrULRw</Vertex>
+					</Edge>
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="9TkrULRw" PositionY="400" PositionX="-420" />
+				<EdgeVertex Name="R96HWYxL" PositionY="240" PositionX="-80" />
+				<EdgeVertex Name="tN61uNzR" PositionY="802" PositionX="368" />
+				<EdgeVertex Name="vertex1" PositionY="360" PositionX="140" />
+				<EdgeVertex Name="vertex2" PositionY="360" PositionX="-420" />
+				<EdgeVertex Name="vertex4" PositionY="240" PositionX="140" />
+				<EdgeVertex Name="XT0CgGHw" PositionY="400" PositionX="360" />
+			</EdgeVertices>
+			<Assets>
+				<TriggerAreaAsset Name="kitchen_areaStash" />
+			</Assets>
+			<Text StringName="otevrit_bednu_C08n" Text="Objective - Otevři bednu s jablky" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="otevrit_b_v_kuchyni_je_be_L6ca" Text="V kuchyni je bedna a v ní spousta jablek, jsou v ní i dvě sejvovice." />
+				</GameplayActionElement>
+			</Elements>
+		</Gameplay>
+	</Skald>
+</Database>

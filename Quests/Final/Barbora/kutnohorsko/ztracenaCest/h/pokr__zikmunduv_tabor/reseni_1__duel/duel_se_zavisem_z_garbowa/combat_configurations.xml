@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="combat_configurations">
+			<Ports>
+				<Port Name="vytas_anything_started" Direction="In" Type="bool">
+					<DesignName StringName="combat_co_vytas_anything__ya1F" Text="vytas anything started" />
+				</Port>
+				<Port Name="vytas_anything_completed" Direction="In" Type="bool">
+					<DesignName StringName="combat_co_vytas_anything__xDOX" Text="vytas anything completed" />
+				</Port>
+				<Port Name="poraz_zavise_started" Direction="In" Type="bool">
+					<DesignName StringName="combat_co_poraz_zavise_st_CMTf" Text="poraz Zavise started" />
+				</Port>
+				<Port Name="round_inprogress" Direction="In" Type="bool">
+					<DesignName StringName="combat_co_round_inprogress_afpa" Text="round inProgress" />
+				</Port>
+				<Port Name="player_aggresive" Direction="Out" Type="trigger">
+					<DesignName StringName="combat_co_zavis_onattacke_PLPK" Text="player aggresive" />
+				</Port>
+				<Port Name="roundjustfinished" Direction="In" Type="bool">
+					<DesignName StringName="combat_co_roundjustfinish_zyUU" Text="RoundJustFinished" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggernpclearnsinformationnotification108" PositionY="-130" PositionX="90" NotificationName="NPCLearnsInformationNotification">
+					<Asset Name="who_value_filter" Alias="zavis" />
+					<Constant Name="isCrime_filter" Value="true" />
+					<Constant Name="crimeLevel_filter" Value="violent" />
+					<Edge From="and2.bool" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<Function Name="and2" PositionY="-130" PositionX="-200" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not1.bool" To="B" />
+					<Edge From="poraz_zavise_started" To="A">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex1</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="and9" PositionY="-740" PositionX="-790" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not8.bool" To="A" />
+					<Edge From="poraz_zavise_started" To="C">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex17</Vertex>
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="vytas_anything_completed" To="B">
+						<Vertex>vertex18</Vertex>
+					</Edge>
+				</Function>
+				<fightconfiguration_indifference Name="fightconfiguration_indifference" PositionY="460" PositionX="20" Namespace="utils.combat">
+					<Constant Name="unarmedonly" Value="false" />
+					<Edge From="makearray4.Array" To="souls">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex30</Vertex>
+					</Edge>
+					<Edge From="or109.bool" To="isactive">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+						<Vertex>YAJaryDY</Vertex>
+					</Edge>
+				</fightconfiguration_indifference>
+				<fightconfiguration_surrendering Name="fightconfiguration_surrendering" PositionY="640" PositionX="20" Namespace="utils.combat">
+					<Asset Name="souls" Alias="zavis" />
+					<Constant Name="neversurrenderorflee" Value="true" />
+					<Constant Name="neveracceptsurrender" Value="true" />
+					<Constant Name="decentmercy" Value="false" />
+					<Constant Name="alwaysmercy" Value="false" />
+					<Edge From="or109.bool" To="isactive">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+						<Vertex>YAJaryDY</Vertex>
+						<Vertex>vertex24</Vertex>
+					</Edge>
+				</fightconfiguration_surrendering>
+				<FilterInput Name="filterinput83" PositionY="-740" PositionX="-470">
+					<Edge From="makearray84.Array" To="Filters" />
+					<Edge From="and9.bool" To="IsActive" />
+				</FilterInput>
+				<MakeArray Name="makearray4" PositionY="400" PositionX="-820" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="player" />
+					<Asset Name="B" Alias="zavis" />
+				</MakeArray>
+				<MakeArray Name="makearray84" PositionY="-540" PositionX="-780" TypeT="Strings">
+					<Constant Name="A" Value="no_inventory" />
+				</MakeArray>
+				<Function Name="not1" PositionY="-100" PositionX="-530" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="or109.bool" To="Value">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="not8" PositionY="-740" PositionX="-1110" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="vytas_anything_started" To="Value" />
+				</Function>
+				<Function Name="or109" PositionY="-30" PositionX="-1130" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="round_inprogress" To="A" />
+					<Edge From="roundjustfinished" To="B" />
+				</Function>
+				<Function Name="or110" PositionY="120" PositionX="-270" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="or109.bool" To="B">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+					</Edge>
+					<Edge From="poraz_zavise_started" To="A">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex1</Vertex>
+					</Edge>
+				</Function>
+				<Output Name="Output">
+					<Edge From="aiconceptsignaltriggernpclearnsinformationnotification108.OnNotification" To="player_aggresive" />
+				</Output>
+				<SetEntityContext Name="setentitycontext103" PositionY="-390" PositionX="-860">
+					<Constant Name="Context" Value="crime_ignorePlayersDrawnWeapon" />
+					<Asset Name="Souls" Alias="zikiTabor" />
+					<Edge From="poraz_zavise_started" To="IsActive">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex17</Vertex>
+					</Edge>
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext16" PositionY="1370" PositionX="20">
+					<Constant Name="Context" Value="combat_forceMelee" />
+					<Edge From="makearray4.Array" To="Souls">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex29</Vertex>
+						<Vertex>vertex27</Vertex>
+						<Vertex>vertex26</Vertex>
+					</Edge>
+					<Edge From="or109.bool" To="IsActive">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+						<Vertex>YAJaryDY</Vertex>
+						<Vertex>vertex24</Vertex>
+						<Vertex>vertex23</Vertex>
+						<Vertex>vertex22</Vertex>
+					</Edge>
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext18" PositionY="1180" PositionX="20">
+					<Constant Name="Context" Value="combat_arrangedFight" />
+					<Edge From="makearray4.Array" To="Souls">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex29</Vertex>
+						<Vertex>vertex27</Vertex>
+						<Vertex>vertex26</Vertex>
+					</Edge>
+					<Edge From="or109.bool" To="IsActive">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+						<Vertex>YAJaryDY</Vertex>
+						<Vertex>vertex24</Vertex>
+						<Vertex>vertex23</Vertex>
+						<Vertex>vertex22</Vertex>
+					</Edge>
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext7" PositionY="940" PositionX="20">
+					<Constant Name="Context" Value="combat_invisible" />
+					<Edge From="makearray4.Array" To="Souls">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex29</Vertex>
+						<Vertex>vertex27</Vertex>
+					</Edge>
+					<Edge From="or109.bool" To="IsActive">
+						<Vertex>vertex3</Vertex>
+						<Vertex>x7NqNvHb</Vertex>
+						<Vertex>YAJaryDY</Vertex>
+						<Vertex>vertex24</Vertex>
+						<Vertex>vertex23</Vertex>
+					</Edge>
+				</SetEntityContext>
+				<vip_protections Name="vip_protections" PositionY="180" PositionX="20" Namespace="utils.combat">
+					<Constant Name="stealprotection" Value="false" />
+					<Constant Name="attackprotection" Value="false" />
+					<Constant Name="immortality" Value="true" />
+					<Constant Name="unconsciousprotection" Value="true" />
+					<Constant Name="lootprotection" Value="false" />
+					<Edge From="makearray4.Array" To="souls">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex30</Vertex>
+					</Edge>
+					<Edge From="or110.bool" To="isactive" />
+				</vip_protections>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-150" PositionX="-280" />
+				<EdgeVertex Name="vertex17" PositionY="-300" PositionX="-1000" />
+				<EdgeVertex Name="vertex18" PositionY="-610" PositionX="-1030" />
+				<EdgeVertex Name="vertex22" PositionY="1270" PositionX="-120" />
+				<EdgeVertex Name="vertex23" PositionY="1030" PositionX="-260" />
+				<EdgeVertex Name="vertex24" PositionY="700" PositionX="-350" />
+				<EdgeVertex Name="vertex26" PositionY="1330" PositionX="-120" />
+				<EdgeVertex Name="vertex27" PositionY="1080" PositionX="-260" />
+				<EdgeVertex Name="vertex28" PositionY="490" PositionX="-530" />
+				<EdgeVertex Name="vertex29" PositionY="640" PositionX="-440" />
+				<EdgeVertex Name="vertex3" PositionY="60" PositionX="-610" />
+				<EdgeVertex Name="vertex30" PositionY="490" PositionX="-110" />
+				<EdgeVertex Name="vertex4" PositionY="-150" PositionX="-1080" />
+				<EdgeVertex Name="vertex9" PositionY="-580" PositionX="-900" />
+				<EdgeVertex Name="x7NqNvHb" PositionY="240" PositionX="-530" />
+				<EdgeVertex Name="YAJaryDY" PositionY="520" PositionX="-430" />
+			</EdgeVertices>
+			<Notes>
+				<Note Name="note100" PositionY="-200" PositionX="170">
+					<Text StringName="combat_co_note100_TiPv" Text="NOTE(Andy): Hrac zautocil na nekoho zautocil, když ještě nebyl vyhlasen zacatek kola" />
+				</Note>
+			</Notes>
+			<Text StringName="combat_configurations_dPP8" Text="Combat configurations" />
+		</Module>
+	</Skald>
+</Database>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="leaningchat">
+			<Ports>
+				<ConstantPort Name="isactive" Direction="In" Type="bool" Value="false">
+					<DesignName StringName="leaningch_isactive_S4F8" Text="IsActive" />
+				</ConstantPort>
+				<Port Name="chatupdate" Direction="In" Type="trigger">
+					<DesignName StringName="leaningch_chatupdate_uqbc" Text="ChatUpdate" />
+				</Port>
+				<Port Name="activechat" Direction="In" Type="bool">
+					<DesignName StringName="leaningch_activechat_vNV8" Text="ActiveChat" />
+				</Port>
+				<Port Name="smartentity" Direction="In" Type="wh::xgenaimodule::SmartEntity*">
+					<DesignName StringName="leaningch_smartentity_gQuu" Text="SmartEntity" />
+				</Port>
+				<Port Name="npc" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="leaningch_npc_WFri" Text="NPC" />
+				</Port>
+				<Port Name="alias" Direction="In" Type="string">
+					<DesignName StringName="leaningch_alias_F4WR" Text="Alias" />
+				</Port>
+				<Port Name="leaningspot" Direction="In" Type="wh::xgenaimodule::LinkableObject*">
+					<DesignName StringName="leaningch_leaningspot_ZpMd" Text="LeaningSpot" />
+				</Port>
+				<Port Name="chatmaxdistance" Direction="In" Type="float">
+					<DesignName StringName="leaningch_chatmaxdistance_5ZAv" Text="ChatMaxDistance" />
+				</Port>
+				<Port Name="area" Direction="In" Type="wh::xgenaimodule::TriggerArea*">
+					<DesignName StringName="leaningch_area_UVWO" Text="Area" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<EnableBehavior Name="enablebehaviorleaningspotchat7" PositionY="-110" PositionX="360" Signature="leaningSpotChat" EventSet="">
+					<Constant Name="Behavior" Value="leaningWithChat" />
+					<Edge From="isactive" To="IsActive" />
+					<Edge From="smartentity" To="SmartEntity" />
+					<Edge From="alias" To="alias" />
+					<Edge From="leaningspot" To="leaningSpot" />
+					<Edge From="chatmaxdistance" To="chatMaxDistance" />
+					<Edge From="npc" To="NPC" />
+					<Edge From="activechat" To="activeChat" />
+					<Edge From="chatupdate" To="UpdateReferences" />
+					<Edge From="area" To="area" />
+				</EnableBehavior>
+			</Nodes>
+			<Assets>
+				<SmartObjectAsset Name="bartosLeanSpot" />
+			</Assets>
+			<Text StringName="leaningchat_U3UN" Text="leaningChat" />
+		</Module>
+	</Skald>
+</Database>

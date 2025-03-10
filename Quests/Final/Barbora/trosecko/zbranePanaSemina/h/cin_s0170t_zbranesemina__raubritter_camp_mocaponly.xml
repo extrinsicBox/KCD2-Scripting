@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Scene Name="cin_s0170t_zbranesemina__raubritter_camp_mocaponly" IsLocked="true">
+			<Ports>
+				<Port Name="boj_v_prvni_casti_je_ukoncen" Direction="In" Type="trigger">
+					<DesignName StringName="cin_s0170_boj_v_prvni_cas_1NUv" Text="Boj v první části je ukončen" />
+				</Port>
+				<Port Name="konec_cs" Direction="Out" Type="trigger">
+					<DesignName StringName="cin_s0170_konec_cs_RoFH" Text="Konec CS" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<CutsceneHandler Name="cutscenehandler1" PositionY="62" PositionX="-258">
+					<Asset Name="CutsceneHolder" Alias="cutsceneBeforeSecondFight" />
+					<Edge From="boj_v_prvni_casti_je_ukoncen" To="EnqueueCutscene" />
+				</CutsceneHandler>
+				<Output Name="Output">
+					<Edge From="cutscenehandler1.OnFinished" To="konec_cs" />
+				</Output>
+			</Nodes>
+			<Text StringName="cin_s0170t_zbranesemina___aT12" Text="V táboře - verze pro mocap only" />
+			<Elements>
+				<SceneActionElement>
+					<ReviewNotesConcept>
+						<Item Date="2020-02-19 15:29:06" UserName="karel.kolmann" Text="Nechybí tu nějakej &quot;to jsou oni&quot; moment na straně semínskejch? Když teď prvně vidí ty pacholky?" />
+						<Item Date="2020-02-19 17:08:53" UserName="karel.kolmann" Text="Takže jsou tam oba ty pacholci? Proč ten druhej nic neříká?" />
+					</ReviewNotesConcept>
+					<Text StringName="cin_s0170_pan_semin_suk_a_iign" Text="Pan Semín, Suk a Jindra se přiblíží k raubitterovu táboru a nahlíží &quot;zpoza&quot; rohu. Z tábora se ozývá hádka. Zbytek scény sledujeme z Jindrova pohledu, kterak za keříkem či skalkou pozoruje dění v raubitterově táboře. Tam se zrovna jeden z kovářových pacholků hádá s raubritterem. Ten stojí, v ruce má měch s vodou, nebo něco, aby neměl prázdné ruce. Před ním je pacholek, za rameno ho drží bandita, který ho někde nachytal. Další tři bandité stojí nedaleko a něco si dělají u ohně." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_kEbI" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Parenthetical>
+												<Text StringName="cin__raubritte_mo_MXKB" Text="M.O." />
+											</Parenthetical>
+											<Text StringName="cin__raubritte_myslel_jse_1yjb" Text="Myslel jsem, že jsme si to Venco vyjasnili." />
+										</Response>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Text StringName="cin__raubritte_chtel_si_m_RICJ" Text="Chtěl si mě posrat, takže dokud nevodjedeme tak tu s náma budete dřepět a držet hubu." />
+										</Response>
+										<Response Role="PACHOLEK_VENCA">
+											<Parenthetical>
+												<Text StringName="cin__pacholek__omluvne_HS09" Text="omluvně" />
+											</Parenthetical>
+											<Text StringName="cin__pacholek__ale_dyt_sm_oIgQ" Text="Ale dyť sme udělali co si chtěl, vzali sme kovářovi vůz i se zbožím." />
+										</Response>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Parenthetical>
+												<Text StringName="cin__raubritte_zvysuje_hl_IbnZ" Text="zvyšuje hlas, ukazuje na bratrance" />
+											</Parenthetical>
+											<Text StringName="cin__raubritte_hovno_chte_Rmo7" Text="Hovno! Chtěli ste mě vojebat. Tvůj zparchantělej bratranec se sám přiznal." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_vidime_druheho__7DEU" Text="Vidíme druhého pacholka, který je nedaleko svázán u skály. " />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_JOuM" Text="seq1" />
+									<Elements>
+										<Response Role="PACHOLEK_VENCA">
+											<Text StringName="cin__pacholek__von_chtel__IM8n" Text="Von chtěl, ale já ne." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_QWTR" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Parenthetical>
+												<Text StringName="cin__raubritte_autoritati_WCW9" Text="autoritativně to utne" />
+											</Parenthetical>
+											<Text StringName="cin__raubritte_to_je_mi_j_ZHhC" Text="To je mi jedno Venco. Za toho zmrda si se zaručil, takže je to na tobě." />
+											<ReviewNotesStylistic>
+												<Item Date="2020-02-19 17:19:37" UserName="karel.kolmann" Text="Podivná zbytečně rozvleklá promluva. Venca by taky mohl být víc posranej. Klidně by mi místo obou replik stačilo něco svižnějšího:&#xD;&#xA;&#xD;&#xA;Č: Na to ti seru, Venco. Za toho zmrda ses zaručil, takže se z toho nesnaž vyvlíknout. Máš kliku, žes mi u Voděrad zachránil kejhák, jinak bych nechal tady Kozu, ať vám uřeže hlavy.&#xD;&#xA;&#xD;&#xA;V: Už se to nikdy nestane, přísahám.&#xD;&#xA;&#xD;&#xA;Č: To doufam. Jinak jste mrtví. A teď zmiz." AcceptState="Accepted" />
+											</ReviewNotesStylistic>
+										</Response>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Parenthetical>
+												<Text StringName="cin__raubritte_trochu_se__bexI" Text="trochu se zklidní" />
+											</Parenthetical>
+											<Text StringName="cin__raubritte_vlastne_ma_bX5s" Text="Vlastně máš kliku, kdybysi mě u Kolína nezachránil kejhák, tak už sem tady Kozu nechal ať tě stáhne z kůže!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_zezadu_mluvi_se_OeqH" Text="Zezadu mluví Semín." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_sJIi" Text="seq1" />
+									<Elements>
+										<Response Role="PAN_SEMIN">
+											<Parenthetical>
+												<Text StringName="cin__pan_semin_posledni_s_bsuq" Text="poslední slova už říká nahlas" />
+											</Parenthetical>
+											<Text StringName="cin__pan_semin_parchanti__56Yx" Text="Parchanti, člověk už nemůže v tomhle kraji věřit nikomu. Nic Suku připrav se budeme vyjednávat." />
+											<ReviewNotesConcept>
+												<Item Date="2020-02-19 15:29:52" UserName="karel.kolmann" Text="&quot;To mi asi stačí&quot; je fakt divný. Měl by to utnout nějak důraznějš." AcceptState="Accepted" />
+												<Item Date="2020-02-19 17:20:21" UserName="karel.kolmann" Text="Aby z toho vyplynulo &quot;Jo, tak takhle se to celý seběhlo.&quot;" AcceptState="Accepted" />
+											</ReviewNotesConcept>
+										</Response>
+										<Response Role="HEJTMAN_SUK">
+											<Text StringName="cin__hejtman_s_jako_u_laz_rUEN" Text="Jako u Lažan pane?" />
+										</Response>
+										<Response Role="PAN_SEMIN">
+											<Text StringName="cin__pan_semin_presne_tak_Dmrs" Text="Přesně tak." />
+										</Response>
+										<Response Role="HEJTMAN_SUK">
+											<Text StringName="cin__hejtman_s_ale_tam_na_aIcq" Text="Ale tam nás bylo trochu víc pane ... a jich trochu míň." />
+										</Response>
+										<Response Role="PAN_SEMIN">
+											<Text StringName="cin__pan_semin_neboj__neb_tfvW" Text="Neboj ... nebudou dělat potíže. Sou to jen sprostý zloději. Kromě toho, vemu si sebou tady Jindru." />
+										</Response>
+										<Response Role="HENRY">
+											<Parenthetical>
+												<Text StringName="cin__henry_prekvapene_M8qw" Text="překvapeně" />
+											</Parenthetical>
+											<Text StringName="cin__henry_co_nPt6" Text="Co?" />
+										</Response>
+										<Response Role="PAN_SEMIN">
+											<Text StringName="cin__pan_semin_a_kdyby_se_cF8P" Text="A kdyby se nelekli, tak si konečně vyzkoušíš svoji novou hračku." />
+										</Response>
+										<Response Role="HEJTMAN_SUK">
+											<Parenthetical>
+												<Text StringName="cin__hejtman_s_souhlasne__d6Zg" Text="souhlasně zamručí" />
+											</Parenthetical>
+											<Text StringName="cin__hejtman_s_no_nevim_s_oEyD" Text="No nevim, snad ji vůbec natáhnu, rameno mě pálí jak čert." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_semin_jde_do_za_0HrZ" Text="Semín jde do záběru, Jindra se trochu zmateně rozhlíží, ale Suk ho postrčí dopředu." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_KOXF" Text="seq1" />
+									<Elements>
+										<Response Role="PAN_SEMIN">
+											<Parenthetical>
+												<Text StringName="cin__pan_semin_hodne_aser_Xje8" Text="hodně asertivně" />
+											</Parenthetical>
+											<Text StringName="cin__pan_semin_ehm__panov_stLv" Text="Ehm ... pánové! Jste laskavý, že jste pohlídali moje zboží, ale teď už bych si ho rád vzal. Dej mi moje zboží a nechám tě jít." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_zbytek_banditu__unbA" Text="Zbytek banditů (3) si bere do rukou zbraně a hromadí se za Červeňákem. Venca se snaží vysmeknout svému strážci, ale ten ho pevně drží." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_5SPU" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Parenthetical>
+												<Text StringName="cin__raubritte_ironicky_3C9V" Text="ironicky" />
+											</Parenthetical>
+											<Text StringName="cin__raubritte_aha_ty_bud_Q3WT" Text="Aha, ty budeš ze Semína, pane. Ale jistě, všechno vrátíme. Koneckonců stačí jen poprosit, že jo?" />
+											<Comments>
+												<Item Date="2020-08-10 09:17:34" UserName="jan.zeman" Text="&quot;Ah tak to je jiná pane, to víš, že ti všechno vrátíme. Koneckonců stačí jen pěkně požádat, že jo chlapi?&quot;" />
+											</Comments>
+											<ReviewNotesConcept>
+												<Item Date="2020-02-19 15:34:55" UserName="karel.kolmann" Text="Neměl by reagovat na to, že jsou tu tři?" AcceptState="Accepted" />
+											</ReviewNotesConcept>
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_ozve_se_lehky_s_QVRE" Text="Ozve se lehký smích banditů." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_Hk3F" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Text StringName="cin__raubritte_co_to_udel_slBd" Text="Uděláme to jinak. Odložte zbraně a já vás tu budu chvíli hostit. NEMÁM totiž v úmyslu vraždit místní pány. Stačí mi vaše prachy." />
+											<Comments>
+												<Item Date="2020-08-10 09:24:27" UserName="jan.zeman" Text="asi spíš: odlehčit ti" />
+											</Comments>
+										</Response>
+										<Response Role="PAN_SEMIN">
+											<Parenthetical>
+												<Text StringName="cin__pan_semin_ironicky_jbsL" Text="ironicky" />
+											</Parenthetical>
+											<Text StringName="cin__pan_semin_to_je_od_t_yi8W" Text="To je od tebe velice šlechetné, pane." />
+											<Comments>
+												<Item Date="2020-08-10 08:59:12" UserName="jan.zeman" Text="&quot;Čím míň majetku, tím mám o něm lepší přehled. A kurva to ti říkám, že mě neser. Vrať co máš a vypadněte dřív, než schytáte přes prdel.&quot;" />
+											</Comments>
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Comments>
+						<Item Date="2020-08-10 09:27:28" UserName="jan.zeman" Text="Tady mám přesvědčení, že celé lažanské vyjednávání má být alá scéna z Patriota- Suk vystřelí aspoň dvě šipky, než se ukáže. Myslím, že na povel by vyletěla šipka a lapkové by ztratili čas ustrašeným ohlédnutím. Následně velí Červeňák: &quot;Na ně, chlapi!&quot; A v rozběhu na Semína s Jindrou to ještě v cutscéně koupí druhý lapka další šipkou." />
+					</Comments>
+					<Text StringName="cin_s0170_zpoza_skaly_kde_SXY3" Text="Zpoza skály, kde se předtím ukrývalo trio se vynoří Suk a má v ruce nabitou kuši. Zadrnčí tětiva a Jindrovi prolétne kolem hlavy. S těžkým žuchnutím zasáhne do ramene banditu, který měl na starosti Vencu." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_C0Ul" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Text StringName="cin__raubritte_co_to___lxBw" Text="Co to ... ?" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_cervenak_se_zma_lkjb" Text="Červeňák se zmátoří první a křičí na své zbývající muže (3). V pozadí vidíme Vencu, který prchá do skal." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue DefaultMaxDistance="10" AllowGreeting="false">
+						<Decision Name="dec1" Priority="SideQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="cin_s0170_seq1_sFfF" Text="seq1" />
+									<Elements>
+										<Response Role="RAUBRITTER_CERVENAK">
+											<Text StringName="cin__raubritte_co_cumite__nw2M" Text="Co čumíte? Na ně!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="cin_s0170_slysime_dupot_n_SMnE" Text="Slyšíme dupot nohou a kamera se v posledním záběru dívá na Jindru a Semína, za kterými dobíhá hejtman Suk a tasí." />
+				</SceneActionElement>
+			</Elements>
+		</Scene>
+	</Skald>
+</Database>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="nakrmeni_hrace_pokud_ma_jidlo">
+			<Ports>
+				<Port Name="po_cutscene" Direction="In" Type="trigger">
+					<DesignName StringName="nakrmeni__po_cutscene_BcO5" Text="po cutscéně" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="createitemcategorydescriptor3_1" PositionY="130" PositionX="390" MethodName="wh::entitymodule::CreateItemCategoryDescriptor" DeclaringType="wh::entitymodule">
+					<Constant Name="Category" Value="Food" />
+					<Constant Name="Type" Value="1" />
+					<Constant Name="NegateType" Value="true" />
+				</Function>
+				<EventMemberFunction Name="useinventoryitems3" PositionY="-50" PositionX="870" MethodName="UseInventoryItems" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="Soul" Alias="player" />
+					<Constant Name="AllowPartialMatch" Value="false" />
+					<Constant Name="BodyPart" Value="head" />
+					<Edge From="po_cutscene" To="Exec" />
+					<Edge From="createitemcategorydescriptor3_1.ItemDescriptor" To="ItemDescriptor" />
+				</EventMemberFunction>
+			</Nodes>
+			<Text StringName="nakrmeni_hrace_pokud_ma_j_YHKt" Text="Nakrmení hráče pokud má jídlo" />
+		</Module>
+	</Skald>
+</Database>

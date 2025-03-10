@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="save_na_konci">
+			<Ports>
+				<Port Name="save_game" Direction="In" Type="trigger">
+					<DesignName StringName="save_na_k_save_game_pxAV" Text="save game" />
+				</Port>
+				<Port Name="ovce_rozehnany" Direction="In" Type="bool">
+					<DesignName StringName="save_na_k_ovce_rozehnany_aK0v" Text="ovce rozehnány" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<If Name="if2" PositionY="-60" PositionX="-340">
+					<Edge From="save_game" To="Exec" />
+					<Edge From="ovce_rozehnany" To="Condition" />
+				</If>
+				<SaveGame Name="savegame1" PositionY="-200" PositionX="-20">
+					<Constant Name="Objective" Value="povez_olbramovi_o_rozhenanem_dobytku" />
+					<Edge From="if2.True" To="EnqueueSave" />
+				</SaveGame>
+				<SaveGame Name="savegame1_1" PositionY="80" PositionX="-20">
+					<Constant Name="Objective" Value="dones_majku_olbramovi" />
+					<Edge From="if2.False" To="EnqueueSave" />
+				</SaveGame>
+			</Nodes>
+			<Text StringName="save_na_konci_questu_Wp0R" Text="Save na konci" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="save_na_k_poznamka_pokud__mIeg" Text="" />
+				</GameplayActionElement>
+			</Elements>
+		</Module>
+	</Skald>
+</Database>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="strelecke_a_jizdni_zavody_na_konich" VoiceNamespace="true" HibernateMode="DLC" RequiredDLC="Unpublished">
+			<Definitions>
+				<Definition File="strelecke_a_jizdni_zavody_na_konich/hadkaKonaru.xml" />
+				<Definition File="strelecke_a_jizdni_zavody_na_konich/konske_zavody.xml" />
+			</Definitions>
+			<Nodes>
+				<hadkaKonaru Name="hadkaKonaru" RequiredForOutput="trosecko">
+					<Edge From="konske_zavody.vsechny_lukostrelecke_trate_vyhrany" To="vysledek_lukostrelby">
+						<Vertex>cBd6BLvS</Vertex>
+						<Vertex>E0sdRyBg</Vertex>
+					</Edge>
+					<Edge From="konske_zavody.vsechny_crosscountry_trate_vyhrany" To="vysledek_crossscountry">
+						<Vertex>Sdg7VLRK</Vertex>
+						<Vertex>akMEsgWs</Vertex>
+					</Edge>
+				</hadkaKonaru>
+				<konske_zavody Name="konske_zavody" PositionY="0" PositionX="540" RequiredForOutput="trosecko">
+					<Edge From="hadkaKonaru.mikroquest_je_aktivni" To="mikroquest_je_aktivni" />
+					<Edge From="hadkaKonaru.EnableActivities" To="povolit_aktivity" />
+					<Edge From="hadkaKonaru.hrac_vybral_lukostrelbu" To="hrac_vybral_lukostrelbu" />
+					<Edge From="hadkaKonaru.hrac_vybral_dostihy" To="hrac_vybral_dostihy" />
+					<Edge From="hadkaKonaru.hrac_vyresil_smirem" To="hrac_vyresil_smirem" />
+					<Edge From="hadkaKonaru.hrac_neuspel_v_reseni_smiru" To="hrac_neuspel_v_reseni_smiru" />
+				</konske_zavody>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="akMEsgWs" PositionY="-150" PositionX="10" />
+				<EdgeVertex Name="cBd6BLvS" PositionY="-120" PositionX="730" />
+				<EdgeVertex Name="E0sdRyBg" PositionY="-120" PositionX="10" />
+				<EdgeVertex Name="Sdg7VLRK" PositionY="-150" PositionX="730" />
+			</EdgeVertices>
+			<Text StringName="strelecke_a_jizdni_zavody_1bLs" Text="Střelecké a jízdní závody na koních" />
+		</Module>
+	</Skald>
+</Database>

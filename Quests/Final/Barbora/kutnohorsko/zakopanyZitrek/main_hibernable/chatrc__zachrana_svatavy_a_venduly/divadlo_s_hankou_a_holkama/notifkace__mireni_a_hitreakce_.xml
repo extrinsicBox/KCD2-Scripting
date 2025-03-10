@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="notifkace__mireni_a_hitreakce_">
+			<Ports>
+				<Port Name="hostage_situation_active" Direction="In" Type="bool">
+					<DesignName StringName="playeraim_hostage_situati_CoPH" Text="Hostage Situation Active" />
+				</Port>
+				<Port Name="podriznout_vendulu" Direction="Out" Type="trigger">
+					<DesignName StringName="playeraim_hanka_si_vsimnu_Lm6y" Text="Podříznout Vendulu" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification2" PositionY="-320" PositionX="-10" NotificationName="hitReactionNotification">
+					<Asset Name="attacker_value_filter" Alias="player" />
+					<Asset Name="victim_value_filter" Alias="svatava" />
+					<Constant Name="hitType_filter" Value="missile" />
+					<Edge From="hostage_situation_active" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerzakopanyzitrekplayeraimsathostageenemies1" PositionY="-80" PositionX="-10" NotificationName="zakopanyZitrek_playerAimsAtHostageEnemies">
+					<Edge From="hostage_situation_active" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<customswitchtree Name="customswitchtree" PositionY="30" PositionX="-10" Namespace="utils.crime">
+					<Asset Name="souls" Alias="hanka" />
+					<Asset Name="qso" Alias="qso" />
+					<Constant Name="treefilename" Value="quests/zakopanyZitrek/zakopanyZitrek.xml" />
+					<Constant Name="treename" Value="zakopanyZitrek_aimingReaction" />
+					<Edge From="hostage_situation_active" To="isactive" />
+				</customswitchtree>
+				<customswitchtree Name="customswitchtree_1" PositionY="260" PositionX="-10" Namespace="utils.crime">
+					<Asset Name="souls" Alias="bandit_3" />
+					<Asset Name="qso" Alias="qso" />
+					<Constant Name="treefilename" Value="quests/zakopanyZitrek/zakopanyZitrek.xml" />
+					<Constant Name="treename" Value="zakopanyZitrek_aimingReaction" />
+					<Edge From="hostage_situation_active" To="isactive" />
+				</customswitchtree>
+				<customswitchtree Name="customswitchtree_2" PositionY="500" PositionX="-10" Namespace="utils.crime">
+					<Asset Name="souls" Alias="bandit_4" />
+					<Asset Name="qso" Alias="qso" />
+					<Constant Name="treefilename" Value="quests/zakopanyZitrek/zakopanyZitrek.xml" />
+					<Constant Name="treename" Value="zakopanyZitrek_aimingReaction" />
+					<Edge From="hostage_situation_active" To="isactive" />
+				</customswitchtree>
+				<Output Name="Output">
+					<Edge From="aiconceptsignaltriggerzakopanyzitrekplayeraimsathostageenemies1.OnNotification" To="podriznout_vendulu" />
+					<Edge From="aiconceptsignaltriggerhitreactionnotification2.OnNotification" To="podriznout_vendulu" />
+				</Output>
+			</Nodes>
+			<Text StringName="playeraimingathankacheck_5mG2" Text="Notifkace - Míření a hitreakce " />
+		</Module>
+	</Skald>
+</Database>

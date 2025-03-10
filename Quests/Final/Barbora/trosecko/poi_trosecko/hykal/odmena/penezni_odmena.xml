@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="penezni_odmena">
+			<Ports>
+				<Port Name="exec" Direction="In" Type="trigger">
+					<DesignName StringName="penezni_o_exec_kzyJ" Text="Exec" />
+				</Port>
+				<Port Name="amount" Direction="In" Type="float">
+					<DesignName StringName="penezni_o_amount_K3qe" Text="Amount" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<hasmoney Name="hasmoney" PositionY="40" PositionX="380" Namespace="utils.money">
+					<Edge From="isoulproperties4.Inventory" To="inventory" />
+					<Edge From="amount" To="amount">
+						<Vertex>JXoH9Wjo</Vertex>
+					</Edge>
+				</hasmoney>
+				<If Name="if5" PositionY="-60" PositionX="690">
+					<Edge From="hasmoney.hasmoney" To="Condition" />
+					<Edge From="exec" To="Exec" />
+				</If>
+				<ObjectProperties Name="isoulproperties4" PositionY="-510" PositionX="0" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="I_Soul" Alias="otraveny" />
+				</ObjectProperties>
+				<ObjectProperties Name="isoulproperties6" PositionY="450" PositionX="550" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="I_Soul" Alias="player" />
+				</ObjectProperties>
+				<movemoney Name="movemoney" PositionY="130" PositionX="960" Namespace="utils.money">
+					<Constant Name="allowpartialmatch" Value="false" />
+					<Constant Name="showuinotification" Value="true" />
+					<Edge From="if5.True" To="exec" />
+					<Edge From="amount" To="amount">
+						<Vertex>JXoH9Wjo</Vertex>
+						<Vertex>Xc26QMHE</Vertex>
+					</Edge>
+					<Edge From="isoulproperties6.Inventory" To="toinventory" />
+					<Edge From="isoulproperties4.Inventory" To="frominventory">
+						<Vertex>McLB0A8M</Vertex>
+					</Edge>
+				</movemoney>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="JXoH9Wjo" PositionY="50" PositionX="150" />
+				<EdgeVertex Name="McLB0A8M" PositionY="-170" PositionX="890" />
+				<EdgeVertex Name="Xc26QMHE" PositionY="240" PositionX="360" />
+			</EdgeVertices>
+			<Text StringName="penezni_odmena_Kcxw" Text="Peněžní odměna" />
+		</Module>
+	</Skald>
+</Database>

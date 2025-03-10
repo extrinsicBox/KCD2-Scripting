@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="strelivo_pro_vypad">
+			<Ports>
+				<Port Name="vypad_awake" Direction="In" Type="bool">
+					<DesignName StringName="strelivo__vypad_awake_NWv6" Text="isActive" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AddSoulDefaultItem Name="addsouldefaultitem3" PositionY="140" PositionX="-270">
+					<Constant Name="Amount" Value="100" />
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="ptacek" />
+					<Constant Name="EquipImmediately" Value="true" />
+					<Edge From="vypad_awake" To="IsActive">
+						<Vertex>vertex12</Vertex>
+						<Vertex>vertex13</Vertex>
+					</Edge>
+					<Edge From="constants_arrow.sipky_do_kuse_pro_ptacka" To="ItemClass" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem3_1" PositionY="480" PositionX="-270">
+					<Constant Name="Amount" Value="100" />
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="ptacekman_3" />
+					<Constant Name="EquipImmediately" Value="true" />
+					<Edge From="vypad_awake" To="IsActive">
+						<Vertex>vertex12</Vertex>
+						<Vertex>vertex13</Vertex>
+					</Edge>
+					<Edge From="constants_arrow.sipy_pro_ptackovy_muzi" To="ItemClass" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem3_2" PositionY="820" PositionX="-270">
+					<Constant Name="Amount" Value="100" />
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="ptacekman_4" />
+					<Constant Name="EquipImmediately" Value="true" />
+					<Edge From="vypad_awake" To="IsActive">
+						<Vertex>vertex12</Vertex>
+						<Vertex>vertex13</Vertex>
+					</Edge>
+					<Edge From="constants_arrow.sipy_pro_ptackovy_muzi" To="ItemClass" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem3_3" PositionY="1160" PositionX="-270">
+					<Constant Name="Amount" Value="100" />
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="ptacekman_5" />
+					<Constant Name="EquipImmediately" Value="true" />
+					<Edge From="vypad_awake" To="IsActive">
+						<Vertex>vertex12</Vertex>
+						<Vertex>vertex13</Vertex>
+					</Edge>
+					<Edge From="constants_arrow.sipy_pro_ptackovy_muzi" To="ItemClass" />
+				</AddSoulDefaultItem>
+				<constants_arrow Name="constants_arrow" PositionY="620" PositionX="-560" Namespace="rutinaavypad" />
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex12" PositionY="170" PositionX="-600" />
+				<EdgeVertex Name="vertex13" PositionY="170" PositionX="-360" />
+			</EdgeVertices>
+			<Text StringName="odebrat_sipy_po_vypadu_pWHv" Text="Střelivo pro výpad" />
+		</Module>
+	</Skald>
+</Database>

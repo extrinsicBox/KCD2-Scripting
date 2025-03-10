@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="checkovani_hitu">
+			<Ports>
+				<Port Name="isactive" Direction="In" Type="bool">
+					<DesignName StringName="checkovan_isactive_wP5X" Text="isActive" />
+				</Port>
+				<Port Name="victim" Direction="In" Type="wh::rpgmodule::I_Soul*">
+					<DesignName StringName="checkovan_victim_F5Lx" Text="Victim" />
+				</Port>
+				<Port Name="hrac_zautocil" Direction="Out" Type="trigger">
+					<DesignName StringName="checkovan_hrac_zautocil_EQux" Text="Hrac zautocil" />
+				</Port>
+				<Port Name="kaminek" Direction="Out" Type="trigger">
+					<DesignName StringName="checkovan_kaminek_SOar" Text="Kaminek" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="checkovani_hitu/compare_hittype.xml" />
+			</Definitions>
+			<Nodes>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification6" PositionY="92" PositionX="12" NotificationName="hitReactionNotification">
+					<Asset Name="attacker_value_filter" Alias="player" />
+					<Edge From="isactive" To="IsActive" />
+					<Edge From="victim" To="victim_value_filter" />
+				</AIConceptSignalTrigger>
+				<compare_hittype Name="compare_hittype" PositionY="112" PositionX="452">
+					<Edge From="aiconceptsignaltriggerhitreactionnotification6.OnNotification" To="onnotification" />
+					<Edge From="aiconceptsignaltriggerhitreactionnotification6.hitType" To="hittype" />
+				</compare_hittype>
+				<Output Name="Output">
+					<Edge From="compare_hittype.hrac_zautocil" To="hrac_zautocil" />
+					<Edge From="compare_hittype.kaminek" To="kaminek" />
+				</Output>
+			</Nodes>
+			<Text StringName="checkovani_hitu_Om2B" Text="Checkovani hitu" />
+		</Module>
+	</Skald>
+</Database>

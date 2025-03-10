@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="clothing_presets_alies">
+			<Ports>
+				<Port Name="haste_metro" Direction="In" Type="trigger">
+					<DesignName StringName="clothing__haste_metro_JpLk" Text="activate presets" />
+				</Port>
+				<Port Name="disable_presets" Direction="In" Type="trigger">
+					<DesignName StringName="clothing__disable_presets_4vC4" Text="disable presets" />
+				</Port>
+				<Port Name="metro_je_aktivni" Direction="In" Type="bool">
+					<DesignName StringName="clothing__metro_je_aktivni_NLEg" Text="Metro je aktivni" />
+				</Port>
+				<Port Name="skirmish_je_aktivni" Direction="In" Type="bool">
+					<DesignName StringName="clothing__skirmish_je_akt_BZMT" Text="Skirmish je aktivni" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<ClothingPresetOverride Name="clothingpresetoverride19" PositionY="-570" PositionX="70">
+					<Asset Name="Souls" Alias="bohuta_npc" />
+					<Constant Name="ClothingPreset" Value="96db3810-114e-4c4c-841d-68f3229b9a9d" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1" PositionY="-360" PositionX="70">
+					<Asset Name="Souls" Alias="ptacek" />
+					<Constant Name="ClothingPreset" Value="9b2dc255-4ea3-4616-9498-054879b5099f" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1_1" PositionY="-160" PositionX="50">
+					<Asset Name="Souls" Alias="zizka" />
+					<Constant Name="ClothingPreset" Value="53198443-73ce-41e1-a2f4-0303aef6103c" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1_1_1" PositionY="60" PositionX="70">
+					<Asset Name="Souls" Alias="kubenka" />
+					<Constant Name="ClothingPreset" Value="ebd5796c-6ba0-4a2e-b15c-ce5d62a032fc" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1_1_1_1" PositionY="270" PositionX="70">
+					<Asset Name="Souls" Alias="hans" />
+					<Constant Name="ClothingPreset" Value="e79b5993-18eb-4bb9-a3a9-41a5be978a3c" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1_1_1_2" PositionY="480" PositionX="70">
+					<Asset Name="Souls" Alias="sam" />
+					<Constant Name="ClothingPreset" Value="4b2b1b9d-0cea-4a66-9108-f8c7bddd0fa2" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<ClothingPresetOverride Name="clothingpresetoverride19_1_1_1_3" PositionY="740" PositionX="60">
+					<Asset Name="Souls" Alias="komar" />
+					<Constant Name="ClothingPreset" Value="9b927796-c4f2-4109-8236-3a1eec76ca9e" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</ClothingPresetOverride>
+				<State Name="ClothingPresetsForAlies" PositionY="-200" PositionX="-250" TypeT="Progress">
+					<Edge From="haste_metro" To="SetActive" />
+					<Edge From="ifor3.True" To="SetActive" />
+					<Edge From="disable_presets" To="SetDone" />
+				</State>
+				<IfFunction Name="ifor3" PositionY="100" PositionX="-530" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="patchtrigger2.OnPatch" To="Exec" />
+					<Edge From="metro_je_aktivni" To="A" />
+					<Edge From="skirmish_je_aktivni" To="B" />
+				</IfFunction>
+				<PatchTrigger Name="patchtrigger2" PositionY="220" PositionX="-980">
+					<Constant Name="TransitionFromVersion" Value="ver_01_00" />
+				</PatchTrigger>
+				<WeaponPresetOverride Name="weaponpresetoverride21" PositionY="-570" PositionX="410">
+					<Asset Name="Souls" Alias="bohuta_npc" />
+					<Constant Name="WeaponPreset" Value="88d5904c-37f2-4e9f-b6c6-83796e872d14" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_1" PositionY="-360" PositionX="410">
+					<Asset Name="Souls" Alias="ptacek" />
+					<Constant Name="WeaponPreset" Value="6fe6731f-4d18-4874-a8ec-53c714655d92" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_2" PositionY="-150" PositionX="410">
+					<Asset Name="Souls" Alias="zizka" />
+					<Constant Name="WeaponPreset" Value="d39ac2a5-4135-4b04-915d-0f38ae83a73a" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_3" PositionY="60" PositionX="410">
+					<Asset Name="Souls" Alias="kubenka" />
+					<Constant Name="WeaponPreset" Value="fa461d4f-f95a-43e8-91f7-0233046fc00f" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_4" PositionY="270" PositionX="410">
+					<Asset Name="Souls" Alias="hans" />
+					<Constant Name="WeaponPreset" Value="cf7936c5-78e7-44a3-8390-2f98d902616b" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_5" PositionY="480" PositionX="410">
+					<Asset Name="Souls" Alias="sam" />
+					<Constant Name="WeaponPreset" Value="ca2ba606-e811-4abf-9304-dfbdf52426ef" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+				<WeaponPresetOverride Name="weaponpresetoverride21_6" PositionY="740" PositionX="400">
+					<Asset Name="Souls" Alias="komar" />
+					<Constant Name="WeaponPreset" Value="f234751b-b117-4ed1-a591-6a4c7ee09d45" />
+					<Edge From="ClothingPresetsForAlies.Active" To="IsActive" />
+				</WeaponPresetOverride>
+			</Nodes>
+			<Text StringName="clothing_presets_alies_DX97" Text="Clothing Presets Alies" />
+		</Module>
+	</Skald>
+</Database>

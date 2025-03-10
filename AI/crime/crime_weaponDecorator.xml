@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<BehaviorTrees>
+	<BehaviorTree name="crime_weaponDecorator" is_function="1">
+		<Variables>
+			<Variable name="leftHand" type="_wuid" values="" isPersistent="0" form="single" />
+			<Variable name="leftHand_content" type="_wuid" values="" isPersistent="0" form="single" />
+			<Variable name="leftHand_ready" type="_bool" values="" isPersistent="0" form="single" />
+			<Variable name="leftHand_secondary" type="_wuid" values="" isPersistent="0" form="single" />
+			<Variable name="rightHand" type="_wuid" values="" isPersistent="0" form="single" />
+			<Variable name="rightHand_content" type="_wuid" values="" isPersistent="0" form="single" />
+			<Variable name="rightHand_ready" type="_bool" values="" isPersistent="0" form="single" />
+			<Variable name="rightHand_secondary" type="_wuid" values="" isPersistent="0" form="single" />
+		</Variables>
+		<Parameters>
+			<Variable name="shouldHaveDrawnWeapon" type="_bool" values="" isPersistent="0" form="single" requirementType="Reference" />
+			<Variable name="suppressWaitAction" type="_bool" values="false" isPersistent="0" form="single" requirementType="In" />
+			<Variable name="waitActionFinished" type="_bool" values="" isPersistent="0" form="single" requirementType="Reference" optional="1" />
+			<Variable name="weaponSet" type="_string" values="Primary" isPersistent="0" form="single" requirementType="In" />
+		</Parameters>
+		<Root OneTimeOnly="false" FailState="Recoverable" saveVersion="2">
+			<Behavior canSkip="1">
+				<Loop count="-1">
+					<IfGate atomic="false" condition="$shouldHaveDrawnWeapon" RunLogic="Halt">
+						<IsWeaponDrawn who="$this.id" WeaponSet="Oversized" saveVersion="2">
+							<Then canSkip="1">
+								<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+							</Then>
+							<Else canSkip="1">
+								<Sequence>
+									<Expression expressions="$rightHand_ready = false &#10;$leftHand_ready = false" />
+									<GetWeaponsFromWeaponSet WeaponSet="$weaponSet" LeftHand="$leftHand" RightHand="$rightHand" UseTorchWhenAppropriate="true" />
+									<Sequence>
+										<GetWeaponsFromWeaponSet WeaponSet="Secondary" LeftHand="$leftHand_secondary" RightHand="$rightHand_secondary" UseTorchWhenAppropriate="true" />
+										<IfCondition failOnCondition="false" condition="$rightHand_secondary ~= $__null | &#10;$leftHand_secondary ~= $__null">
+											<Sequence>
+												<HandCheck who="$this.id" LeftHand="$leftHand_content" RightHand="$rightHand_content" />
+												<IfCondition failOnCondition="false" condition="$leftHand_secondary == $leftHand_content &amp; &#10;$rightHand_secondary == $rightHand_content">
+													<Expression expressions="$rightHand = $rightHand_secondary &#10;$leftHand = $leftHand_secondary" />
+												</IfCondition>
+											</Sequence>
+										</IfCondition>
+									</Sequence>
+									<Parallel successMode="Any" failureMode="Any">
+										<IfElseCondition failOnCondition="false" condition="$rightHand ~= $__null" saveVersion="2">
+											<Then canSkip="1">
+												<HandContentElement hand="Right" item="$rightHand" allowAny="false" allowHomeSlotAutoReturn="false" decisionLabel="crime_weapon_rightHand" useDecision="true" enabled="true" saveVersion="2">
+													<Search canSkip="1">
+														<Success />
+													</Search>
+													<Exec canSkip="1">
+														<Sequence>
+															<Expression expressions="$rightHand_ready = true" />
+															<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+														</Sequence>
+													</Exec>
+												</HandContentElement>
+											</Then>
+											<Else canSkip="1">
+												<Sequence>
+													<Expression expressions="$rightHand_ready = true" />
+													<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+												</Sequence>
+											</Else>
+										</IfElseCondition>
+										<IfElseCondition failOnCondition="false" condition="$leftHand ~= $__null" saveVersion="2">
+											<Then canSkip="1">
+												<HandContentElement hand="Left" item="$leftHand" allowAny="false" allowHomeSlotAutoReturn="false" decisionLabel="crime_weapon_leftHand" useDecision="true" enabled="true" saveVersion="2">
+													<Search canSkip="1">
+														<Success />
+													</Search>
+													<Exec canSkip="1">
+														<Sequence>
+															<Expression expressions="$leftHand_ready = true" />
+															<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+														</Sequence>
+													</Exec>
+												</HandContentElement>
+											</Then>
+											<Else canSkip="1">
+												<Sequence>
+													<Expression expressions="$leftHand_ready = true" />
+													<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+												</Sequence>
+											</Else>
+										</IfElseCondition>
+										<IfGate atomic="false" condition="$rightHand_ready &amp; $leftHand_ready" RunLogic="KeepRunning">
+											<Sequence>
+												<IfCondition failOnCondition="false" condition="~$suppressWaitAction">
+													<IsFastForwarded failOnCondition="false" saveVersion="2">
+														<Else canSkip="1">
+															<SuppressFailure>
+																<InstantSemaphore SemaphoreCount="1" LockManagerType="Intellect" SemaphoreName="&apos;SAL_action_running&apos;">
+																	<Sequence>
+																		<WaitAction />
+																		<Expression expressions="$waitActionFinished = true" />
+																	</Sequence>
+																</InstantSemaphore>
+															</SuppressFailure>
+														</Else>
+													</IsFastForwarded>
+												</IfCondition>
+												<Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" />
+											</Sequence>
+										</IfGate>
+									</Parallel>
+								</Sequence>
+							</Else>
+						</IsWeaponDrawn>
+					</IfGate>
+				</Loop>
+			</Behavior>
+		</Root>
+		<ForestContainer />
+		<EditorData EventSet="">
+			<Variables>
+				<Variable name="leftHand" comment="" />
+				<Variable name="leftHand_content" comment="" />
+				<Variable name="leftHand_ready" comment="" />
+				<Variable name="leftHand_secondary" comment="" />
+				<Variable name="rightHand" comment="" />
+				<Variable name="rightHand_content" comment="" />
+				<Variable name="rightHand_ready" comment="" />
+				<Variable name="rightHand_secondary" comment="" />
+				<Variable name="shouldHaveDrawnWeapon" comment="" />
+				<Variable name="suppressWaitAction" comment="" />
+				<Variable name="waitActionFinished" comment="" />
+				<Variable name="weaponSet" comment="" />
+			</Variables>
+			<ForwardDeclarations />
+			<Root hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+				<OutputBreakpoints />
+				<Behavior>
+					<Loop hasInputBreakpoint="0" comment="" breakpointFlags="0">
+						<OutputBreakpoints />
+						<IfGate hasInputBreakpoint="0" comment="" breakpointFlags="0">
+							<OutputBreakpoints />
+							<IsWeaponDrawn hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+								<OutputBreakpoints />
+								<Then>
+									<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+										<OutputBreakpoints />
+									</Wait>
+								</Then>
+								<Else>
+									<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+										<OutputBreakpoints />
+										<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+											<OutputBreakpoints />
+										</Expression>
+										<GetWeaponsFromWeaponSet hasInputBreakpoint="0" comment="" breakpointFlags="0">
+											<OutputBreakpoints />
+										</GetWeaponsFromWeaponSet>
+										<Sequence hasInputBreakpoint="0" comment="#KCD2-328373" breakpointFlags="0">
+											<OutputBreakpoints />
+											<GetWeaponsFromWeaponSet hasInputBreakpoint="0" comment="" breakpointFlags="0">
+												<OutputBreakpoints />
+											</GetWeaponsFromWeaponSet>
+											<IfCondition hasInputBreakpoint="0" comment="" breakpointFlags="0">
+												<OutputBreakpoints />
+												<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+													<OutputBreakpoints />
+													<HandCheck hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+													</HandCheck>
+													<IfCondition hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+														<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+															<OutputBreakpoints />
+														</Expression>
+													</IfCondition>
+												</Sequence>
+											</IfCondition>
+										</Sequence>
+										<Parallel hasInputBreakpoint="0" comment="" breakpointFlags="0">
+											<OutputBreakpoints />
+											<IfElseCondition hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+												<OutputBreakpoints />
+												<Then>
+													<HandContentElement hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+														<OutputBreakpoints />
+														<Search>
+															<Success hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																<OutputBreakpoints />
+															</Success>
+														</Search>
+														<Exec>
+															<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																<OutputBreakpoints />
+																<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																	<OutputBreakpoints />
+																</Expression>
+																<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																	<OutputBreakpoints />
+																</Wait>
+															</Sequence>
+														</Exec>
+													</HandContentElement>
+												</Then>
+												<Else>
+													<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+														<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+															<OutputBreakpoints />
+														</Expression>
+														<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+															<OutputBreakpoints />
+														</Wait>
+													</Sequence>
+												</Else>
+											</IfElseCondition>
+											<IfElseCondition hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+												<OutputBreakpoints />
+												<Then>
+													<HandContentElement hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+														<OutputBreakpoints />
+														<Search>
+															<Success hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																<OutputBreakpoints />
+															</Success>
+														</Search>
+														<Exec>
+															<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																<OutputBreakpoints />
+																<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																	<OutputBreakpoints />
+																</Expression>
+																<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																	<OutputBreakpoints />
+																</Wait>
+															</Sequence>
+														</Exec>
+													</HandContentElement>
+												</Then>
+												<Else>
+													<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+														<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+															<OutputBreakpoints />
+														</Expression>
+														<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+															<OutputBreakpoints />
+														</Wait>
+													</Sequence>
+												</Else>
+											</IfElseCondition>
+											<IfGate hasInputBreakpoint="0" comment="" breakpointFlags="0">
+												<OutputBreakpoints />
+												<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+													<OutputBreakpoints />
+													<IfCondition hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+														<IsFastForwarded hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+															<OutputBreakpoints />
+															<Else>
+																<SuppressFailure hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																	<OutputBreakpoints />
+																	<InstantSemaphore hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																		<OutputBreakpoints />
+																		<Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																			<OutputBreakpoints />
+																			<WaitAction hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																				<OutputBreakpoints />
+																			</WaitAction>
+																			<Expression hasInputBreakpoint="0" comment="" breakpointFlags="0">
+																				<OutputBreakpoints />
+																			</Expression>
+																		</Sequence>
+																	</InstantSemaphore>
+																</SuppressFailure>
+															</Else>
+														</IsFastForwarded>
+													</IfCondition>
+													<Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+														<OutputBreakpoints />
+													</Wait>
+												</Sequence>
+											</IfGate>
+										</Parallel>
+									</Sequence>
+								</Else>
+							</IsWeaponDrawn>
+						</IfGate>
+					</Loop>
+				</Behavior>
+			</Root>
+			<Forest />
+			<Comments />
+		</EditorData>
+	</BehaviorTree>
+</BehaviorTrees>

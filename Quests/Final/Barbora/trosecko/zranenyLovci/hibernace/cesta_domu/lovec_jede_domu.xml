@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="lovec_jede_domu">
+			<Ports>
+				<Port Name="lovec_prijizdi_domu" Direction="Out" Type="trigger">
+					<DesignName StringName="lovec_jed_lovec_prijizdi__KHEA" Text="lovec přijíždí domů" />
+				</Port>
+				<Port Name="lovec_v_poradku_dojel_domu" Direction="Out" Type="bool">
+					<DesignName StringName="lovec_jed_lovec_v_poradku_IHzb" Text="lovec v pořádku dojel domů" />
+				</Port>
+				<Port Name="kun_cestou_umrel" Direction="Out" Type="trigger">
+					<DesignName StringName="lovec_jed_kun_cestou_umrel_hxNv" Text="kůň cestou umřel" />
+				</Port>
+				<Port Name="lovec_je_na_ceste_domu" Direction="Out" Type="bool">
+					<DesignName StringName="lovec_jed_lovec_je_na_ces_ArNr" Text="lovec je na cestě domů" />
+				</Port>
+				<Port Name="lovec_jede_sam_na_koni_domu" Direction="In" Type="trigger">
+					<DesignName StringName="lovec_jed_lovec_jede_sam__Objd" Text="Lovec jede sám na koni domů" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="lovec_jede_domu/jindra_se_snazi_promluvit_s_lovcem_ktery_jede_domu_ale_jeste_nedorazil.xml" />
+			</Definitions>
+			<Nodes>
+				<EnableBehavior Name="enablebehaviorempty152212404" PositionY="-130" PositionX="500" Signature="empty" EventSet="">
+					<Constant Name="Behavior" Value="pepik_wait" />
+					<Asset Name="SmartEntity" Alias="quest" />
+					<Asset Name="NPC" Alias="PepikTheHorse" />
+					<Edge From="rideHome_patchActive.State" To="IsActive" />
+				</EnableBehavior>
+				<EnableBehavior Name="enablebehavioremptyendnotification152212360" PositionY="350" PositionX="500" Signature="empty" EventSet="endNotification">
+					<Constant Name="Behavior" Value="hunter_rideHome" />
+					<Asset Name="SmartEntity" Alias="quest" />
+					<Asset Name="NPC" Alias="hunterVostatek" />
+					<Edge From="rideHome_patchActive.State" To="IsActive" />
+				</EnableBehavior>
+				<State Name="hunterArrivedOnHorse" PositionY="160" PositionX="1330" TypeT="bool">
+					<Edge From="ifareacheck1522128.True" To="SetTrue" />
+				</State>
+				<IfFunction Name="ifareacheck1522128" PositionY="350" PositionX="990" MethodName="wh::rpgmodule::AreaCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="hunterVostatek" />
+					<Asset Name="Areas" Alias="huntersHome" />
+					<Edge From="enablebehavioremptyendnotification152212360.OnFinished" To="Exec" />
+				</IfFunction>
+				<IfFunction Name="ifdeathcheck152212344" PositionY="610" PositionX="1280" MethodName="wh::rpgmodule::DeathCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="PepikTheHorse" />
+					<Edge From="ifareacheck1522128.False" To="Exec" />
+				</IfFunction>
+				<jindra_se_snazi_promluvit_s_lovcem_ktery_jede_domu_ale_jeste_nedorazil Name="jindra_se_snazi_promluvit_s_lovcem_ktery_jede_domu_ale_jeste_nedorazil" PositionY="100" PositionX="500">
+					<Edge From="rideHome_patchActive.State" To="lovec_jede_domu" />
+				</jindra_se_snazi_promluvit_s_lovcem_ktery_jede_domu_ale_jeste_nedorazil>
+				<Output Name="Output">
+					<Edge From="hunterArrivedOnHorse.OnExec" To="lovec_prijizdi_domu">
+						<Vertex>vertex10</Vertex>
+					</Edge>
+					<Edge From="hunterArrivedOnHorse.State" To="lovec_v_poradku_dojel_domu" />
+					<Edge From="ifdeathcheck152212344.True" To="kun_cestou_umrel" />
+					<Edge From="rideHome_patchActive.State" To="lovec_je_na_ceste_domu">
+						<Vertex>vertex7</Vertex>
+						<Vertex>vertex8</Vertex>
+					</Edge>
+				</Output>
+				<State Name="rideHome_patchActive" PositionY="290" PositionX="60" TypeT="bool">
+					<Edge From="ifdeathcheck152212344.False" To="SetTrue">
+						<Vertex>vertex9</Vertex>
+						<Vertex>vertex3</Vertex>
+					</Edge>
+					<Edge From="enablebehavioremptyendnotification152212360.OnFinished" To="SetFalse">
+						<Vertex>vertex6</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="lovec_jede_sam_na_koni_domu" To="SetTrue" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex10" PositionY="250" PositionX="1820" />
+				<EdgeVertex Name="vertex3" PositionY="830" PositionX="-80" />
+				<EdgeVertex Name="vertex5" PositionY="630" PositionX="90" />
+				<EdgeVertex Name="vertex6" PositionY="640" PositionX="730" />
+				<EdgeVertex Name="vertex7" PositionY="900" PositionX="470" />
+				<EdgeVertex Name="vertex8" PositionY="910" PositionX="1790" />
+				<EdgeVertex Name="vertex9" PositionY="840" PositionX="1420" />
+			</EdgeVertices>
+			<Text StringName="lovec_jede_domu_O7Rn" Text="Lovec jede domů" />
+		</Module>
+	</Skald>
+</Database>

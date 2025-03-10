@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="stream_a_odchod_muzikantu">
+			<Ports>
+				<Port Name="spustit_leavelevel__quest_skoncen" Direction="In" Type="trigger">
+					<DesignName StringName="stream_a__spustit_leavele_AdNn" Text="Spustit leaveLevel - quest skončen" />
+				</Port>
+				<Port Name="muzikanti__start_leave_level" Direction="Out" Type="trigger">
+					<DesignName StringName="stream_a__muzikanti__star_5U0q" Text="Muzikanti - start leave level" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<constants Name="constants" PositionY="80" PositionX="-270" Namespace="kejkliri" />
+				<Output Name="Output">
+					<Edge From="timerPredOdchodem.OnFinished" To="muzikanti__start_leave_level" />
+				</Output>
+				<Timer Name="timerPredOdchodem" PositionY="-80" PositionX="60">
+					<Constant Name="TimeType" Value="WorldTime" />
+					<Edge From="constants.cas_po_kterem_muzikanti_odchazeji_z_trosecka" To="Duration" />
+					<Edge From="spustit_leavelevel__quest_skoncen" To="SetRunning" />
+				</Timer>
+			</Nodes>
+			<Text StringName="stream_a_odchod_muzikantu_CZuz" Text="Stream a odchod muzikantů" />
+		</Module>
+	</Skald>
+</Database>

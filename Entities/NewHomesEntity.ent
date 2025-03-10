@@ -1,0 +1,4 @@
+<Entity
+ Name="NewHomesEntity"
+ Script="Scripts/Entities/WH/NewHomes/NewHomesEntity.lua"
+/>

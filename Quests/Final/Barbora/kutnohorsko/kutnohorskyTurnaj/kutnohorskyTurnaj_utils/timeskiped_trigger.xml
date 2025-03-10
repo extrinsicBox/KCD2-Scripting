@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="timeskiped_trigger">
+			<Ports>
+				<Port Name="isactive" Direction="In" Type="bool">
+					<DesignName StringName="timeskipe_isactive_7vNN" Text="isActive" />
+				</Port>
+				<Port Name="time_skipped" Direction="Out" Type="trigger">
+					<DesignName StringName="timeskipe_time_skipped_vO2q" Text="Time skipped after" />
+				</Port>
+				<Port Name="time_skipped_before" Direction="Out" Type="trigger">
+					<DesignName StringName="timeskipe_time_skipped_be_jZYr" Text="Time skipped before" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="isinactorstate136" PositionY="-120" PositionX="-80" MethodName="wh::entitymodule::IsInActorState" DeclaringType="wh::entitymodule">
+					<Asset Name="Souls" Alias="player" />
+					<Constant Name="State" Value="skipTime" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="watchbool.onchangedtofalse" To="time_skipped" />
+					<Edge From="watchbool.onchangedtotrue" To="time_skipped_before" />
+				</Output>
+				<watchbool Name="watchbool" PositionY="-160" PositionX="220" Namespace="utils.general">
+					<Edge From="isinactorstate136.InState" To="watchedstate" />
+					<Edge From="isactive" To="isactive">
+						<Vertex>3dhK9F2R</Vertex>
+					</Edge>
+				</watchbool>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="3dhK9F2R" PositionY="-180" PositionX="-70" />
+			</EdgeVertices>
+			<Text StringName="timeskiped_trigger_kYsL" Text="Timeskiped Trigger" />
+		</Module>
+	</Skald>
+</Database>

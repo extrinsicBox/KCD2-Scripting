@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<BehaviorTrees>
+  <BehaviorTree name="use_weedOut" is_function="0">
+    <Variables>
+      <Variable name="item" type="_wuid" values="" isPersistent="0" form="single" />
+      <Variable name="itemSlot" type="_wuid" values="" isPersistent="0" form="single" />
+    </Variables>
+    <Root OneTimeOnly="false" FailState="Recoverable" saveVersion="2">
+      <OnInit canSkip="1">
+        <Sequence>
+          <GraphSearch Origin="$__object.id" Borders="" depth="1" selection="true" SearchPattern="Depth" EdgePruning="&apos;parent,inventory&apos;" AllowedEdges="" SubGraph="" AllowSubtraph="false" includeOrigin="false" excludeOrigin="false" failOnEmpty="true" SetOperationChoice="Intersection|And" errorOnEmpty="false" shortCircuit="false" skipTraversed="true">
+            <LinkTagFilter tag="&apos;rag&apos;" prune="true" negprune="unknown" Parent="" Child="$itemSlot" Data="" />
+          </GraphSearch>
+          <GetItemInSlot slot="$itemSlot" useHomeItem="true" item="$item" />
+        </Sequence>
+      </OnInit>
+      <Behavior canSkip="1">
+        <Parallel successMode="Any" failureMode="Any">
+          <Sequence>
+            <Parallel successMode="All" failureMode="Any">
+              <UnstanceAction unstance="healingForeheadOnly" locationObject="$__object.id" slaveObject="" />
+              <SuppressFailure>
+                <Function_speech_schedulerMonolog alias="" animationApproach="$enum:animationApproach.dontPlayDialogAnimations" context="" lookAtId="" metarole="&apos;NPC_SBIRA_KYTKY&apos;" subtitlesDown="false" nodeLabel="26406591" />
+              </SuppressFailure>
+            </Parallel>
+            <Wait duration="&apos;5s&apos;" timeType="GameTime" doFail="false" variation="" skipInLOD="false" />
+          </Sequence>
+          <LinkGate from="$itemSlot" to="" tag="&apos;SlotLink&apos;" amount="AtLeastOne" presence="NotThere" RunLogic="KeepRunning">
+            <Sequence>
+              <SetVisibility ItemWUID="$item" Visibility="false" />
+              <Wait duration="&apos;-1&apos;" timeType="GameTime" doFail="false" variation="" skipInLOD="false" />
+            </Sequence>
+          </LinkGate>
+        </Parallel>
+      </Behavior>
+    </Root>
+    <ForestContainer>
+      <UnstanceElement unstance="healingLeft" locationObject="$__object.id" slaveObject="" enabled="true" />
+      <AnimationAction fragment="&apos;HealingAction&apos;" tags="&apos;healingSideLeft,healingPartChest&apos;" eventReferenceObject="" alignObject="" slaveObject="" resourceOverride="" allowTorchForPlayer="false" />
+    </ForestContainer>
+    <EditorData EventSet="">
+      <Variables>
+        <Variable name="item" comment="" />
+        <Variable name="itemSlot" comment="" />
+      </Variables>
+      <ForwardDeclarations />
+      <Root hasInputBreakpoint="0" comment="" breakpointFlags="0" saveVersion="2">
+        <OutputBreakpoints />
+        <OnInit>
+          <Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+            <OutputBreakpoints />
+            <GraphSearch hasInputBreakpoint="0" comment="" breakpointFlags="0">
+              <OutputBreakpoints />
+              <LinkTagFilter hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                <OutputBreakpoints />
+              </LinkTagFilter>
+            </GraphSearch>
+            <GetItemInSlot hasInputBreakpoint="0" comment="" breakpointFlags="0">
+              <OutputBreakpoints />
+            </GetItemInSlot>
+          </Sequence>
+        </OnInit>
+        <Behavior>
+          <Parallel hasInputBreakpoint="0" comment="" breakpointFlags="0">
+            <OutputBreakpoints />
+            <Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+              <OutputBreakpoints />
+              <Parallel hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                <OutputBreakpoints />
+                <UnstanceAction hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                  <OutputBreakpoints />
+                </UnstanceAction>
+                <SuppressFailure hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                  <OutputBreakpoints />
+                  <Function_speech_schedulerMonolog hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                    <OutputBreakpoints />
+                  </Function_speech_schedulerMonolog>
+                </SuppressFailure>
+              </Parallel>
+              <Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                <OutputBreakpoints />
+              </Wait>
+            </Sequence>
+            <LinkGate hasInputBreakpoint="0" comment="" breakpointFlags="0">
+              <OutputBreakpoints />
+              <Sequence hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                <OutputBreakpoints />
+                <SetVisibility hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                  <OutputBreakpoints />
+                </SetVisibility>
+                <Wait hasInputBreakpoint="0" comment="" breakpointFlags="0">
+                  <OutputBreakpoints />
+                </Wait>
+              </Sequence>
+            </LinkGate>
+          </Parallel>
+        </Behavior>
+      </Root>
+      <Forest>
+        <UnstanceElement editorPosX="290" editorPosY="-430" hasInputBreakpoint="0" comment="" breakpointFlags="0">
+          <OutputBreakpoints />
+        </UnstanceElement>
+        <AnimationAction editorPosX="570" editorPosY="-450" hasInputBreakpoint="0" comment="" breakpointFlags="0">
+          <OutputBreakpoints />
+        </AnimationAction>
+      </Forest>
+      <Comments />
+    </EditorData>
+  </BehaviorTree>
+</BehaviorTrees>

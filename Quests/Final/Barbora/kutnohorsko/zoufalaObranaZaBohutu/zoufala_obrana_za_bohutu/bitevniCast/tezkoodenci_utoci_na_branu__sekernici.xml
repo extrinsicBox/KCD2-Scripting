@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="tezkoodenci_utoci_na_branu__sekernici">
+			<Ports>
+				<Port Name="zacit_prepinat_sekerniky" Direction="In" Type="trigger">
+					<DesignName StringName="tezkooden_zacit_prepinat__TE00" Text="Začít přepínat sekerníky" />
+				</Port>
+				<Port Name="poslat_sekerniky_sekat" Direction="In" Type="trigger">
+					<DesignName StringName="tezkooden_prvni_linie_vys_6S4a" Text="Poslat sekerníky sekat" />
+				</Port>
+				<Port Name="sekernici_sekaji" Direction="Out" Type="bool">
+					<DesignName StringName="tezkooden_sekernici_zacal_kwJT" Text="Sekerníci sekají" />
+				</Port>
+				<Port Name="prilis_sekerniku_zemrelo" Direction="Out" Type="trigger">
+					<DesignName StringName="tezkooden_prilis_sekernik_BAWf" Text="Příliš sekerníků zemřelo" />
+				</Port>
+				<Port Name="olej_vylit" Direction="In" Type="trigger">
+					<DesignName StringName="tezkooden_olej_vylit_ib9X" Text="Pustit animace polití horkým olejem" />
+				</Port>
+				<Port Name="konec" Direction="In" Type="trigger">
+					<DesignName StringName="tezkooden_konec_joca" Text="Vypnout modul" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AddFactionRelationBetweenArrays Name="addfactionrelationbetweenarrays22" PositionY="-340" PositionX="240">
+					<Constant Name="RelationValue" Value="0" />
+					<Asset Name="SoulArray0" Alias="player_bohuta" />
+					<Asset Name="SoulArray1" Alias="frontWallAxeAttackers" />
+					<Edge From="frontWallAxeAttackersBashingGate.Updated" To="IsActive" />
+				</AddFactionRelationBetweenArrays>
+				<ObjectProperties Name="battlesituationproperties3" PositionY="300" PositionX="770" DeclaringType="wh::combatmodule::BattleSituation">
+					<Edge From="battletrigger2.Situation" To="BattleSituation" />
+				</ObjectProperties>
+				<BattleTrigger Name="battletrigger2" PositionY="390" PositionX="260">
+					<Asset Name="SmartObject" Alias="frontWallAxeAttackersGroupController" />
+					<Constant Name="EventType" Value="DeadSoul" />
+					<Edge From="frontWallAxeAttackersBashingGate.Updated" To="IsActive" />
+				</BattleTrigger>
+				<EnableBehavior Name="enablebehavior21" PositionY="-590" PositionX="230" Signature="" EventSet="">
+					<Constant Name="Behavior" Value="withdrawAxe" />
+					<Asset Name="SmartEntity" Alias="battleSO" />
+					<Edge From="frontWallAxeAttackersBashingGate.Active" To="IsActive" />
+				</EnableBehavior>
+				<State Name="frontWallAxeAttackersBashingGate" PositionY="-60" PositionX="-80" TypeT="ProgressUpdated">
+					<Edge From="ifcompare5.True" To="SetDone">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex21</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+					<Edge From="olej_vylit" To="SetDone" />
+					<Edge From="poslat_sekerniky_sekat" To="SetUpdated" />
+					<Edge From="zacit_prepinat_sekerniky" To="SetActive" />
+					<Edge From="ifand24.True" To="SetActive" />
+				</State>
+				<IfFunction Name="ifand24" PositionY="-120" PositionX="-340" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="zacit_prepinat_sekerniky" To="Exec" />
+					<Edge From="frontWallAxeAttackersBashingGate.None" To="A">
+						<Vertex>6rJM6vse</Vertex>
+						<Vertex>HFVa5nvY</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifcompare5" PositionY="280" PositionX="1090" TypeT="int" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="GreaterEquals" />
+					<Edge From="battlesituationproperties3.DeadCount" To="ValueA" />
+					<Edge From="battletrigger2.OnEvent" To="Exec">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="sekernici_u_mrize.maximum_mrtvych" To="ValueB" />
+				</IfFunction>
+				<Output Name="Output">
+					<Edge From="ifcompare5.True" To="prilis_sekerniku_zemrelo" />
+					<Edge From="frontWallAxeAttackersBashingGate.Updated" To="sekernici_sekaji">
+						<Vertex>vertex5</Vertex>
+						<Vertex>vertex6</Vertex>
+					</Edge>
+				</Output>
+				<sekernici_u_mrize Name="sekernici_u_mrize" PositionY="460" PositionX="810" Namespace="" />
+				<wakeandbashgate Name="wakeandbashgate" PositionY="-60" PositionX="260" Namespace="utils.battle">
+					<Asset Name="gatecontroller" Alias="frontWallGateController" />
+					<Constant Name="forcekick" Value="true" />
+					<Constant Name="linktag" Value="battleEntity" />
+					<Edge From="frontWallAxeAttackersBashingGate.OnDone" To="burningoil" />
+					<Edge From="konec" To="deactivate">
+						<Vertex>vertex19</Vertex>
+						<Vertex>vertex20</Vertex>
+					</Edge>
+					<Edge From="ifcompare5.True" To="stopwainkg">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex21</Vertex>
+					</Edge>
+					<Edge From="olej_vylit" To="stopwainkg">
+						<Vertex>mwGXTfu7</Vertex>
+						<Vertex>1UhPY75o</Vertex>
+					</Edge>
+					<Edge From="zacit_prepinat_sekerniky" To="activate">
+						<Vertex>dfAq03MM</Vertex>
+						<Vertex>PDx3wbKK</Vertex>
+					</Edge>
+				</wakeandbashgate>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="1UhPY75o" PositionY="371" PositionX="126" />
+				<EdgeVertex Name="6rJM6vse" PositionY="-161" PositionX="121" />
+				<EdgeVertex Name="dfAq03MM" PositionY="-170" PositionX="-310" />
+				<EdgeVertex Name="HFVa5nvY" PositionY="-158" PositionX="-307" />
+				<EdgeVertex Name="mwGXTfu7" PositionY="371" PositionX="-79" />
+				<EdgeVertex Name="PDx3wbKK" PositionY="-170" PositionX="120" />
+				<EdgeVertex Name="vertex1" PositionY="270" PositionX="770" />
+				<EdgeVertex Name="vertex19" PositionY="360" PositionX="-80" />
+				<EdgeVertex Name="vertex2" PositionY="270" PositionX="1022" />
+				<EdgeVertex Name="vertex20" PositionY="361" PositionX="129" />
+				<EdgeVertex Name="vertex21" PositionY="630" PositionX="240" />
+				<EdgeVertex Name="vertex3" PositionY="630" PositionX="1275" />
+				<EdgeVertex Name="vertex4" PositionY="630" PositionX="-80" />
+				<EdgeVertex Name="vertex5" PositionY="-100" PositionX="210" />
+				<EdgeVertex Name="vertex6" PositionY="-100" PositionX="1280" />
+			</EdgeVertices>
+			<Assets>
+				<TriggerAreaAsset Name="ladderManSuicideArea" />
+			</Assets>
+			<Notes>
+				<Note Name="note23" PositionY="-305" PositionX="534">
+					<Text StringName="tezkooden_note23_uepy" Text="Aby se hráč nemohl lockovat přes mříž s děravou kolizí na sekerníky." />
+				</Note>
+			</Notes>
+			<Text StringName="tezkoodenci_utoci_na_bran_317R" Text="Těžkooděnci útočí na bránu - sekerníci" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="tezkooden_tezkoodenci_sek_sOfe" Text="Těžkooděnci sekerníci se rozestavují v bráně a sekají do mříže sekerami." />
+				</GameplayActionElement>
+			</Elements>
+		</Gameplay>
+	</Skald>
+</Database>

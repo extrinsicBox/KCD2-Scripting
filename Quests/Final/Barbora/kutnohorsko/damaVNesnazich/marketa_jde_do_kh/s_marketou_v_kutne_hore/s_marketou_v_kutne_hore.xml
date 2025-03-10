@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<ForcedDialog Name="s_marketou_v_kutne_hore">
+			<Ports>
+				<Port Name="jindra_muze_jit_za_lackem" Direction="Out" Type="trigger">
+					<DesignName StringName="s_marketo_jindra_muze_jit_jH9A" Text="Jindra může jít za Lackem" />
+				</Port>
+				<Port Name="hrac_vypada_bozsky" Direction="In" Type="bool">
+					<DesignName StringName="s_marketo_hrac_vypada_boz_cPr3" Text="hrac_vypada_bozsky" />
+				</Port>
+				<Port Name="hrac_vypada_hezky" Direction="In" Type="bool">
+					<DesignName StringName="s_marketo_hrac_vypada_hez_B3ie" Text="hrac_vypada_hezky" />
+				</Port>
+				<Port Name="hrac_nevypada_hezky" Direction="In" Type="bool">
+					<DesignName StringName="s_marketo_hrac_nevypada_h_i9Q0" Text="hrac_nevypada_hezky" />
+				</Port>
+				<Port Name="hrac_vypada_priserne" Direction="In" Type="bool">
+					<DesignName StringName="s_marketo_hrac_vypada_pri_YYRj" Text="hrac_vypada_priserne" />
+				</Port>
+			</Ports>
+			<Text StringName="s_marketou_v_kutne_hore_tv7T" Text="S Markétou v Kutné Hoře" />
+			<Dialogue TechnicalStatus="Enabled" AllowFarewell="false" AllowGreeting="false" Initiator="NonPlayer" GesturesSetDate="2024-06-24T18:38:46.3669991+02:00" GesturesSetResponseCount="17">
+				<SelectedSouls>
+					<SelectedSoul Role="HENRY" Voice="tomMcKay" Type="Wave" Language="ENG" />
+					<SelectedSoul Role="MARKETA" Voice="bethanRoseYoung" Type="Wave" Language="ENG" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="SideQuestSubmission">
+					<Sequences>
+						<Sequence EntryCondition="!ThisSequenceUsed()" EndType="Decision" Name="seq10">
+							<DesignName StringName="s_marketo_seq10_rSD9" Text="seq10" />
+							<UiPrompt StringName="ui_s_marketo_seq10_ivtL" Text="Tak jsem tady." />
+							<Elements>
+								<Response Role="HENRY" ReferenceLength="1.7">
+									<Text StringName="s_ma_henry_tak_jsem_tady_LH6G" Text="Tak jsem tady." />
+									<Commands>
+										<AnimationCommand Delay="0.46" FragmentId="ADLG_Nod" Guid="c05d1d1b-ecca-45b7-8434-c2d21c80187b" Variant="1" />
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+							<Decision Name="dec2" Priority="SideQuestSubmission">
+								<Sequences>
+									<Sequence EntryCondition="Port('hrac_vypada_hezky') OR Port('hrac_vypada_bozsky')" EndType="Decision" Name="fancy_success">
+										<DesignName StringName="s_marketo_fancy_success_9NXu" Text="Fancy success" />
+										<Elements>
+											<Response Role="MARKETA" ReferenceLength="2.76">
+												<Parenthetical>
+													<Text StringName="s_ma_marketa_potesene_cILQ" Text="potěšeně" />
+												</Parenthetical>
+												<Text StringName="s_ma_marketa_jo_takhle_by_wZTC" Text="A musím říct, že vypadáš skvěle." />
+												<Commands>
+													<AnimationCommand Delay="0.02" FragmentId="ADLG_posture_change" Guid="5be4ae9e-92b3-4d02-a8f8-04a683d3685c" Variant="5" DesiredDuration="5.02" />
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="MARKETA" ReferenceLength="2.29">
+												<Text StringName="s_ma_marketa_ted_rychle_k_TMRw" Text="Ale rychle k našemu plánu." />
+												<Commands>
+													<AnimationCommand Delay="2.12" FragmentId="ADLG_Nod" Guid="e19b4783-39a0-4a4e-951d-018bc8ad1a03" Variant="0" />
+												</Commands>
+											</Response>
+										</Elements>
+										<Decision Name="dec7">
+											<Sequences>
+												<Sequence EndType="EndDialogue" Name="seq18">
+													<DesignName StringName="s_marketo_seq18_fOMU" Text="seq18" />
+													<Triggers>
+														<Port Name="jindra_muze_jit_za_lackem" />
+													</Triggers>
+													<Elements>
+														<Response Role="MARKETA" ReferenceLength="5">
+															<Text StringName="s_ma_marketa_pujdes_na_na_ar6Y" Text="Půjdeš na náměstí do hospody Na Voprátce a najdeš tam krejčího Lacka." />
+															<Commands>
+																<AnimationCommand Delay="0.4" FragmentId="ADLG_Gesture" Guid="447b018f-9485-446f-a811-c0cde0b017f7" Variant="4" />
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="MARKETA" ReferenceLength="3.4">
+															<Text StringName="s_ma_marketa_urcite_sedi__Pkbe" Text="Určitě sedí sám u svýho stolu pod voknem." />
+															<Commands>
+																<AnimationCommand Delay="0.38" FragmentId="ADLG_Confusion" Guid="d66ec093-3ef1-4d8c-b717-68254998806c" Variant="5" />
+																<AnimationCommand Delay="2.32" FragmentId="ADLG_Gesture" Guid="68f5d7ad-0c24-465e-a342-14fc1a2f7507" Variant="5" />
+															</Commands>
+														</Response>
+														<Response Role="MARKETA" ReferenceLength="8.46">
+															<Text StringName="s_ma_marketa_promluvis_s__Pbhd" Text="Promluvíš s ním, klidně mu něco navykládej ale hlavně mu musíš nenápadně nalít do pití ten uspávák." />
+															<Commands>
+																<AnimationCommand Delay="3.92" FragmentId="ADLG_Surprised_light" Guid="ec1ef83e-f206-5b50-63ea-27915e5061a3" Variant="0" />
+																<AnimationCommand Delay="8.19" FragmentId="ADLG_Disagree_light" Guid="5acf8d95-df36-4634-834b-980ef7993e74" Variant="1" />
+															</Commands>
+														</Response>
+														<Response Role="MARKETA" ReferenceLength="2.82">
+															<Text StringName="s_ma_marketa_az_to_s_nim__eHJZ" Text="Až to s ním sekne, tak ho sebereš a přineseš ho sem." />
+															<Commands>
+																<AnimationCommand Delay="2.5" FragmentId="ADLG_Gesture" Guid="84e4edff-ff8e-459e-9eb3-683bd42a6d5c" Variant="8" DesiredDuration="3.41" />
+															</Commands>
+														</Response>
+														<Response Role="MARKETA" ReferenceLength="5.14">
+															<Text StringName="s_ma_marketa_bude_to_vypa_3kO2" Text="Bude to vypadat, že neseš opilce domů, takhle v noci to nebude nikomu nápadný." />
+															<Commands>
+																<AnimationCommand Delay="4.38" FragmentId="ADLG_Confusion" Guid="886b368e-34df-4f89-a8b4-266ae4e863e8" Variant="2" />
+															</Commands>
+														</Response>
+														<Response Role="MARKETA" ReferenceLength="2.73">
+															<Text StringName="s_ma_marketa_az_ho_donese_Y991" Text="Tady už se vo něj postarám já." />
+															<Commands>
+																<AnimationCommand Delay="1.68" FragmentId="ADLG_Nod" Guid="e19b4783-39a0-4a4e-951d-018bc8ad1a03" Variant="0" />
+															</Commands>
+														</Response>
+														<Response Role="HENRY" ReferenceLength="5.6">
+															<Text StringName="s_ma_henry_dobre_promluvi_BESy" Text="Dobře. Promluvit, uspat a přinýst. Jdu na to." />
+															<Commands>
+																<AnimationCommand Delay="0.22" FragmentId="ADLG_Nod" Guid="ca364fe9-66bd-48fa-8178-0e49459d7038" Variant="2" />
+																<AnimationCommand Delay="1.34" FragmentId="ADLG_Gesture" Guid="c6b727f7-9697-4d31-8885-9bbc2f47896a" Variant="20" />
+																<CameraCommand />
+															</Commands>
+														</Response>
+													</Elements>
+												</Sequence>
+											</Sequences>
+										</Decision>
+									</Sequence>
+									<Sequence EntryCondition="Port('hrac_vypada_priserne') OR Port('hrac_nevypada_hezky')" EndType="EndDialogue" Visibility="Internal" Name="fancy_fail">
+										<DesignName StringName="s_marketo_fancy_fail_E2TS" Text="fancy fail" />
+										<Elements>
+											<Response Role="MARKETA" ReferenceLength="4.16">
+												<Text StringName="s_ma_marketa_videl_si_jak_CbO2" Text="Sem ráda, že ses na mě nevykašlal, ale musíš se převlíknout!" />
+												<Commands>
+													<AnimationCommand FragmentId="ADLG_Agree" Guid="f0f76cf7-bf3c-416e-83df-3f9594209321" Variant="3" DesiredDuration="1.42" />
+													<AnimationCommand Delay="3.2" FragmentId="ADLG_Disagree_light" Guid="5acf8d95-df36-4634-834b-980ef7993e74" Variant="1" />
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="MARKETA" ReferenceLength="3.4">
+												<Text StringName="s_ma_marketa_rikala_jsem__fQKz" Text="Říkala jsem, že máš vypadat jako charismatickej vobchodník." />
+												<Commands>
+													<AnimationCommand Delay="0.83" FragmentId="ADLG_Frustration" Guid="d72ef4f7-fc2a-42d2-b0bd-b5d0fa6bc39c" Variant="2" />
+												</Commands>
+											</Response>
+											<Response Role="MARKETA" ReferenceLength="2.7">
+												<Text StringName="s_ma_marketa_udelej_se_se_fxBl" Text="Pospěš si prosím. Nemáme moc času." />
+												<Commands>
+													<AnimationCommand Delay="0.12" FragmentId="ADLG_Threat" Guid="7639e7d5-e955-4376-9676-96b75416e048" Variant="1" />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+						<Sequence EntryCondition="SequenceUsed('fancy_fail')" EndType="Decision" Name="seq15">
+							<DesignName StringName="s_marketo_seq15_uqHQ" Text="seq15" />
+							<UiPrompt StringName="ui_s_marketo_seq15_nusG" Text="Už je to lepší?" />
+							<Elements>
+								<Response Role="HENRY" ReferenceLength="1.25">
+									<Text StringName="s_ma_henry_je_to_takhle_l_Zoab" Text="Je to takhle lepší?" />
+									<Commands>
+										<AnimationCommand FragmentId="ADLG_Surprised_light" Guid="05fbbee9-b1a6-ec13-8596-a39e097f4674" Variant="0" />
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+							<Decision Name="dec6">
+								<Sequences>
+									<Sequence EntryCondition="Port('hrac_vypada_priserne') OR Port('hrac_nevypada_hezky')" EndType="EndDialogue" Name="seq16">
+										<DesignName StringName="s_marketo_seq16_okqP" Text="seq16" />
+										<Elements>
+											<Response Role="MARKETA" ReferenceLength="4.74">
+												<Parenthetical>
+													<Text StringName="s_ma_marketa_trochu_podra_4XWb" Text="trochu podrážděně" />
+												</Parenthetical>
+												<Text StringName="s_ma_marketa_tohle_neni_d_PIwP" Text="Tohle není dost! Von pozná, že to na něj hraješ a ani s tebou nepromluví!" />
+												<Commands>
+													<AnimationCommand Delay="0.02" FragmentId="ADLG_Disagree" Guid="4f8697b6-f6c3-4598-ac1e-68511077bf57" Variant="3" />
+													<AnimationCommand Delay="3.26" FragmentId="ADLG_Frustration" Guid="db7e2543-4ce2-4f48-aaca-aaa2bbbd4f1d" Variant="3" />
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="MARKETA">
+												<Text StringName="s_ma_marketa_ja_ho_znam_1hZt" Text="Já ho znám!" />
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EntryCondition="Port('hrac_vypada_bozsky') OR Port('hrac_vypada_hezky')" EndType="GoTo" GoToDecision="dec7" Name="seq17">
+										<DesignName StringName="s_marketo_seq17_9kGD" Text="seq17" />
+										<Elements>
+											<Response Role="MARKETA" ReferenceLength="3.54">
+												<Parenthetical>
+													<Text StringName="s_ma_marketa_potesene_dQaz" Text="potěšeně" />
+												</Parenthetical>
+												<Text StringName="s_ma_marketa_skvely_tak_t_V39j" Text="Skvělý! Tak teď k tomu, co musíš udělat." />
+												<Commands>
+													<AnimationCommand Delay="0.02" FragmentId="ADLG_Surprised_light" Guid="ec1ef83e-f206-5b50-63ea-27915e5061a3" Variant="0" />
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</ForcedDialog>
+	</Skald>
+</Database>

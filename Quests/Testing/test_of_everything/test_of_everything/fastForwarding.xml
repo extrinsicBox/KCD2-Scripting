@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+  <Skald>
+    <Module Name="fastForwarding" HasteNamespace="true">
+      <Nodes>
+        <CutsceneHandler Name="cutscenehandler2" PositionY="-80" PositionX="370">
+          <Asset Name="CutsceneHolder" Alias="fastForwarding_cutscene" />
+          <Edge From="start_cutscene.OnTrigger" To="EnqueueCutscene" />
+        </CutsceneHandler>
+        <SchedulerLinkActivation Name="schedule4" PositionY="-50" PositionX="1160">
+          <Constant Name="LinkTag" Value="fastForwarding" />
+          <Edge From="state3.State" To="IsActive" />
+        </SchedulerLinkActivation>
+        <HasteTrigger Name="start_cutscene" PositionY="-80" PositionX="10" />
+        <State Name="state3" PositionY="-80" PositionX="860" TypeT="bool">
+          <Edge From="cutscenehandler2.AfterPlay" To="SetTrue" />
+        </State>
+      </Nodes>
+      <Assets>
+        <CutsceneHolderAsset Name="fastForwarding_cutscene" />
+      </Assets>
+      <Text Text="fastForwarding" />
+    </Module>
+  </Skald>
+</Database>

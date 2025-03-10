@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="hlahol_z_tabor">
+			<Ports>
+				<Port Name="hlahol_zapocat" Direction="In" Type="bool">
+					<DesignName StringName="hlahol_z__hlahol_zapocat_fU7T" Text="Hlahol započat" />
+				</Port>
+			</Ports>
+			<Text StringName="hlahol_z_tabora_dYlQ" Text="Hlahol z tábor" />
+			<Dialogue Type="ingame" TechnicalStatus="Enabled" Hearing="100" Initiator="NonPlayer">
+				<Decision Name="dec1" Priority="SideQuestSubmission" Alias="zbranePanaSemina_hlaholCamp" Autoselect="true">
+					<Sequences>
+						<Sequence EntryCondition="Port('hlahol_zapocat')" EndType="EndDialogue" Name="seq2">
+							<DesignName StringName="hlahol_z__seq2_tRxB" Text="seq2" />
+							<Elements>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_ha_strasli_vQOQ" Text="... no to mě potěš. To si fakt viděl?" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_jo_strasne_Phr0" Text="No nekecám, řekni Honzo, že nekecám... dyť si to taky viděl." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_no_fakt_ne_eydk" Text="No fakt nekecá. Viděl sem to na vlastní voči. Přesně takový je měla." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_no_dobre_a_LVtY" Text="No dobře, ale to neni vo... dyť ta ženská musí bejt všem pro smích." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_proc_nekom_4fNt" Text="Proč? Někomu se to může líbit." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_to_teda_ne_NnHw" Text="To teda nevim komu. A dělali něco?" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_ty_vole_co_fbey" Text="Ty vole, co si jako myslíš, že by dělali, svítili?" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_nech_ho_ho_HLWI" Text="Nech ho, Honzíku. Máš pravdu, něco dělali... točili se a šel z nich kouř. Haha!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_jo_kour_ha_fgya" Text="Jo kouř! Hahaha!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_ste_hovada_iXW3" Text="Ste hovada fakt, já bych si s takovou nic nezačínal, je to celý divný. Mít to takhle... udělaný." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_buhvi_jest_1JtN" Text="Bůhví jestli nebyla prokletá, nebo třeba čarodějnice!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_ty_taky_vi_F3Nq" Text="Ty taky vidíš čáry všude. Nakonec můj strejda to taky takhle měl. Každý voko jinak barevný a prokletej teda rozhodně nebyl." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_to_nemuzes_y8kj" Text="To nemůžeš vědět!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_to_je_zase_gz0c" Text="To je zas pravda... nikdy nevíš jakej kříž si lidi nesou." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_prosimte_h_7q4e" Text="Prosímtě Honzíku, nezačínej zase. Sem vás chtěl pobavit vtipnou historkou a ne poslouchat tvoje rádoby učený kecy." />
+									<ReviewNotesStylistic>
+										<Item Date="2020-05-13 16:43:58" UserName="martin.sourek" Text="spíš vás?" />
+									</ReviewNotesStylistic>
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_radoby_asi_UJFS" Text="Rádoby? Asi zapomínáš, že mě vysvětili, ty... nevzdělanče." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_jezisi_uz__bOsO" Text="Ježiši - už zase. Nikdo tě Honzíku nevysvětil!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_ale_vysvet_qtAx" Text="Ale vysvětil, Plesnivec - v lesní kapli za Voděradama." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_hovno_te_n_3Lqg" Text="Hovno tě někdo vysvětil. To, že ti starej Plesnivec vylil na hlavu vodu z potoka za Voděradama nic nezmanená." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_ale_plesni_znHF" Text="Ale Plesnivec je kněžour!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_plesnivec__7uz4" Text="Plesnivec je především starej pomatenej vožrala, kterej tvrdí, že byl kněz. Nezná ani jeden biblickej verš!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_navic_se_m_89ip" Text="Navíc se mu říká Plesnivec... ty vole, nemyslíš, že by měl lepší přezdívku, kdyby byl kněz?" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_hej_za_to__smkb" Text="Hej! Za to co má s nohama nemůže! " />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_ja_bych_re_6MeP" Text="Já bych řekl, že to je boží trest za ty jeho kecy." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_3">
+									<Text StringName="hlah_zbrane_pa_ste_zabedn_XpIy" Text="Ste zabedněný hovada. Plesnivec byl kněz, vokazoval mi svatý vobrázky a spoustu mě toho naučil." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_mas_pravdu_9X9G" Text="Máš pravdu, Plesnivec byl kněz, prasata maj křídla a Červeňák je ve skutečnosti Červená Karkulka." />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_1">
+									<Text StringName="hlah_zbrane_pa_na_zenskou_LMpX" Text="Na ženskou má teda dost mizerný kozy. Haha!" />
+								</Response>
+								<Response Role="ZBRANE_PANA_SEMINA_LAPKA_2">
+									<Text StringName="hlah_zbrane_pa_hahaha_8pM1" Text="Hahaha!" />
+								</Response>
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

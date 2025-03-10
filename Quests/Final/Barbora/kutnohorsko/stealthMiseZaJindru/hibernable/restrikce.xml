@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="restrikce">
+			<Ports>
+				<Port Name="quest_active" Direction="In" Type="bool">
+					<DesignName StringName="ow_restri_start_N0Gt" Text="quest active" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<DisableHorseInventory Name="disablehorseinventory8" PositionY="-490" PositionX="-160">
+					<Edge From="quest_active" To="IsActive" />
+				</DisableHorseInventory>
+				<FilterInput Name="filterinput6" PositionY="-30" PositionX="-220">
+					<Edge From="makearray7.Array" To="Filters" />
+					<Edge From="quest_active" To="IsActive" />
+				</FilterInput>
+				<MakeArray Name="makearray7" PositionY="130" PositionX="-500" TypeT="Strings">
+					<Constant Name="A" Value="no_horse" />
+					<Constant Name="B" Value="no_horse_mount" />
+				</MakeArray>
+				<PauseWorldTime Name="pauseworldtime1" PositionY="-360" PositionX="-160">
+					<Edge From="quest_active" To="IsActive" />
+				</PauseWorldTime>
+				<SetGameContext Name="setgamecontext3" PositionY="-230" PositionX="-160">
+					<Constant Name="Context" Value="NoDog" />
+					<Edge From="quest_active" To="IsActive" />
+				</SetGameContext>
+			</Nodes>
+			<Text StringName="ow_restrikce_7xvJ" Text="restrikce" />
+		</Gameplay>
+	</Skald>
+</Database>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="haste">
+			<Ports>
+				<Port Name="quest_lze_nastartovat" Direction="Out" Type="trigger">
+					<DesignName StringName="haste_quest_lze_nastartov_oLcb" Text="quest lze nastartovat" />
+				</Port>
+				<Port Name="hvezdicka_je_viditelna" Direction="Out" Type="trigger">
+					<DesignName StringName="haste_hvezdicka_je_vidite_fcnu" Text="hvezdicka je viditelna" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<HasteTrigger Name="createHorseshoesBlacksmithingShit" PositionY="210" PositionX="-200" />
+				<HasteTrigger Name="createHorseshoesBlacksmithingSuperb" PositionY="670" PositionX="-210" />
+				<EventFunction Name="createplayerreward5" PositionY="210" PositionX="160" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Constant Name="ItemClass" Value="850d28d9-9d0a-4b2e-9feb-e6c48c5f1aad" />
+					<Edge From="createHorseshoesBlacksmithingShit.OnTrigger" To="Exec" />
+				</EventFunction>
+				<EventFunction Name="createplayerreward5_1" PositionY="650" PositionX="190" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Edge From="konstanty.podkova_vykovana" To="ItemClass" />
+					<Edge From="createHorseshoesBlacksmithingSuperb.OnTrigger" To="Exec" />
+				</EventFunction>
+				<HasteTrigger Name="init" PositionY="-170" PositionX="-200">
+					<Edge From="makearray4.Array" To="ConsoleCommands" />
+				</HasteTrigger>
+				<konstanty Name="konstanty" PositionY="870" PositionX="-120" Namespace="zavodni_podkovy" />
+				<MakeArray Name="makearray4" PositionY="-150" PositionX="-450" TypeT="Strings">
+					<Constant Name="A" Value="goto tsem_man_2" />
+				</MakeArray>
+				<MakeArray Name="makearray4_1" PositionY="-315" PositionX="-431" TypeT="Strings">
+					<Constant Name="A" Value="goto tvez_mikolaj" />
+				</MakeArray>
+				<HasteTrigger Name="mikolaj" PositionY="-360" PositionX="-210">
+					<Edge From="makearray4_1.Array" To="ConsoleCommands" />
+				</HasteTrigger>
+				<Output Name="Output">
+					<Edge From="init.OnTrigger" To="quest_lze_nastartovat" />
+					<Edge From="questAvailableWithMarker.OnTrigger" To="hvezdicka_je_viditelna" />
+				</Output>
+				<HasteTrigger Name="questAvailableWithMarker" PositionY="26" PositionX="-200" />
+			</Nodes>
+			<Text StringName="haste_2ezC" Text="haste" />
+		</Module>
+	</Skald>
+</Database>

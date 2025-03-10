@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="chovani_ingame_polylog">
+			<Ports>
+				<Port Name="deaktivace_chatu" Direction="In" Type="bool">
+					<DesignName StringName="chovani_i_deaktivace_chatu_C2MA" Text="deaktivace chatu" />
+				</Port>
+				<Port Name="polylog_skoncil" Direction="In" Type="bool">
+					<DesignName StringName="chovani_i_polylog_skoncil_KDfb" Text="Polylog skončil" />
+				</Port>
+				<Port Name="stream_hostiny" Direction="In" Type="trigger">
+					<DesignName StringName="chovani_i_stream_hostiny_a5dG" Text="stream hostiny" />
+				</Port>
+				<Port Name="chat_update" Direction="In" Type="trigger">
+					<DesignName StringName="chovani_i_deaktivace_chat_lCNf" Text="chat update" />
+				</Port>
+				<Port Name="hrac_neni_zatykan" Direction="In" Type="bool">
+					<DesignName StringName="chovani_i_hrac_neni_zatyk_IySt" Text="hráč není zatýkán" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="and14" PositionY="380" PositionX="690" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not6.bool" To="A" />
+					<Edge From="polylog_skoncil" To="B">
+						<Vertex>vertex8</Vertex>
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="hrac_neni_zatykan" To="C">
+						<Vertex>CN0RgLWy</Vertex>
+						<Vertex>M3BJYHWB</Vertex>
+					</Edge>
+				</Function>
+				<If Name="if12" PositionY="-100" PositionX="-400">
+					<Edge From="isJitkaAlive.None" To="Condition">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="stream_hostiny" To="Exec" />
+				</If>
+				<IfFunction Name="ifdeathcheck9" PositionY="-90" PositionX="-60" MethodName="wh::rpgmodule::DeathCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="Jitka" />
+					<Edge From="if12.True" To="Exec" />
+				</IfFunction>
+				<ingamepolylogchat_sitstand Name="ingamepolylogchat_sitstand" PositionY="-120" PositionX="1190" Namespace="utoknanebakov">
+					<Asset Name="smartentity" Alias="feast" />
+					<Constant Name="aliaschat" Value="utokNaNebakov_feast_foodChat" />
+					<Constant Name="aliaspolylog" Value="utokNaNebakov_feast_foodIngamePolylog" />
+					<Constant Name="chatmaxdistance" Value="4" />
+					<Edge From="makearray1.Array" To="chatnpcs" />
+					<Edge From="makearray3.Array" To="sitplaces" />
+					<Edge From="makearray4.Array" To="standingnpcs" />
+					<Edge From="makearray5.Array" To="standplaces" />
+					<Edge From="isJitkaAlive.SoulAlive" To="isactive" />
+					<Edge From="and14.bool" To="activechat" />
+					<Edge From="chat_update" To="updatereferences">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+						<Vertex>vertex6</Vertex>
+					</Edge>
+					<Edge From="makearray16.Array" To="dontcallwench" />
+					<Edge From="makearray17.Array" To="tables" />
+					<Edge From="makearray19.Array" To="sittingnpcs" />
+				</ingamepolylogchat_sitstand>
+				<State Name="isJitkaAlive" PositionY="-90" PositionX="270" TypeT="DeathStateCheck">
+					<Edge From="ifdeathcheck9.True" To="SetSoulDeath" />
+					<Edge From="ifdeathcheck9.False" To="SetSoulAlive" />
+				</State>
+				<MakeArray Name="makearray1" PositionY="770" PositionX="690" TypeT="wh::xgenaimodule::LinkableObjects">
+					<Asset Name="A" Alias="Hanko" />
+					<Asset Name="B" Alias="Busek" />
+				</MakeArray>
+				<MakeArray Name="makearray16" PositionY="550" PositionX="1080" TypeT="wh::conceptmodule::Bools">
+					<Constant Name="A" Value="true" />
+					<Constant Name="B" Value="false" />
+				</MakeArray>
+				<MakeArray Name="makearray17" PositionY="710" PositionX="1080" TypeT="wh::xgenaimodule::LinkableObjects">
+					<Asset Name="A" Alias="table_hanko" />
+					<Asset Name="B" Alias="table_hanko" />
+				</MakeArray>
+				<MakeArray Name="makearray19" PositionY="600" PositionX="690" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="B" Alias="Busek" />
+					<Edge From="switch15.Value1" To="A" />
+				</MakeArray>
+				<MakeArray Name="makearray3" PositionY="1080" PositionX="690" TypeT="wh::xgenaimodule::LinkableObjects">
+					<Asset Name="A" Alias="seat_jitkaBolka" />
+					<Asset Name="B" Alias="seat_busek" />
+				</MakeArray>
+				<MakeArray Name="makearray4" PositionY="940" PositionX="690" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="Hanko" />
+				</MakeArray>
+				<MakeArray Name="makearray5" PositionY="1230" PositionX="690" TypeT="wh::xgenaimodule::LinkableObjects">
+					<Asset Name="A" Alias="spot_hanko" />
+				</MakeArray>
+				<Function Name="not6" PositionY="380" PositionX="280" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="deaktivace_chatu" To="Value">
+						<Vertex>6dVAjeSv</Vertex>
+					</Edge>
+				</Function>
+				<Switch Name="switch15" PositionY="170" PositionX="690" TypeT="bool" ValueTypes="wh::rpgmodule::I_Soul*" SwitchValues="true">
+					<Asset Name="trueValue1" Alias="Jitka" />
+					<Asset Name="DefaultValue1" Alias="Bolka" />
+					<Edge From="isJitkaAlive.SoulAlive" To="Switch" />
+				</Switch>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="6dVAjeSv" PositionY="470" PositionX="-360" />
+				<EdgeVertex Name="CN0RgLWy" PositionY="580" PositionX="-360" />
+				<EdgeVertex Name="M3BJYHWB" PositionY="580" PositionX="470" />
+				<EdgeVertex Name="vertex1" PositionY="310" PositionX="470" />
+				<EdgeVertex Name="vertex2" PositionY="310" PositionX="-370" />
+				<EdgeVertex Name="vertex4" PositionY="340" PositionX="-370" />
+				<EdgeVertex Name="vertex5" PositionY="340" PositionX="470" />
+				<EdgeVertex Name="vertex6" PositionY="140" PositionX="700" />
+				<EdgeVertex Name="vertex8" PositionY="540" PositionX="-360" />
+				<EdgeVertex Name="vertex9" PositionY="540" PositionX="470" />
+			</EdgeVertices>
+			<Assets>
+				<SmartObjectAsset Name="seat_jitkaBolka" />
+				<SmartObjectAsset Name="seat_busek" />
+				<SmartObjectAsset Name="table_hanko" />
+			</Assets>
+			<Text StringName="chovani_ingame_polylog_IxKQ" Text="Chování ingame polylog" />
+		</Module>
+	</Skald>
+</Database>

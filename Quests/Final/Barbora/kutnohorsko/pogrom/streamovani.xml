@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="streamovani">
+			<Ports>
+				<Port Name="stream_na_zacatku" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_stream_NMEp" Text="Stream na zacatku" />
+				</Port>
+				<Port Name="stream_ve_finalni_casti" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_unstream_6Whk" Text="Stream ve finalni casti" />
+				</Port>
+				<Port Name="hrac_je_dostatecne_daleko_od_prezivsich" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_hrac_je_dostate_YYLi" Text="hráč je dostatečně daleko od přeživších" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<streamprofileshandling Name="streamprofileshandling" PositionY="230" PositionX="-210" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="finalPart" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="stream_ve_finalni_casti" To="streamprofiles" />
+					<Edge From="hrac_je_dostatecne_daleko_od_prezivsich" To="unstreamprofiles" />
+				</streamprofileshandling>
+				<streamprofileshandling Name="streamprofileshandling_1" PositionY="-60" PositionX="-220" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="vuz" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="stream_na_zacatku" To="streamprofiles" />
+					<Edge From="stream_ve_finalni_casti" To="unstreamprofiles" />
+				</streamprofileshandling>
+			</Nodes>
+			<Assets>
+				<ProfileAsset Name="finalPart" AssetProfiles="pogrom_showInFinalPart" />
+			</Assets>
+			<Text StringName="streamovani_QGPI" Text="Streamovani" />
+		</Module>
+	</Skald>
+</Database>

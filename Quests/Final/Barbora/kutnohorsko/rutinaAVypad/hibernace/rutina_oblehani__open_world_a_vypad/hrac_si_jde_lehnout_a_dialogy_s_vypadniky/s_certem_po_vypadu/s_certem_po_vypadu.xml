@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<ForcedDialog Name="s_certem_po_vypadu">
+			<Ports>
+				<Port Name="vypad_byl_uspesny" Direction="In" Type="bool">
+					<DesignName StringName="hrac_mluv_vypad_byl_uspes_hi8z" Text="výpad byl úspěšný" />
+				</Port>
+				<Port Name="nekdo_z_vypadniku_dostal_buff" Direction="In" Type="bool">
+					<DesignName StringName="hrac_mluv_nekdo_z_vypadni_QGWp" Text="někdo z výpadníků dostal buff" />
+				</Port>
+				<Port Name="nekdo_z_vypadniku_pri_vypadu_zemrel" Direction="In" Type="bool">
+					<DesignName StringName="hrac_mluv_nekdo_z_vypadni_VYe1" Text="někdo z výpadníků při výpadu zemřel" />
+				</Port>
+				<Port Name="start_objectivu_hlaseni_zizkovi" Direction="Out" Type="trigger">
+					<DesignName StringName="s_certem__start_objectivu_eGFH" Text="Start objectivu Hlaseni Zizkovi" />
+				</Port>
+			</Ports>
+			<Text StringName="hrac_mluvi_s_certem_po_vy_XeYA" Text="S Čertem po výpadu" />
+			<Dialogue TechnicalStatus="Enabled" AllowFarewell="false" AllowGreeting="false" Initiator="NonPlayer" NonSpeakerRoles="PTACEK">
+				<Decision Name="dec1" Priority="MainQuestAdditionals">
+					<Sequences>
+						<Sequence EntryCondition="!Port('vypad_byl_uspesny')" EndType="Decision" Name="seq4">
+							<DesignName StringName="hrac_mluv_seq4_JHtt" Text="seq4" />
+							<Elements>
+								<Response Role="HENRY">
+									<Text StringName="s_ce_henry_certe_jeste_ze_55sg" Text="Čerte! Ještě že jste se stihli vrátit. Co se stalo?" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="HYNEK_SUCHY_CERT">
+									<Parenthetical>
+										<Text StringName="hrac_hynek_suc_vypruzene_n1L8" Text="vypruzeně" />
+									</Parenthetical>
+									<Text StringName="hrac_hynek_suc_posralo_se_4Mbk" Text="Posralo se to no. Co bys jako chtěl slyšet?" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+							<Decision Name="dec3" Priority="MainQuestSubmission">
+								<Sequences>
+									<Sequence EntryCondition="!ThisSequenceUsed()" EndType="Decision" Name="seq5">
+										<DesignName StringName="hrac_mluv_seq5_wJrJ" Text="seq5" />
+										<UiPrompt StringName="ui_hrac_mluv_seq5_wjKA" Text="Jak se dařilo mojí rotě?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Text StringName="hrac_henry_jak_si_vedli_m_68q6" Text="Jak si vedli moji chlapi?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+										<Decision Name="dec4" Priority="MainQuestSubmission">
+											<Sequences>
+												<Sequence EntryCondition="Port('nekdo_z_vypadniku_dostal_buff') AND !Port('nekdo_z_vypadniku_pri_vypadu_zemrel')" EndType="GoTo" GoToDecision="dec3" Name="seq6">
+													<DesignName StringName="hrac_mluv_seq6_go7H" Text="seq6" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_no_musim_r_VcYF" Text="No, musím říct, že jsi je vybral dobře." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_v_boji_se__lIpo" Text="V boji se zvládli doplňovat a taky se kvůli tomu všichni vrátili." />
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_dej_jim_za_j2aW" Text="Dej jim za mě pochvalu." />
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EntryCondition="!Port('nekdo_z_vypadniku_dostal_buff') AND !Port('nekdo_z_vypadniku_pri_vypadu_zemrel')" EndType="GoTo" GoToDecision="dec3" Name="seq7">
+													<DesignName StringName="hrac_mluv_seq7_2BM4" Text="seq7" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_bud_je_to__NDDe" Text="Buď je to neuspořádaná banda, nebo jsi mi poslal ty nejhorší hovada." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_pulku_casu_7sIe" Text="Půlku času tam spíš překáželi!" />
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_mas_stesti_7iwV" Text="Máš štěstí, že se ti všichni vrátili. Za to předpokládám můžou vděčit jen mě a vaší střelbě." />
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EntryCondition="Port('nekdo_z_vypadniku_dostal_buff') AND Port('nekdo_z_vypadniku_pri_vypadu_zemrel')" EndType="GoTo" GoToDecision="dec3" Name="seq8">
+													<DesignName StringName="hrac_mluv_seq8_1n09" Text="seq8" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_vedli_si_d_7O5M" Text="Vedli si dobře, až jsem byl sám překvapenej. Ale náhoda je blbec." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_aspon_vidi_FxIX" Text="Aspoň vidíš, že můžeš dát dobrej rozkaz, vybrat správný lidi, ale stejně to dopadne blbě, když svatý nedaj." />
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EntryCondition="!Port('nekdo_z_vypadniku_dostal_buff') AND Port('nekdo_z_vypadniku_pri_vypadu_zemrel')" EndType="GoTo" GoToDecision="dec3" Name="seq9">
+													<DesignName StringName="hrac_mluv_seq9_wcmL" Text="seq9" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_no_moc_se__1kJ2" Text="No moc se nepředvedli. Jestli nechceš, abys hradby za chvíli bránil sám, tak si je vezmi do parády." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+													</Elements>
+												</Sequence>
+											</Sequences>
+										</Decision>
+									</Sequence>
+									<Sequence SpeechCoef="0" EntryCondition="!ThisSequenceUsed()" EndType="Decision" Name="seq2">
+										<DesignName StringName="hrac_mluv_seq2_VRnn" Text="seq2" />
+										<UiPrompt StringName="ui_hrac_mluv_seq2_G40P" Text="Co myslíš, že bude dál?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Text StringName="hrac_hynek_suc_to_jo_4393" Text="Jak myslíš, že Pražani na ten útok zareagujou?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+										<Decision Name="dec5" Priority="MainQuestSubmission">
+											<Sequences>
+												<Sequence EntryCondition="Port('vypad_byl_uspesny')" EndType="GoTo" GoToDecision="dec3" Name="seq12">
+													<DesignName StringName="hrac_mluv_seq12_lvQv" Text="seq12" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_rozhodne_s_xmZs" Text="Rozhodně si teď dají větší pozor a to jejich postup zpomalí." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_takze_si_m_usQ2" Text="Takže si myslím, že jsme kurva uspěli." />
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EntryCondition="!Port('vypad_byl_uspesny')" EndType="GoTo" GoToDecision="dec3" Name="seq13">
+													<DesignName StringName="hrac_mluv_seq13_vn4n" Text="seq13" />
+													<Elements>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_ukazali_js_R1eD" Text="Ukázali jsme jim, že tu nehodláme jen sedět na prdeli a čekat, až si vylezou pro stříbro." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="HYNEK_SUCHY_CERT">
+															<Text StringName="hrac_hynek_suc_a_i_kdyz_s_0rUE" Text="A i když se to vlastně celý posralo, aspoň tohle s jejich nadšením určitě zamává." />
+														</Response>
+													</Elements>
+												</Sequence>
+											</Sequences>
+										</Decision>
+									</Sequence>
+									<Sequence EntryCondition="!ThisSequenceUsed()" EndType="GoTo" GoToDecision="dec3" Name="seq15">
+										<DesignName StringName="hrac_mluv_seq15_r6d3" Text="seq15" />
+										<UiPrompt StringName="ui_hrac_mluv_seq15_xtwG" Text="Jak bitva probíhala?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Text StringName="hrac_henry_jaka_to_byla_b_Q7xQ" Text="Jak bitva probíhala? Myslím... tam zezdola. U nás hradbách to bylo určitě dost jiný." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Text StringName="hrac_hynek_suc_rez_jako_k_6cTY" Text="Řež jako každá jiná. Jenom snad... myslím, že jednoho z těch kluků jsem znal." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="hrac_henry_prekvapene_iU3c" Text="překvapeně" />
+												</Parenthetical>
+												<Text StringName="hrac_henry_jednoho_z_tech_x3I5" Text="Co? Jednoho z těch Pražanů? Odkud?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Text StringName="hrac_hynek_suc_jo_myslim__eMBk" Text="Myslím, že jsme spolu táhli do Rakous, na Weikertschlag." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Text StringName="hrac_hynek_suc_mladej_klu_xpVu" Text="Říkali mu Vosa. Horkokrevnej malej zmrd, kterej se objevil všude kde tekla krev. Měl jsem ho rád." />
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Text StringName="hrac_hynek_suc_jak_se_dos_SvWg" Text="Jak se dostal k Pražanům, to netušim. Ale ta naše známost mi zachránila kejhák." />
+											</Response>
+											<Response Role="HENRY">
+												<Text StringName="hrac_henry_co_on_ti_nejak_uMpR" Text="Co? On ti pomoh?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Parenthetical>
+													<Text StringName="hrac_hynek_suc_cynicky_dFcj" Text="cynicky" />
+												</Parenthetical>
+												<Text StringName="hrac_hynek_suc_to_ne_ale__YMj9" Text="To ne. Ale když mě viděl, tak zaváhal. A to mi stačilo, abych mu probodnul chřtán. Kdyby to neudělal, měl mě na háku." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="EndDialogue" Name="seq10">
+										<DesignName StringName="hrac_mluv_seq10_8WlZ" Text="seq10" />
+										<UiPrompt StringName="ui_hrac_mluv_seq10_4GZh" Text="Měl bych jít dát hlášení." />
+										<Triggers>
+											<Port Name="start_objectivu_hlaseni_zizkovi" />
+										</Triggers>
+										<Elements>
+											<Response Role="HENRY">
+												<Text StringName="hrac_henry_necham_te_odpo_zl9c" Text="No, tak já půjdu dát hlášení Žižkovi." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="HYNEK_SUCHY_CERT">
+												<Text StringName="hrac_hynek_suc_hm_9A2O" Text="Hm." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+						<Sequence EntryCondition="Port('vypad_byl_uspesny')" EndType="GoTo" GoToDecision="dec3" Name="seq3">
+							<DesignName StringName="hrac_mluv_seq3_LESG" Text="seq3" />
+							<Elements>
+								<Response Role="HENRY">
+									<Text StringName="s_ce_henry_certe_podarilo_9NEC" Text="Čerte! Podařilo se to?" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="HYNEK_SUCHY_CERT">
+									<Parenthetical>
+										<Text StringName="hrac_hynek_suc_zlomyslne_cvsy" Text="zlomyslně" />
+									</Parenthetical>
+									<Text StringName="hrac_hynek_suc_co_jeste_j_6WEx" Text="Co? Necejtíš snad ve vzduchu ten popel?" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</ForcedDialog>
+	</Skald>
+</Database>

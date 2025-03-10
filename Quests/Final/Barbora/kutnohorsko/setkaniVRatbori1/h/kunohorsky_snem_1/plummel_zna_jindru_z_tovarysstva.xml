@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="plummel_zna_jindru_z_tovarysstva">
+			<Ports>
+				<Port Name="hrac_zacal_bonzovat_na_tovaryse" Direction="In" Type="bool">
+					<DesignName StringName="plummel_z_hrac_zacal_bonz_nfvr" Text="Hráč začal bonzovat na Tovaryše" />
+				</Port>
+			</Ports>
+			<Text StringName="plummel_zna_hrace_z_tovar_L0qJ" Text="Plummel zná Jindru z Tovaryšstva" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="plummel_z_hrac_teoreticky_fI12" Text="Hráč teoreticky mohl nejdřív donášet rychtáři, ale pak se rozhdnout dát s ek Tovaryšstv  a zmasakrovat stráže. Tohle bude muset zahrát tak, že o jehoúčasti rychtář neví a zajímají ho novinky z vyšetřování (jen šeptem, chat)" />
+				</GameplayActionElement>
+			</Elements>
+			<Dialogue Type="chat" TechnicalStatus="Enabled" Hearing="100" DefaultMaxDistance="5" DefaultChatTimeLimit="5" Initiator="NonPlayer">
+				<Decision Name="dec1" Priority="MainQuestSubmission" Alias="setkaniVRatbori1_plummelZnaJindruZTovarysstva" TimeLimit="0">
+					<Sequences>
+						<Sequence EntryCondition="Port('hrac_zacal_bonzovat_na_tovaryse')" EndType="Decision" Name="seq1">
+							<DesignName StringName="plummel_z_seq1_PFBL" Text="seq1" />
+							<Elements>
+								<Response Role="RYCHTAR_PLUMEL_SETKANI_V_RATBORI">
+									<Parenthetical>
+										<Text StringName="plum_rychtar_p_potesene_HvUK" Text="potěšeně, německý přízvuk" />
+									</Parenthetical>
+									<Text StringName="plum_rychtar_p_to_jsi_ty__1nx9" Text="To jsi ty? Je vidět, že jsi skutečně cílevědomý mladý muž!" />
+								</Response>
+							</Elements>
+							<Decision Name="dec2" Priority="MainQuestSubmission">
+								<Sequences>
+									<Sequence EndType="EndDialogue" Name="seq2">
+										<DesignName StringName="plummel_z_seq2_zK8K" Text="seq2" />
+										<UiPrompt StringName="ui_plummel_z_seq2_MCou" Text="Poděkovat." />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="plum_henry_pysny_sam_na_s_T5AN" Text="pyšný sám na sebe" />
+												</Parenthetical>
+												<Text StringName="plum_henry_dekuji_pane_ry_HTor" Text="Děkuji, pane rychtáři. Snažím se." />
+											</Response>
+											<Response Role="RYCHTAR_PLUMEL_SETKANI_V_RATBORI">
+												<Parenthetical>
+													<Text StringName="plum_rychtar_p_nemecky_pr_4PGo" Text="německý přízvuk" />
+												</Parenthetical>
+												<Text StringName="plum_rychtar_p_jen_tak_da_sHmf" Text="Jen tak dál. Jednou to dotáhneš daleko! " />
+											</Response>
+										</Elements>
+										<ReviewNotesStylistic>
+											<Item Date="2023-06-26 14:01:28" UserName="david.horak" Text="Přepsat" AcceptState="Accepted" />
+										</ReviewNotesStylistic>
+									</Sequence>
+									<Sequence EndType="EndDialogue" Name="seq3">
+										<DesignName StringName="plummel_z_seq3_tNqJ" Text="seq3" />
+										<UiPrompt StringName="ui_plummel_z_seq3_n8Zt" Text="Vykrucovat se." />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="plum_henry_krci_rameny_d9OX" Text="krčí rameny" />
+												</Parenthetical>
+												<Text StringName="plum_henry_to_vite_jeden__pL9x" Text="To víte, jeden se musí ohánět..." />
+											</Response>
+											<Response Role="RYCHTAR_PLUMEL_SETKANI_V_RATBORI">
+												<Parenthetical>
+													<Text StringName="plum_rychtar_p_nemecky_pr_0SaM" Text="německý přízvuk" />
+												</Parenthetical>
+												<Text StringName="plum_rychtar_p_to_je_vide_kFYH" Text="Jen nepovídej! Nejdřív práce pro stráž, teď jako číšník. Dotáhneš to daleko." />
+											</Response>
+										</Elements>
+										<ReviewNotesStylistic>
+											<Item Date="2023-06-26 14:01:34" UserName="david.horak" Text="Přepsat" AcceptState="Accepted" />
+										</ReviewNotesStylistic>
+									</Sequence>
+									<Sequence EndType="EndDialogue" ChatPosition="Refusal" Name="seq4">
+										<DesignName StringName="plummel_z_seq4_BqS6" Text="seq4" />
+										<Elements>
+											<Response Role="RYCHTAR_PLUMEL_SETKANI_V_RATBORI">
+												<Parenthetical>
+													<Text StringName="plum_rychtar_p_pro_sebe_qvo3" Text="pro sebe, , německý přízvuk" />
+												</Parenthetical>
+												<Text StringName="plum_rychtar_p_cilevedomy_XdoQ" Text="Cílevědomý, ale nevychovaný!" />
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

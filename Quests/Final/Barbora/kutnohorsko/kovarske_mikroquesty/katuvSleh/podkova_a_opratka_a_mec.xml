@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="podkova_a_opratka_a_mec">
+			<Ports>
+				<Port Name="ziskej_podkovu_aktivni" Direction="In" Type="bool">
+					<DesignName StringName="stastna_p_ziskej_pdokovu__Bu3E" Text="ziskej podkovu aktivni" />
+				</Port>
+				<Port Name="hrac_by_mel_ziskat_stastnou_podkovu__musi_se_dodelat" Direction="In" Type="trigger">
+					<DesignName StringName="stastna_p_hrac_by_mel_zis_1DnK" Text="hrac by mel ziskat stastnou podkovu = MUSI SE DODELAT" />
+				</Port>
+				<Port Name="looter_ma_loot" Direction="In" Type="trigger">
+					<DesignName StringName="podkova_a_looter_ma_loot_bDC4" Text="looter ma loot" />
+				</Port>
+				<Port Name="quest_je_ukoncen" Direction="In" Type="trigger">
+					<DesignName StringName="podkova_a_quest_je_ukoncen_FfKu" Text="quest je ukoncen" />
+				</Port>
+				<Port Name="mec_vykovan" Direction="In" Type="trigger">
+					<DesignName StringName="podkova_a_mec_vykovan_FURP" Text="mec vykovan" />
+				</Port>
+				<Port Name="zacatek_questu" Direction="In" Type="trigger">
+					<DesignName StringName="podkova_a_mrtvola_ma_opra_FWb6" Text="zacatek questu" />
+				</Port>
+				<Port Name="mec_odevzdan" Direction="In" Type="trigger">
+					<DesignName StringName="podkova_a_mec_odevzdan_3eYS" Text="mec odevzdan" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AddQuestItem Name="addquestitem9" PositionY="1010" PositionX="300">
+					<Constant Name="ItemClassGUID" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Asset Name="BackupLocation" Alias="player_stash" />
+					<Asset Name="StartingLocation" Alias="hangman" />
+					<Edge From="opratka.MrtvolaMaOpratku" To="IsActive" />
+				</AddQuestItem>
+				<AddQuestItem Name="addquestitem9_1" PositionY="1230" PositionX="300">
+					<Constant Name="ItemClassGUID" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Asset Name="BackupLocation" Alias="player_stash" />
+					<Asset Name="StartingLocation" Alias="player" />
+					<Edge From="opratka.HracMaOpratku" To="IsActive" />
+				</AddQuestItem>
+				<AddQuestItem Name="addquestitem9_2" PositionY="-120" PositionX="260">
+					<Constant Name="ItemClassGUID" Value="651333f0-36d1-4321-975f-bc7833a773eb" />
+					<Asset Name="BackupLocation" Alias="player_stash" />
+					<Asset Name="StartingLocation" Alias="player" />
+					<Edge From="hracMaPodkovu.Active" To="IsActive" />
+				</AddQuestItem>
+				<AddQuestItem Name="addquestitem9_3" PositionY="2060" PositionX="280">
+					<Constant Name="ItemClassGUID" Value="44a65a44-426a-4a3d-9d41-3629a7be0e38" />
+					<Asset Name="BackupLocation" Alias="player_stash" />
+					<Asset Name="StartingLocation" Alias="player" />
+					<Edge From="state15.HracMaMec" To="IsActive" />
+				</AddQuestItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem8" PositionY="840" PositionX="1170">
+					<Constant Name="ItemClass" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Constant Name="Purpose" Value="Inventory" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="hangman" />
+					<Edge From="opratka_1.MrtvolaMaOpratku" To="IsActive" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem8_1" PositionY="130" PositionX="390">
+					<Constant Name="ItemClass" Value="3e0c1595-4274-4997-b2d0-b83d5baec4e2" />
+					<Constant Name="Purpose" Value="Inventory" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="hangman" />
+					<Edge From="state14.LootMaHangman" To="IsActive" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem8_2" PositionY="440" PositionX="400">
+					<Constant Name="ItemClass" Value="3e0c1595-4274-4997-b2d0-b83d5baec4e2" />
+					<Constant Name="Purpose" Value="Inventory" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="looter" />
+					<Edge From="state14.LootMaLooter" To="IsActive" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem8_3" PositionY="2330" PositionX="280">
+					<Constant Name="ItemClass" Value="44a65a44-426a-4a3d-9d41-3629a7be0e38" />
+					<Constant Name="Purpose" Value="Inventory" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="executioner" />
+					<Edge From="state15.PopravciMaMec" To="IsActive" />
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem8_3_1" PositionY="2160" PositionX="1170">
+					<Constant Name="ItemClass" Value="44a65a44-426a-4a3d-9d41-3629a7be0e38" />
+					<Constant Name="Purpose" Value="Inventory" />
+					<Constant Name="Mode" Value="EnsureThenKeep" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="executioner" />
+					<Edge From="state15_1.PopravciMaMec" To="IsActive" />
+				</AddSoulDefaultItem>
+				<EventFunction Name="createplayerreward12" PositionY="1170" PositionX="1180" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Constant Name="ItemClass" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Edge From="opratka_1.OnHracMaOpratku" To="Exec" />
+				</EventFunction>
+				<EventFunction Name="createplayerreward12_1" PositionY="1930" PositionX="1160" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Constant Name="ItemClass" Value="44a65a44-426a-4a3d-9d41-3629a7be0e38" />
+					<Constant Name="ShowUINotification" Value="false" />
+					<Edge From="state15_1.OnHracMaMec" To="Exec" />
+				</EventFunction>
+				<DeleteNondivisibleItems_FromSoul Name="DeleteNondivisibleItems_FromSoul" PositionY="1408" PositionX="1174" Namespace="utils.item">
+					<Asset Name="soul" Alias="player" />
+					<Constant Name="itemclass" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Constant Name="amount" Value="1" />
+					<Constant Name="allowpartialmatch" Value="false" />
+					<Constant Name="showuinotification" Value="true" />
+					<Edge From="opratka_1.OnNikdoNemaOpratku" To="exec" />
+				</DeleteNondivisibleItems_FromSoul>
+				<HasteTrigger Name="givePodkova" PositionY="-470" PositionX="-320" />
+				<State Name="hracMaPodkovu" PositionY="-230" PositionX="-30" TypeT="Progress">
+					<Edge From="ifand2.True" To="SetActive" />
+					<Edge From="givePodkova.OnTrigger" To="SetActive" />
+					<Edge From="mec_vykovan" To="SetDone" />
+				</State>
+				<IfFunction Name="ifand13" PositionY="830" PositionX="-560" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="opratka_1.None" To="A">
+						<Vertex>vertex7</Vertex>
+						<Vertex>vertex8</Vertex>
+					</Edge>
+					<Edge From="mec_vykovan" To="Exec" />
+				</IfFunction>
+				<IfFunction Name="ifand2" PositionY="-220" PositionX="-320" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="hracMaPodkovu.None" To="A">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="hrac_by_mel_ziskat_stastnou_podkovu__musi_se_dodelat" To="Exec" />
+					<Edge From="ziskej_podkovu_aktivni" To="B" />
+				</IfFunction>
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory" PositionY="1440" PositionX="300" Namespace="utils.item">
+					<Constant Name="itemclass" Value="2d5e420c-3678-4cc1-a7d1-6d585dbf2d1b" />
+					<Constant Name="amount" Value="1" />
+					<Edge From="opratka.MrtvolaMaOpratku" To="isactive" />
+				</itemclasstrigger_playerinventory>
+				<State Name="opratka" PositionY="840" PositionX="-130" TypeT="Opratka">
+					<Edge From="itemclasstrigger_playerinventory.onacquire" To="SetHracMaOpratku">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+					<Edge From="ifand13.True" To="SetNikdoNemaOpratku" />
+					<Edge From="zacatek_questu" To="SetMrtvolaMaOpratku" />
+					<Edge From="opratka_1.OnExec" To="SetNikdoNemaOpratku">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex19</Vertex>
+					</Edge>
+				</State>
+				<State Name="opratka_1" PositionY="830" PositionX="720" TypeT="Opratka">
+					<Edge From="opratka.State" To="Value" />
+					<Edge From="quest_je_ukoncen" To="Exec">
+						<Vertex>vertex13</Vertex>
+						<Vertex>vertex5</Vertex>
+						<Vertex>vertex6</Vertex>
+					</Edge>
+					<Edge From="ifand13.False" To="SetNikdoNemaOpratku">
+						<Vertex>vertex9</Vertex>
+						<Vertex>vertex10</Vertex>
+					</Edge>
+				</State>
+				<State Name="state14" PositionY="170" PositionX="-40" TypeT="LootFromHangman">
+					<Edge From="zacatek_questu" To="SetLootMaHangman" />
+					<Edge From="looter_ma_loot" To="SetLootMaLooter" />
+				</State>
+				<State Name="state15" PositionY="1870" PositionX="-70" TypeT="PopravciMec">
+					<Edge From="mec_vykovan" To="SetHracMaMec">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+					<Edge From="mec_odevzdan" To="SetPopravciMaMec">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="state15_1.OnExec" To="SetNikdoNemaMec">
+						<Vertex>vertex16</Vertex>
+						<Vertex>vertex17</Vertex>
+					</Edge>
+				</State>
+				<State Name="state15_1" PositionY="1910" PositionX="790" TypeT="PopravciMec">
+					<Edge From="quest_je_ukoncen" To="Exec">
+						<Vertex>vertex13</Vertex>
+						<Vertex>vertex14</Vertex>
+						<Vertex>vertex15</Vertex>
+					</Edge>
+					<Edge From="state15.State" To="Value" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-290" PositionX="100" />
+				<EdgeVertex Name="vertex10" PositionY="833" PositionX="610" />
+				<EdgeVertex Name="vertex11" PositionY="2100" PositionX="-490" />
+				<EdgeVertex Name="vertex12" PositionY="2170" PositionX="-550" />
+				<EdgeVertex Name="vertex13" PositionY="483" PositionX="-379" />
+				<EdgeVertex Name="vertex14" PositionY="1838" PositionX="-279" />
+				<EdgeVertex Name="vertex15" PositionY="1845" PositionX="679" />
+				<EdgeVertex Name="vertex16" PositionY="2330" PositionX="1100" />
+				<EdgeVertex Name="vertex17" PositionY="2324" PositionX="-48" />
+				<EdgeVertex Name="vertex18" PositionY="1281" PositionX="946" />
+				<EdgeVertex Name="vertex19" PositionY="1303" PositionX="-143" />
+				<EdgeVertex Name="vertex2" PositionY="-290" PositionX="-270" />
+				<EdgeVertex Name="vertex3" PositionY="1800" PositionX="580" />
+				<EdgeVertex Name="vertex4" PositionY="1810" PositionX="-210" />
+				<EdgeVertex Name="vertex5" PositionY="780" PositionX="-140" />
+				<EdgeVertex Name="vertex6" PositionY="789" PositionX="631" />
+				<EdgeVertex Name="vertex7" PositionY="751" PositionX="1016" />
+				<EdgeVertex Name="vertex8" PositionY="740" PositionX="-540" />
+				<EdgeVertex Name="vertex9" PositionY="817" PositionX="-200" />
+			</EdgeVertices>
+			<Types>
+				<Type TypeName="Opratka">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="MrtvolaMaOpratku" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="HracMaOpratku" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="NikdoNemaOpratku" ObjectiveValueType="None" />
+				</Type>
+				<Type TypeName="LootFromHangman">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="LootMaHangman" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="LootMaLooter" ObjectiveValueType="None" />
+				</Type>
+				<Type TypeName="PopravciMec">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="HracMaMec" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="PopravciMaMec" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="NikdoNemaMec" ObjectiveValueType="None" />
+				</Type>
+			</Types>
+			<Assets>
+				<StashAsset Name="tempStash" />
+				<SmartObjectAsset Name="deadBodyQso" />
+			</Assets>
+			<Notes>
+				<Note Name="note11" PositionY="880" PositionX="340">
+					<Text StringName="podkova_a_note11_aWZv" Text="TODO: change backup location" />
+				</Note>
+			</Notes>
+			<Text StringName="stastna_podkova_BcN2" Text="podkova a opratka a mec" />
+		</Module>
+	</Skald>
+</Database>

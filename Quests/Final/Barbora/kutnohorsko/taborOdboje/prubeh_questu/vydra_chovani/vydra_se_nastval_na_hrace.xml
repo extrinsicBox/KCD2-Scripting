@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="vydra_se_nastval_na_hrace">
+			<Text StringName="vydra_se_nastval_na_hrace_FAnp" Text="Vydra se naštval na hráče" />
+			<Dialogue Type="ingame monolog" TechnicalStatus="Enabled" Initiator="NonPlayer" ClashPriority="Crime">
+				<Decision Name="dec1" Priority="SideQuestSubmission" Alias="taborOdboje_vydraSeNastvalNaHrace">
+					<Sequences>
+						<Sequence EndType="EndDialogue" Name="seq1">
+							<DesignName StringName="vydra_se__seq1_D8xz" Text="seq1" />
+							<Elements>
+								<Response Role="ODBOJAR_VYDRA">
+									<Parenthetical>
+										<Text StringName="vydr_odbojar_v_nastvane_f2tZ" Text="naštvaně" />
+									</Parenthetical>
+									<Text StringName="vydr_odbojar_v_co_blbnes_PH29" Text="Co blbneš?!" />
+								</Response>
+								<Response Role="ODBOJAR_VYDRA">
+									<Parenthetical>
+										<Text StringName="vydr_odbojar_v_nastvane_EtA8" Text="naštvaně" />
+									</Parenthetical>
+									<Text StringName="vydr_odbojar_v_seru_na_te_9cOs" Text="Tos mi pomohl, abys mě pak zkusil zabít? Nechci s tebou mít nic společnýho." />
+								</Response>
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="horsebuying_washinstance">
+			<Ports>
+				<Port Name="timeskip" Direction="In" Type="wh::entitymodule::CutsceneHolder*">
+					<DesignName StringName="horsebuyi_timeskip_YAsd" Text="Timeskip" />
+				</Port>
+				<Port Name="horsetrader" Direction="In" Type="wh::rpgmodule::I_Soul*">
+					<DesignName StringName="horsebuyi_horsetrader_d6vQ" Text="HorseTrader" />
+				</Port>
+				<Port Name="ondone" Direction="Out" Type="trigger">
+					<DesignName StringName="horsebuyi_ondone_G3Vh" Text="OnDone" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="horsebuying_washinstance/horse_washing_ch__behaviour.xml" />
+				<Definition File="horsebuying_washinstance/podkoni_mycka__muz.xml" />
+				<Definition File="horsebuying_washinstance/podkoni_mycka__zena.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="compare6" PositionY="210" PositionX="1290" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="podkoni_mycka__muz.PODKONI_MYCKA_MUZ" To="ValueB">
+						<Vertex>n04W5VSJ</Vertex>
+						<Vertex>qmRI3cA7</Vertex>
+					</Edge>
+					<Edge From="horsetrader" To="ValueA">
+						<Vertex>skNIzxb0</Vertex>
+						<Vertex>VpcnmFLC</Vertex>
+						<Vertex>0EGbj0AD</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="compare6_1" PositionY="970" PositionX="1250" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="podkoni_mycka__zena.PODKONI_MYCKA_ZENA" To="ValueB">
+						<Vertex>Ywmj1KFa</Vertex>
+						<Vertex>EjYJUGkP</Vertex>
+					</Edge>
+					<Edge From="horsetrader" To="ValueA">
+						<Vertex>skNIzxb0</Vertex>
+						<Vertex>VpcnmFLC</Vertex>
+					</Edge>
+				</Function>
+				<hasmoney Name="hasmoney" PositionY="500" PositionX="1280" Namespace="money">
+					<Constant Name="amount" Value="200" />
+					<Edge From="isoulproperties1_1.Inventory" To="inventory" />
+				</hasmoney>
+				<MemberFunction Name="hasprimarycompanion2" PositionY="-115" PositionX="286" MethodName="HasPrimaryCompanion" DeclaringType="wh::rpgmodule::CompanionManager">
+					<Constant Name="Type" Value="Horse" />
+					<Edge From="isoulproperties1.CompanionManager" To="Manager" />
+				</MemberFunction>
+				<horse_washing_ch__behaviour Name="horse_washing_ch__behaviour" PositionY="140" PositionX="2950">
+					<Edge From="horsetrader" To="trader">
+						<Vertex>skNIzxb0</Vertex>
+						<Vertex>VpcnmFLC</Vertex>
+						<Vertex>0EGbj0AD</Vertex>
+						<Vertex>pzr1kd5L</Vertex>
+					</Edge>
+					<Edge From="timeskip" To="timeskip">
+						<Vertex>DHGdP68m</Vertex>
+						<Vertex>KPF8nQwG</Vertex>
+					</Edge>
+					<Edge From="podkoni_mycka__muz.wash_horse" To="wash_horse" />
+					<Edge From="podkoni_mycka__zena.wash_horse" To="wash_horse" />
+				</horse_washing_ch__behaviour>
+				<ObjectProperties Name="isoulproperties1" PositionY="-115" PositionX="-93" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="I_Soul" Alias="player" />
+				</ObjectProperties>
+				<ObjectProperties Name="isoulproperties1_1" PositionY="320" PositionX="710" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="I_Soul" Alias="player_any" />
+				</ObjectProperties>
+				<Output Name="Output">
+					<Edge From="horse_washing_ch__behaviour.onfinished" To="ondone" />
+				</Output>
+				<podkoni_mycka__muz Name="podkoni_mycka__muz" PositionY="-40" PositionX="1620">
+					<Constant Name="Payment_seq7" Value="200" />
+					<Edge From="hasprimarycompanion2.Result" To="hrac_ma_companiona" />
+					<Edge From="compare6.bool" To="enabled" />
+					<Edge From="hasmoney.hasmoney" To="playerhasenoughmoneyforhorsewash" />
+				</podkoni_mycka__muz>
+				<podkoni_mycka__zena Name="podkoni_mycka__zena" PositionY="850" PositionX="1620">
+					<Constant Name="Payment_seq7" Value="200" />
+					<Edge From="hasprimarycompanion2.Result" To="hrac_ma_companiona">
+						<Vertex>J8bbj2I7</Vertex>
+					</Edge>
+					<Edge From="compare6_1.bool" To="enabled" />
+					<Edge From="hasmoney.hasmoney" To="playerhasenoughmoneyforhorsewash" />
+				</podkoni_mycka__zena>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="0EGbj0AD" PositionY="-188" PositionX="1024" />
+				<EdgeVertex Name="DHGdP68m" PositionY="-209" PositionX="-105" />
+				<EdgeVertex Name="EjYJUGkP" PositionY="1250" PositionX="1340" />
+				<EdgeVertex Name="J8bbj2I7" PositionY="984" PositionX="566" />
+				<EdgeVertex Name="KPF8nQwG" PositionY="-215" PositionX="1453" />
+				<EdgeVertex Name="n04W5VSJ" PositionY="420" PositionX="1820" />
+				<EdgeVertex Name="pzr1kd5L" PositionY="-190" PositionX="1440" />
+				<EdgeVertex Name="qmRI3cA7" PositionY="420" PositionX="1250" />
+				<EdgeVertex Name="skNIzxb0" PositionY="-187" PositionX="-114" />
+				<EdgeVertex Name="VpcnmFLC" PositionY="-190" PositionX="550" />
+				<EdgeVertex Name="Ywmj1KFa" PositionY="1220" PositionX="1890" />
+			</EdgeVertices>
+			<Text StringName="horsebuying_washinstance_lx9z" Text="HorseBuying_WashInstance" />
+		</Module>
+	</Skald>
+</Database>

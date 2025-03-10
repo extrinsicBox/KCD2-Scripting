@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="ruthardka_daycycle">
+			<Ports>
+				<Port Name="state" Direction="In" Type="PapezskyLegatProgress">
+					<DesignName StringName="ruthardka_state_tauM" Text="State" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="ruthardka_daycycle/gossipy_a_vymeny_clenu_bandy.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="and17" PositionY="-880" PositionX="-560" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not16.bool" To="A" />
+					<Edge From="switch12_1.Value1" To="B" />
+				</Function>
+				<expectedeffect Name="expectedeffect" PositionY="-720" PositionX="-280" Namespace="utils.crime.trespass">
+					<Constant Name="extenduntilplayerleavestrespass" Value="true" />
+					<Edge From="makearray14.Array" To="npcs" />
+					<Edge From="and17.bool" To="isactive" />
+				</expectedeffect>
+				<gossipy_a_vymeny_clenu_bandy Name="gossipy_a_vymeny_clenu_bandy" PositionY="-670" PositionX="-1050">
+					<Edge From="switch11.Value1" To="Awake" />
+					<Edge From="state" To="state" />
+				</gossipy_a_vymeny_clenu_bandy>
+				<isitnight Name="isitnight" PositionY="-1040" PositionX="-1150" Namespace="utils.time" />
+				<keepdoorunlocked Name="keepdoorunlocked" PositionY="120" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="dvereDoStaji" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1" PositionY="300" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="dvereDoSklepa" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1" PositionY="460" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="tunnel_door" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1" PositionY="640" PositionX="-420" Namespace="utils.general">
+					<Asset Name="door" Alias="ruthardkaDoor" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1" PositionY="820" PositionX="-420" Namespace="utils.general">
+					<Asset Name="door" Alias="ruthardka_door_1" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1_1" PositionY="1000" PositionX="-420" Namespace="utils.general">
+					<Asset Name="door" Alias="ruthardka_door_2" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1_1_1" PositionY="1180" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="ruthardkaCouncilDoor" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1_1_1_1" PositionY="1340" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="dvereDoPredpokoje" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1_1_1_1_1" PositionY="1540" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="dvereDoVeze" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<keepdoorunlocked Name="keepdoorunlocked_1_1_1_1_1_1_1_1_1" PositionY="1740" PositionX="-430" Namespace="utils.general">
+					<Asset Name="door" Alias="dvereDoPokoje" />
+					<Edge From="switch12.Value1" To="isactive" />
+				</keepdoorunlocked>
+				<MakeArray Name="makearray14" PositionY="-690" PositionX="-550" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="Zizka" />
+					<Asset Name="B" Alias="Cert" />
+					<Asset Name="C" Alias="Bohuta" />
+					<Asset Name="D" Alias="Roza" />
+					<Asset Name="E" Alias="Samuel" />
+				</MakeArray>
+				<Function Name="not16" PositionY="-950" PositionX="-860" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="isitnight.itisnight" To="Value" />
+				</Function>
+				<SetEntityContext Name="setentitycontext13" PositionY="-440" PositionX="-560">
+					<Constant Name="Context" Value="switch_horse_disableMountableByPlayer" />
+					<Asset Name="Souls" Alias="horsesVRuthardce" />
+					<Edge From="switch12_1.Value1" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext18" PositionY="-440" PositionX="-180">
+					<Constant Name="Context" Value="crime_ignoreThefts" />
+					<Asset Name="Souls" Alias="NPCvRuthardce" />
+					<Edge From="switch12_1.Value1" To="IsActive" />
+				</SetEntityContext>
+				<SetOwner Name="setowner3" PositionY="-260" PositionX="-560">
+					<Asset Name="What" Alias="ruthardkaTrespassArea1" />
+					<Asset Name="Who" Alias="player" />
+					<Edge From="switch12_1.Value1" To="IsActive" />
+				</SetOwner>
+				<SetOwner Name="setowner3_1" PositionY="-50" PositionX="-560">
+					<Asset Name="What" Alias="ruthardkaTrespassArea2" />
+					<Asset Name="Who" Alias="player" />
+					<Edge From="switch12_1.Value1" To="IsActive" />
+				</SetOwner>
+				<SetOwner Name="setowner3_2" PositionY="-140" PositionX="-310">
+					<Asset Name="What" Alias="ruthardkaTrespassArea3" />
+					<Asset Name="Who" Alias="player" />
+					<Edge From="switch12_1.Value1" To="IsActive" />
+				</SetOwner>
+				<Switch Name="switch11" PositionY="-760" PositionX="-1440" TypeT="PapezskyLegatProgress" ValueTypes="bool" SwitchValues="PruzkumSklepeni PripravaNaPrepad">
+					<Constant Name="PruzkumSklepeniValue1" Value="true" />
+					<Constant Name="PripravaNaPrepadValue1" Value="true" />
+					<Constant Name="DefaultValue1" Value="false" />
+					<Edge From="state" To="Switch" />
+				</Switch>
+				<Switch Name="switch12" PositionY="140" PositionX="-970" TypeT="PapezskyLegatProgress" ValueTypes="bool" SwitchValues="VavakuvKlic PruzkumSklepeni PripravaNaPrepad Honicka Epilog">
+					<Constant Name="VavakuvKlicValue1" Value="true" />
+					<Constant Name="PruzkumSklepeniValue1" Value="true" />
+					<Constant Name="PripravaNaPrepadValue1" Value="true" />
+					<Constant Name="HonickaValue1" Value="true" />
+					<Constant Name="EpilogValue1" Value="true" />
+					<Constant Name="DefaultValue1" Value="false" />
+					<Edge From="state" To="Switch" />
+				</Switch>
+				<Switch Name="switch12_1" PositionY="-240" PositionX="-950" TypeT="PapezskyLegatProgress" ValueTypes="bool" SwitchValues="VavakuvKlic PruzkumSklepeni PripravaNaPrepad Honicka Epilog Ruthardka NocSRozou">
+					<Constant Name="VavakuvKlicValue1" Value="true" />
+					<Constant Name="PruzkumSklepeniValue1" Value="true" />
+					<Constant Name="PripravaNaPrepadValue1" Value="true" />
+					<Constant Name="HonickaValue1" Value="true" />
+					<Constant Name="EpilogValue1" Value="true" />
+					<Constant Name="RuthardkaValue1" Value="true" />
+					<Constant Name="NocSRozouValue1" Value="true" />
+					<Constant Name="DefaultValue1" Value="false" />
+					<Edge From="state" To="Switch" />
+				</Switch>
+			</Nodes>
+			<Assets>
+				<AnimDoorAsset Name="dvereDoStaji" />
+				<AnimDoorAsset Name="dvereDoSklepa" />
+				<AnimDoorAsset Name="dvereDoPredpokoje" />
+				<AnimDoorAsset Name="dvereDoVeze" />
+				<AnimDoorAsset Name="dvereDoPokoje" />
+				<AreaUnionAsset Name="ruthardkaTrespassArea1" />
+				<AreaUnionAsset Name="ruthardkaTrespassArea2" />
+				<SoulAsset Name="horsesVRuthardce" SharedSoulGuids="bb702580-5ea3-4438-8ce2-632fb7b7ef83 905b8952-fa01-4819-8d39-346dd20af4b3 4dff075b-4097-45bd-8f07-e152e6cd0621 2e2de7d7-5173-4731-88a6-eaaaf7451421 c0e61814-5fa6-41ac-9889-480ce790f3e7" />
+				<AreaUnionAsset Name="ruthardkaTrespassArea3" />
+				<SoulAsset Name="NPCvRuthardce" SharedSoulGuids="4a705738-fd86-23bd-5eb9-ee16d727038a 08df910a-a0a0-4ca6-a4fd-dd52cc3eb89a 92e0e532-d0ca-4d76-bf98-eb4f099dac7b 4361beac-9622-8880-2415-63a87e8d2d8f 3965655b-c894-423f-a4b3-2da8324bc279 ea74dd3c-1cf3-472f-b36b-9aa3dafbc2c3 6cc3bb5a-8427-4a49-8ed9-ea9dcdbd3ab7 46bb1e4d-31b1-7d13-d768-d7e0886a2199 b77185e0-0ec9-4a72-8ae2-048a286cced4 bd672e35-7841-4e0f-be10-4cbaccf16cda 4ee6712c-b00e-45a5-9ad6-d1083e2201b5 683213a7-f31b-4d54-885d-12ad39cfe499 d2e3d989-6bdb-46e5-966a-5749a452b0ab" />
+			</Assets>
+			<Text StringName="ruthardka_dcs_eCPM" Text="Ruthardka Daycycle" />
+		</Module>
+	</Skald>
+</Database>

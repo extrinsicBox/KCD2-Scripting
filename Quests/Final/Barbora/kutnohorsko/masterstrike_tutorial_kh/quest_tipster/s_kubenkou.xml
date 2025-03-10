@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<FaderDialog Name="s_kubenkou">
+			<Ports>
+				<Port Name="tip_given" Direction="Out" Type="trigger">
+					<DesignName StringName="s_kubenkou_tip_given_fTlx" Text="tip given" />
+				</Port>
+				<Port Name="m44_zikmunduv_tabor_zacal" Direction="In" Type="bool">
+					<DesignName StringName="s_kubenkou_m44_zikmunduv__Fwuc" Text="M44 Zikmundův tábor začal" />
+				</Port>
+				<Port Name="jidnra_se_muze_vyptat_na_certa" Direction="In" Type="bool">
+					<DesignName StringName="s_kubenkou_jidnra_se_muze_Al7Z" Text="Jidnra se může vyptat na Čerta" />
+				</Port>
+				<Port Name="cert_je_na_certovce" Direction="In" Type="bool">
+					<DesignName StringName="s_kubenkou_cert_je_na_cer_g1kl" Text="Čert je na Čertovce" />
+				</Port>
+			</Ports>
+			<Text StringName="s_kubenkou_9FnF" Text="S Kuběnkou" />
+			<Dialogue TechnicalStatus="Enabled" GesturesSetDate="2023-10-26T16:28:59.3702513+02:00" GesturesSetResponseCount="3">
+				<SelectedSouls>
+					<SelectedSoul Role="HENRY" Voice="tomMcKay" Type="Wave" Language="ENG" />
+					<SelectedSoul Role="KUBENKA" Voice="fejk" Type="Wave" Language="PDG" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="SideQuestAssignment">
+					<Sequences>
+						<Sequence EntryCondition="Port('jidnra_se_muze_vyptat_na_certa') AND &#xD;&#xA;!Port('m44_zikmunduv_tabor_zacal') AND &#xD;&#xA;Port('cert_je_na_certovce')" Name="jindra_slysel_ze_cert_uz_je_v_poradku">
+							<DesignName StringName="s_kubenkou_seq1_Ef4I" Text="Jindra slyšel, že Čert už je v pořádku" />
+							<UiPrompt StringName="ui_s_kubenkou_seq1_zPOC" Text="Čert už se uzdravil?" />
+							<Triggers>
+								<Port Name="tip_given" />
+							</Triggers>
+							<Elements>
+								<Response Role="HENRY" ReferenceLength="4.38">
+									<Text StringName="s_ku_henry_co_cert_a_jeho_exyp" Text="Co Čert a jeho zadnice? Už je na tom líp?" />
+									<Commands>
+										<FacialMoodCommand FacialMood="happy1" />
+										<AnimationCommand Delay="0.25" FragmentId="ADLG_You" Guid="be891276-e31d-d3de-0861-950464b02445" Variant="3" />
+										<AnimationCommand Delay="1.75" FragmentId="ADLG_Laugh" Guid="a332b333-53d7-766c-4436-4e59a79d295b" Variant="1" DesiredDuration="2.48" />
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="KUBENKA">
+									<Text StringName="s_ku_kubenka_ale_jo_sice__exxQ" Text="Ále jo. Sice na to pořád nadává, ale z postele už vylez." />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="KUBENKA">
+									<Text StringName="s_ku_kubenka_von_taky_dlo_m6AW" Text="Von taky dlouho v klidu nevydrží. Už zase cvičí šerm. Tady v tom rozpadlým baráku vedle Čertovky." />
+								</Response>
+								<Response Role="KUBENKA">
+									<Text StringName="s_ku_kubenka_kdybys_mel_c_Lc4d" Text="Kdybys měl chuť určitě si s ním můžeš zašermovat. Možný by tě mohl i něco naučit. Čert je secakra dobrej šermíř." />
+								</Response>
+								<Response Role="HENRY" ReferenceLength="1.17">
+									<Text StringName="s_ku_henry_to_zni_lakave_4d9W" Text="To zní lákavě." />
+									<Commands>
+										<AnimationCommand Delay="0.02" FragmentId="ADLG_Surprised_light" Guid="078c2b11-e2e3-4f4c-baf5-92aa3590fa78" Variant="1" />
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+						</Sequence>
+						<Sequence EntryCondition="Port('jidnra_se_muze_vyptat_na_certa') AND&#xD;&#xA;Port('m44_zikmunduv_tabor_zacal') AND &#xD;&#xA;Port('cert_je_na_certovce')" Name="seq1">
+							<DesignName StringName="s_kubenkou_seq1_q3bk" Text="seq1" />
+							<UiPrompt StringName="ui_s_kubenkou_seq1_knBd" Text="Nechceš si zašermovat?" />
+							<Triggers>
+								<Port Name="tip_given" />
+							</Triggers>
+							<Elements>
+								<Response Role="HENRY">
+									<Text StringName="s_ku_henry_nechces_si_zas_OH9L" Text="Nechceš si zašermovat? Jen cvičně..." />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="KUBENKA">
+									<Text StringName="s_ku_kubenka_ja_zadnej_ve_PvkQ" Text="Já žádnej velkej šermíř nejsem. To radši řekni Čertovi. To je teprve šermíř." />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="KUBENKA">
+									<Text StringName="s_ku_kubenka_vod_nej_se_u_4Vc9" Text="Vod něj se určitě něco naučíš." />
+								</Response>
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</FaderDialog>
+	</Skald>
+</Database>

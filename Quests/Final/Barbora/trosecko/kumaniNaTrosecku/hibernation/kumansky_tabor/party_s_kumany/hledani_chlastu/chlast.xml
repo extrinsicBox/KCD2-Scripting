@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="chlast">
+			<Ports>
+				<Port Name="jindra_vi_o_skrysi_s_chlastem" Direction="In" Type="trigger">
+					<DesignName StringName="tajna_skr_jindra_vi_o_skr_JjQj" Text="Jindra ví o skrýši s chlastem" />
+				</Port>
+				<Port Name="jindra_neodevzdal_chlast_kumanum" Direction="In" Type="bool">
+					<DesignName StringName="chlast_jindra_neodevzdal__IhGK" Text="Jindra neodevzdal chlast Kumánům" />
+				</Port>
+				<Port Name="jindra_ziskava_chlast" Direction="Out" Type="trigger">
+					<DesignName StringName="chlast_jindra_si_bere_chl_ZHfE" Text="Jindra získává chlast" />
+				</Port>
+				<Port Name="jindra_ztraci_chlast" Direction="Out" Type="trigger">
+					<DesignName StringName="chlast_jindra_ztraci_chla_4im3" Text="Jindra ztrácí chlast" />
+				</Port>
+				<Port Name="jindra_dava_chlast_kumanum" Direction="In" Type="trigger">
+					<DesignName StringName="chlast_jindra_dava_chlast_tZfg" Text="Jindra dává chlast Kumánům" />
+				</Port>
+				<Port Name="jindra_dal_chlast_kumanum" Direction="Out" Type="trigger">
+					<DesignName StringName="chlast_jindra_dal_chlast__3sOE" Text="Jindra dal chlast Kumánům" />
+				</Port>
+				<Port Name="boozeholdership" Direction="Out" Type="BoozeHoldership">
+					<DesignName StringName="chlast_boozeholdership_PO0N" Text="BoozeHoldership" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="chlast/henry_nachazi_tajnou_skrys.xml" />
+			</Definitions>
+			<Nodes>
+				<AddQuestItem Name="addquestitem2" PositionY="-290" PositionX="620">
+					<Constant Name="ItemClassGUID" Value="a9ae4ee2-b096-423f-8ac7-c375acc17bec" />
+					<Asset Name="BackupLocation" Alias="boozeStash" />
+					<Asset Name="StartingLocation" Alias="boozeStash" />
+					<Edge From="boozeItemHoldership_questItem.InStash" To="IsActive">
+						<Vertex>vertex16</Vertex>
+					</Edge>
+				</AddQuestItem>
+				<AddQuestItem Name="addquestitem2_1" PositionY="240" PositionX="560">
+					<Constant Name="ItemClassGUID" Value="a9ae4ee2-b096-423f-8ac7-c375acc17bec" />
+					<Asset Name="BackupLocation" Alias="boozeStash" />
+					<Asset Name="StartingLocation" Alias="player" />
+					<Edge From="boozeItemHoldership_questItem.OnPlayer" To="IsActive">
+						<Vertex>vertex10</Vertex>
+					</Edge>
+				</AddQuestItem>
+				<State Name="boozeItemHoldership_questItem" PositionY="-130" PositionX="150" TypeT="BoozeHoldership">
+					<Edge From="itemclasstrigger_playerinventory_1.onlose" To="SetInStash">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex11</Vertex>
+						<Vertex>vertex17</Vertex>
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="itemclasstrigger_playerinventory.onacquire" To="SetOnPlayer">
+						<Vertex>vertex13</Vertex>
+						<Vertex>vertex14</Vertex>
+					</Edge>
+					<Edge From="jindra_dava_chlast_kumanum" To="SetWithCumans" />
+					<Edge From="jindra_vi_o_skrysi_s_chlastem" To="SetInStash">
+						<Vertex>vertex31</Vertex>
+						<Vertex>vertex12</Vertex>
+					</Edge>
+				</State>
+				<FocusCamWithinArea Name="FocusCamWithinArea" PositionY="-790" PositionX="120" Namespace="utils.general">
+					<Asset Name="target" Alias="boozeStash" />
+					<Asset Name="area" Alias="boozeFocusCameraArea" />
+					<Constant Name="actionprompt" Value="tajna_skr_placeholder_pod_s9sa" />
+					<Constant Name="focuscam_horizontallimits" Value="0.5,0.5" />
+					<Constant Name="focuscam_verticallimits" Value="0.5,0.5" />
+					<Constant Name="focuscam_dampingfactor" Value="12" />
+					<Edge From="requestmonologue1.OnExec" To="disable">
+						<Vertex>vertex22</Vertex>
+						<Vertex>vertex23</Vertex>
+						<Vertex>vertex26</Vertex>
+					</Edge>
+					<Edge From="boozeItemHoldership_questItem.OnOnPlayer" To="disable">
+						<Vertex>vertex25</Vertex>
+						<Vertex>vertex23</Vertex>
+						<Vertex>vertex26</Vertex>
+					</Edge>
+					<Edge From="jindra_vi_o_skrysi_s_chlastem" To="enable">
+						<Vertex>vertex31</Vertex>
+					</Edge>
+				</FocusCamWithinArea>
+				<henry_nachazi_tajnou_skrys Name="henry_nachazi_tajnou_skrys" PositionY="-820" PositionX="630" />
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory" PositionY="80" PositionX="1510" Namespace="utils.item">
+					<Constant Name="itemclass" Value="a9ae4ee2-b096-423f-8ac7-c375acc17bec" />
+					<Constant Name="amount" Value="1" />
+					<Edge From="boozeItemHoldership_questItem.InStash" To="isactive">
+						<Vertex>vertex16</Vertex>
+					</Edge>
+				</itemclasstrigger_playerinventory>
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory_1" PositionY="150" PositionX="1030" Namespace="utils.item">
+					<Constant Name="itemclass" Value="a9ae4ee2-b096-423f-8ac7-c375acc17bec" />
+					<Constant Name="amount" Value="1" />
+					<Edge From="boozeItemHoldership_questItem.OnPlayer" To="isactive">
+						<Vertex>vertex10</Vertex>
+						<Vertex>vertex27</Vertex>
+					</Edge>
+				</itemclasstrigger_playerinventory>
+				<Output Name="Output">
+					<Edge From="boozeItemHoldership_questItem.State" To="boozeholdership" />
+					<Edge From="itemclasstrigger_playerinventory_1.onlose" To="jindra_ztraci_chlast">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex19</Vertex>
+					</Edge>
+					<Edge From="boozeItemHoldership_questItem.OnOnPlayer" To="jindra_ziskava_chlast">
+						<Vertex>vertex25</Vertex>
+					</Edge>
+					<Edge From="boozeItemHoldership_questItem.OnWithCumans" To="jindra_dal_chlast_kumanum">
+						<Vertex>vertex29</Vertex>
+						<Vertex>vertex28</Vertex>
+					</Edge>
+				</Output>
+				<Function Name="requestmonologue1" PositionY="-630" PositionX="530" MethodName="wh::xgenaimodule::RequestMonologue" DeclaringType="wh::xgenaimodule">
+					<Asset Name="Souls" Alias="player" />
+					<Constant Name="DecisionAlias" Value="kumaniNaTrosecku_henryNachaziTajnouSkrys" />
+					<Edge From="FocusCamWithinArea.onfocuscamentered" To="Exec" />
+				</Function>
+				<SetOwner Name="setowner4" PositionY="-250" PositionX="1150">
+					<Asset Name="What" Alias="booze" />
+					<Asset Name="Who" Alias="player" />
+					<Edge From="boozeItemHoldership_questItem.OnPlayer" To="IsActive">
+						<Vertex>vertex10</Vertex>
+						<Vertex>vertex27</Vertex>
+					</Edge>
+				</SetOwner>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex10" PositionY="190" PositionX="510" />
+				<EdgeVertex Name="vertex11" PositionY="870" PositionX="1300" />
+				<EdgeVertex Name="vertex12" PositionY="90" PositionX="80" />
+				<EdgeVertex Name="vertex13" PositionY="930" PositionX="1780" />
+				<EdgeVertex Name="vertex14" PositionY="930" PositionX="70" />
+				<EdgeVertex Name="vertex16" PositionY="120" PositionX="560" />
+				<EdgeVertex Name="vertex17" PositionY="870" PositionX="60" />
+				<EdgeVertex Name="vertex18" PositionY="540" PositionX="1420" />
+				<EdgeVertex Name="vertex19" PositionY="540" PositionX="1780" />
+				<EdgeVertex Name="vertex22" PositionY="-370" PositionX="930" />
+				<EdgeVertex Name="vertex23" PositionY="-370" PositionX="440" />
+				<EdgeVertex Name="vertex25" PositionY="150" PositionX="470" />
+				<EdgeVertex Name="vertex26" PositionY="-370" PositionX="115" />
+				<EdgeVertex Name="vertex27" PositionY="185" PositionX="955" />
+				<EdgeVertex Name="vertex28" PositionY="570" PositionX="1820" />
+				<EdgeVertex Name="vertex29" PositionY="570" PositionX="520" />
+				<EdgeVertex Name="vertex31" PositionY="0" PositionX="-90" />
+			</EdgeVertices>
+			<Assets>
+				<TriggerAreaAsset Name="boozeFocusCameraArea" />
+			</Assets>
+			<Notes>
+				<Note Name="note5" PositionY="-310" PositionX="1100">
+					<Text StringName="chlast_note5_6lxO" Text="NOTE(Andy): Potřebujeme to, když není ten chlast kradenej?" />
+				</Note>
+			</Notes>
+			<Text StringName="tajna_skrys_s_chlastem_Vo7D" Text="Chlast" />
+			<Elements>
+				<ActionPromptElement>
+					<Text StringName="tajna_skr_placeholder_pod_s9sa" Text="Podívat se na úkryt" />
+				</ActionPromptElement>
+			</Elements>
+		</Module>
+	</Skald>
+</Database>

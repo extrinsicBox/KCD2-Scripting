@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="wineencyclopedia">
+			<Ports>
+				<Port Name="active" Direction="In" Type="bool">
+					<DesignName StringName="wineencyc_active_4C1a" Text="active" />
+				</Port>
+				<Port Name="read" Direction="Out" Type="trigger">
+					<DesignName StringName="wineencyc_read_wZFy" Text="read" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<IfFunction Name="ifcompare12" PositionY="0" PositionX="640" TypeT="wh::entitymodule::ItemClassId" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="cc07e392-08be-4bd1-a0f7-078c461ee5f5" />
+					<Edge From="itemproperties11.ItemClass" To="ValueA" />
+					<Edge From="useitemtrigger4.OnUsed" To="Exec" />
+				</IfFunction>
+				<ObjectProperties Name="itemproperties11" PositionY="120" PositionX="320" DeclaringType="wh::entitymodule::Item">
+					<Edge From="useitemtrigger4.Item" To="Item" />
+				</ObjectProperties>
+				<Output Name="Output">
+					<Edge From="ifcompare12.True" To="read" />
+				</Output>
+				<UseItemTrigger Name="useitemtrigger4">
+					<Asset Name="Soul" Alias="player" />
+					<Edge From="active" To="IsActive" />
+				</UseItemTrigger>
+			</Nodes>
+			<Text StringName="wineencyclopedia_MJrd" Text="wineEncyclopedia" />
+		</Module>
+	</Skald>
+</Database>

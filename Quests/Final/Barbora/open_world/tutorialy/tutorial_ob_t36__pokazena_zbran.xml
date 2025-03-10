@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="tutorial_ob_t36__pokazena_zbran">
+			<Ports>
+				<Port Name="active" Direction="In" Type="bool">
+					<DesignName StringName="tutorial__active_oGAL" Text="Active" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="createitempropertydescriptor1" PositionY="580" PositionX="-80" MethodName="wh::entitymodule::CreateItemPropertyDescriptor" DeclaringType="wh::entitymodule">
+					<Constant Name="EquippedFilter" Value="Pass" />
+					<Constant Name="MaxCondition" Value="0.4" />
+				</Function>
+				<DisplayTutorial Name="displaytutorial4" PositionY="-190" PositionX="1420">
+					<Constant Name="Tutorial" Value="OB_T36_GunRepair" />
+					<Edge From="ifcompare14.True" To="Show" />
+					<Edge From="ifcompare14_1.True" To="Hide" />
+				</DisplayTutorial>
+				<IfFunction Name="ifcompare14" PositionY="-200" PositionX="1150" TypeT="int" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="13" />
+					<Edge From="itemdescriptortrigger2.OnAcquire" To="Exec" />
+					<Edge From="itemproperties13.Type" To="ValueA" />
+				</IfFunction>
+				<IfFunction Name="ifcompare14_1" PositionY="40" PositionX="1150" TypeT="int" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="13" />
+					<Edge From="itemdescriptortrigger2.OnLose" To="Exec" />
+					<Edge From="itemproperties13.Type" To="ValueA" />
+				</IfFunction>
+				<ObjectProperties Name="isoulproperties3" PositionY="40" PositionX="-80" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="I_Soul" Alias="player_any" />
+				</ObjectProperties>
+				<ItemDescriptorTrigger Name="itemdescriptortrigger2" PositionY="-130" PositionX="320">
+					<Edge From="createitempropertydescriptor1.ItemDescriptor" To="ItemDescriptor" />
+					<Edge From="isoulproperties3.Inventory" To="Inventory" />
+					<Edge From="active" To="IsActive">
+						<Vertex>vertex1</Vertex>
+					</Edge>
+				</ItemDescriptorTrigger>
+				<ObjectProperties Name="itemproperties13" PositionY="130" PositionX="760" DeclaringType="wh::entitymodule::Item">
+					<Edge From="itemdescriptortrigger2.Item" To="Item" />
+				</ObjectProperties>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-50" PositionX="-40" />
+			</EdgeVertices>
+			<Text StringName="tutorial_ob_t24__prvni_vy_rmof" Text="Tutoriál OB_T36 - pokazená puška" />
+		</Gameplay>
+	</Skald>
+</Database>

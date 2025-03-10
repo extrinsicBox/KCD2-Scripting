@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="tezkoodenci_utoci_na_branu__strelci">
+			<Ports>
+				<Port Name="strelci_budou_strilet" Direction="In" Type="trigger">
+					<DesignName StringName="tezkooden_tezkoodenci_jso_udoU" Text="Střelci budou střílet" />
+				</Port>
+				<Port Name="strelci_strileji_skrze_mriz" Direction="Out" Type="trigger">
+					<DesignName StringName="tezkooden_strelci_strilej_EQ75" Text="střelci střílejí skrze mříž" />
+				</Port>
+				<Port Name="strelci_se_skryli" Direction="Out" Type="trigger">
+					<DesignName StringName="tezkooden_strelci_se_skry_2FON" Text="Střelci se skryli" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<State Name="assaultShooterHiding" PositionY="-150" PositionX="1340" TypeT="Progress">
+					<Edge From="playtrackview8.OnFinished" To="SetDone">
+						<Vertex>7v3APwRR</Vertex>
+						<Vertex>xV4daI26</Vertex>
+					</Edge>
+					<Edge From="ifand10.True" To="SetActive" />
+				</State>
+				<Timer Name="assaultShootersShootingThroughGate" PositionY="-200" PositionX="-550">
+					<Constant Name="Duration" Value="1s" />
+					<Constant Name="TimeType" Value="GameTime" />
+					<Edge From="strelci_budou_strilet" To="SetRunning" />
+				</Timer>
+				<State Name="assaultShootersShootingThroughGate_1" PositionY="-820" PositionX="-130" TypeT="Progress">
+					<Edge From="assaultShootersShootingThroughGate.OnFinished" To="SetActive" />
+					<Edge From="playtrackview4.OnFinished" To="SetDone">
+						<Vertex>HWE0cSYC</Vertex>
+						<Vertex>nMkdJxA9</Vertex>
+					</Edge>
+				</State>
+				<State Name="assaultShootersShootingThroughGate_2" PositionY="-290" PositionX="-130" TypeT="Progress">
+					<Edge From="assaultShootersShootingThroughGate.OnFinished" To="SetActive" />
+					<Edge From="playtrackview4_1.OnFinished" To="SetDone">
+						<Vertex>dk9joFbk</Vertex>
+						<Vertex>vTJ2D0Id</Vertex>
+					</Edge>
+				</State>
+				<State Name="assaultShootersShootingThroughGate_3" PositionY="180" PositionX="-130" TypeT="Progress">
+					<Edge From="assaultShootersShootingThroughGate.OnFinished" To="SetActive" />
+					<Edge From="playtrackview4_2.OnFinished" To="SetDone">
+						<Vertex>dXSvFXoq</Vertex>
+						<Vertex>Rn9KwpRk</Vertex>
+					</Edge>
+				</State>
+				<IfFunction Name="ifand10" PositionY="-100" PositionX="1000" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="assaultShootersShootingThroughGate_3.Done" To="C">
+						<Vertex>tkCPqf8z</Vertex>
+						<Vertex>bACxak9z</Vertex>
+					</Edge>
+					<Edge From="assaultShootersShootingThroughGate_2.Done" To="B">
+						<Vertex>XaK8w5DU</Vertex>
+						<Vertex>YtRnSb3P</Vertex>
+					</Edge>
+					<Edge From="assaultShootersShootingThroughGate_1.Done" To="A">
+						<Vertex>3khqJuW7</Vertex>
+						<Vertex>Ytufu0qG</Vertex>
+					</Edge>
+					<Edge From="assaultShootersShootingThroughGate_1.OnDone" To="Exec">
+						<Vertex>oJXwMSXy</Vertex>
+						<Vertex>QR06yVQ9</Vertex>
+					</Edge>
+					<Edge From="assaultShootersShootingThroughGate_2.OnDone" To="Exec">
+						<Vertex>LuHGvzEE</Vertex>
+						<Vertex>VujaIUXs</Vertex>
+					</Edge>
+					<Edge From="assaultShootersShootingThroughGate_3.OnDone" To="Exec">
+						<Vertex>r13oVHVb</Vertex>
+						<Vertex>VuEsj69x</Vertex>
+					</Edge>
+				</IfFunction>
+				<Output Name="Output">
+					<Edge From="playtrackview8.OnFinished" To="strelci_se_skryli" />
+					<Edge From="ifand10.True" To="strelci_strileji_skrze_mriz">
+						<Vertex>yGqL2VyL</Vertex>
+						<Vertex>jA8cNGWA</Vertex>
+					</Edge>
+				</Output>
+				<PlayTrackView Name="playtrackview4" PositionY="-680" PositionX="210">
+					<Asset Name="CutsceneHolder" Alias="frontWallAssaultShootersShootingThroughGateTrackview_1" />
+					<Edge From="assaultShootersShootingThroughGate_1.Active" To="IsActive" />
+				</PlayTrackView>
+				<PlayTrackView Name="playtrackview4_1" PositionY="-160" PositionX="260">
+					<Asset Name="CutsceneHolder" Alias="frontWallAssaultShootersShootingThroughGateTrackview_2" />
+					<Edge From="assaultShootersShootingThroughGate_2.Active" To="IsActive" />
+				</PlayTrackView>
+				<PlayTrackView Name="playtrackview4_2" PositionY="300" PositionX="250">
+					<Asset Name="CutsceneHolder" Alias="frontWallAssaultShootersShootingThroughGateTrackview_3" />
+					<Edge From="assaultShootersShootingThroughGate_3.Active" To="IsActive" />
+				</PlayTrackView>
+				<PlayTrackView Name="playtrackview8" PositionY="-80" PositionX="1610">
+					<Asset Name="CutsceneHolder" Alias="frontWallAssaultShootersBackUpTrackview" />
+					<Edge From="assaultShooterHiding.Active" To="IsActive" />
+				</PlayTrackView>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="3khqJuW7" PositionY="-390" PositionX="220" />
+				<EdgeVertex Name="7v3APwRR" PositionY="240" PositionX="2060" />
+				<EdgeVertex Name="bACxak9z" PositionY="550" PositionX="780" />
+				<EdgeVertex Name="dk9joFbk" PositionY="-360" PositionX="790" />
+				<EdgeVertex Name="dXSvFXoq" PositionY="140" PositionX="780" />
+				<EdgeVertex Name="HWE0cSYC" PositionY="-890" PositionX="750" />
+				<EdgeVertex Name="jA8cNGWA" PositionY="-210" PositionX="2070" />
+				<EdgeVertex Name="LuHGvzEE" PositionY="100" PositionX="260" />
+				<EdgeVertex Name="nMkdJxA9" PositionY="-890" PositionX="-120" />
+				<EdgeVertex Name="oJXwMSXy" PositionY="-400" PositionX="220" />
+				<EdgeVertex Name="QR06yVQ9" PositionY="-400" PositionX="790" />
+				<EdgeVertex Name="r13oVHVb" PositionY="540" PositionX="190" />
+				<EdgeVertex Name="Rn9KwpRk" PositionY="140" PositionX="-130" />
+				<EdgeVertex Name="tkCPqf8z" PositionY="550" PositionX="190" />
+				<EdgeVertex Name="vTJ2D0Id" PositionY="-360" PositionX="-130" />
+				<EdgeVertex Name="VuEsj69x" PositionY="540" PositionX="780" />
+				<EdgeVertex Name="VujaIUXs" PositionY="100" PositionX="780" />
+				<EdgeVertex Name="XaK8w5DU" PositionY="110" PositionX="250" />
+				<EdgeVertex Name="xV4daI26" PositionY="240" PositionX="1350" />
+				<EdgeVertex Name="yGqL2VyL" PositionY="-210" PositionX="1300" />
+				<EdgeVertex Name="YtRnSb3P" PositionY="110" PositionX="780" />
+				<EdgeVertex Name="Ytufu0qG" PositionY="-390" PositionX="790" />
+			</EdgeVertices>
+			<Assets>
+				<CutsceneHolderAsset Name="frontWallAssaultShootersShootingThroughGateTrackview_1" />
+				<CutsceneHolderAsset Name="frontWallAssaultShootersBackUpTrackview" />
+				<CutsceneHolderAsset Name="frontWallAssaultShootersShootingThroughGateTrackview_3" />
+				<CutsceneHolderAsset Name="frontWallAssaultShootersShootingThroughGateTrackview_2" />
+			</Assets>
+			<Notes>
+				<Note Name="note11" PositionY="-1020" PositionX="-30">
+					<Text StringName="tezkooden_note11_x1GS" Text="Je potřeba rozdělit na víc shooting sekvencí - KCD2-476834." />
+				</Note>
+			</Notes>
+			<Text StringName="tezkoodenci_utoci_na_bran_E4PK" Text="Těžkooděnci útočí na bránu - střelci" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="tezkooden_prvni_linie_tez_sCxC" Text="První linie těžkooděnců nese kuše. Vběhnou do brány, strčí je skrz mříž a vystřelí na naše pavézníky - něco trefí pavézu, někteří spojenci umřou. Nepřátelští střelci se rozestoupí k bokům průchodu a ustoupí sekerníkům." />
+				</GameplayActionElement>
+			</Elements>
+		</Gameplay>
+	</Skald>
+</Database>

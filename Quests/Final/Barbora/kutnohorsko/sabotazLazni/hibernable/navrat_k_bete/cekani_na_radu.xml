@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="cekani_na_radu">
+			<Ports>
+				<Port Name="start_okna" Direction="In" Type="trigger">
+					<DesignName StringName="sabotovac_start_okna_ujEa" Text="start okna" />
+				</Port>
+				<Port Name="konec_okna" Direction="Out" Type="trigger">
+					<DesignName StringName="sabotovac_konec_okna_rKkt" Text="konec okna timerem" />
+				</Port>
+				<Port Name="timer_bezi" Direction="Out" Type="bool">
+					<DesignName StringName="cekani_na_timer_bezi_Ze3K" Text="timer běží" />
+				</Port>
+				<Port Name="timer_dobehl" Direction="Out" Type="bool">
+					<DesignName StringName="cekani_na_timer_dobehl_A3yO" Text="timer doběhl" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Output Name="Output">
+					<Edge From="timerIsRunning.Active" To="timer_bezi" />
+					<Edge From="timerIsRunning.Done" To="timer_dobehl" />
+					<Edge From="timerIsRunning.OnDone" To="konec_okna" />
+				</Output>
+				<TimeOfDayWatch Name="timeofdaywatch10" PositionY="-120" PositionX="40">
+					<Constant Name="TimeOfDayStart" Value="10h00m" />
+					<Constant Name="TimeOfDayEnd" Value="10h00m" />
+					<Constant Name="DaysToStart" Value="0" />
+					<Edge From="timer5.OnFinished" To="SetRunning" />
+				</TimeOfDayWatch>
+				<Timer Name="timer5" PositionY="-120" PositionX="-280">
+					<Constant Name="Duration" Value="72h" />
+					<Constant Name="TimeType" Value="WorldTime" />
+					<Edge From="start_okna" To="SetRunning" />
+				</Timer>
+				<State Name="timerIsRunning" PositionY="-150" PositionX="460" TypeT="Progress">
+					<Edge From="start_okna" To="SetActive">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="timeofdaywatch10.OnTimeOfDay" To="SetDone" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-169" PositionX="-294" />
+				<EdgeVertex Name="vertex2" PositionY="-169" PositionX="342" />
+			</EdgeVertices>
+			<Text StringName="sabotovaci_okno_VLLs" Text="Čekání na radu" />
+		</Gameplay>
+	</Skald>
+</Database>

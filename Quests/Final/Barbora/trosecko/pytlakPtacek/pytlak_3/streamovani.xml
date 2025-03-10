@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="streamovani">
+			<Ports>
+				<Port Name="stream" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_stream_ax7K" Text="stream" />
+				</Port>
+				<Port Name="unstreamstash" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_unstreamstash_09XW" Text="unstreamStash" />
+				</Port>
+				<Port Name="streamdone" Direction="Out" Type="trigger">
+					<DesignName StringName="streamova_streamdone_19LR" Text="streamDone" />
+				</Port>
+				<Port Name="unstreamevniro" Direction="In" Type="trigger">
+					<DesignName StringName="streamova_unstreamevniro_pZWG" Text="unstreamEvniro" />
+				</Port>
+				<Port Name="wolves_profile" Direction="Out" Type="bool">
+					<DesignName StringName="streamova_wolves_profile_QgFd" Text="wolves profile" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<CutsceneHandler Name="cutscenehandler30" PositionY="100" PositionX="-560">
+					<Asset Name="CutsceneHolder" Alias="pytlakPtacek_faderProfile" />
+					<Constant Name="AutoPlay" Value="false" />
+					<Edge From="ifand20161216.True" To="PlayCutscene">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="stream" To="EnqueueCutscene" />
+				</CutsceneHandler>
+				<IfFunction Name="ifand20161216" PositionY="260" PositionX="540" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="streamprofileshandling_1.onloaded" To="Exec" />
+					<Edge From="streamprofileshandling_2.onloaded" To="Exec" />
+					<Edge From="streamprofileshandling_1.profileactive" To="B" />
+					<Edge From="streamprofileshandling_2.profileactive" To="C" />
+					<Edge From="leavelevelhandling_v2.onstreamed" To="Exec" />
+					<Edge From="leavelevelhandling_v2.profilesactive" To="A" />
+				</IfFunction>
+				<leavelevelhandling_v2 Name="leavelevelhandling_v2" PositionY="-480" PositionX="110" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="camp3_wolves_profile" />
+					<Asset Name="smartentity" Alias="qSO" />
+					<Asset Name="souls" Alias="wolves" />
+					<Constant Name="speed" Value="run" />
+					<Edge From="cutscenehandler30.BeforePlay" To="streamprofiles">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="timer20161212.OnFinished" To="leavelevel">
+						<Vertex>vertex11</Vertex>
+						<Vertex>vertex12</Vertex>
+					</Edge>
+				</leavelevelhandling_v2>
+				<Output Name="Output">
+					<Edge From="cutscenehandler30.OnFinished" To="streamdone">
+						<Vertex>vertex6</Vertex>
+						<Vertex>vertex10</Vertex>
+					</Edge>
+					<Edge From="leavelevelhandling_v2.profilesactive" To="wolves_profile" />
+				</Output>
+				<streamprofileshandling Name="streamprofileshandling_1" PositionY="-90" PositionX="110" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="camp3_stash_profile" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="cutscenehandler30.BeforePlay" To="streamprofiles">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="unstreamstash" To="unstreamprofiles">
+						<Vertex>vertex2</Vertex>
+					</Edge>
+				</streamprofileshandling>
+				<streamprofileshandling Name="streamprofileshandling_2" PositionY="180" PositionX="110" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="camp3_enviro_profile" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="cutscenehandler30.BeforePlay" To="streamprofiles">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="timer20161211_1.OnFinished" To="unstreamprofiles" />
+				</streamprofileshandling>
+				<Timer Name="timer20161211_1" PositionY="-360" PositionX="-450">
+					<Constant Name="Duration" Value="7d" />
+					<Constant Name="TimeType" Value="WorldTime" />
+					<Edge From="unstreamevniro" To="SetRunning" />
+				</Timer>
+				<Timer Name="timer20161212" PositionY="-460" PositionX="470">
+					<Constant Name="Duration" Value="1d" />
+					<Constant Name="TimeType" Value="WorldTime" />
+					<Edge From="leavelevelhandling_v2.onstreamed" To="SetRunning" />
+				</Timer>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex10" PositionY="530" PositionX="720" />
+				<EdgeVertex Name="vertex11" PositionY="-500" PositionX="730" />
+				<EdgeVertex Name="vertex12" PositionY="-496" PositionX="114" />
+				<EdgeVertex Name="vertex2" PositionY="30" PositionX="-100" />
+				<EdgeVertex Name="vertex4" PositionY="500" PositionX="720" />
+				<EdgeVertex Name="vertex5" PositionY="500" PositionX="-550" />
+				<EdgeVertex Name="vertex6" PositionY="530" PositionX="120" />
+				<EdgeVertex Name="vertex9" PositionY="220" PositionX="-90" />
+			</EdgeVertices>
+			<Assets>
+				<SoulAsset Name="wolves" SharedSoulGuids="0f628cf4-0a29-4aa7-b1b9-b82b1579734b 3a4ae2e4-74d7-40b1-9def-56a595eb9637 cba99983-c609-46e2-918f-f2a706c31c34" />
+			</Assets>
+			<Text StringName="streamovani_oI1b" Text="Streamování" />
+		</Module>
+	</Skald>
+</Database>

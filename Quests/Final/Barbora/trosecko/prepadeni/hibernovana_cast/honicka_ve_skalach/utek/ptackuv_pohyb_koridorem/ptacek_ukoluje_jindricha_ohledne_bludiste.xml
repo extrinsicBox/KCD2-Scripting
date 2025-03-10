@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<FaderDialog Name="ptacek_ukoluje_jindricha_ohledne_bludiste">
+			<Ports>
+				<Port Name="dialog_probehl" Direction="Out" Type="trigger">
+					<DesignName StringName="ptacek_uk_dialog_probehl_jsbM" Text="dialog proběhl" />
+				</Port>
+				<Port Name="ptacek_ceka_na_hrace_u_vstupu_do_bludiste" Direction="In" Type="bool">
+					<DesignName StringName="ptacek_uk_ptacek_ceka_na__aqcg" Text="Ptáček čeká na hráče u vstupu do bludiště" />
+				</Port>
+			</Ports>
+			<Text StringName="ptacek_ukoluje_jindricha__WbEi" Text="Ptáček úkoluje Jindřicha ohledně bludiště" />
+			<Dialogue TechnicalStatus="Enabled" Priority="1" GesturesSetDate="2024-07-04T21:04:26.5563427+02:00" GesturesSetResponseCount="12">
+				<SelectedSouls>
+					<SelectedSoul Role="PTACEK" Voice="lukeDale" Type="Wave" Language="ENG" />
+					<SelectedSoul Role="HENRY" Voice="tomMcKay" Type="Wave" Language="ENG" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="MainQuestSubmission" Alias="prepadeni_ptacekUkolujeJindrichaOhledneBludiste">
+					<Sequences>
+						<Sequence EntryCondition="Port('ptacek_ceka_na_hrace_u_vstupu_do_bludiste')" EndType="EndDialogue" Name="seq1">
+							<DesignName StringName="ptacek_uk_seq1_cd2S" Text="seq1" />
+							<UiPrompt StringName="ui_ptacek_uk_seq1_aGKQ" Text="Co teď?" />
+							<Triggers>
+								<Port Name="dialog_probehl" />
+							</Triggers>
+							<Elements>
+								<Response Role="PTACEK" ReferenceLength="1.74">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_znavene_lJGm" Text="stres, zadýchaně" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_zatracene_jso_lSsT" Text="Zatraceně, jsou všude!" />
+									<Commands>
+										<FacialMoodCommand FacialMood="nervous2" />
+										<AnimationCommand FragmentId="ADLG_Intense" Guid="a7b078ae-7adf-e03f-3246-eaa15307184d" Variant="4" DesiredDuration="3.59" />
+										<CameraCommand CameraType="CloseUp" />
+									</Commands>
+								</Response>
+								<Response Role="HENRY" ReferenceLength="1.35">
+									<Parenthetical>
+										<Text StringName="ptac_henry_zadychane_UZT3" Text="zadýchaně" />
+									</Parenthetical>
+									<Text StringName="ptac_henry_co_budem_delat_8mhH" Text="Co budem dělat?" />
+									<Commands>
+										<FacialMoodCommand FacialMood="nervous2" />
+										<AnimationCommand Role="PTACEK" Delay="0.55" FragmentId="ADLG_Whisper" Guid="fc83c50c-e145-4b5f-8cd5-269e950d826d" Variant="4" DesiredDuration="6.49" />
+										<CameraCommand CameraType="CloseUp" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="1.29">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_vystresovane_E2s2" Text="vystresovaně" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_koukni_jestli_4JxF" Text="Vim já?!" />
+									<Commands>
+										<CameraCommand CameraType="CloseUp" />
+										<LookAtCommand Delay="0.5" LookAtRole="HENRY" Offset="MiddleLeft" />
+										<LookAtCommand Delay="1.52" LookAtRole="HENRY" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" HearingOverride="20" ReferenceLength="3.34">
+									<Text StringName="ptac_ptacek_ja_nechci_liz_KfVS" Text="Nemůžem lízt v noci někam do skal, kde vidíme prd!" />
+									<Commands>
+										<AnimationCommand Role="HENRY" Delay="1.81" FragmentId="ADLG_Whisper" Guid="ab7e9df3-ca07-5c59-a645-70a47952b384" Variant="1" DesiredDuration="3.01" />
+									</Commands>
+								</Response>
+								<Response Role="HENRY" ReferenceLength="1.47">
+									<Parenthetical>
+										<Text StringName="ptac_henry_intenzivne_dIOz" Text="intenzivně" />
+									</Parenthetical>
+									<Text StringName="ptac_henry_ale_vzdyt_nas__b1vv" Text="Ale vždyť nás chytěj!" />
+									<Commands>
+										<AnimationCommand Role="PTACEK" Delay="1.43" FragmentId="ADLG_Frustration" Guid="6b429e29-668f-4071-8fd9-4152f8810e5d" Variant="3" />
+										<CameraCommand CameraType="CloseShot" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="1.97">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_kamera_na_mal_1Jug" Text="odbije Jindru" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_nedejboze_do__zyxj" Text="Nepovidej, ty chytrej!" />
+									<Commands>
+										<MoodCommand Role="HENRY" Delay="0.37" />
+										<FacialMoodCommand FacialMood="arrogant2" />
+										<CameraCommand CameraType="CloseUp" />
+									</Commands>
+								</Response>
+								<Response Role="HENRY" StartDelay="0.17" ReferenceLength="1.88">
+									<Parenthetical>
+										<Text StringName="ptac_henry_prekvapene_6BNv" Text="překvapeně" />
+									</Parenthetical>
+									<Text StringName="ptac_henry_nemam_cas_W7zW" Text="Uklidni se, doprdele!" />
+									<Commands>
+										<AnimationCommand Role="PTACEK" Delay="1.77" FragmentId="ADLG_Easy_man" Guid="a88b0649-f2db-45b9-ac75-fbe939616780" Variant="0" DesiredDuration="2.08" />
+										<AnimationCommand Delay="-0.05" FragmentId="ADLG_Whisper" Guid="ab7e9df3-ca07-5c59-a645-70a47952b384" Variant="1" DesiredDuration="3.54" />
+										<CameraCommand CameraType="CloseUp" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="2.77">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_razne_dVcS" Text="rázně" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_nech_toho_tak_qYbZ" Text="Nech toho! Takhle si nepomůžem!" />
+									<Commands>
+										<FacialMoodCommand FacialMood="angry2" />
+										<CameraCommand CameraType="CloseShot" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="4.28">
+									<Text StringName="ptac_ptacek_vis_co_koukni_7LNO" Text="Víš co? Koukni do tý soutěsky za mnou, jestli tam nevede cesta dál." />
+									<Commands>
+										<FacialMoodCommand FacialMood="nervous1" />
+										<AnimationCommand Delay="0.87" FragmentId="ADLG_Point" Guid="de38a264-7aaa-4ee9-b694-0e18a60419c4" Variant="5" DesiredDuration="1.6" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="3.96">
+									<Text StringName="ptac_ptacek_pak_se_za_mno_Ywm4" Text="Pak se za mnou vrať. Aspoň budem vědět, jestli má cenu tamtudy jít." />
+									<Commands>
+										<AnimationCommand Delay="0.11" FragmentId="ADLG_posture_change" Guid="3ef9aa3d-a4d1-4eee-a973-3de14cfae95d" Variant="2" DesiredDuration="5.13" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK" ReferenceLength="1.48">
+									<Text StringName="ptac_ptacek_a_jestli_nas__FpTZ" Text="Jestli se dostanem ven ze skal." />
+									<Commands>
+										<LookAtCommand Delay="0.98" LookAtRole="HENRY" Offset="MiddleRight" />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK">
+									<Text StringName="ptac_ptacek_ja_tu_zatim_p_fjYE" Text="Já tu zatím počkám a pohlídám, že nikdo nejde..." />
+								</Response>
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</FaderDialog>
+	</Skald>
+</Database>

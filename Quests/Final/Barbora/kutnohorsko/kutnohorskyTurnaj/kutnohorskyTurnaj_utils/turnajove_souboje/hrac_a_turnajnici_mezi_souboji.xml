@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="hrac_a_turnajnici_mezi_souboji">
+			<Ports>
+				<Port Name="konci_souboj" Direction="In" Type="trigger">
+					<DesignName StringName="hrac_a_tu_konci_souboj_dDTP" Text="Končí souboj" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<CutsceneHandler Name="cutscenehandler4" PositionY="-100" PositionX="-240">
+					<Asset Name="CutsceneHolder" Alias="csTimeskipInterrupt" />
+					<Edge From="ifareacheck3.True" To="EnqueueCutscene" />
+				</CutsceneHandler>
+				<IfFunction Name="ifareacheck3" PositionY="-70" PositionX="-550" MethodName="wh::rpgmodule::AreaCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="player" />
+					<Asset Name="Areas" Alias="taTurnajStart" />
+					<Edge From="ifisinactorstate2.True" To="Exec" />
+				</IfFunction>
+				<IfFunction Name="ifisinactorstate2" PositionY="-60" PositionX="-840" MethodName="wh::entitymodule::IsInActorState" DeclaringType="wh::entitymodule">
+					<Asset Name="Souls" Alias="player" />
+					<Constant Name="State" Value="skipTime" />
+					<Edge From="konci_souboj" To="Exec" />
+				</IfFunction>
+			</Nodes>
+			<Text StringName="hrac_mezi_souboji_ktGz" Text="Hráč a turnajnící mezi souboji" />
+		</Gameplay>
+	</Skald>
+</Database>

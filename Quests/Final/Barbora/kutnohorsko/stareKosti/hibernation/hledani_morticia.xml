@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="hledani_morticia">
+			<Ports>
+				<Port Name="quest_dokoncen" Direction="Out" Type="trigger">
+					<DesignName StringName="hledani_m_konec_questu_hJEi" Text="quest dokoncen" />
+				</Port>
+				<Port Name="vsechny_pyramidky_hotovo_trigger" Direction="In" Type="trigger">
+					<DesignName StringName="hledani_m_vsechny_pyramid_R2Bv" Text="vsechny Pyramidky hotovo trigger" />
+				</Port>
+				<Port Name="quest_active" Direction="In" Type="bool">
+					<DesignName StringName="hledani_m_quest_active_y4Nv" Text="quest active" />
+				</Port>
+				<Port Name="quest_hotov" Direction="In" Type="bool">
+					<DesignName StringName="hledani_m_quest_hotov_DsET" Text="quest hotov" />
+				</Port>
+				<Port Name="vsechny_pyramidky_hotovo" Direction="In" Type="bool">
+					<DesignName StringName="hledani_m_vsechny_pyramid_NrHO" Text="vsechny Pyramidky hotovo" />
+				</Port>
+				<Port Name="quest_failnul" Direction="Out" Type="trigger">
+					<DesignName StringName="hledani_m_quest_failnul_o0B7" Text="quest failnul" />
+				</Port>
+				<Port Name="hrac_nasel_morticia" Direction="Out" Type="bool">
+					<DesignName StringName="hledani_m_hrac_nasel_mort_nNTN" Text="hrac nasel morticia" />
+				</Port>
+				<Port Name="kosti_zameteny" Direction="In" Type="bool">
+					<DesignName StringName="hledani_m_kosti_zameteny_bxrq" Text="kosti zameteny" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="hledani_morticia/kde_je_morticius__mnisi.xml" />
+				<Definition File="hledani_morticia/kde_je_morticius__hrobnik_1.xml" />
+				<Definition File="hledani_morticia/kde_je_morticius__hrobnik_2__v_kapli.xml" />
+				<Definition File="hledani_morticia/nalezeni_falesneho_morticia.xml" />
+				<Definition File="hledani_morticia/hledani_morticia_mnichu_a_hrobnika.xml" />
+			</Definitions>
+			<Nodes>
+				<CutsceneHandler Name="cutscenehandler7" PositionY="-570" PositionX="-440">
+					<Asset Name="CutsceneHolder" Alias="cutscene_morticiusTeleport" />
+					<Edge From="ifand9.True" To="EnqueueCutscene">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+				</CutsceneHandler>
+				<hledani_morticia_mnichu_a_hrobnika Name="hledani_morticia_mnichu_a_hrobnika" PositionY="-110" PositionX="320" RequiredForOutput="kutnohorsko">
+					<Edge From="kde_je_morticius__hrobnik_2__v_kapli.konec_questu" To="splnit_hledani_pres_hrobnika" />
+					<Edge From="kde_je_morticius__mnisi.end_questu" To="splnit_hledani_pres_mnichy">
+						<Vertex>vertex69</Vertex>
+					</Edge>
+					<Edge From="nalezeni_falesneho_morticia.kdyz_si_s_nim_promluv" To="splnit_hledani_pres_morticia">
+						<Vertex>vertex17</Vertex>
+						<Vertex>vertex73</Vertex>
+					</Edge>
+					<Edge From="vsechny_pyramidky_hotovo_trigger" To="pyramidky_postaveny">
+						<Vertex>vertex75</Vertex>
+						<Vertex>vertex76</Vertex>
+					</Edge>
+				</hledani_morticia_mnichu_a_hrobnika>
+				<IfFunction Name="ifand9" PositionY="-500" PositionX="-770" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="quest_active" To="A">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+					<Edge From="vsechny_pyramidky_hotovo_trigger" To="Exec">
+						<Vertex>vertex74</Vertex>
+					</Edge>
+				</IfFunction>
+				<kde_je_morticius__hrobnik_1 Name="kde_je_morticius__hrobnik_1" PositionY="-260" PositionX="-590">
+					<Edge From="quest_active" To="quest_active">
+						<Vertex>vertex11</Vertex>
+						<Vertex>vertex66</Vertex>
+					</Edge>
+					<Edge From="vsechny_pyramidky_hotovo" To="vsechny_hromadky_hotovo">
+						<Vertex>vertex27</Vertex>
+					</Edge>
+				</kde_je_morticius__hrobnik_1>
+				<kde_je_morticius__hrobnik_2__v_kapli Name="kde_je_morticius__hrobnik_2__v_kapli" PositionY="-230" PositionX="-220">
+					<Edge From="kde_je_morticius__hrobnik_1.force_dialogu_v_kostnici" To="force_dialog" />
+					<Edge From="kosti_zameteny" To="kosti_zameteny">
+						<Vertex>gbmkuBut</Vertex>
+						<Vertex>3vgkmT9C</Vertex>
+					</Edge>
+				</kde_je_morticius__hrobnik_2__v_kapli>
+				<kde_je_morticius__mnisi Name="kde_je_morticius__mnisi" PositionY="230" PositionX="-530">
+					<Edge From="quest_active" To="quest_active">
+						<Vertex>vertex11</Vertex>
+						<Vertex>vertex66</Vertex>
+						<Vertex>vertex10</Vertex>
+					</Edge>
+					<Edge From="vsechny_pyramidky_hotovo" To="vsechny_hromadky_hotovo">
+						<Vertex>vertex27</Vertex>
+						<Vertex>vertex28</Vertex>
+					</Edge>
+				</kde_je_morticius__mnisi>
+				<nalezeni_falesneho_morticia Name="nalezeni_falesneho_morticia" PositionY="-10" PositionX="-590">
+					<Edge From="quest_hotov" To="quest_hotov" />
+					<Edge From="vsechny_pyramidky_hotovo" To="Awake">
+						<Vertex>vertex27</Vertex>
+					</Edge>
+				</nalezeni_falesneho_morticia>
+				<Output Name="Output">
+					<Edge From="nalezeni_falesneho_morticia.hrac_nasel_morticia" To="hrac_nasel_morticia">
+						<Vertex>vertex46</Vertex>
+						<Vertex>vertex45</Vertex>
+					</Edge>
+					<Edge From="hledani_morticia_mnichu_a_hrobnika.quest_dokoncen" To="quest_dokoncen" />
+					<Edge From="hledani_morticia_mnichu_a_hrobnika.quest_failnul" To="quest_failnul" />
+				</Output>
+				<SchedulerLinkActivation Name="schedule23" PositionY="700" PositionX="-380">
+					<Constant Name="LinkTag" Value="stareKosti_graveDigger" />
+					<Edge From="timer22.Running" To="IsActive" />
+				</SchedulerLinkActivation>
+				<Timer Name="timer22" PositionY="520" PositionX="-760">
+					<Constant Name="Duration" Value="12h" />
+					<Constant Name="TimeType" Value="WorldTime" />
+					<Edge From="vsechny_pyramidky_hotovo_trigger" To="SetRunning">
+						<Vertex>vertex75</Vertex>
+					</Edge>
+					<Edge From="kde_je_morticius__hrobnik_2__v_kapli.konec_questu" To="SetFinished">
+						<Vertex>vertex67</Vertex>
+						<Vertex>vertex68</Vertex>
+					</Edge>
+				</Timer>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="3vgkmT9C" PositionY="-17" PositionX="-273" />
+				<EdgeVertex Name="gbmkuBut" PositionY="6" PositionX="-931" />
+				<EdgeVertex Name="vertex10" PositionY="290" PositionX="-780" />
+				<EdgeVertex Name="vertex11" PositionY="-390" PositionX="-900" />
+				<EdgeVertex Name="vertex12" PositionY="-410" PositionX="-500" />
+				<EdgeVertex Name="vertex17" PositionY="200" PositionX="-180" />
+				<EdgeVertex Name="vertex27" PositionY="120" PositionX="-730" />
+				<EdgeVertex Name="vertex28" PositionY="330" PositionX="-660" />
+				<EdgeVertex Name="vertex45" PositionY="350" PositionX="640" />
+				<EdgeVertex Name="vertex46" PositionY="360" PositionX="-100" />
+				<EdgeVertex Name="vertex66" PositionY="-170" PositionX="-836" />
+				<EdgeVertex Name="vertex67" PositionY="948" PositionX="50" />
+				<EdgeVertex Name="vertex68" PositionY="956" PositionX="-757" />
+				<EdgeVertex Name="vertex69" PositionY="420" PositionX="240" />
+				<EdgeVertex Name="vertex73" PositionY="200" PositionX="220" />
+				<EdgeVertex Name="vertex74" PositionY="-360" PositionX="-890" />
+				<EdgeVertex Name="vertex75" PositionY="491" PositionX="-866" />
+				<EdgeVertex Name="vertex76" PositionY="500" PositionX="260" />
+			</EdgeVertices>
+			<Assets>
+				<DialogueHolderAsset Name="dialogHolder_gravedigger" />
+			</Assets>
+			<Notes>
+				<Note Name="note13" PositionY="-640" PositionX="-510">
+					<Text StringName="hledani_m_note13_ZRnQ" Text="Pyramids can be finished even if the quest fails" />
+				</Note>
+			</Notes>
+			<Text StringName="hledani_morticia_MRKB" Text="hledání Morticia" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="hledani_m_po_te_co_dokonc_ybuP" Text="po té, co dokončím poslední stash, si hráč barkne že se má stavit za morticiem pro odevzdávání. Jenže Morticius venku na svém místě na hrobě není. Leží tam lebka a cizí pes. Když hráč vejde do arei, barkne si &quot;kam se ten mnich poděl?&quot; a naskočí mu objectv, že ho má najít. Všichni mniši a kněží (duchovní obecně) budoi vědět, že je už dlouho mrtvý. " />
+				</GameplayActionElement>
+				<GameplayActionElement>
+					<Text StringName="hledani_m_morticius_respe_kAqn" Text="Morticius, respektive týpek co si z hráče vystřelil, sedí na druhém konci mapy v hospodě. když ho hráč najde, vysvětlí mu to a naučí ho ten slíbený perk. Quest ale končí ve chvíli, kdy se dozví že je mrtvý, nalezení švindlíře je vyloženě bonus. " />
+				</GameplayActionElement>
+			</Elements>
+			<MapVizLocation MapName="kutnohorsko" PositionX="3865" PositionY="722" />
+		</Gameplay>
+	</Skald>
+</Database>

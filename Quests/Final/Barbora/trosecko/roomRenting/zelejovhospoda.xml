@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="zelejovHospoda">
+			<Definitions>
+				<Definition File="zelejovHospoda/zelejov_rent_room_kde_je_pokoj_muz_.xml" />
+				<Definition File="zelejovHospoda/zelejov_rent_room_kde_je_pokoj_zena.xml" />
+			</Definitions>
+			<Nodes>
+				<roomrent Name="roomrent" PositionY="-60" PositionX="-90" Namespace="utils.roomrenting">
+					<Asset Name="souls" Alias="owners" />
+					<Asset Name="dvere" Alias="dvere" />
+					<Asset Name="so" Alias="so_zelejov" />
+					<Asset Name="postel" Alias="bed" />
+					<Asset Name="kotlik" Alias="kotlik" />
+				</roomrent>
+				<zelejov_rent_room_kde_je_pokoj_muz_ Name="zelejov_rent_room_kde_je_pokoj_muz_" PositionY="200" PositionX="170">
+					<Edge From="roomrent.jindra_ma_pronajatej_pokoj" To="jindra_ma_pronajaty_pokoj" />
+				</zelejov_rent_room_kde_je_pokoj_muz_>
+				<zelejov_rent_room_kde_je_pokoj_zena Name="zelejov_rent_room_kde_je_pokoj_zena_1" PositionY="420" PositionX="180">
+					<Edge From="roomrent.jindra_ma_pronajatej_pokoj" To="jindra_ma_pronajaty_pokoj" />
+				</zelejov_rent_room_kde_je_pokoj_zena>
+			</Nodes>
+			<Assets>
+				<SoulAsset Name="owners" SharedSoulGuids="449022cc-0fbf-ffa4-021b-2b4b13e113be 4758bdb9-f854-38ef-1ea4-e8799614ceb7 4a95aae0-f752-4bb2-2fb5-2c897d2efcb2 40924ea1-1d40-e575-9c92-f0b3806656aa" />
+				<AnimDoorAsset Name="dvere" />
+				<SmartObjectAsset Name="so_zelejov" />
+				<TriggerAreaAsset Name="roomArea" />
+				<SmartObjectAsset Name="bed" />
+				<SmartObjectAsset Name="kotlik" />
+			</Assets>
+			<Text StringName="zelejovhospoda_z6kr" Text="ZelejovHospoda" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="zelejovho_hotovo_B7Q4" Text="Hotovo." />
+				</GameplayActionElement>
+				<GameplayActionElement>
+					<Text StringName="zelejovho_priradit_soulam_QAZ3" Text="Přiřadit soulám: tzel_woman_9, tzel_vavrinec" />
+				</GameplayActionElement>
+			</Elements>
+		</Gameplay>
+	</Skald>
+</Database>

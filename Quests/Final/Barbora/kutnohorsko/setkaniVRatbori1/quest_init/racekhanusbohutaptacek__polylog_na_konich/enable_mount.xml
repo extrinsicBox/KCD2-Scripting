@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="enable_mount">
+			<Ports>
+				<Port Name="start" Direction="In" Type="trigger">
+					<DesignName StringName="enable_mo_start_7ET5" Text="Start" />
+				</Port>
+				<Port Name="end" Direction="In" Type="trigger">
+					<DesignName StringName="enable_mo_end_sUbI" Text="End" />
+				</Port>
+				<Port Name="mount_behaviors_enabled" Direction="Out" Type="trigger">
+					<DesignName StringName="enable_mo_mount_behaviors_wceo" Text="Mount Behaviors Enabled" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<mount Name="mount" PositionY="-710" PositionX="500" Namespace="setkanivratbori1">
+					<Asset Name="actor" Alias="racek" />
+					<Asset Name="horse" Alias="racekHorse" />
+					<Edge From="mountingRattayPeopleProgress.Active" To="active">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</mount>
+				<mount Name="mount_1" PositionY="-470" PositionX="500" Namespace="setkanivratbori1">
+					<Asset Name="actor" Alias="hanus" />
+					<Asset Name="horse" Alias="hanusHorse" />
+					<Edge From="mountingRattayPeopleProgress.Active" To="active">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</mount>
+				<mount Name="mount_1_1" PositionY="-230" PositionX="500" Namespace="setkanivratbori1">
+					<Asset Name="actor" Alias="bohuta" />
+					<Asset Name="horse" Alias="bohutaHorse" />
+					<Edge From="mountingRattayPeopleProgress.Active" To="active">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</mount>
+				<mount Name="mount_1_1_1" PositionY="230" PositionX="500" Namespace="setkanivratbori1">
+					<Asset Name="actor" Alias="brabant" />
+					<Asset Name="horse" Alias="brabantHorse" />
+					<Edge From="mountingRattayPeopleProgress.Active" To="active">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</mount>
+				<mount Name="mount_1_2" PositionY="0" PositionX="500" Namespace="setkanivratbori1">
+					<Asset Name="actor" Alias="ptacek" />
+					<Asset Name="horse" Alias="ptacekHorse" />
+					<Edge From="mountingRattayPeopleProgress.Active" To="active">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</mount>
+				<State Name="mountingRattayPeopleProgress" PositionY="-220" PositionX="-60" TypeT="Progress">
+					<Edge From="start" To="SetActive" />
+					<Edge From="end" To="SetDone" />
+				</State>
+				<Output Name="Output">
+					<Edge From="mountingRattayPeopleProgress.OnActive" To="mount_behaviors_enabled">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+				</Output>
+				<PlayerAction_TeleportOnHorse Name="PlayerAction_TeleportOnHorse" PositionY="430" PositionX="500" Namespace="utils.player">
+					<Asset Name="horse" Alias="playersStolenHorse" />
+					<Asset Name="destination" Alias="playerStolenHorsePoint" />
+					<Edge From="mountingRattayPeopleProgress.OnActive" To="teleportonhorse" />
+				</PlayerAction_TeleportOnHorse>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex3" PositionY="30" PositionX="240" />
+				<EdgeVertex Name="vertex4" PositionY="-840" PositionX="280" />
+				<EdgeVertex Name="vertex5" PositionY="-840" PositionX="750" />
+			</EdgeVertices>
+			<Assets>
+				<TagPointAsset Name="playerStolenHorsePoint" />
+			</Assets>
+			<Text StringName="enable_mount_I2wS" Text="Enable Mount" />
+		</Module>
+	</Skald>
+</Database>

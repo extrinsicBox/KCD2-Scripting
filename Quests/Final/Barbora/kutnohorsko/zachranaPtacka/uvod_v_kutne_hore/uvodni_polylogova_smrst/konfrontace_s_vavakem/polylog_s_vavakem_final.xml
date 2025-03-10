@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="polylog_s_vavakem_final">
+			<Ports>
+				<Port Name="enqueuedialog" Direction="In" Type="trigger">
+					<DesignName StringName="polylog_s_enqueuedialog_aD3T" Text="EnqueueDialog" />
+				</Port>
+				<Port Name="dalsi_polylog" Direction="Out" Type="trigger">
+					<DesignName StringName="polylog_s_dalsi_polylog_EiAs" Text="další polylog" />
+				</Port>
+				<Port Name="polylog_skoncil_combatem" Direction="In" Type="bool">
+					<DesignName StringName="polylog_s_polylog_skoncil_Ft29" Text="Polylog skončil combatem" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="polylog_s_vavakem_final/polylog_s_vavakem_final.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="createdialogparams1" PositionY="290" PositionX="-470" MethodName="wh::dialogmodule::CreateDialogParams" DeclaringType="wh::dialogmodule">
+					<Edge From="makearray2.Array" To="Participants" />
+				</Function>
+				<MakeArray Name="makearray2" PositionY="390" PositionX="-760" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="martin" />
+					<Asset Name="B" Alias="kunclin" />
+					<Asset Name="C" Alias="oldrich" />
+				</MakeArray>
+				<Output Name="Output">
+					<Edge From="polylog_s_vavakem_final.dalsi_polylog" To="dalsi_polylog" />
+				</Output>
+				<polylog_s_vavakem_final Name="polylog_s_vavakem_final" PositionY="10" PositionX="0">
+					<Asset Name="DialogueHolder" Alias="afterVavakConfrontationScene" />
+					<Constant Name="Mec" Value="e37bdf86-4cc8-4805-b04c-3b05964b9484" />
+					<Edge From="enqueuedialog" To="EnqueueDialogue" />
+					<Edge From="createdialogparams1.DialogParams" To="DialogParams" />
+					<Edge From="polylog_skoncil_combatem" To="polylog_skoncil_combatem" />
+				</polylog_s_vavakem_final>
+			</Nodes>
+			<Assets>
+				<CameraAsset Name="M35_VavakFinal_customCamera_23" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_22" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_01" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_21" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_02" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_20" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_03" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_19" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_04" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_18" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_05" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_17" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_06" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_16" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_07" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_15" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_08" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_14" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_09" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_13" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_10" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_12" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_11" />
+				<CameraAsset Name="M35_VavakFinal_customCamera_24" />
+			</Assets>
+		</DialogWrapper>
+	</Skald>
+</Database>

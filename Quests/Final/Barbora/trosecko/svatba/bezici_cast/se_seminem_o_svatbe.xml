@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="se_seminem_o_svatbe" HibernateMode="Script">
+			<Definitions>
+				<Definition File="se_seminem_o_svatbe/se_seminem_o_svatbe.xml" />
+			</Definitions>
+			<Nodes>
+				<se_seminem_o_svatbe Name="se_seminem_o_svatbe" />
+			</Nodes>
+		</DialogWrapper>
+	</Skald>
+</Database>

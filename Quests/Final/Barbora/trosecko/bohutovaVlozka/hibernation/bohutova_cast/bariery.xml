@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="bariery">
+			<Ports>
+				<Port Name="bohuta_jede_za_erikem" Direction="In" Type="bool">
+					<DesignName StringName="bariery_bohuta_jede_za_er_MlzB" Text="Bohuta jede za Erikem" />
+				</Port>
+				<Port Name="bohuta_projel_zacatkem_rokle" Direction="In" Type="bool">
+					<DesignName StringName="bariery_bohuta_projel_zac_kLzV" Text="Bohuta projel začátkem rokle" />
+				</Port>
+				<Port Name="bohuta_se_potkal_s_erikem" Direction="In" Type="bool">
+					<DesignName StringName="bariery_bohuta_se_potkal__HxKo" Text="Bohuta se potkal s Erikem" />
+				</Port>
+				<Port Name="bohuta_mluvil_s_erikem_po_pobiti_lapku" Direction="In" Type="bool">
+					<DesignName StringName="bariery_bohuta_mluvil_s_e_fFT5" Text="Bohuta mluvil s Erikem po pobití lapků" />
+				</Port>
+				<Port Name="bohuta_je_na_nebakove" Direction="In" Type="bool">
+					<DesignName StringName="bariery_bohuta_je_na_neba_KD6N" Text="Bohuta je na Nebákově" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="bariery/bohuta_barkuje_pri_vyjezdu_z_koridoru.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="and7" PositionY="50" PositionX="-260" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not8.bool" To="B" />
+					<Edge From="bohuta_se_potkal_s_erikem" To="A">
+						<Vertex>yqKbpzjr</Vertex>
+					</Edge>
+				</Function>
+				<Layer Name="atNebakovBarrierProfile" PositionY="450" PositionX="-500">
+					<Asset Name="Profiles" Alias="mutinyBarrierProfile" />
+					<Edge From="bohuta_je_na_nebakove" To="IsActive">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</Layer>
+				<bohuta_barkuje_pri_vyjezdu_z_koridoru Name="bohuta_barkuje_pri_vyjezdu_z_koridoru" PositionY="370" PositionX="-120">
+					<Edge From="bohuta_je_na_nebakove" To="bohuta_je_na_nebakove">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+				</bohuta_barkuje_pri_vyjezdu_z_koridoru>
+				<Layer Name="introBarrierProfile" PositionY="-270" PositionX="-280">
+					<Asset Name="Profiles" Alias="zelejovBarrierProfile" />
+					<Edge From="bohuta_jede_za_erikem" To="IsActive" />
+				</Layer>
+				<Function Name="not8" PositionY="210" PositionX="-530" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="bohuta_mluvil_s_erikem_po_pobiti_lapku" To="Value" />
+				</Function>
+				<Function Name="or5" PositionY="-70" PositionX="30" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="bohuta_projel_zacatkem_rokle" To="A" />
+					<Edge From="and7.bool" To="B" />
+				</Function>
+				<Layer Name="profile3" PositionY="-70" PositionX="340">
+					<Asset Name="Profiles" Alias="additiveBarrierProfile" />
+					<Edge From="or5.bool" To="IsActive" />
+				</Layer>
+				<Layer Name="toNebakovBarrierProfile" PositionY="200" PositionX="-240">
+					<Asset Name="Profiles" Alias="travellingToNebakovBarrierProfile" />
+					<Edge From="bohuta_se_potkal_s_erikem" To="IsActive">
+						<Vertex>yqKbpzjr</Vertex>
+					</Edge>
+				</Layer>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex3" PositionY="400" PositionX="-580" />
+				<EdgeVertex Name="yqKbpzjr" PositionY="160" PositionX="-450" />
+			</EdgeVertices>
+			<Types>
+				<Type TypeName="BohutasIntermissionBarriers">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="TravellingToErik1" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="TravellingToErik2" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="TravellingToNebakov" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="MutinyActive" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Done" ObjectiveValueType="None" />
+				</Type>
+			</Types>
+			<Assets>
+				<ProfileAsset Name="travellingToNebakovBarrierProfile" AssetProfiles="bohutovaVlozka_barrier_2" />
+				<ProfileAsset Name="mutinyBarrierProfile" AssetProfiles="bohutovaVlozka_barrier_atNebakov" />
+				<ProfileAsset Name="additiveBarrierProfile" AssetProfiles="bohutovaVlozka_barrier_1_additive" />
+			</Assets>
+			<Text StringName="bariery_jGup" Text="Bariéry" />
+		</Module>
+	</Skald>
+</Database>

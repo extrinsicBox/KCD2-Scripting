@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="hluchy_chat_s_zizkou">
+			<Text StringName="hluchy_chat_s_zizkou_nz6N" Text="Hluchý chat s Žižkou" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="hluchy_ch_zizka_nam_chce__HDEA" Text="Žižka nám chce něco říct, ale nerozumíme mu ani slovo, protože se ozývá pískání po shellshocku. Neslyšíme ani sami sebe. Naštěstí to trvá jen chvíli." />
+				</GameplayActionElement>
+			</Elements>
+			<Dialogue Type="chat" TechnicalStatus="Enabled" Hearing="35" DefaultMaxDistance="5" Initiator="NonPlayer">
+				<SelectedSouls>
+					<SelectedSoul Role="JAN_ZIZKA_Z_TROCNOVA" Voice="adrianBouchet" Type="Wave" Language="ENG" />
+					<SelectedSoul Role="HENRY" Voice="fejk" Type="Wave" Language="PDG" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="MainQuestSubmission" Alias="prepadeniVlasskehoDvora_hluchyChatSZizkou">
+					<Sequences>
+						<Sequence EndType="Decision" Name="seq1">
+							<DesignName StringName="hluchy_ch_seq1_nwge" Text="seq1" />
+							<Elements>
+								<Response Role="JAN_ZIZKA_Z_TROCNOVA" ReferenceLength="5.81">
+									<Parenthetical>
+										<Text StringName="hluc_jan_zizka_nesrozumit_9sqF" Text="nesrozumitelně" />
+									</Parenthetical>
+									<Text StringName="hluc_jan_zizka_ses_v_pora_Dczh" Text="...">
+										<Note StringName="hluc_jan_zizka_ses_v_pora_Dczh_note" Text="Seš v pořádku?" />
+									</Text>
+									<Commands>
+										<AnimationHeadCommand Delay="0.06" FragmentId="ADLG_FA_Surprise" Guid="23e7bdd6-7119-4e5a-886e-8e9b143871fd" Variant="1" />
+									</Commands>
+									<ReviewNotesConcept>
+										<Item Date="2022-03-24 17:28:50" UserName="martina.sourkova" Text="a jak to má působit? Neslyšíme, ale čteme titulky, takže rozumíme? Nebylo by lepší ten text taky přizpůsobit aby hráč opravdu nerozuměl? Odpovídat He? Na něco, čemu rozumíš protože sis to přečetl je takový... no, nevím" AcceptState="Accepted" />
+									</ReviewNotesConcept>
+									<RecordingNotes>
+										<Item Date="2022-09-06 15:39:00" UserName="richard.malatinsky" Text="Seš v pořádku?&#xD;&#xA;" />
+									</RecordingNotes>
+								</Response>
+							</Elements>
+							<Decision Name="dec2" Priority="MainQuestSubmission" DesignName="hluchá odpověď" TimeLimit="0">
+								<Sequences>
+									<Sequence EndType="EndDialogue" ChatPosition="First" Name="seq2">
+										<DesignName StringName="hluchy_ch_seq2_DH0K" Text="seq2" />
+										<UiPrompt StringName="ui_hluchy_ch_seq2_aBDz" Text="He?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="hluc_henry_neslysi_sam_se_TerY" Text="neslyší sám sebe" />
+												</Parenthetical>
+												<Text StringName="hluc_henry_he_O8nP" Text="...">
+													<Note StringName="hluc_henry_he_O8nP_note" Text="He?" />
+												</Text>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:39:26" UserName="richard.malatinsky" Text="He?&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+											<Response Role="JAN_ZIZKA_Z_TROCNOVA" ReferenceLength="6.26">
+												<Parenthetical>
+													<Text StringName="hluc_jan_zizka_nesrozumit_lBhR" Text="nesrozumitelně" />
+												</Parenthetical>
+												<Text StringName="hluc_jan_zizka_co_rikas_FPuA" Text="...">
+													<Note StringName="hluc_jan_zizka_co_rikas_FPuA_note" Text="Co říkáš?!" />
+												</Text>
+												<Commands>
+													<AnimationHeadCommand Delay="0.01" FragmentId="ADLG_FA_Awkward" Guid="8410c1c8-cfc7-41ef-bd65-24c4d7026e52" Variant="0" />
+												</Commands>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:39:54" UserName="richard.malatinsky" Text="Co říkáš?!&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="EndDialogue" ChatPosition="Second" Name="seq3">
+										<DesignName StringName="hluchy_ch_seq3_pdvV" Text="seq3" />
+										<UiPrompt StringName="ui_hluchy_ch_seq3_foAN" Text="Cože?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="hluc_henry_neslysi_sam_se_weem" Text="neslyší sám sebe" />
+												</Parenthetical>
+												<Text StringName="hluc_henry_coze_tUq2" Text="...">
+													<Note StringName="hluc_henry_coze_tUq2_note" Text="Cože?" />
+												</Text>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:40:16" UserName="richard.malatinsky" Text="Cože?&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+											<Response Role="JAN_ZIZKA_Z_TROCNOVA">
+												<Parenthetical>
+													<Text StringName="hluc_jan_zizka_nesrozumit_DHPx" Text="nesrozumitelně" />
+												</Parenthetical>
+												<Text StringName="hluc_jan_zizka_neslysim_te_OOFH" Text="...">
+													<Note StringName="hluc_jan_zizka_neslysim_te_OOFH_note" Text="Neslyšim tě!" />
+												</Text>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:40:27" UserName="richard.malatinsky" Text="Neslyšim tě!&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="EndDialogue" ChatPosition="Third" Name="seq4">
+										<DesignName StringName="hluchy_ch_seq4_Ngmd" Text="seq4" />
+										<UiPrompt StringName="ui_hluchy_ch_seq4_l6LO" Text="Neslyším!" />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="hluc_henry_neslysi_sam_se_vOEd" Text="neslyší sám sebe" />
+												</Parenthetical>
+												<Text StringName="hluc_henry_neslysim_bMnv" Text="...">
+													<Note StringName="hluc_henry_neslysim_bMnv_note" Text="Neslyším!" />
+												</Text>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:41:08" UserName="richard.malatinsky" Text="Neslyším!&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+											<Response Role="JAN_ZIZKA_Z_TROCNOVA" ReferenceLength="6.78">
+												<Parenthetical>
+													<Text StringName="hluc_jan_zizka_nesrozumit_7p6s" Text="nesrozumitelně" />
+												</Parenthetical>
+												<Text StringName="hluc_jan_zizka_co_rikas_jxUZ" Text="...">
+													<Note StringName="hluc_jan_zizka_co_rikas_jxUZ_note" Text="Co říkáš?" />
+												</Text>
+												<Commands>
+													<AnimationHeadCommand Delay="1.72" FragmentId="ADLG_FA_IDontKnow" Guid="d227ac07-3fc2-4fe1-892a-712f70fd76a1" Variant="1" />
+												</Commands>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:41:26" UserName="richard.malatinsky" Text="Co říkáš?&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="EndDialogue" ChatPosition="Refusal" Name="seq5">
+										<DesignName StringName="hluchy_ch_seq5_ZYrG" Text="seq5" />
+										<Elements>
+											<Response Role="JAN_ZIZKA_Z_TROCNOVA" ReferenceLength="7.45">
+												<Parenthetical>
+													<Text StringName="hluc_jan_zizka_nesrozumit_81C2" Text="nesrozumitelně" />
+												</Parenthetical>
+												<Text StringName="hluc_jan_zizka_slysis_AEBr" Text="...">
+													<Note StringName="hluc_jan_zizka_slysis_AEBr_note" Text="Slyšíš?" />
+												</Text>
+												<Commands>
+													<AnimationHeadCommand Delay="3.06" FragmentId="ADLG_FA_EyebrowRaise_Right" Guid="af7eb8d8-db3a-404a-9b2e-312c0f795776" Variant="0" />
+												</Commands>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:41:47" UserName="richard.malatinsky" Text="Slyšíš?&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+											<Response Role="JAN_ZIZKA_Z_TROCNOVA">
+												<Parenthetical>
+													<Text StringName="hluc_jan_zizka_nesrozumit_36RP" Text="nesrozumitelně" />
+												</Parenthetical>
+												<Text StringName="hluc_jan_zizka_kurnik_rek_8yLs" Text="...">
+													<Note StringName="hluc_jan_zizka_kurnik_rek_8yLs_note" Text="Kurnik, řekni něco!" />
+												</Text>
+												<RecordingNotes>
+													<Item Date="2022-09-06 15:42:04" UserName="richard.malatinsky" Text="Kurnik, řekni něco!&#xD;&#xA;" />
+												</RecordingNotes>
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

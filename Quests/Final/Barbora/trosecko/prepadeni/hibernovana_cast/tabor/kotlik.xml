@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="kotlik">
+			<Ports>
+				<Port Name="onwake" Direction="In" Type="trigger">
+					<DesignName StringName="kotlik_onwake_eRUM" Text="OnWake" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<InstantSendMessage Name="instantsendmessagekettlesignalonfireplacephasechange1" PositionY="-80" PositionX="-50" MessageType="kettle:signal:onFireplacePhaseChange">
+					<Asset Name="Receiver" Alias="fireplace" />
+					<Constant Name="Content_state__" Value="0" />
+					<Constant Name="Content_onInit" Value="false" />
+					<Edge From="onwake" To="Exec" />
+				</InstantSendMessage>
+			</Nodes>
+			<Assets>
+				<SmartObjectAsset Name="fireplace" />
+			</Assets>
+			<Text StringName="kotlik_EVxo" Text="kotlík" />
+		</Module>
+	</Skald>
+</Database>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="s_vokrakem_o_mincovne">
+			<Ports>
+				<Port Name="vokrak_se_vzdava" Direction="In" Type="bool">
+					<DesignName StringName="s_vokrake_vokrak_se_vzdava_FjJt" Text="vokřák se vzdává" />
+				</Port>
+				<Port Name="vokrak_mizi_do_kh" Direction="Out" Type="trigger">
+					<DesignName StringName="s_vokrake_vokrak_mizi_do__LKft" Text="Vokřák mizí do KH" />
+				</Port>
+				<Port Name="mapa_k_mincovne_predana_hraci" Direction="Out" Type="trigger">
+					<DesignName StringName="s_vokrake_mapa_k_mincovne_ytJU" Text="mapa k mincovně předána hráči" />
+				</Port>
+				<Port Name="najdi_tajnou_mincovnu" Direction="Out" Type="trigger">
+					<DesignName StringName="s_vokrake_najdi_tajnou_mi_TSJw" Text="najdi tajnou mincovnu" />
+				</Port>
+				<Port Name="vokrakLeaves" Direction="Out" Type="bool">
+					<DesignName StringName="s_vokrake_vokrakleaves_LDye" Text="vokrakLeaves" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="s_vokrakem_o_mincovne/s_vokrakem_o_mincovne.xml" />
+			</Definitions>
+			<Nodes>
+				<duelinterruptsimple Name="duelinterruptsimple" PositionY="300" PositionX="830" Namespace="utils.combat">
+					<Asset Name="attacker" Alias="vokrak" />
+					<Asset Name="target" Alias="player" />
+					<Constant Name="lowhealththreshold" Value="0" />
+					<Edge From="state10.OnActive" To="startfight" />
+				</duelinterruptsimple>
+				<Output Name="Output">
+					<Edge From="s_vokrakem_o_mincovne.mapa_k_mincovne_predana_hraci" To="mapa_k_mincovne_predana_hraci" />
+					<Edge From="s_vokrakem_o_mincovne.najdi_tajnou_mincovnu" To="najdi_tajnou_mincovnu" />
+					<Edge From="s_vokrakem_o_mincovne.vokrak_mizi_do_kh" To="vokrak_mizi_do_kh" />
+					<Edge From="s_vokrakem_o_mincovne.vokrakLeaves" To="vokrakLeaves" />
+				</Output>
+				<AddReward Name="reward1" PositionY="740" PositionX="570">
+					<Edge From="s_vokrakem_o_mincovne.addreward" To="AddReward" />
+					<Rewards>
+						<MoneyReward Amount="05 Shitty sword" />
+					</Rewards>
+				</AddReward>
+				<s_vokrakem_o_mincovne Name="s_vokrakem_o_mincovne" PositionY="0" PositionX="30">
+					<Edge From="vokrak_se_vzdava" To="vokrak_se_vzdava" />
+				</s_vokrakem_o_mincovne>
+				<SetEntityContext Name="setentitycontext8" PositionY="130" PositionX="830">
+					<Constant Name="Context" Value="combat_neverSurrenderOrFlee" />
+					<Asset Name="Souls" Alias="vokrak" />
+					<Edge From="state10.Active" To="IsActive" />
+				</SetEntityContext>
+				<State Name="state10" PositionY="300" PositionX="570" TypeT="Progress">
+					<Edge From="duelinterruptsimple.ontargetwon" To="SetDone">
+						<Vertex>JfgrWcHg</Vertex>
+						<Vertex>VwescjdK</Vertex>
+					</Edge>
+					<Edge From="duelinterruptsimple.onattackerwon" To="SetDone">
+						<Vertex>JfgrWcHg</Vertex>
+						<Vertex>VwescjdK</Vertex>
+					</Edge>
+					<Edge From="s_vokrakem_o_mincovne.zabij_vokraka" To="SetActive" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="JfgrWcHg" PositionY="670" PositionX="1020" />
+				<EdgeVertex Name="VwescjdK" PositionY="670" PositionX="580" />
+			</EdgeVertices>
+		</DialogWrapper>
+	</Skald>
+</Database>

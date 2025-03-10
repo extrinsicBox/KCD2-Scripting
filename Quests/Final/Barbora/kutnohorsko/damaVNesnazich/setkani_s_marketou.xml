@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="setkani_s_marketou" HibernateMode="Script">
+			<Ports>
+				<Port Name="hrac_videl_marketu" Direction="In" Type="bool">
+					<DesignName StringName="setkani_s_hrac_videl_mark_53oV" Text="Hráč viděl Markétu" />
+				</Port>
+				<Port Name="trest_hraci" Direction="In" Type="Punishment_damaVNesnazich">
+					<DesignName StringName="setkani_s_trest_hraci_kXFW" Text="trest hráči" />
+				</Port>
+				<Port Name="hrac_vyhnal_marketu" Direction="Out" Type="trigger">
+					<DesignName StringName="setkani_s_hrac_vyhnal_mar_ShHV" Text="Hráč vyhnal Markétu" />
+				</Port>
+				<Port Name="hrac_prijmul_quest" Direction="Out" Type="trigger">
+					<DesignName StringName="setkani_s_hrac_prijmul_qu_frFQ" Text="Hráč přijmul quest" />
+				</Port>
+				<Port Name="hrac_uz_ma_uspavaci_lektvar" Direction="Out" Type="bool">
+					<DesignName StringName="setkani_s_hrac_uz_ma_uspa_q8kG" Text="Hráč už má uspávací lektvar" />
+				</Port>
+				<Port Name="hrac_odevzdal_saty" Direction="Out" Type="bool">
+					<DesignName StringName="setkani_s_hrac_odevzdal_s_PuAX" Text="Hráč odevzdal šaty" />
+				</Port>
+				<Port Name="prevleceni_satu" Direction="Out" Type="trigger">
+					<DesignName StringName="setkani_s_prevleceni_satu_LwCK" Text="převlečení šatů" />
+				</Port>
+				<Port Name="afterplay" Direction="Out" Type="trigger">
+					<DesignName StringName="setkani_s_afterplay_uMAm" Text="AfterPlay" />
+				</Port>
+				<Port Name="odevzdane_saty" Direction="Out" Type="wh::entitymodule::ItemClassId">
+					<DesignName StringName="setkani_s_odevzdane_saty_47d0" Text="odevzdané šaty" />
+				</Port>
+				<Port Name="nastaveni_satu" Direction="Out" Type="trigger">
+					<DesignName StringName="setkani_s_nastaveni_satu_xHc6" Text="nastavení šatů" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="setkani_s_marketou/uvodni_rozhovor_s_marketou_tulackou2.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="and35" PositionY="-800" PositionX="820" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="state33.State" To="B" />
+					<Edge From="Awake" To="A">
+						<Vertex>WYq4Llx3</Vertex>
+					</Edge>
+				</Function>
+				<LinkEffectNoData Name="linkeffectnodata34" PositionY="-760" PositionX="1090">
+					<Asset Name="From" Alias="introDialogMarketaDH" />
+					<Asset Name="To" Alias="marketa_standUpPoint" />
+					<Constant Name="Tag" Value="teleportBefore" />
+					<Edge From="and35.bool" To="IsActive" />
+				</LinkEffectNoData>
+				<Output Name="Output">
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.hrac_uz_ma_uspavaci_lektvar" To="hrac_uz_ma_uspavaci_lektvar" />
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.hrac_odevzdal_saty" To="hrac_odevzdal_saty" />
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.saty_presunuty" To="prevleceni_satu" />
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.afterplay" To="afterplay" />
+					<Edge From="scenefinishedwaiter3.OnFinished" To="hrac_prijmul_quest" />
+					<Edge From="scenefinishedwaiter3_1.OnFinished" To="hrac_vyhnal_marketu" />
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.odevzdane_saty" To="odevzdane_saty" />
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.nastaveni_satu" To="nastaveni_satu" />
+				</Output>
+				<SceneFinishedWaiter Name="scenefinishedwaiter3" PositionY="-260" PositionX="640">
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.hrac_prijmul_quest" To="Enqueue" />
+				</SceneFinishedWaiter>
+				<SceneFinishedWaiter Name="scenefinishedwaiter3_1" PositionY="-420" PositionX="640">
+					<Edge From="uvodni_rozhovor_s_marketou_tulackou2.hrac_vyhnal_marketu" To="Enqueue" />
+				</SceneFinishedWaiter>
+				<StanceTrigger Name="stancetrigger32" PositionY="-510" PositionX="40">
+					<Asset Name="Souls" Alias="marketa" />
+					<Constant Name="Stance" Value="sitting" />
+					<Edge From="Awake" To="IsActive" />
+				</StanceTrigger>
+				<State Name="state33" PositionY="-680" PositionX="540" TypeT="bool">
+					<Edge From="stancetrigger32.OnStanceMatched" To="SetTrue" />
+					<Edge From="stancetrigger32.OnStanceUnmatched" To="SetFalse" />
+				</State>
+				<uvodni_rozhovor_s_marketou_tulackou2 Name="uvodni_rozhovor_s_marketou_tulackou2" PositionY="50" PositionX="20">
+					<Edge From="hrac_videl_marketu" To="hrac_videl_marketu" />
+					<Edge From="trest_hraci" To="trest_hraci" />
+				</uvodni_rozhovor_s_marketou_tulackou2>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="WYq4Llx3" PositionY="-710" PositionX="30" />
+			</EdgeVertices>
+			<Text StringName="setkani_s_marketou_VH7a" Text="Setkání s Markétou" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="setkani_s_hrac_se_setkava_s8C8" Text="Hráč se setkává s tulačkou Markétou (známou z questu Dáma v nesnázích). Je ve špatném stavu. Vykládá Jindrovi, že okradla mlynáře, protože vyhnal svoji těhotnou ženu z domu a chtěla pro ni nějaké peníze. Bohužel však o vše přišla a chystá nový podvod na obchodníka Lacka z KH. Poud jí hráč pomůže, tak si taky vydělá a pomůže potrestat hajzla.">
+						<Note StringName="setkani_s_hrac_se_setkava_s8C8_note" Text="v questu vystupuje žena zlodějka, chce to překládat nějak aby bylo jasné, že to je ta zlodějka, když se bude mluvit o zlodějce v CZ" />
+					</Text>
+				</GameplayActionElement>
+			</Elements>
+			<MapVizLocation MapName="kutnohorsko" PositionX="2161" PositionY="1507" />
+		</Gameplay>
+	</Skald>
+</Database>

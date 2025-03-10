@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="variant_setup">
+			<Ports>
+				<Port Name="track_1" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_1_aq3b" Text="Track 1" />
+				</Port>
+				<Port Name="tracknumber" Direction="Out" Type="int">
+					<DesignName StringName="setups_tracknumber_qNE6" Text="Track index" />
+				</Port>
+				<Port Name="shootingtargetsprofiles" Direction="Out" Type="wh::entitymodule::LayerProfiles">
+					<DesignName StringName="setups_targetsprofile_KE9K" Text="ShootingTargetsProfiles" />
+				</Port>
+				<Port Name="trackname" Direction="Out" Type="string">
+					<DesignName StringName="variant_s_trackname_vZ6B" Text="Track name" />
+				</Port>
+				<Port Name="opponentscore" Direction="Out" Type="int">
+					<DesignName StringName="setups_goalscore_NYWj" Text="OpponentScore" />
+				</Port>
+				<Port Name="racelength_30stimerrepetitions" Direction="Out" Type="int">
+					<DesignName StringName="setups_n30stimerepetitions_soW3" Text="RaceLength_30sTimerRepetitions" />
+				</Port>
+				<Port Name="track_2" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_2_Q0YS" Text="Track 2" />
+				</Port>
+				<Port Name="track_3" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_3_Tw17" Text="Track 3" />
+				</Port>
+				<Port Name="track_4" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_4_nc9l" Text="Track 4" />
+				</Port>
+				<Port Name="track_5" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_5_X6Oe" Text="Track 5" />
+				</Port>
+				<Port Name="track_6" Direction="In" Type="trigger">
+					<DesignName StringName="setups_trat_6_i91C" Text="Track 6" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Constants_Tracks_Trosky Name="Constants_Tracks_Trosky" PositionY="0" PositionX="-890" Namespace="utils.JizdniLukostrelba_utils" />
+				<Output Name="Output">
+					<Edge From="SetupSwitch.Value1" To="shootingtargetsprofiles" />
+					<Edge From="SelectedTrackNumber.State" To="tracknumber">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="SetupSwitch.Value3" To="racelength_30stimerrepetitions" />
+					<Edge From="SetupSwitch.Value2" To="opponentscore" />
+					<Edge From="SetupSwitch.Value4" To="trackname" />
+				</Output>
+				<Select Name="select41" PositionY="-500" PositionX="-890" InputPortGroups="6" ValueTypes="int">
+					<Constant Name="AValue1" Value="1" />
+					<Constant Name="BValue1" Value="2" />
+					<Constant Name="CValue1" Value="3" />
+					<Constant Name="DValue1" Value="4" />
+					<Constant Name="EValue1" Value="5" />
+					<Constant Name="FValue1" Value="6" />
+					<Edge From="track_1" To="SelectA" />
+					<Edge From="track_2" To="SelectB" />
+					<Edge From="track_3" To="SelectC" />
+					<Edge From="track_4" To="SelectD" />
+					<Edge From="track_5" To="SelectE" />
+					<Edge From="track_6" To="SelectF" />
+				</Select>
+				<State Name="SelectedTrackNumber" PositionY="-450" PositionX="-590" TypeT="int">
+					<Constant Name="DefaultValue" Value="1" />
+					<Edge From="select41.Value1" To="Value" />
+					<Edge From="select41.OnExec" To="Exec" />
+				</State>
+				<Switch Name="SetupSwitch" PositionY="-350" PositionX="-280" TypeT="int" ValueTypes="wh::entitymodule::LayerProfiles int int string" SwitchValues="1 2 3 4 5 6">
+					<Asset Name="1Value1" Alias="track1stream" />
+					<Asset Name="2Value1" Alias="track2stream" />
+					<Asset Name="3Value1" Alias="track3stream" />
+					<Asset Name="4Value1" Alias="track4stream" />
+					<Asset Name="5Value1" Alias="track5stream" />
+					<Asset Name="6Value1" Alias="track6stream" />
+					<Asset Name="DefaultValue1" Alias="track1stream" />
+					<Constant Name="DefaultValue2" Value="0" />
+					<Constant Name="DefaultValue3" Value="0" />
+					<Constant Name="DefaultValue4" Value="NoTrackSpecified" />
+					<Edge From="SelectedTrackNumber.State" To="Switch" />
+					<Edge From="Constants_Tracks_Trosky.track1_opponentscore" To="1Value2" />
+					<Edge From="Constants_Tracks_Trosky.track1_length" To="1Value3" />
+					<Edge From="Constants_Tracks_Trosky.track2_opponentscore" To="2Value2" />
+					<Edge From="Constants_Tracks_Trosky.track2_length" To="2Value3" />
+					<Edge From="Constants_Tracks_Trosky.track3_opponentscore" To="3Value2" />
+					<Edge From="Constants_Tracks_Trosky.track3_length" To="3Value3" />
+					<Edge From="Constants_Tracks_Trosky.track4_opponentscore" To="4Value2" />
+					<Edge From="Constants_Tracks_Trosky.track4_length" To="4Value3" />
+					<Edge From="Constants_Tracks_Trosky.track5_opponentscore" To="5Value2" />
+					<Edge From="Constants_Tracks_Trosky.track5_length" To="5Value3" />
+					<Edge From="Constants_Tracks_Trosky.track6_opponentscore" To="6Value2" />
+					<Edge From="Constants_Tracks_Trosky.track6_length" To="6Value3" />
+					<Edge From="Constants_Tracks_Trosky.track1_name" To="1Value4" />
+					<Edge From="Constants_Tracks_Trosky.track2_name" To="2Value4" />
+					<Edge From="Constants_Tracks_Trosky.track3_name" To="3Value4" />
+					<Edge From="Constants_Tracks_Trosky.track4_name" To="4Value4" />
+					<Edge From="Constants_Tracks_Trosky.track5_name" To="5Value4" />
+					<Edge From="Constants_Tracks_Trosky.track6_name" To="6Value4" />
+				</Switch>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-400" PositionX="-260" />
+				<EdgeVertex Name="vertex5" PositionY="-400" PositionX="180" />
+			</EdgeVertices>
+			<Text StringName="setups_o7DC" Text="Variant setup" />
+		</Module>
+	</Skald>
+</Database>

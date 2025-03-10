@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="cepice__quest_item">
+			<Ports>
+				<Port Name="hrac_odevzdal_cepici_v_zadavacim_dialogu" Direction="In" Type="trigger">
+					<DesignName StringName="cepice__q_hrac_odovzdal_c_1Kn5" Text="Hráč odevzdal čepici Hospodskému - neoblíka ji" />
+				</Port>
+				<Port Name="pridat_cepici_pukavcovi_po_aktivaci_questu" Direction="In" Type="trigger">
+					<DesignName StringName="cepice__q_pridat_cepici_p_3eUl" Text="Přidat čepici Pukavcovi po aktivaci questu" />
+				</Port>
+				<Port Name="quest_skoncil_nebo_failnul" Direction="In" Type="trigger">
+					<DesignName StringName="cepice__q_quest_skoncil_a_dghw" Text="Quest skončil nebo failnul" />
+				</Port>
+				<Port Name="hrac_odevzdal_cepici_hospodskemu" Direction="In" Type="trigger">
+					<DesignName StringName="cepice__q_hrac_odovzdal_c_S5iW" Text="Hráč odevzdal čepici Hospodskému - oblíka ji" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AddQuestItem Name="addquestitem2" PositionY="-160" PositionX="130">
+					<Constant Name="ItemClassGUID" Value="bb7c554b-119a-424a-a6b4-3989046a858f" />
+					<Asset Name="BackupLocation" Alias="capBackupLocation" />
+					<Asset Name="StartingLocation" Alias="pukavec" />
+					<Constant Name="DoEquip" Value="true" />
+					<Edge From="cepiceHoldershipDuringQuestActived.PukavecIsOwner" To="IsActive" />
+				</AddQuestItem>
+				<AddQuestItem Name="addquestitem3" PositionY="80" PositionX="130">
+					<Constant Name="ItemClassGUID" Value="bb7c554b-119a-424a-a6b4-3989046a858f" />
+					<Asset Name="BackupLocation" Alias="capBackupLocation" />
+					<Asset Name="StartingLocation" Alias="player" />
+					<Edge From="cepiceHoldershipDuringQuestActived.AcquiredByPlayer" To="IsActive" />
+				</AddQuestItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem4" PositionY="-490" PositionX="1660">
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="pukavec" />
+					<Edge From="cepiceHoldershipAfterQuestEnd.PukavecIsOwner" To="IsActive" />
+					<Edge From="constants.cepice" To="ItemClass">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+				</AddSoulDefaultItem>
+				<AddSoulDefaultItem Name="addsouldefaultitem6" PositionY="250" PositionX="1660">
+					<Constant Name="Purpose" Value="EquipPresetPriority" />
+					<Constant Name="Mode" Value="Create" />
+					<Constant Name="DisableRestock" Value="true" />
+					<Asset Name="Souls" Alias="hospodsky" />
+					<Edge From="cepiceHoldershipAfterQuestEnd.HandedToHospodsky" To="IsActive" />
+					<Edge From="constants.cepice" To="ItemClass">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+				</AddSoulDefaultItem>
+				<State Name="cepiceHoldershipAfterQuestEnd" PositionY="-140" PositionX="1030" TypeT="CertovkaQuestItemHoldership">
+					<Edge From="cepiceHoldershipDuringQuestActived.State" To="Value">
+						<Vertex>vertex7</Vertex>
+						<Vertex>vertex8</Vertex>
+					</Edge>
+					<Edge From="hrac_odevzdal_cepici_v_zadavacim_dialogu" To="SetHandedToHospodsky">
+						<Vertex>vertex10</Vertex>
+						<Vertex>vertex11</Vertex>
+					</Edge>
+					<Edge From="hrac_odevzdal_cepici_hospodskemu" To="SetHandedToHospodsky">
+						<Vertex>vertex10</Vertex>
+						<Vertex>vertex11</Vertex>
+					</Edge>
+					<Edge From="if10.True" To="Exec" />
+				</State>
+				<State Name="cepiceHoldershipDuringQuestActived" PositionY="-160" PositionX="-380" TypeT="CertovkaQuestItemHoldership">
+					<Edge From="cepiceHoldershipAfterQuestEnd.OnExec" To="SetNone">
+						<Vertex>vertex5</Vertex>
+						<Vertex>vertex6</Vertex>
+					</Edge>
+					<Edge From="itemclasstrigger_playerinventory.ontargetamountacquire" To="SetAcquiredByPlayer">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="if11.True" To="SetPukavecIsOwner" />
+					<Edge From="if13.True" To="SetNone">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex19</Vertex>
+					</Edge>
+				</State>
+				<constants Name="constants" PositionY="-970" PositionX="-340" Namespace="taborcertovkalibrary" />
+				<EventFunction Name="createplayerreward5" PositionY="-60" PositionX="1660" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Constant Name="ShowUINotification" Value="false" />
+					<Edge From="cepiceHoldershipAfterQuestEnd.OnAcquiredByPlayer" To="Exec" />
+					<Edge From="constants.cepice" To="ItemClass">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+				</EventFunction>
+				<SoulDeathTrigger Name="deathtrigger12" PositionY="470" PositionX="120">
+					<Asset Name="Souls" Alias="hospodsky" />
+					<Edge From="cepiceHoldershipDuringQuestActived.AcquiredByPlayer" To="IsActive" />
+				</SoulDeathTrigger>
+				<If Name="if10" PositionY="-40" PositionX="660">
+					<Edge From="cepiceHoldershipAfterQuestEnd.None" To="Condition">
+						<Vertex>vertex14</Vertex>
+						<Vertex>vertex15</Vertex>
+					</Edge>
+					<Edge From="quest_skoncil_nebo_failnul" To="Exec">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+				</If>
+				<If Name="if11" PositionY="-160" PositionX="-690">
+					<Edge From="pridat_cepici_pukavcovi_po_aktivaci_questu" To="Exec" />
+					<Edge From="cepiceHoldershipDuringQuestActived.None" To="Condition">
+						<Vertex>vertex16</Vertex>
+						<Vertex>vertex17</Vertex>
+					</Edge>
+				</If>
+				<If Name="if13" PositionY="530" PositionX="450">
+					<Edge From="deathtrigger12.OnDeath" To="Exec" />
+					<Edge From="permadeathcheck.isdead" To="Condition" />
+				</If>
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory" PositionY="-550" PositionX="130" Namespace="utils.item">
+					<Constant Name="amount" Value="1" />
+					<Edge From="cepiceHoldershipDuringQuestActived.PukavecIsOwner" To="isactive" />
+					<Edge From="constants.cepice" To="itemclass" />
+				</itemclasstrigger_playerinventory>
+				<permadeathcheck Name="permadeathcheck" PositionY="630" PositionX="160" Namespace="utils.general">
+					<Asset Name="soul" Alias="hospodsky" />
+				</permadeathcheck>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-565" PositionX="421" />
+				<EdgeVertex Name="vertex10" PositionY="420" PositionX="-490" />
+				<EdgeVertex Name="vertex11" PositionY="430" PositionX="510" />
+				<EdgeVertex Name="vertex14" PositionY="-190" PositionX="1400" />
+				<EdgeVertex Name="vertex15" PositionY="-200" PositionX="650" />
+				<EdgeVertex Name="vertex16" PositionY="-190" PositionX="-40" />
+				<EdgeVertex Name="vertex17" PositionY="-190" PositionX="-660" />
+				<EdgeVertex Name="vertex18" PositionY="840" PositionX="630" />
+				<EdgeVertex Name="vertex19" PositionY="840" PositionX="-330" />
+				<EdgeVertex Name="vertex2" PositionY="-565" PositionX="-368" />
+				<EdgeVertex Name="vertex3" PositionY="360" PositionX="-490" />
+				<EdgeVertex Name="vertex4" PositionY="370" PositionX="460" />
+				<EdgeVertex Name="vertex5" PositionY="-590" PositionX="1340" />
+				<EdgeVertex Name="vertex6" PositionY="-592" PositionX="-366" />
+				<EdgeVertex Name="vertex7" PositionY="-180" PositionX="110" />
+				<EdgeVertex Name="vertex8" PositionY="-170" PositionX="950" />
+				<EdgeVertex Name="vertex9" PositionY="-850" PositionX="1500" />
+			</EdgeVertices>
+			<Notes>
+				<Note Name="note9" PositionY="130" PositionX="660">
+					<Text StringName="cepice__q_note9_tFed" Text="Kvôli tomu že čapicu môžeme odovzdať už v zadavacom dialogu a stráca efekt quest item. Aby po skončení questu zostali zachované stavy." />
+				</Note>
+			</Notes>
+			<Text StringName="cepice__quest_item_Ydqc" Text="Čepice - quest item" />
+		</Module>
+	</Skald>
+</Database>

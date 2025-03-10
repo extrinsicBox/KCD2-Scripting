@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<ForcedDialog Name="forced_jindra_smrdi">
+			<Ports>
+				<Port Name="umyj_se_u_kade" Direction="Out" Type="trigger">
+					<DesignName StringName="forced_ji_umyj_se_u_kade_iet1" Text="umyj se u kádě" />
+				</Port>
+			</Ports>
+			<Text StringName="forced_jindra_smrdi_jNqk" Text="Forced Jindra smrdí" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="forced_ji_po_cutscene_se__GAM8" Text="Po cutscéně se Jindra snaží vmístit do dialogu hospodské a Kateřiny." />
+				</GameplayActionElement>
+			</Elements>
+			<Dialogue TechnicalStatus="Enabled" AllowFarewell="false" AllowGreeting="false" Initiator="NonPlayer" GesturesSetDate="2024-06-23T10:42:08.7885255+02:00" GesturesSetResponseCount="14">
+				<SelectedSouls>
+					<SelectedSoul Role="KATERINA" Voice="fejka" Type="Wave" Language="PDG" />
+					<SelectedSoul Role="HOSPODSKA_TROSKOVICE" Voice="fejka" Type="Wave" Language="PDG" />
+					<SelectedSoul Role="HENRY" Voice="fejk" Type="Wave" Language="PDG" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="MainQuestSubmission">
+					<Sequences>
+						<Sequence EndType="Decision" Name="seq1">
+							<DesignName StringName="forced_ji_seq1_Ub36" Text="seq1" />
+							<Elements>
+								<Response Role="KATERINA" ReferenceLength="4.76">
+									<Parenthetical>
+										<Text StringName="forc_katerina_razne_preda_qJIG" Text="rázně, předává džbán" />
+									</Parenthetical>
+									<Text StringName="forc_katerina_pozdrav_pan_ztub" Text="Pozdrav Pánbůh! Plnej džbán vína!  " />
+									<Commands>
+										<MoodCommand Mood="holdingWineJug" />
+										<FacialMoodCommand FacialMood="happy1" />
+										<AnimationPropCommand FragmentId="ADLG_HoldingWineJug_SpawnJug" Guid="217c927f-0b0d-42a6-970d-bf1a6c6065a3" Variant="0" Attachment="ADLG_HoldingWineJug_SpawnJug_0" Prop="wineJug_katerina" />
+										<AnimationHeadCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.7" FragmentId="ADLG_FA_Smile" Guid="5ed65c1a-4743-4f51-ae18-465ab0352052" Variant="0" />
+										<AnimationCommand Role="HOSPODSKA_TROSKOVICE" Delay="1.14" FragmentId="ADLG_posture_change" Guid="7c1d941a-1a6f-441c-a939-a6bf3b7342e3" Variant="8" DesiredDuration="3.59" />
+										<CameraCommand CustomCamera="smradoch_camera_01" />
+										<LookAtCommand Delay="0.02" LookAtRole="HOSPODSKA_TROSKOVICE" />
+										<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.08" LookAtRole="KATERINA" />
+									</Commands>
+								</Response>
+								<Response Role="HOSPODSKA_TROSKOVICE" ReferenceLength="3.11">
+									<Parenthetical>
+										<Text StringName="forc_hospodska_udivene_pr_m99d" Text="udiveně, přebírá džbán" />
+									</Parenthetical>
+									<Text StringName="forc_hospodska_ten_je_ted_qauv" Text="Ten je teda pořádnej. " />
+									<Commands>
+										<MoodCommand Role="KATERINA" Delay="1.2" />
+										<MoodCommand Delay="1.24" Mood="holdingWineJug" />
+										<FacialMoodCommand FacialMood="nervous1" />
+										<AnimationPropCommand Delay="0.06" FragmentId="ADLG_HoldingWineJug_TakeJug" Guid="f0cdea79-c9c6-4f3b-8980-4e38da5cb951" Variant="0" Attachment="ADLG_HoldingWineJug_TakeJug_0" Prop="wineJug_innkeeper" />
+										<AnimationPropCommand Role="KATERINA" Delay="0.04" FragmentId="ADLG_HoldingWineJug_GiveJug" Guid="f5d351d8-b5bd-4b14-87a9-8bf17886bc5d" Variant="0" Attachment="ADLG_HoldingWineJug_GiveJug_0" Prop="wineJug_katerina" />
+										<AnimationHeadCommand Delay="0.02" FragmentId="ADLG_FA_Surprise" Guid="0b240a5a-0db0-4455-9cb5-c335de2695eb" Variant="0" />
+										<CameraCommand Role="KATERINA" Delay="1.37" CustomCamera="smradoch_camera_25" />
+										<CameraCommand Role="KATERINA" Delay="2.57" CustomCamera="smradoch_camera_03" />
+										<LookAtCommand Delay="2.24" LookAtRole="KATERINA" TransitionDuration="0.4" />
+										<LookAtCommand Delay="0.04" LookAtRole="KATERINA" Offset="BottomCenter" TransitionDuration="0.7" />
+										<CameraCommand Role="KATERINA" Delay="0.12" CustomCamera="smradoch_camera_02" />
+									</Commands>
+								</Response>
+								<Response Role="HOSPODSKA_TROSKOVICE" ReferenceLength="7.26">
+									<Parenthetical>
+										<Text StringName="forc_hospodska_zkoumave_fvEi" Text="zkoumavě" />
+									</Parenthetical>
+									<Text StringName="forc_hospodska_tebe_jsem__V56J" Text="Tebe jsem tu ještě neviděla. Odkudpak seš? Snad ne od těch kočovnejch vandráků..." />
+									<Commands>
+										<FacialMoodCommand FacialMood="nervous3" />
+										<AnimationCommand Delay="4.22" FragmentId="ADLG_Disagree" Guid="923c3a0b-02b4-40ff-931c-03eed7462dd0" Variant="2" DesiredDuration="4.17" />
+										<CameraCommand Delay="2.94" CustomCamera="smradoch_camera_04" />
+									</Commands>
+								</Response>
+								<Response Role="KATERINA" ReferenceLength="3.63">
+									<Parenthetical>
+										<Text StringName="forc_katerina_pobavene_5fSi" Text="pobaveně" />
+									</Parenthetical>
+									<Text StringName="forc_katerina_neboj_posil_1v9B" Text="Neboj, posílaj mě z hradu." />
+									<Commands>
+										<AnimationCommand Delay="0.12" FragmentId="ADLG_Disagree_light" Guid="90562064-04ce-e372-a5df-a85d90c72608" Variant="2" DesiredDuration="1.27" />
+										<AnimationHeadCommand Delay="0.24" FragmentId="ADLG_FA_Smile" Guid="5ed65c1a-4743-4f51-ae18-465ab0352052" Variant="0" DesiredDuration="3.21" />
+										<CameraCommand CustomCamera="smradoch_camera_05" />
+										<CameraCommand Delay="4.36" CustomCamera="smradoch_camera_18" />
+									</Commands>
+								</Response>
+								<Response Role="KATERINA" StartDelay="0.29" ReferenceLength="5.35">
+									<Text StringName="forc_katerina_jsem_kateri_jEtR" Text="Jsem Kateřina. Mám se starat o to, aby vojákům nevyschlo v krku." />
+									<Commands>
+										<FacialMoodCommand Role="HOSPODSKA_TROSKOVICE" FacialMood="neutral" />
+										<AnimationCommand Delay="1.92" FragmentId="ADLG_posture_change" Guid="e7f25f1b-3ba2-40a9-af57-020eb667d84e" Variant="16" DesiredDuration="3.88" />
+										<AnimationCommand Delay="-0.26" FragmentId="ADLG_Confusion" Guid="d66ec093-3ef1-4d8c-b717-68254998806c" Variant="5" DesiredDuration="2.29" />
+									</Commands>
+								</Response>
+								<Response Role="HOSPODSKA_TROSKOVICE" ReferenceLength="2.68">
+									<Parenthetical>
+										<Text StringName="forc_hospodska_spokojene_hQco" Text="spokojeně" />
+									</Parenthetical>
+									<Text StringName="forc_hospodska_jo_tak_to__tyYp" Text="Jo ták... to je jiná..." />
+									<Commands>
+										<FacialMoodCommand FacialMood="happy1" />
+										<AnimationCommand Delay="0.46" FragmentId="ADLG_Agree" Guid="a40cfff1-b2f3-4be3-a3b8-a96234cabe3b" Variant="1" DesiredDuration="3.96" />
+										<CameraCommand CustomCamera="smradoch_camera_04" />
+									</Commands>
+								</Response>
+								<Response Role="HOSPODSKA_TROSKOVICE" StartDelay="0.34" ReferenceLength="4.46">
+									<Parenthetical>
+										<Text StringName="forc_hospodska_zarazi_se__R5GO" Text="zarazí se, znechuceně" />
+									</Parenthetical>
+									<Text StringName="forc_hospodska_uch_cejtis_gKA0" Text="Teda... Uch... Cejtíš to taky?" />
+									<Commands>
+										<FacialMoodCommand Role="KATERINA" FacialMood="nervous1" />
+										<FacialMoodCommand FacialMood="nervous2" />
+										<AnimationHeadCommand Delay="1.27" FragmentId="ADLG_FA_Disgust" Guid="9ad7ccc5-907d-4e86-a86d-5d1c7c54550f" Variant="0" />
+										<AnimationHeadCommand Role="KATERINA" Delay="-0.12" FragmentId="ADLG_FA_DisgustTaste" Guid="4f2d0f95-d581-4c52-b3f2-d61f7a5ae6e1" Variant="1" DesiredDuration="4.94" />
+										<AnimationHeadCommand Delay="-0.16" FragmentId="ADLG_FA_WinkSurprised" Guid="38544437-3448-4c19-8b05-fabe6aea4167" Variant="0" DesiredDuration="1.42" />
+										<AnimationHeadCommand Delay="3.81" FragmentId="ADLG_FA_DisgustTaste" Guid="44a5244c-c3e8-466e-a4da-bb58e460d768" Variant="0" />
+										<LookAtCommand Delay="0.4" LookAtRole="KATERINA" />
+										<LookAtCommand Delay="2.61" LookAtRole="KATERINA" Offset="BottomRight" TransitionDuration="0.5" />
+										<LookAtCommand Role="KATERINA" Delay="1.84" LookAtRole="KATERINA" Offset="MiddleLeft" TransitionDuration="0.9" />
+										<LookAtCommand Role="KATERINA" Delay="3.74" LookAtRole="HOSPODSKA_TROSKOVICE" TransitionDuration="0.8" />
+										<CameraCommand Role="KATERINA" Delay="2.23" CustomCamera="smradoch_camera_07" />
+										<LookAtCommand Role="KATERINA" Delay="0.24" LookAtRole="HOSPODSKA_TROSKOVICE" />
+									</Commands>
+								</Response>
+								<Response Role="KATERINA" ReferenceLength="3.9">
+									<Parenthetical>
+										<Text StringName="forc_katerina_znechucene_8wXf" Text="znechuceně" />
+									</Parenthetical>
+									<Text StringName="forc_katerina_fuj_jakoby__ifJH" Text="Fuj. Jakoby tady něco chcíplo..." />
+									<Commands>
+										<FacialMoodCommand Role="HOSPODSKA_TROSKOVICE" FacialMood="nervous2" />
+										<AnimationHeadCommand Delay="0.2" FragmentId="ADLG_FA_DisgustTaste" Guid="44a5244c-c3e8-466e-a4da-bb58e460d768" Variant="0" DesiredDuration="3.77" />
+										<AnimationHeadCommand Role="HENRY" Delay="1.51" FragmentId="ADLG_FA_Awkward" Guid="8410c1c8-cfc7-41ef-bd65-24c4d7026e52" Variant="0" />
+										<AnimationCommand Role="HENRY" Delay="1.89" FragmentId="ADLG_posture_change" Guid="abfbc808-6852-4cb7-b70f-c53019feee81" Variant="9" />
+										<CameraCommand Delay="0.13" CustomCamera="smradoch_camera_08" />
+										<CameraCommand Role="HOSPODSKA_TROSKOVICE" Delay="2.63" CustomCamera="smradoch_camera_06" />
+										<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="1.88" LookAtRole="KATERINA" TransitionDuration="0.3" />
+										<LookAtCommand Delay="3.13" LookAtRole="HENRY" />
+										<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="3.07" LookAtRole="HENRY" TransitionDuration="0.5" />
+									</Commands>
+								</Response>
+							</Elements>
+							<Decision Name="dec2" Priority="MainQuestSubmission" CustomCamera="smradoch_camera_06" DesignName="jindra se pokouší vmísit do dialogu" TimeLimit="7">
+								<Sequences>
+									<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq6">
+										<DesignName StringName="forced_ji_seq6_7rfQ" Text="seq6" />
+										<UiPrompt StringName="ui_forced_ji_seq6_rFCk" Text="(Mlčet)" />
+										<Elements>
+											<Response Role="HENRY" ReferenceLength="5">
+												<Commands>
+													<MoodCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.04" Mood="holdingWineJug" />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq3">
+										<DesignName StringName="forced_ji_seq3_8rlc" Text="seq3" />
+										<UiPrompt StringName="ui_forced_ji_seq3_aptZ" Text="Promiň, že ruším..." />
+										<Elements>
+											<Response Role="HENRY" ReferenceLength="2.04">
+												<Parenthetical>
+													<Text StringName="forc_henry_nesmele_H6dU" Text="nesměle" />
+												</Parenthetical>
+												<Text StringName="forc_henry_promin_ze_rusim_KybR" Text="Promiň, že ruším..." />
+												<Commands>
+													<MoodCommand Role="HOSPODSKA_TROSKOVICE" Mood="holdingWineJug" />
+													<AnimationHeadCommand Delay="0.02" FragmentId="ADLG_FA_Awkward" Guid="8410c1c8-cfc7-41ef-bd65-24c4d7026e52" Variant="0" DesiredDuration="2.17" />
+													<CameraCommand CustomCamera="smradoch_camera_06" />
+													<LookAtCommand Role="KATERINA" LookAtRole="HENRY" />
+													<LookAtCommand Role="HOSPODSKA_TROSKOVICE" LookAtRole="HENRY" />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq2">
+										<DesignName StringName="forced_ji_seq2_kOb8" Text="seq2" />
+										<UiPrompt StringName="ui_forced_ji_seq2_fnGi" Text="My se známe!" />
+										<Elements>
+											<Response Role="HENRY" ReferenceLength="1.98">
+												<Parenthetical>
+													<Text StringName="forc_henry_bodre_PcTj" Text="bodře" />
+												</Parenthetical>
+												<Text StringName="forc_henry_my_se_prece_zn_hiGu" Text="My se přece známe!" />
+												<Commands>
+													<MoodCommand Role="HOSPODSKA_TROSKOVICE" Mood="holdingWineJug" />
+													<FacialMoodCommand FacialMood="angry1" />
+													<AnimationCommand Delay="0.04" FragmentId="ADLG_Threat" Guid="ad276849-0d6e-4e0b-9008-f83254c5803e" Variant="3" DesiredDuration="1.54" />
+													<CameraCommand CustomCamera="smradoch_camera_06" />
+													<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.02" LookAtRole="HENRY" />
+													<LookAtCommand Role="KATERINA" Delay="0.02" LookAtRole="HENRY" />
+													<LookAtCommand LookAtRole="KATERINA" />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="Decision" Name="seq4">
+										<DesignName StringName="forced_ji_seq4_1dLN" Text="seq4" />
+										<UiPrompt StringName="ui_forced_ji_seq4_PNO2" Text="Ty seš ta od rybníka!" />
+										<Elements>
+											<Response Role="HENRY" ReferenceLength="2.28">
+												<Parenthetical>
+													<Text StringName="forc_henry_ukaze_prstem_tZLb" Text="ukáže prstem" />
+												</Parenthetical>
+												<Text StringName="forc_henry_ty_ses_ta_od_r_dc9G" Text="Ty seš ta od rybníka!" />
+												<Commands>
+													<MoodCommand Role="HOSPODSKA_TROSKOVICE" Mood="holdingWineJug" />
+													<AnimationCommand Delay="0.04" FragmentId="ADLG_You" Guid="be891276-e31d-d3de-0861-950464b02445" Variant="3" />
+													<CameraCommand CustomCamera="smradoch_camera_12" />
+													<LookAtCommand Role="KATERINA" LookAtRole="HENRY" />
+													<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.02" LookAtRole="HENRY" />
+												</Commands>
+											</Response>
+										</Elements>
+										<Decision Name="dec3" Priority="MainQuestSubmission" DesignName="diss">
+											<Sequences>
+												<Sequence EndType="EndDialogue" Name="seq5">
+													<DesignName StringName="forced_ji_seq5_H7v8" Text="seq5" />
+													<Triggers>
+														<Port Name="umyj_se_u_kade" />
+													</Triggers>
+													<Elements>
+														<Response Role="KATERINA" ReferenceLength="4.13">
+															<Parenthetical>
+																<Text StringName="forc_katerina_znechucene_sI33" Text="znechuceně" />
+															</Parenthetical>
+															<Text StringName="forc_katerina_teda_to_je__wOO7" Text="Teda chlape, to je vážně síla..." />
+															<Commands>
+																<MoodCommand Role="HOSPODSKA_TROSKOVICE" Mood="holdingWineJug" />
+																<FacialMoodCommand FacialMood="nervous1" />
+																<FacialMoodCommand Role="HOSPODSKA_TROSKOVICE" FacialMood="nervous2" />
+																<AnimationCommand Delay="0.03" FragmentId="ADLG_Disagree" Guid="e75df559-6860-4234-bdac-0bf6fb204b31" Variant="4" />
+																<AnimationCommand Role="HOSPODSKA_TROSKOVICE" Delay="1.72" FragmentId="ADLG_Nod" Guid="99ebc3f8-4b3c-4b3c-b7f7-c8e0ae50f8c7" Variant="0" DesiredDuration="2.28" />
+																<AnimationHeadCommand Delay="2.04" FragmentId="ADLG_FA_EyebrowsRaise" Guid="76ae1e5a-a947-4dde-bb4e-32678c03284f" Variant="0" DesiredDuration="2.08" />
+																<CameraCommand CustomCamera="smradoch_camera_11" />
+																<LookAtCommand Role="HOSPODSKA_TROSKOVICE" Delay="0.02" LookAtRole="HENRY" />
+																<LookAtCommand Delay="0.04" LookAtRole="HENRY" />
+																<LookAtCommand Delay="2.74" LookAtRole="HOSPODSKA_TROSKOVICE" TransitionDuration="0.5" />
+															</Commands>
+														</Response>
+														<Response Role="HOSPODSKA_TROSKOVICE" ReferenceLength="8.94">
+															<Parenthetical>
+																<Text StringName="forc_hospodska_znechucene_mWUp" Text="znechuceně, k Jindrovi" />
+															</Parenthetical>
+															<Text StringName="forc_hospodska_hele_mlade_7SBH" Text="Hele mladej, jestli se mi tady chceš promenádovat mezi hostama, tak se nejdřív vopláchni u kádě!" />
+															<Commands>
+																<FacialMoodCommand FacialMood="arrogant2" />
+																<MoodCommand Role="KATERINA" Delay="2.7" Mood="pensive" />
+																<AnimationCommand Role="HENRY" Delay="8.87" FragmentId="ADLG_Confusion" Guid="3ee18b27-3ab6-44ff-973a-dac45dd39426" Variant="1" />
+																<AnimationCommand Delay="5.13" FragmentId="ADLG_Gesture" Guid="54abd8bc-c131-4147-9513-8edca407efba" Variant="1" />
+																<AnimationCommand Delay="1.1" FragmentId="ADLG_Agree" Guid="e069f451-9917-47a8-944d-59dbb224870b" Variant="4" DesiredDuration="4.03" />
+																<AnimationCommand Delay="8.36" FragmentId="ADLG_Gesture" Guid="04a97023-2e55-4351-a20b-f3fdc8bb0aee" Variant="0" DesiredDuration="4.19" />
+																<CameraCommand Delay="3.98" CustomCamera="smradoch_camera_17" />
+																<CameraCommand Delay="8.73" CustomCamera="smradoch_camera_14" />
+																<LookAtCommand Role="KATERINA" Delay="2.49" LookAtRole="HOSPODSKA_TROSKOVICE" Offset="MiddleLeft" TransitionDuration="1" />
+																<LookAtCommand Delay="0.02" LookAtRole="HENRY" TransitionDuration="0.4" />
+																<CameraCommand Delay="0.3" CustomCamera="smradoch_camera_01" />
+																<LookAtCommand Role="KATERINA" Delay="7.49" LookAtRole="HOSPODSKA_TROSKOVICE" TransitionDuration="0.4" />
+																<LookAtCommand Delay="4.71" LookAtRole="KATERINA" />
+																<LookAtCommand Delay="8.59" LookAtRole="HENRY" TransitionDuration="0.6" />
+															</Commands>
+														</Response>
+														<Response Role="HOSPODSKA_TROSKOVICE" ReferenceLength="2.68">
+															<Parenthetical>
+																<Text StringName="forc_hospodska_zabrumla_aMOq" Text="zabrumlá" />
+															</Parenthetical>
+															<Text StringName="forc_hospodska_kdo_to_ma__eYIB" Text="Kdo to má čuchat..." />
+															<Commands>
+																<MoodCommand Role="KATERINA" Delay="1.06" />
+															</Commands>
+														</Response>
+													</Elements>
+												</Sequence>
+											</Sequences>
+										</Decision>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+					</Sequences>
+				</Decision>
+				<Props>
+					<Prop Name="wineJug_katerina" />
+					<Prop Name="wineJug_innkeeper" />
+				</Props>
+			</Dialogue>
+		</ForcedDialog>
+	</Skald>
+</Database>

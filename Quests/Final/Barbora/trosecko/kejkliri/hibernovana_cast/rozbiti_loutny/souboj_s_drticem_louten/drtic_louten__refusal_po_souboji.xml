@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="drtic_louten__refusal_po_souboji" HibernateMode="Script">
+			<Definitions>
+				<Definition File="drtic_louten__refusal_po_souboji/drtic_louten__refusal_po_souboji.xml" />
+			</Definitions>
+			<Nodes>
+				<drtic_louten__refusal_po_souboji Name="drtic_louten__refusal_po_souboji" />
+			</Nodes>
+		</DialogWrapper>
+	</Skald>
+</Database>

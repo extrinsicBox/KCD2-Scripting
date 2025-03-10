@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="chovani_po_leceni">
+			<Ports>
+				<Port Name="rodina_bezi_za_otcem__otec_zije" Direction="In" Type="trigger">
+					<DesignName StringName="chovani_p_rodina_bezi_za__eVq8" Text="rodina běží za otcem - otec žije" />
+				</Port>
+				<Port Name="rodina_bezi_za_otcem__otec_mrtev" Direction="In" Type="trigger">
+					<DesignName StringName="chovani_p_rodina_bezi_za__QYqy" Text="rodina běží za otcem - otec mrtev" />
+				</Port>
+				<Port Name="konec_chovani" Direction="In" Type="trigger">
+					<DesignName StringName="chovani_p_konec_chovani_TuPL" Text="konec chování" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="chovani_po_leceni/hendl_mluvi_s_otcem.xml" />
+				<Definition File="chovani_po_leceni/matka_dekuje_bohu.xml" />
+				<Definition File="chovani_po_leceni/matka_se_modli_za_mtrveho_otce.xml" />
+			</Definitions>
+			<Nodes>
+				<EnableBehavior Name="enablebehaviorkubaparalustopandturn12_2" PositionY="110" PositionX="-420" Signature="kubaParalu_stopAndTurn" EventSet="">
+					<Constant Name="Behavior" Value="stopAndTurn" />
+					<Asset Name="SmartEntity" Alias="qSO" />
+					<Asset Name="NPC" Alias="mandelina" />
+					<Constant Name="barkAlias" Value="kubaParalu_matkaDekujeBohu" />
+					<Constant Name="distanceVariation" Value="0" />
+					<Asset Name="moveTo" Alias="uPosteleMatka" />
+					<Constant Name="stopWithinDistance" Value="0" />
+					<Asset Name="turnToTarget" Alias="goclin" />
+					<Edge From="rodinaUGoclina.GoclinVylecen" To="IsActive" />
+				</EnableBehavior>
+				<EnableBehavior Name="enablebehaviorkubaparalustopandturn12_2_1" PositionY="510" PositionX="-420" Signature="kubaParalu_stopAndTurn" EventSet="">
+					<Constant Name="Behavior" Value="stopAndTurn" />
+					<Asset Name="SmartEntity" Alias="qSO" />
+					<Asset Name="NPC" Alias="mandelina" />
+					<Constant Name="barkAlias" Value="kubaParalu_matkaSeModliZaMtrvehoOtce" />
+					<Constant Name="distanceVariation" Value="0" />
+					<Asset Name="moveTo" Alias="uPosteleSyn" />
+					<Constant Name="stopWithinDistance" Value="0" />
+					<Asset Name="turnToTarget" Alias="goclin" />
+					<Edge From="rodinaUGoclina.GoclinUmrel" To="IsActive" />
+				</EnableBehavior>
+				<hendl_mluvi_s_otcem Name="hendl_mluvi_s_otcem" PositionY="-250" PositionX="-50" />
+				<matka_dekuje_bohu Name="matka_dekuje_bohu" PositionY="90" PositionX="-80" />
+				<matka_se_modli_za_mtrveho_otce Name="matka_se_modli_za_mtrveho_otce" PositionY="490" PositionX="-80" />
+				<npcdialog_movetonpc Name="npcdialog_movetonpc" PositionY="-320" PositionX="-420" Namespace="utils.speech">
+					<Asset Name="moving_soul" Alias="hendl" />
+					<Asset Name="reaction_soul" Alias="goclin" />
+					<Constant Name="alias" Value="kubaParalu_hendlMluviNaOtce" />
+					<Constant Name="movetonpc_behavior_" Value="npcDialog_moveToNpc" />
+					<Constant Name="reaction_behavior" Value="npcDialog_reaction" />
+					<Asset Name="smartentity" Alias="qSO" />
+					<Constant Name="waitforfreedialogwindow" Value="true" />
+					<Constant Name="reactionsoulkeepsstance" Value="true" />
+					<Edge From="rodinaUGoclina.GoclinVylecen" To="active" />
+				</npcdialog_movetonpc>
+				<State Name="rodinaUGoclina" PositionY="-180" PositionX="-820" TypeT="rodinaUGoclina">
+					<Edge From="rodina_bezi_za_otcem__otec_mrtev" To="SetGoclinUmrel" />
+					<Edge From="rodina_bezi_za_otcem__otec_zije" To="SetGoclinVylecen" />
+					<Edge From="npcdialog_movetonpc.reacting_npc_is_dead" To="SetDone">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="npcdialog_movetonpc.dialog_failed" To="SetDone">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="konec_chovani" To="SetDone" />
+					<Edge From="hendl_mluvi_s_otcem.konec_rozhovoru" To="SetDone">
+						<Vertex>sttf23KQ</Vertex>
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="sttf23KQ" PositionY="-340" PositionX="191" />
+				<EdgeVertex Name="vertex1" PositionY="-339" PositionX="-160" />
+				<EdgeVertex Name="vertex2" PositionY="-340" PositionX="-810" />
+			</EdgeVertices>
+			<Types>
+				<Type TypeName="rodinaUGoclina">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="GoclinVylecen" ObjectiveValueType="Started" />
+					<StateTypeEnumeration Name="GoclinUmrel" ObjectiveValueType="Started" />
+					<StateTypeEnumeration Name="Done" ObjectiveValueType="Completed" />
+				</Type>
+			</Types>
+			<Text StringName="chovani_po_leceni_WMoU" Text="chování po léčení" />
+		</Gameplay>
+	</Skald>
+</Database>

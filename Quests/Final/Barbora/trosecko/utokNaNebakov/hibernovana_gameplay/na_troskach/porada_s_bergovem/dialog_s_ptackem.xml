@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="dialog_s_ptackem" HibernateMode="Script">
+			<Ports>
+				<Port Name="jindra_pokecal_s_ptackem" Direction="Out" Type="trigger">
+					<DesignName StringName="dialog_s__jindra_pokecal__T3fL" Text="Jindra pokecal s Ptáčkem" />
+				</Port>
+				<Port Name="semin_je_zachranen" Direction="In" Type="bool">
+					<DesignName StringName="dialog_s__semin_je_zachra_KKcv" Text="Semín je zachráněn" />
+				</Port>
+				<Port Name="semin_probehl" Direction="In" Type="bool">
+					<DesignName StringName="dialog_s__semin_probehl_zxpN" Text="Semín proběhl" />
+				</Port>
+				<Port Name="jindra_byl_na_semine" Direction="In" Type="bool">
+					<DesignName StringName="dialog_s__jindra_byl_na_s_liVu" Text="Jindra byl na Semíně" />
+				</Port>
+				<Port Name="co_se_stalo_na_semine" Direction="In" Type="bool">
+					<DesignName StringName="dialog_s__co_se_stalo_na__E2ZX" Text="co se stalo na Semine" />
+				</Port>
+				<Port Name="enqueue_polylog" Direction="Out" Type="trigger">
+					<DesignName StringName="dialog_s__enqueue_polylog_lAxC" Text="enqueue polylog" />
+				</Port>
+				<Port Name="uvod_dialog_final" Direction="Out" Type="bool">
+					<DesignName StringName="dialog_s__uvod_dialog_fin_IlHk" Text="uvod dialog final" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="dialog_s_ptackem/dialog_s_ptackem.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="checkentitycontext2" PositionY="200" PositionX="-420" MethodName="wh::xgenaimodule::CheckEntityContext" DeclaringType="wh::xgenaimodule">
+					<Asset Name="Souls" Alias="ptacek" />
+					<Constant Name="Context" Value="utokNaNebakov_leaningRail" />
+				</Function>
+				<CleanAndHealTo Name="CleanAndHealTo" PositionY="530" PositionX="1740" Namespace="utils.general">
+					<Constant Name="hp" Value="50" />
+					<Edge From="revive.onexec" To="exec" />
+					<Edge From="joinarrays13.Array" To="souls" />
+				</CleanAndHealTo>
+				<dialog_s_ptackem Name="dialog_s_ptackem" PositionY="-220" PositionX="30">
+					<Asset Name="DialogueHolder" Alias="beforeFeastDH" />
+					<Edge From="semin_je_zachranen" To="semin_je_zachranen" />
+					<Edge From="semin_probehl" To="semin_probehl" />
+					<Edge From="jindra_byl_na_semine" To="jindra_byl_na_semine" />
+					<Edge From="checkentitycontext2.HasContext" To="je_vecer_a_ptacek_se_opira" />
+					<Edge From="co_se_stalo_na_semine" To="co_se_stalo_na_semine" />
+				</dialog_s_ptackem>
+				<Function Name="joinarrays13" PositionY="500" PositionX="1160" TypeT="wh::rpgmodule::Souls" MethodName="utilities::array::JoinArrays" DeclaringType="utilities::array">
+					<Asset Name="A" Alias="feast_NPCs" />
+					<Edge From="makearray12.Array" To="B" />
+				</Function>
+				<MakeArray Name="makearray12" PositionY="460" PositionX="860" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="osina" />
+					<Asset Name="B" Alias="cook" />
+					<Asset Name="C" Alias="cook_servant" />
+				</MakeArray>
+				<Output Name="Output">
+					<Edge From="scenefinishedwaiter3.OnEnqueue" To="enqueue_polylog" />
+					<Edge From="dialog_s_ptackem.uvod_dialog_final" To="uvod_dialog_final" />
+					<Edge From="triggersequence15.B" To="jindra_pokecal_s_ptackem" />
+				</Output>
+				<Function Name="passlongtime4" PositionY="0" PositionX="490" MethodName="wh::conceptmodule::PassLongTime" DeclaringType="wh::conceptmodule">
+					<Edge From="dialog_s_ptackem.BeforePlay" To="Exec" />
+				</Function>
+				<revive Name="revive" PositionY="340" PositionX="1450" Namespace="utils.general">
+					<Edge From="joinarrays13.Array" To="souls" />
+					<Edge From="triggersequence15.A" To="exec" />
+				</revive>
+				<SceneFinishedWaiter Name="scenefinishedwaiter3" PositionY="200" PositionX="490">
+					<Edge From="dialog_s_ptackem.jindra_pokecal_s_ptackem" To="Enqueue" />
+				</SceneFinishedWaiter>
+				<TriggerSequence Name="triggersequence15" PositionY="280" PositionX="860">
+					<Edge From="scenefinishedwaiter3.OnFinished" To="Exec" />
+				</TriggerSequence>
+			</Nodes>
+			<Assets>
+				<DialogueHolderAsset Name="beforeFeastDH" />
+			</Assets>
+		</DialogWrapper>
+	</Skald>
+</Database>

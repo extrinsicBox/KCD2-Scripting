@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="villageStashes">
+			<Ports>
+				<Port Name="init" Direction="In" Type="trigger">
+					<DesignName StringName="villagest_init_u34P" Text="Init" />
+				</Port>
+				<Port Name="value_of_loot_stolen_from_villagers" Direction="Out" Type="int">
+					<DesignName StringName="villagest_value_of_loot_s_Ryuz" Text="Value of loot stolen from villagers" />
+				</Port>
+				<Port Name="stashwatchactive" Direction="In" Type="bool">
+					<DesignName StringName="villagest_stashwatchactive_FUqC" Text="StashWatchActive" />
+				</Port>
+				<Port Name="domluveno" Direction="In" Type="bool">
+					<DesignName StringName="villagest_domluveno_UuVx" Text="Domluveno s velitelem na začátku" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<stashitemsandtriggers Name="AllStashItems" PositionY="-4160" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash1TreeDestroStash" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1" PositionY="-3940" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash1" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1" PositionY="-3720" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash2" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1" PositionY="-3500" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash3" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1" PositionY="-3280" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash4" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1" PositionY="-3060" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash5" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1" PositionY="-2410" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash8" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1_1" PositionY="-1980" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash10" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1_1_1" PositionY="-1550" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash12" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1_1_1_1" PositionY="-890" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash15" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1_1_1_1_1" PositionY="-680" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash16" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_1_1_1_2" PositionY="-1330" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash13" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_2" PositionY="-2630" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash7" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_2_1" PositionY="-2190" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash9" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_2_1_1" PositionY="-1760" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash11" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_1_2_1_1_1" PositionY="-1110" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash14" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_1_1_1_2" PositionY="-2850" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash6" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<stashitemsandtriggers Name="AllStashItems_2" PositionY="-460" PositionX="-1010" Namespace="utils.item">
+					<Asset Name="stash" Alias="hiddenStash2DestroStash" />
+					<Edge From="and21.bool" To="isactive">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</stashitemsandtriggers>
+				<Function Name="and21" PositionY="-370" PositionX="-1620" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="stashwatchactive" To="A" />
+					<Edge From="domluveno" To="B" />
+				</Function>
+				<CalculateItemsValueInStash Name="CalculateItemsValueInStash" PositionY="-140" PositionX="-70" Namespace="spizovacioddil_utils">
+					<Edge From="joinarrays7.Array" To="items" />
+					<Edge From="itemdescriptortrigger18.OnLose" To="recalculatestashcontentvalue" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_2_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_2.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_2_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_2_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_2.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_2.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="AllStashItems_1.onclosed" To="recalculatestashcontentvalue">
+						<Vertex>vertex12</Vertex>
+					</Edge>
+					<Edge From="init" To="recalculatestashcontentvalue">
+						<Vertex>vertex15</Vertex>
+						<Vertex>vertex12</Vertex>
+					</Edge>
+				</CalculateItemsValueInStash>
+				<Function Name="createitemclassdescriptor20" PositionY="240" PositionX="-1140" MethodName="wh::entitymodule::CreateItemClassDescriptor" DeclaringType="wh::entitymodule">
+					<Constant Name="ItemClass" Value="1657b964-9a6b-4e74-af81-7fe06d50cf12" />
+				</Function>
+				<State Name="currentVillageLootValueLeftUntouched" PositionY="70" PositionX="660" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Edge From="CalculateItemsValueInStash.value" To="Value" />
+					<Edge From="CalculateItemsValueInStash.oncalculationfinished" To="Exec" />
+				</State>
+				<IfFunction Name="ifcompare8" PositionY="-270" PositionX="380" TypeT="int" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="0" />
+					<Edge From="CalculateItemsValueInStash.oncalculationfinished" To="Exec" />
+					<Edge From="initialVillageLootValue.State" To="ValueA">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+				</IfFunction>
+				<State Name="initialVillageLootValue" PositionY="-190" PositionX="660" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Edge From="CalculateItemsValueInStash.value" To="Value" />
+					<Edge From="ifcompare8.True" To="Exec" />
+				</State>
+				<ItemDescriptorTrigger Name="itemdescriptortrigger18" PositionY="-20" PositionX="-690">
+					<Edge From="stashproperties19.Inventory" To="Inventory" />
+					<Edge From="createitemclassdescriptor20.ItemDescriptor" To="ItemDescriptor" />
+					<Edge From="and21.bool" To="IsActive" />
+				</ItemDescriptorTrigger>
+				<Function Name="joinarrays7" PositionY="-1000" PositionX="-360" TypeT="wh::entitymodule::Items" MethodName="utilities::array::JoinArrays" DeclaringType="utilities::array">
+					<Edge From="AllStashItems.items" To="A" />
+					<Edge From="AllStashItems_1.items" To="B" />
+					<Edge From="AllStashItems_1_1.items" To="C" />
+					<Edge From="AllStashItems_1_1_1.items" To="D" />
+					<Edge From="AllStashItems_1_1_1_1.items" To="E" />
+					<Edge From="AllStashItems_1_1_1_1_1.items" To="F" />
+					<Edge From="AllStashItems_1_1_1_2.items" To="G" />
+					<Edge From="AllStashItems_1_1_1_1_2.items" To="H" />
+					<Edge From="AllStashItems_1_1_1_1_1_1.items" To="I" />
+					<Edge From="AllStashItems_1_1_1_1_2_1.items" To="J" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1.items" To="K" />
+					<Edge From="AllStashItems_1_1_1_1_2_1_1.items" To="L" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1.items" To="M" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_2.items" To="N" />
+					<Edge From="AllStashItems_1_1_1_1_2_1_1_1.items" To="O" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1_1.items" To="P" />
+					<Edge From="AllStashItems_2.items" To="R" />
+					<Edge From="AllStashItems_1_1_1_1_1_1_1_1_1_1.items" To="Q" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="sub9.int" To="value_of_loot_stolen_from_villagers" />
+				</Output>
+				<ObjectProperties Name="stashproperties19" PositionY="120" PositionX="-1090" DeclaringType="wh::entitymodule::Stash">
+					<Asset Name="Stash" Alias="hiddenStash1TreeDestroStash" />
+				</ObjectProperties>
+				<Function Name="sub9" PositionY="-40" PositionX="1060" MethodName="math::integer::Sub" DeclaringType="math::integer">
+					<Edge From="initialVillageLootValue.State" To="A" />
+					<Edge From="currentVillageLootValueLeftUntouched.State" To="B" />
+				</Function>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex11" PositionY="-2290" PositionX="-1290" />
+				<EdgeVertex Name="vertex12" PositionY="-110" PositionX="-520" />
+				<EdgeVertex Name="vertex15" PositionY="-104" PositionX="-1373" />
+				<EdgeVertex Name="vertex4" PositionY="-299" PositionX="868" />
+				<EdgeVertex Name="vertex5" PositionY="-298" PositionX="376" />
+			</EdgeVertices>
+			<Text StringName="villagestashes_dDhk" Text="Skrytý majetek vesničanů" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="villagest_pri_zacatku_rab_08x6" Text="Při začátku rabování spočítá hodnotu věcí ve sledovaných stashích (možná přidáme i sloty, pokud budou). Paslety s připravenými itemy se nepočítají! Pak při každé interakci s těmito stashemi/sloty spočítá zbylou celkovou hodnotu. Při příliš vysokém rozdílu už budou vesničani naštvaní." />
+				</GameplayActionElement>
+			</Elements>
+		</Module>
+	</Skald>
+</Database>

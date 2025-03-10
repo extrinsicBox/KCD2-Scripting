@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Quest Name="zavodniPodkovy" HibernateMode="DLC" RequiredDLC="Unpublished" Type="Micro" Difficulty="6" ProductionCode="U04">
+			<Ports>
+				<Port Name="janek_vyhral_zavod" Direction="Out" Type="trigger">
+					<DesignName StringName="zavodnipo_janek_vyhral_za_ogXf" Text="Janek vyhral zavod" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="zavodniPodkovy/semin__zadani_.xml" />
+				<Definition File="zavodniPodkovy/nalezeni_podkovy.xml" />
+				<Definition File="zavodniPodkovy/zavodni_podkovy.xml" />
+				<Definition File="zavodniPodkovy/prubeh_a_odezvdani.xml" />
+				<Definition File="zavodniPodkovy/haste.xml" />
+				<Definition File="zavodniPodkovy/quest_tipster__kovar_radovan__tachov.xml" />
+				<Definition File="zavodniPodkovy/janek_skillteacher.xml" />
+				<Definition File="zavodniPodkovy/quest_tipster__hospodsky_ptachov.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="and10" PositionY="-220" PositionX="-1260" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="not11.bool" To="B" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.none" To="A">
+						<Vertex>vertex35</Vertex>
+						<Vertex>vertex36</Vertex>
+					</Edge>
+				</Function>
+				<haste Name="haste" PositionY="-560" PositionX="-200" />
+				<IfFunction Name="ifand26" PositionY="-512" PositionX="145" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="OnWake" To="Exec">
+						<Vertex>vertex32</Vertex>
+					</Edge>
+					<Edge From="QuestProgressExpanded_NonRepeatable.none" To="A" />
+				</IfFunction>
+				<janek_skillteacher Name="janek_skillteacher" PositionY="810" PositionX="110">
+					<Edge From="prubeh_a_odezvdani.janek_vyhral_zavod" To="janek_vyhral_zavod">
+						<Vertex>vertex52</Vertex>
+					</Edge>
+				</janek_skillteacher>
+				<nalezeni_podkovy Name="nalezeni_podkovy" PositionY="-140" PositionX="-1000">
+					<Edge From="and10.bool" To="Awake" />
+				</nalezeni_podkovy>
+				<Function Name="not11" PositionY="-50" PositionX="-1500" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="receptNaucen.State" To="Value">
+						<Vertex>vertex30</Vertex>
+						<Vertex>vertex31</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="or13" PositionY="280" PositionX="600" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="QuestProgressExpanded_NonRepeatable.active" To="A" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.done" To="B" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.failed" To="C" />
+				</Function>
+				<Function Name="or15" PositionY="50" PositionX="600" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="QuestProgressExpanded_NonRepeatable.isavailable" To="A" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.available_questgivermarkeractivated" To="B" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.active" To="C" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="QuestProgressExpanded_NonRepeatable.queststate" To="Progress" />
+					<Edge From="prubeh_a_odezvdani.janek_vyhral_zavod" To="janek_vyhral_zavod">
+						<Vertex>vertex52</Vertex>
+						<Vertex>vertex53</Vertex>
+					</Edge>
+				</Output>
+				<PermaDeath Name="PermaDeath" PositionY="330" PositionX="900" Namespace="utils.general">
+					<Asset Name="souls" Alias="janek" />
+					<Edge From="or13.bool" To="isactive" />
+				</PermaDeath>
+				<prubeh_a_odezvdani Name="prubeh_a_odezvdani" PositionY="-210" PositionX="-220" RequiredForOutput="trosecko">
+					<Edge From="receptNaucen.State" To="umim_recept" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.active" To="Awake">
+						<Vertex>vertex47</Vertex>
+						<Vertex>vertex48</Vertex>
+					</Edge>
+				</prubeh_a_odezvdani>
+				<quest_tipster__hospodsky_ptachov Name="quest_tipster__hospodsky_ptachov" PositionY="570" PositionX="-1190" />
+				<quest_tipster__kovar_radovan__tachov Name="quest_tipster__kovar_radovan__tachov" PositionY="250" PositionX="-930" />
+				<QuestProgressExpanded_NonRepeatable Name="QuestProgressExpanded_NonRepeatable" PositionY="-270" PositionX="100" RequiredForOutput="trosecko" Namespace="utils.general">
+					<Constant Name="suppressavailablestate" Value="false" />
+					<Asset Name="questgiver" Alias="janek" />
+					<Edge From="prubeh_a_odezvdani.quest_fail" To="setfailed" />
+					<Edge From="prubeh_a_odezvdani.jindra_si_promluvil_o_finalni_odmene" To="setdone" />
+					<Edge From="semin__zadani_.quest_zacal" To="setactive" />
+					<Edge From="haste.quest_lze_nastartovat" To="setavailable" />
+					<Edge From="haste.hvezdicka_je_viditelna" To="setquestgivermarker" />
+					<Edge From="quest_tipster__kovar_radovan__tachov.hvezdicka_je_viditelna" To="setquestgivermarker">
+						<Vertex>vertex44</Vertex>
+					</Edge>
+					<Edge From="ifand26.True" To="setavailable" />
+				</QuestProgressExpanded_NonRepeatable>
+				<State Name="receptNaucen" PositionY="-140" PositionX="-510" TypeT="bool">
+					<Edge From="nalezeni_podkovy.recept_naucen" To="SetTrue" />
+					<Edge From="prubeh_a_odezvdani.recept_naucen" To="SetTrue">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex19</Vertex>
+					</Edge>
+				</State>
+				<MemberFunction Name="revive14" PositionY="470" PositionX="580" MethodName="Revive" DeclaringType="wh::rpgmodule::I_Soul">
+					<Asset Name="Soul" Alias="mikolaj" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.onactive" To="Exec" />
+				</MemberFunction>
+				<SaveGame Name="savegame24" PositionY="100" PositionX="-280">
+					<Constant Name="Objective" Value="vykovej_pro_janka_podkovy_s_ozuby" />
+					<Edge From="receptNaucen.OnTrue" To="EnqueueSave" />
+				</SaveGame>
+				<SaveGame Name="savegame24_1" PositionY="150" PositionX="890">
+					<Constant Name="Objective" Value="pockej_par_dni_a_vyzvedni_si_u_janka_odmenu" />
+					<Edge From="QuestProgressExpanded_NonRepeatable.ondone" To="EnqueueSave">
+						<Vertex>vertex51</Vertex>
+					</Edge>
+				</SaveGame>
+				<semin__zadani_ Name="semin__zadani_" PositionY="250" PositionX="-390">
+					<Edge From="receptNaucen.State" To="recept_naucen">
+						<Vertex>vertex30</Vertex>
+					</Edge>
+					<Edge From="or15.bool" To="Awake">
+						<Vertex>vertex40</Vertex>
+						<Vertex>vertex41</Vertex>
+					</Edge>
+					<Edge From="QuestProgressExpanded_NonRepeatable.available_questgivermarkeractivated" To="hrac_vi_o_questu">
+						<Vertex>vertex42</Vertex>
+						<Vertex>vertex43</Vertex>
+					</Edge>
+					<Edge From="or13.bool" To="not_available">
+						<Vertex>vertex49</Vertex>
+						<Vertex>vertex50</Vertex>
+					</Edge>
+				</semin__zadani_>
+				<zavodni_podkovy Name="zavodni_podkovy" PositionY="460" PositionX="180" />
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex18" PositionY="90" PositionX="-60" />
+				<EdgeVertex Name="vertex19" PositionY="90" PositionX="-490" />
+				<EdgeVertex Name="vertex30" PositionY="175" PositionX="-379" />
+				<EdgeVertex Name="vertex31" PositionY="172" PositionX="-1468" />
+				<EdgeVertex Name="vertex32" PositionY="-240" PositionX="-1440" />
+				<EdgeVertex Name="vertex35" PositionY="-330" PositionX="460" />
+				<EdgeVertex Name="vertex36" PositionY="-327" PositionX="-1258" />
+				<EdgeVertex Name="vertex40" PositionY="670" PositionX="740" />
+				<EdgeVertex Name="vertex41" PositionY="669" PositionX="-398" />
+				<EdgeVertex Name="vertex42" PositionY="626" PositionX="426" />
+				<EdgeVertex Name="vertex43" PositionY="629" PositionX="-375" />
+				<EdgeVertex Name="vertex44" PositionY="-200" PositionX="-540" />
+				<EdgeVertex Name="vertex47" PositionY="-271" PositionX="441" />
+				<EdgeVertex Name="vertex48" PositionY="-269" PositionX="-236" />
+				<EdgeVertex Name="vertex49" PositionY="712" PositionX="740" />
+				<EdgeVertex Name="vertex50" PositionY="714" PositionX="-473" />
+				<EdgeVertex Name="vertex51" PositionY="244" PositionX="608" />
+				<EdgeVertex Name="vertex52" PositionY="758" PositionX="45" />
+				<EdgeVertex Name="vertex53" PositionY="771" PositionX="1309" />
+			</EdgeVertices>
+			<Types>
+				<Type TypeName="DoubleSuccessPodkovy">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Cekani" ObjectiveValueType="Started" />
+					<StateTypeEnumeration Name="Promluvit" ObjectiveValueType="Updated" />
+					<StateTypeEnumeration Name="Odmena" ObjectiveValueType="Completed" />
+					<StateTypeEnumeration Name="BezOdmeny" ObjectiveValueType="Completed" />
+					<StateTypeEnumeration Name="Canceled" ObjectiveValueType="Canceled" />
+				</Type>
+				<Type TypeName="Avalibility">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Available" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="AvailableWithMarker" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="NotAvailable" ObjectiveValueType="None" />
+				</Type>
+				<Type TypeName="PodkovyOdevzdani">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="LzeOdevzdat" ObjectiveValueType="Started" />
+					<StateTypeEnumeration Name="OdevzdavanoIncludem" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Odevzdano" ObjectiveValueType="Completed" />
+					<StateTypeEnumeration Name="Failed" ObjectiveValueType="Canceled" />
+					<StateTypeEnumeration Name="Aborted" ObjectiveValueType="None" />
+				</Type>
+			</Types>
+			<Assets>
+				<SoulAsset Name="mikolaj" SharedSoulGuids="4fc4dfec-f706-16e8-7db2-522512975793" />
+				<SoulAsset Name="janek" SharedSoulGuids="4e4ed54e-aa51-0f94-7669-8c0df1840baa" />
+				<TriggerAreaAsset Name="searchArea" />
+				<StashAsset Name="horseshoeStash" />
+			</Assets>
+			<Notes>
+				<Note Name="note13" PositionY="510" PositionX="910">
+					<Text StringName="zavodnipo_note13_OdQi" Text="muze byt janek perma death?" />
+				</Note>
+				<Note Name="note25" PositionY="230" PositionX="-930">
+					<Text StringName="zavodnipo_note25_xJ74" Text="tohle smazat, zapojit tipster dialog vedle" />
+				</Note>
+			</Notes>
+			<Text StringName="zavodnipodkovy_Noet" Text="Závodní podkovy" />
+			<MapVizLocation MapName="trosecko" PositionX="1669" PositionY="1593" />
+			<QuestName StringName="qname_zavodnipodkovy_mT3F" Text="Kouzelné podkovy" />
+			<QuestDescription StringName="qdesc_zavodnipodkovy_Iu46" Text="Janek, čeledín semínského sedláře se chystá na velký závod, a doslechl se o kouzelných podkovách, díky kterým kůn nikdy neuklouzne a běhá rychle jako vítr. Kdybych mu takové podkovy vykoval, dobře by mi zaplatil." />
+			<Objectives>
+				<Objective TypeT="ProgressFailableAbortable" Name="promluv_si_s_kocovniky_o_podkovach" IsOptional="true">
+					<LocalizedName StringName="zavodnipo_promluv_si_s_ci_HWgg" Text="Promluv si s kočovníky o podkovách." />
+					<Logs>
+						<EnumLog Type="None" Name="None" />
+						<EnumLog Type="Started" Name="Started" Marker="mikolaj">
+							<Log StringName="promluv_s_mohli_bych_se_d_QlSv" Text="V táboře bude určitě někdo, kdo by mi mohl o těch zvláštních podkovách něco říct. Stačí se jen šikovně zeptat." />
+						</EnumLog>
+						<EnumLog Type="Completed" Name="Completed">
+							<Log StringName="promluv_s_uz_vim_jake_pod_5g1q" Text="Mluvil jsem s Mikolajem, který se v táboře stará o koně. Pokovy prý nejsou ani trochu kouzelné, ale udrží koně na skalnatém povrchu díky ozubům." />
+						</EnumLog>
+						<EnumLog Type="Canceled" Name="Failed">
+							<Log StringName="promluv_s_z_cikanu_inform_l7Mm" Text="Pokusil jsem se z Mikolaje zjistit, jaké podkovy používá, ale neřekl mi ani slovo. Musím to zjistit jinak." />
+						</EnumLog>
+						<EnumLog Type="None" Name="Aborted" />
+					</Logs>
+				</Objective>
+				<Objective TypeT="ProgressFailable" Name="vykovej_pro_janka_podkovy_s_ozuby">
+					<LocalizedName StringName="zavodnipo_vyrob_podkovu_DdnV" Text="Vykovej pro Janka podkovy s ozuby." />
+					<Logs>
+						<EnumLog Type="None" Name="None" />
+						<EnumLog Type="Started" Name="Active">
+							<Log StringName="vyrob_pod_ted_kdyz_vim_ja_3qUM" Text="Teď, když vím jak na to, můžu vyrobit Jankovi jeho vlastní sadu podkov s ozuby." />
+						</EnumLog>
+						<EnumLog Type="Completed" Name="Done">
+							<Log StringName="vyrob_pod_vyrobil_jsem_ce_eEz6" Text="Vyrobil jsem podkovy s ozuby pro Janka." />
+						</EnumLog>
+						<EnumLog Type="Canceled" Name="Canceled">
+							<Log StringName="vyrob_pod_celedin_je_mrtv_9ev6" Text="Čeledín Janek je mrtvý, teď už by mu ty podkovy k ničemu nebudou..." />
+						</EnumLog>
+					</Logs>
+				</Objective>
+				<Objective TypeT="ProgressAbortable" Name="najdi_podkovu_v_kocovnickem_tabore">
+					<LocalizedName StringName="zavodnipo_najdi_podkovu_v_foUr" Text="Najdi podkovu v kočovnickém táboře." />
+					<Logs>
+						<EnumLog Type="None" Name="None" />
+						<EnumLog Type="Started" Name="Started" Marker="searchArea">
+							<Log StringName="najdi_pod_v_cikanskem_tab_QKQH" Text="V kočovnickém táboře bude určitě někde ležet alespoň jedna ta jejich záhadná podkova. Pokud se mi ji podaří najít a dobře si ji prohlédnout, měl bych být  schopen jich pak vyrobit celou sadu." />
+						</EnumLog>
+						<EnumLog Type="Completed" Name="Completed">
+							<Log StringName="najdi_pod_nasel_jsem_kouz_mgc9" Text="Podařilo se mi najít tu zvláštní podkovu s ozuby." />
+						</EnumLog>
+						<EnumLog Type="None" Name="Aborted" />
+					</Logs>
+				</Objective>
+				<Objective TypeT="DoubleSuccessPodkovy" Name="pockej_par_dni_a_vyzvedni_si_u_janka_odmenu">
+					<LocalizedName StringName="zavodnipo_pockej_par_dni__6Qyi" Text="Počkej pár dní a vyzvedni si u Janka odměnu." />
+					<Logs>
+						<EnumLog Type="None" Name="None" />
+						<EnumLog Type="Started" Name="Cekani">
+							<Log StringName="pockej_pa_celedin_janek_p_dqqs" Text="Čeledín Janek pojede brzy závod s podkovami, které jsem mu vyrobil. Slíbil mi, že když vyhraje, dá mi pár grošů navíc." />
+						</EnumLog>
+						<EnumLog Type="Updated" Name="Promluvit" Marker="janek">
+							<Log StringName="pockej_pa_celedin_pojede__ioCw" Text="Myslím, že je načase, abych se vrátil k Jankovi a vyzvedl si od něj svou odměnu." />
+						</EnumLog>
+						<EnumLog Type="Completed" Name="Odmena">
+							<Log StringName="pockej_pa_celedin_vyhral__LcRl" Text="Janek vyhrál díky mým podkovám závod a rozdělil se se mnou o výhru." />
+						</EnumLog>
+						<EnumLog Type="Completed" Name="BezOdmeny">
+							<Log StringName="pockej_pa_celedin_v_zavod_Y2cl" Text="Podkovy Jankovi asi moc nepomohly. Závod prohrál a já mám po odměně." />
+						</EnumLog>
+						<EnumLog Type="Canceled" Name="Canceled">
+							<Log StringName="pockej_pa_celedin_je_mrtv_4SHS" Text="Janek bohužel zemřel. Teď už se žádné odměny za svoje podkovy nedočkám." />
+						</EnumLog>
+					</Logs>
+				</Objective>
+				<Objective TypeT="PodkovyOdevzdani" Name="dones_jankovi_podkovy">
+					<LocalizedName StringName="zavodnipo_dones_jankovi_p_QkHc" Text="Dones Jankovi podkovy." />
+					<Logs>
+						<EnumLog Type="None" Name="None" />
+						<EnumLog Type="Started" Name="LzeOdevzdat" Marker="janek">
+							<Log StringName="dones_jan_konecne_mam_pro_sPmT" Text="Mám pro Janka sadu podkov s ozuby na jeho velký závod. Stačí, abych mu je donesl." />
+						</EnumLog>
+						<EnumLog Type="None" Name="OdevzdavanoIncludem" />
+						<EnumLog Type="Completed" Name="Odevzdano">
+							<Log StringName="dones_jan_predal_jsem_jan_5Jfx" Text="Předal jsem Jankovi jeho nové podkovy." />
+						</EnumLog>
+						<EnumLog Type="Canceled" Name="Failed">
+							<Log StringName="dones_jan_janek_je_mrtvy__mA5j" Text="Janek je mrtvý, ty podkovy jsem mu koval zbytečně..." />
+						</EnumLog>
+						<EnumLog Type="None" Name="Aborted" />
+					</Logs>
+				</Objective>
+			</Objectives>
+		</Quest>
+	</Skald>
+</Database>

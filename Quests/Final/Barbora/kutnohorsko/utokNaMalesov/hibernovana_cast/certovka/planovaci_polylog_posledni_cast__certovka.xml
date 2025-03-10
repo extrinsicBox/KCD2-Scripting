@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="planovaci_polylog_posledni_cast__certovka">
+			<Ports>
+				<Port Name="jindra_rekl_o_roze" Direction="Out" Type="bool">
+					<DesignName StringName="planovaci_jindra_rekl_o_r_mkl3" Text="Jindra řekl o Róze" />
+				</Port>
+				<Port Name="hotovo" Direction="Out" Type="bool">
+					<DesignName StringName="planovaci_ft_do_malesova_mETY" Text="Hotovo" />
+				</Port>
+				<Port Name="dokecana_druha_cast_1" Direction="In" Type="trigger">
+					<DesignName StringName="planovaci_dokecana_druha__g6G9" Text="EnqueueDialog" />
+				</Port>
+				<Port Name="komar_rekl_o_roze" Direction="In" Type="bool">
+					<DesignName StringName="planovaci_komar_rekl_o_ro_e9fr" Text="Komar rekl o Roze" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="planovaci_polylog_posledni_cast__certovka/planovaci_polylog_posledni_cast__certovka.xml" />
+			</Definitions>
+			<Nodes>
+				<CleanAndHealTo Name="CleanAndHealTo" PositionY="-440" PositionX="0" Namespace="utils.general">
+					<Asset Name="souls" Alias="certovkaEveningMeetupParticipants" />
+					<Constant Name="hp" Value="100" />
+					<Edge From="dokecana_druha_cast_1" To="exec" />
+				</CleanAndHealTo>
+				<Function Name="createdialogparams1" PositionY="150" PositionX="-540" MethodName="wh::dialogmodule::CreateDialogParams" DeclaringType="wh::dialogmodule">
+					<Asset Name="Participants" Alias="certovkaEveningMeetupParticipants" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="planovaci_polylog_posledni_cast__certovka.jindra_rekl_o_roze" To="jindra_rekl_o_roze" />
+					<Edge From="planovaci_polylog_posledni_cast__certovka.jde_se_na_malesov" To="hotovo" />
+				</Output>
+				<planovaci_polylog_posledni_cast__certovka Name="planovaci_polylog_posledni_cast__certovka">
+					<Asset Name="DialogueHolder" Alias="certovkaEveningMeetupSceneSecondCertovkaPart" />
+					<Constant Name="hagenMashBowl" Value="a49439a3-85cc-a14f-db92-9e17bee76c81" />
+					<Constant Name="hagenSpoon" Value="30b2916b-37be-4d62-ad7f-2389b137fd59" />
+					<Constant Name="samKnife" Value="ec9399a5-3995-455f-81a5-9e9afec59e53" />
+					<Constant Name="tankard_bear" Value="710eae16-0b2e-a077-86a1-6c9ef8f949ef" />
+					<Edge From="dokecana_druha_cast_1" To="EnqueueDialogue" />
+					<Edge From="createdialogparams1.DialogParams" To="DialogParams" />
+					<Edge From="komar_rekl_o_roze" To="komar_rekl_o_roze" />
+				</planovaci_polylog_posledni_cast__certovka>
+				<Function Name="removebuff22" PositionY="-190" PositionX="0" MethodName="wh::rpgmodule::RemoveBuff" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="certovkaEveningMeetupParticipants" />
+					<Constant Name="Buff" Value="ffc20522-134d-4811-8bc5-e933b74b7081" />
+					<Edge From="dokecana_druha_cast_1" To="Exec" />
+				</Function>
+			</Nodes>
+			<Assets>
+				<CameraAsset Name="certovka_customCamera_01" />
+				<CameraAsset Name="certovka_customCamera_02" />
+				<CameraAsset Name="certovka_customCamera_03" />
+				<CameraAsset Name="certovka_customCamera_04" />
+				<CameraAsset Name="certovka_customCamera_05" />
+				<CameraAsset Name="certovka_customCamera_06" />
+				<CameraAsset Name="certovka_customCamera_07" />
+				<CameraAsset Name="certovka_customCamera_08" />
+				<CameraAsset Name="certovka_customCamera_09" />
+				<CameraAsset Name="certovka_customCamera_10" />
+				<CameraAsset Name="certovka_customCamera_11" />
+				<CameraAsset Name="certovka_customCamera_12" />
+				<CameraAsset Name="certovka_customCamera_13" />
+				<CameraAsset Name="certovka_customCamera_14" />
+				<CameraAsset Name="certovka_customCamera_15" />
+				<CameraAsset Name="certovka_customCamera_16" />
+				<TagPointAsset Name="m44b_certovka_customTagpoint_01" />
+				<CameraAsset Name="certovka_customCamera_17" />
+				<CameraAsset Name="certovka_customCamera_18" />
+				<CameraAsset Name="certovka_customCamera_19" />
+				<CameraAsset Name="certovka_customCamera_20" />
+			</Assets>
+			<Notes>
+				<Note Name="note2" PositionY="-240" PositionX="-10">
+					<Text StringName="planovaci_note2_odR7" Text="KCD2-445104 - Aby nebyli opilý a špinavý na přepad" />
+				</Note>
+			</Notes>
+			<MapVizLocation MapName="kutnohorsko" PositionX="2963" PositionY="2933" />
+		</DialogWrapper>
+	</Skald>
+</Database>

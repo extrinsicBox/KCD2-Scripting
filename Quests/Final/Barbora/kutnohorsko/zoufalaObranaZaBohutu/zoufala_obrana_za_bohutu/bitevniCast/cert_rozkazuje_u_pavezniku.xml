@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="cert_rozkazuje_u_pavezniku">
+			<Ports>
+				<Port Name="poslat_certa_k_mrizi" Direction="In" Type="trigger">
+					<DesignName StringName="cert_rozk_cert_jde_k_mrizi_4wNr" Text="Poslat Čerta k mříži" />
+				</Port>
+				<Port Name="tezkoodenci_vyrazili_k_brane" Direction="In" Type="bool">
+					<DesignName StringName="cert_rozk_objective_bran__AfnQ" Text="Těžkooděnci vyrazili k bráně" />
+				</Port>
+				<Port Name="pustit_bark_certa_opetujte_palbu" Direction="In" Type="trigger">
+					<DesignName StringName="cert_rozk_cert_krici_opet_Wy36" Text="Pustit bark Čerta opětujte palbu" />
+				</Port>
+				<Port Name="pustit_certovi_barky_behem_utoku_sekerniku" Direction="In" Type="trigger">
+					<DesignName StringName="cert_rozk_pustit_certovi__HoIZ" Text="Pustit Čertovi barky během útoku sekerníků" />
+				</Port>
+				<Port Name="pustit_bark_certa_po_vyliti_oleje" Direction="In" Type="trigger">
+					<DesignName StringName="cert_rozk_cert_krici_po_v_ekUG" Text="Pustit bark Čerta po vylití oleje" />
+				</Port>
+				<Port Name="hotovo" Direction="Out" Type="trigger">
+					<DesignName StringName="cert_rozk_hotovo_lp1J" Text="Hotovo" />
+				</Port>
+				<Port Name="probiha_utok_sekerniku" Direction="In" Type="bool">
+					<DesignName StringName="cert_rozk_probiha_utok_se_s88G" Text="Probíhá útok sekerníků" />
+				</Port>
+				<Port Name="poslat_hrace_k_brane" Direction="Out" Type="trigger">
+					<DesignName StringName="cert_rozk_poslat_hrace_k__0Liy" Text="Poslat hráče k bráně" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="cert_rozkazuje_u_pavezniku/suchy_cert_kdyz_blokuje_strelce.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/suchy_cert_krici_pred_palbou.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/suchy_cert_barkuje_po_vyliti_oleje.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/cert_bude_odchazet.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/suchy_cert_krici_na_hrace_kdyz_jde_pomoct.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/suchy_cert_vola_o_pomoc_kdyz_je_hrac_u_brany.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/barky_certa_pri_utoku_na_branu.xml" />
+				<Definition File="cert_rozkazuje_u_pavezniku/cert_opakuje_ze_ma_jit_hrac_na_branu.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="and11" PositionY="300" PositionX="740" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="tezkoodenci_vyrazili_k_brane" To="B">
+						<Vertex>vertex8</Vertex>
+						<Vertex>vertex13</Vertex>
+					</Edge>
+					<Edge From="or15.bool" To="A" />
+				</Function>
+				<Function Name="and24" PositionY="-960" PositionX="690" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="or23.bool" To="B" />
+					<Edge From="not25.bool" To="A" />
+				</Function>
+				<barky_certa_pri_utoku_na_branu Name="barky_certa_pri_utoku_na_branu" PositionY="-920" PositionX="1320" />
+				<cert_bude_odchazet Name="cert_bude_odchazet" PositionY="-650" PositionX="1320" />
+				<cert_opakuje_ze_ma_jit_hrac_na_branu Name="cert_opakuje_ze_ma_jit_hrac_na_branu" PositionY="-1480" PositionX="1350" />
+				<DistanceTrigger Name="distancetrigger12" PositionY="270" PositionX="1010">
+					<Asset Name="Origin" Alias="cert" />
+					<Asset Name="Target" Alias="player_bohuta" />
+					<Constant Name="Operator" Value="LessEquals" />
+					<Constant Name="Distance" Value="6" />
+					<Edge From="and11.bool" To="IsActive" />
+				</DistanceTrigger>
+				<DistanceTrigger Name="distancetrigger12_1" PositionY="-980" PositionX="910">
+					<Asset Name="Origin" Alias="cert" />
+					<Asset Name="Target" Alias="player_bohuta" />
+					<Constant Name="Operator" Value="LessEquals" />
+					<Constant Name="Distance" Value="6" />
+					<Edge From="and24.bool" To="IsActive" />
+				</DistanceTrigger>
+				<EnableBehavior Name="enablebehaviorzoufalaobranazabohutucertcommandpavisemenendnotification10" PositionY="-370" PositionX="1270" Signature="zoufalaObranaZaBohutu_cert_commandPaviseMen" EventSet="endNotification">
+					<Constant Name="Behavior" Value="cert_commandPaviseMen" />
+					<Asset Name="SmartEntity" Alias="battleSO" />
+					<Asset Name="NPC" Alias="cert" />
+					<Asset Name="area" Alias="areaInFrontOfFrontWallGate" />
+					<Asset Name="commandSpot" Alias="certGateCommandingSpot" />
+					<Constant Name="cooldown" Value="5s" />
+					<Constant Name="cooldownVariation" Value="3s" />
+					<Asset Name="gateLookSpot" Alias="gateLookSpot" />
+					<Constant Name="playerBarkAlias" Value="zoufalaObranaZaBohutu_suchyCertKriciNaHraceKdyzBlokujeStrelce" />
+					<Edge From="paviseMenShootingCertCommands.OnExec" To="UpdateReferences">
+						<Vertex>vertex2</Vertex>
+						<Vertex>vertex3</Vertex>
+					</Edge>
+					<Edge From="switch9.Value1" To="commandBarkAlias" />
+					<Edge From="or2.bool" To="IsActive">
+						<Vertex>vertex1</Vertex>
+					</Edge>
+					<Edge From="or13.bool" To="isRepeatingBark">
+						<Vertex>vertex25</Vertex>
+					</Edge>
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="playAnimationWhenBarking">
+						<Vertex>vertex31</Vertex>
+						<Vertex>vertex32</Vertex>
+					</Edge>
+					<Edge From="or27.bool" To="triggerBark">
+						<Vertex>FUIy8Dwk</Vertex>
+					</Edge>
+					<Edge From="or26.bool" To="barkingAtPlayer">
+						<Vertex>aIeI5hMs</Vertex>
+					</Edge>
+				</EnableBehavior>
+				<IfFunction Name="ifand30" PositionY="490" PositionX="-490" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="probiha_utok_sekerniku" To="A" />
+					<Edge From="paviseMenShootingCertCommands.OnPlayerCameDone" To="Exec">
+						<Vertex>vzJgAeFX</Vertex>
+						<Vertex>96b6DCTI</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifand32" PositionY="120" PositionX="-490" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="pustit_certovi_barky_behem_utoku_sekerniku" To="Exec" />
+					<Edge From="paviseMenShootingCertCommands.ReturnFire" To="A">
+						<Vertex>K0pJ92l8</Vertex>
+						<Vertex>sw4QxDDM</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifand33" PositionY="310" PositionX="-490" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="suchy_cert_krici_na_hrace_kdyz_jde_pomoct.bark_na_hrace" To="A">
+						<Vertex>FjD04umJ</Vertex>
+						<Vertex>rUfWFMWG</Vertex>
+					</Edge>
+					<Edge From="distancetrigger12.OnMatch" To="Exec">
+						<Vertex>vertex10</Vertex>
+						<Vertex>vertex11</Vertex>
+					</Edge>
+				</IfFunction>
+				<Function Name="not25" PositionY="-1000" PositionX="460" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="tezkoodenci_vyrazili_k_brane" To="Value">
+						<Vertex>vertex30</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="or13" PositionY="-140" PositionX="530" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.AttackOnGateUnderway" To="C" />
+					<Edge From="paviseMenShootingCertCommands.PlayerIsNotComing" To="B" />
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="A" />
+				</Function>
+				<Function Name="or15" PositionY="270" PositionX="490" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.NoBark" To="A" />
+					<Edge From="paviseMenShootingCertCommands.PlayerCame" To="D" />
+					<Edge From="paviseMenShootingCertCommands.PlayerIsNotComing" To="C" />
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="B" />
+					<Edge From="paviseMenShootingCertCommands.AttackOnGateUnderway" To="F" />
+					<Edge From="paviseMenShootingCertCommands.PlayerCameDone" To="E" />
+				</Function>
+				<Function Name="or2" PositionY="-1460" PositionX="480" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.NoBark" To="A" />
+					<Edge From="paviseMenShootingCertCommands.PlayerCame" To="D" />
+					<Edge From="paviseMenShootingCertCommands.PlayerIsNotComing" To="C" />
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="B" />
+					<Edge From="paviseMenShootingCertCommands.CertLeaving" To="I" />
+					<Edge From="paviseMenShootingCertCommands.OilSpilled" To="H" />
+					<Edge From="paviseMenShootingCertCommands.AttackOnGateUnderway" To="G" />
+					<Edge From="paviseMenShootingCertCommands.ReturnFire" To="F" />
+					<Edge From="paviseMenShootingCertCommands.PlayerCameDone" To="E" />
+				</Function>
+				<Function Name="or23" PositionY="-880" PositionX="450" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.NoBark" To="A" />
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="B" />
+				</Function>
+				<Function Name="or26" PositionY="-330" PositionX="540" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.PlayerStaysAtCourtyard" To="A" />
+					<Edge From="paviseMenShootingCertCommands.PlayerCame" To="B" />
+				</Function>
+				<Function Name="or27" PositionY="40" PositionX="540" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="paviseMenShootingCertCommands.PlayerCame" To="A" />
+					<Edge From="paviseMenShootingCertCommands.CertLeaving" To="C" />
+					<Edge From="paviseMenShootingCertCommands.OilSpilled" To="B" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="paviseMenShootingCertCommands.OnDone" To="hotovo">
+						<Vertex>vertex6</Vertex>
+						<Vertex>vertex7</Vertex>
+					</Edge>
+					<Edge From="paviseMenShootingCertCommands.OnPlayerCameDone" To="poslat_hrace_k_brane">
+						<Vertex>sy4m35VB</Vertex>
+						<Vertex>tVAw4TX5</Vertex>
+					</Edge>
+				</Output>
+				<State Name="paviseMenShootingCertCommands" PositionY="-390" PositionX="-40" TypeT="DesperateDefenseAsBohuta_CertCommands">
+					<Edge From="poslat_certa_k_mrizi" To="SetNoBark">
+						<Vertex>rq7sbzSv</Vertex>
+						<Vertex>cLcVTDRe</Vertex>
+					</Edge>
+					<Edge From="pustit_bark_certa_opetujte_palbu" To="SetReturnFire">
+						<Vertex>bdE3Jxp8</Vertex>
+						<Vertex>BAoMH1pX</Vertex>
+					</Edge>
+					<Edge From="pustit_bark_certa_po_vyliti_oleje" To="SetOilSpilled">
+						<Vertex>9agjzIyF</Vertex>
+						<Vertex>66Q6lHLQ</Vertex>
+					</Edge>
+					<Edge From="distancetrigger12.OnUnmatch" To="SetPlayerIsNotComing">
+						<Vertex>vertex16</Vertex>
+						<Vertex>vertex17</Vertex>
+					</Edge>
+					<Edge From="distancetrigger12_1.OnMatch" To="SetPlayerStaysAtCourtyard">
+						<Vertex>vertex26</Vertex>
+						<Vertex>vertex27</Vertex>
+					</Edge>
+					<Edge From="distancetrigger12_1.OnUnmatch" To="SetNoBark">
+						<Vertex>vertex28</Vertex>
+						<Vertex>vertex29</Vertex>
+					</Edge>
+					<Edge From="switch28.Value1" To="Value" />
+					<Edge From="enablebehaviorzoufalaobranazabohutucertcommandpavisemenendnotification10.OnFinished" To="Exec">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="ifand30.True" To="SetAttackOnGateUnderway" />
+					<Edge From="ifand32.True" To="SetAttackOnGateUnderway" />
+					<Edge From="ifand33.True" To="SetPlayerCameDone" />
+					<Edge From="ifand33.False" To="SetPlayerCame" />
+				</State>
+				<suchy_cert_barkuje_po_vyliti_oleje Name="suchy_cert_barkuje_po_vyliti_oleje" PositionY="-780" PositionX="1330" />
+				<suchy_cert_kdyz_blokuje_strelce Name="suchy_cert_kdyz_blokuje_strelce" PositionY="-520" PositionX="1310" />
+				<suchy_cert_krici_na_hrace_kdyz_jde_pomoct Name="suchy_cert_krici_na_hrace_kdyz_jde_pomoct" PositionY="-1240" PositionX="1320" />
+				<suchy_cert_krici_pred_palbou Name="suchy_cert_krici_pred_palbou" PositionY="-1070" PositionX="1310" />
+				<suchy_cert_vola_o_pomoc_kdyz_je_hrac_u_brany Name="suchy_cert_vola_o_pomoc_kdyz_je_hrac_u_brany" PositionY="-1360" PositionX="1330" />
+				<Switch Name="switch28" PositionY="-220" PositionX="-550" TypeT="DesperateDefenseAsBohuta_CertCommands" ValueTypes="DesperateDefenseAsBohuta_CertCommands" SwitchValues="PlayerCame CertLeaving OilSpilled">
+					<Constant Name="PlayerCameValue1" Value="PlayerCameDone" />
+					<Constant Name="CertLeavingValue1" Value="Done" />
+					<Constant Name="OilSpilledValue1" Value="CertLeaving" />
+					<Constant Name="DefaultValue1" Value="Done" />
+					<Edge From="paviseMenShootingCertCommands.State" To="Switch">
+						<Vertex>sD7lBDra</Vertex>
+						<Vertex>qe5qKDbm</Vertex>
+					</Edge>
+				</Switch>
+				<Switch Name="switch9" PositionY="-720" PositionX="500" TypeT="DesperateDefenseAsBohuta_CertCommands" ValueTypes="string" SwitchValues="ReturnFire OilSpilled CertLeaving PlayerCame PlayerIsNotComing AttackOnGateUnderway PlayerStaysAtCourtyard">
+					<Constant Name="ReturnFireValue1" Value="zoufalaObranaZaBohutu_suchyCertKriciPredPalbou" />
+					<Constant Name="OilSpilledValue1" Value="zoufalaObranaZaBohutu_suchyCertBarkujePoVylitiOleje" />
+					<Constant Name="CertLeavingValue1" Value="zoufalaObranaZaBohutu_certBudeOdchazet" />
+					<Constant Name="PlayerCameValue1" Value="zoufalaObranaZaBohutu_suchyCertKriciNaHraceKdyzJdePomoct" />
+					<Constant Name="PlayerIsNotComingValue1" Value="zoufalaObranaZaBohutu_suchyCertVolaOPomocKdyzJeHracUBrany" />
+					<Constant Name="AttackOnGateUnderwayValue1" Value="zoufalaObranaZaBohutu_barkyCertaPriUtokuNaBranu" />
+					<Constant Name="PlayerStaysAtCourtyardValue1" Value="zoufalaObranaZaBohutu_certOpakujeZeMaJitHracNaBranu" />
+					<Constant Name="DefaultValue1" Value="none" />
+					<Edge From="paviseMenShootingCertCommands.State" To="Switch" />
+				</Switch>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="66Q6lHLQ" PositionY="70" PositionX="-200" />
+				<EdgeVertex Name="96b6DCTI" PositionY="681" PositionX="-492" />
+				<EdgeVertex Name="9agjzIyF" PositionY="70" PositionX="-560" />
+				<EdgeVertex Name="aIeI5hMs" PositionY="-240" PositionX="1150" />
+				<EdgeVertex Name="BAoMH1pX" PositionY="60" PositionX="-200" />
+				<EdgeVertex Name="bdE3Jxp8" PositionY="60" PositionX="-560" />
+				<EdgeVertex Name="cLcVTDRe" PositionY="50" PositionX="-200" />
+				<EdgeVertex Name="FjD04umJ" PositionY="-1516" PositionX="1712" />
+				<EdgeVertex Name="FUIy8Dwk" PositionY="130" PositionX="1170" />
+				<EdgeVertex Name="K0pJ92l8" PositionY="-431" PositionX="361" />
+				<EdgeVertex Name="qe5qKDbm" PositionY="-420" PositionX="-545" />
+				<EdgeVertex Name="rq7sbzSv" PositionY="50" PositionX="-560" />
+				<EdgeVertex Name="rUfWFMWG" PositionY="-1516" PositionX="-525" />
+				<EdgeVertex Name="sD7lBDra" PositionY="-419" PositionX="367" />
+				<EdgeVertex Name="sw4QxDDM" PositionY="-430" PositionX="-547" />
+				<EdgeVertex Name="sy4m35VB" PositionY="570" PositionX="440" />
+				<EdgeVertex Name="tVAw4TX5" PositionY="560" PositionX="1780" />
+				<EdgeVertex Name="vertex1" PositionY="-1370" PositionX="1070" />
+				<EdgeVertex Name="vertex10" PositionY="660" PositionX="1250" />
+				<EdgeVertex Name="vertex11" PositionY="660" PositionX="-500" />
+				<EdgeVertex Name="vertex13" PositionY="670" PositionX="680" />
+				<EdgeVertex Name="vertex16" PositionY="650" PositionX="1250" />
+				<EdgeVertex Name="vertex17" PositionY="650" PositionX="-60" />
+				<EdgeVertex Name="vertex2" PositionY="-1480" PositionX="450" />
+				<EdgeVertex Name="vertex25" PositionY="-50" PositionX="1160" />
+				<EdgeVertex Name="vertex26" PositionY="-1030" PositionX="1170" />
+				<EdgeVertex Name="vertex27" PositionY="-1030" PositionX="-70" />
+				<EdgeVertex Name="vertex28" PositionY="-1020" PositionX="1160" />
+				<EdgeVertex Name="vertex29" PositionY="-1020" PositionX="-70" />
+				<EdgeVertex Name="vertex3" PositionY="-1480" PositionX="1090" />
+				<EdgeVertex Name="vertex30" PositionY="-910" PositionX="-540" />
+				<EdgeVertex Name="vertex31" PositionY="250" PositionX="550" />
+				<EdgeVertex Name="vertex32" PositionY="250" PositionX="1120" />
+				<EdgeVertex Name="vertex4" PositionY="570" PositionX="1780" />
+				<EdgeVertex Name="vertex5" PositionY="580" PositionX="-10" />
+				<EdgeVertex Name="vertex6" PositionY="590" PositionX="450" />
+				<EdgeVertex Name="vertex7" PositionY="580" PositionX="1780" />
+				<EdgeVertex Name="vertex8" PositionY="670" PositionX="-500" />
+				<EdgeVertex Name="vzJgAeFX" PositionY="680" PositionX="370" />
+			</EdgeVertices>
+			<Assets>
+				<TagPointAsset Name="gateLookSpot" />
+			</Assets>
+			<Text StringName="cert_rozkazuje_u_mrize_pFR1" Text="Čert rozkazuje u pavézníků" />
+		</Module>
+	</Skald>
+</Database>

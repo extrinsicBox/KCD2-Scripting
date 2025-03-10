@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="podkova">
+			<Ports>
+				<Port Name="onwake" Direction="In" Type="trigger">
+					<DesignName StringName="stastna_p_onwake_B9i4" Text="OnWake" />
+				</Port>
+				<Port Name="ziskej_pdokovu_aktivni" Direction="Out" Type="bool">
+					<DesignName StringName="stastna_p_ziskej_pdokovu__wHjG" Text="ziskej pdokovu aktivni" />
+				</Port>
+				<Port Name="quest_fail" Direction="In" Type="trigger">
+					<DesignName StringName="stastna_p_quest_fail_LxTE" Text="quest fail" />
+				</Port>
+				<Port Name="update_ziskavani" Direction="Out" Type="trigger">
+					<DesignName StringName="stastna_p_update_ziskavani_fTCU" Text="update ziskavani" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<HasItems_Soul Name="HasItems_Soul" PositionY="-270" PositionX="-900" Namespace="utils.item">
+					<Asset Name="soul" Alias="player" />
+					<Constant Name="itemclass" Value="651333f0-36d1-4321-975f-bc7833a773eb" />
+					<Constant Name="amount" Value="1" />
+				</HasItems_Soul>
+				<IfFunction Name="ifand3" PositionY="-20" PositionX="-190" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="ifnot2.True" To="Exec" />
+					<Edge From="ziskejPodkovu.None" To="A">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+						<Vertex>vertex10</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifand3_1" PositionY="130" PositionX="-190" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="ziskejPodkovu.None" To="A">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+						<Vertex>vertex10</Vertex>
+					</Edge>
+					<Edge From="ifnot2.False" To="Exec" />
+				</IfFunction>
+				<IfFunction Name="ifand4" PositionY="290" PositionX="-240" MethodName="math::boolean::And" DeclaringType="math::boolean">
+					<Edge From="quest_fail" To="Exec">
+						<Vertex>vertex11</Vertex>
+					</Edge>
+					<Edge From="ziskejPodkovu.Started" To="A">
+						<Vertex>vertex7</Vertex>
+						<Vertex>vertex8</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifnot2" PositionY="-20" PositionX="-560" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="onwake" To="Exec" />
+					<Edge From="HasItems_Soul.hasitems" To="Value" />
+				</IfFunction>
+				<itemclasstrigger_playerinventory Name="itemclasstrigger_playerinventory" PositionY="210" PositionX="430" Namespace="utils.item">
+					<Constant Name="itemclass" Value="651333f0-36d1-4321-975f-bc7833a773eb" />
+					<Constant Name="amount" Value="1" />
+					<Edge From="ziskejPodkovu.Started" To="isactive" />
+				</itemclasstrigger_playerinventory>
+				<ziskej_stastnou_podkovu Name="objectiveVisual5" PositionY="-198" PositionX="437" RequiredForOutput="kutnohorsko">
+					<Edge From="ziskejPodkovu.State" To="Progress" />
+				</ziskej_stastnou_podkovu>
+				<Output Name="Output">
+					<Edge From="ziskejPodkovu.Started" To="ziskej_pdokovu_aktivni" />
+					<Edge From="ziskejPodkovu.OnCompleted" To="update_ziskavani" />
+				</Output>
+				<State Name="ziskejPodkovu" PositionY="-90" PositionX="90" RequiredForOutput="kutnohorsko" TypeT="ProgressAbortable">
+					<Edge From="ifand4.True" To="SetAborted" />
+					<Edge From="itemclasstrigger_playerinventory.ontargetamountacquire" To="SetCompleted">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+					<Edge From="ifand3.True" To="SetStarted" />
+					<Edge From="ifand3_1.True" To="SetAborted" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="-127" PositionX="270" />
+				<EdgeVertex Name="vertex10" PositionY="70" PositionX="-250" />
+				<EdgeVertex Name="vertex11" PositionY="410" PositionX="-900" />
+				<EdgeVertex Name="vertex2" PositionY="-130" PositionX="-260" />
+				<EdgeVertex Name="vertex3" PositionY="564" PositionX="721" />
+				<EdgeVertex Name="vertex4" PositionY="569" PositionX="76" />
+				<EdgeVertex Name="vertex7" PositionY="490" PositionX="260" />
+				<EdgeVertex Name="vertex8" PositionY="490" PositionX="-190" />
+			</EdgeVertices>
+			<Text StringName="stastna_podkova_EpAO" Text="šťastná podkova" />
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="stastna_p_jindra_musi_vyh_UHdH" Text="Jindra musí vyhrát koňský závod. Při vítězství do inventáře dostane item &quot;šťastná podkova&quot;. " />
+				</GameplayActionElement>
+				<GameplayActionElement>
+					<Text StringName="stastna_p_pokud_vyhral_ne_2Kgp" Text="Pokud vyhrál nějaký závod už před začátkem questu, v dialogu s katem Hynkem se mu objevila možnost říct, že závod už vyhrál. V tu chvíli se mu do koňského inventáře spawnul item podkovy." />
+				</GameplayActionElement>
+			</Elements>
+			<MapVizLocation MapName="kutnohorsko" PositionX="3314" PositionY="254" />
+		</Gameplay>
+	</Skald>
+</Database>

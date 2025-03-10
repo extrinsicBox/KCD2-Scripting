@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+  <Skald>
+    <Module Name="dialogAnimations">
+      <Definitions>
+        <Definition File="dialogAnimations/rozina_kniha__psani_knihy.xml" />
+      </Definitions>
+      <Nodes>
+        <rozina_kniha__psani_knihy Name="rozina_kniha__psani_knihy" PositionY="-70" PositionX="-10">
+          <Asset Name="DialogueHolder" Alias="rozinaKniha_dialog" />
+          <Constant Name="quill" Value="47c3bd7b-1411-4da7-83e7-669385331d91" />
+        </rozina_kniha__psani_knihy>
+      </Nodes>
+      <Assets>
+        <DialogueHolderAsset Name="rozinaKniha_dialog" />
+        <CameraAsset Name="rozinaKniha_player_camera" />
+        <CameraAsset Name="rozinaKniha_roza_camera" />
+      </Assets>
+      <Text Text="dialogAnimations" />
+    </Module>
+  </Skald>
+</Database>

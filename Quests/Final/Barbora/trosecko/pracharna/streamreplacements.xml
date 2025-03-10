@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="streamreplacements">
+			<Ports>
+				<Port Name="stream" Direction="In" Type="trigger">
+					<DesignName StringName="fader_str_stream_DHvD" Text="Stream" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<State Name="BonkaAndZink" PositionY="170" PositionX="530" TypeT="BonkaAndZink">
+					<Edge From="ifdeathcheck4.True" To="SetBothDead" />
+					<Edge From="ifdeathcheck4_1.False" To="SetNooneDied" />
+					<Edge From="ifdeathcheck4.False" To="SetBonkaDead" />
+					<Edge From="ifdeathcheck4_1.True" To="SetZinkDead" />
+				</State>
+				<CutsceneHandler Name="cutscenehandler1" PositionY="650" PositionX="1170">
+					<Asset Name="CutsceneHolder" Alias="fader_stream" />
+					<Constant Name="AutoPlay" Value="false" />
+					<Edge From="triggersequence18.A" To="PlayCutscene" />
+					<Edge From="stream" To="EnqueueCutscene" />
+				</CutsceneHandler>
+				<If Name="if14" PositionY="310" PositionX="1310">
+					<Edge From="streamprofileshandling.onloaded" To="Exec" />
+					<Edge From="BonkaAndZink.ZinkDead" To="Condition">
+						<Vertex>DMB4bwq0</Vertex>
+						<Vertex>XJfRtn8T</Vertex>
+					</Edge>
+				</If>
+				<If Name="if15" PositionY="120" PositionX="1330">
+					<Edge From="streamprofileshandling_1.onloaded" To="Exec" />
+					<Edge From="BonkaAndZink.BonkaDead" To="Condition">
+						<Vertex>yezq58J2</Vertex>
+						<Vertex>JrA4EuhG</Vertex>
+					</Edge>
+				</If>
+				<If Name="if16" PositionY="190" PositionX="1610">
+					<Edge From="streamprofileshandling.profileactive" To="Condition">
+						<Vertex>3rfHtsfX</Vertex>
+					</Edge>
+					<Edge From="if15.False" To="Exec" />
+				</If>
+				<If Name="if17" PositionY="360" PositionX="1610">
+					<Edge From="streamprofileshandling_1.profileactive" To="Condition">
+						<Vertex>tseRGsbn</Vertex>
+					</Edge>
+					<Edge From="if14.False" To="Exec" />
+				</If>
+				<IfFunction Name="ifdeathcheck2" PositionY="340" PositionX="0" MethodName="wh::rpgmodule::DeathCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="bonka" />
+					<Edge From="cutscenehandler1.BeforePlay" To="Exec">
+						<Vertex>8MvIv9nd</Vertex>
+						<Vertex>Ytdd1krK</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifdeathcheck4" PositionY="270" PositionX="260" MethodName="wh::rpgmodule::DeathCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="zink" />
+					<Edge From="ifdeathcheck2.True" To="Exec" />
+				</IfFunction>
+				<IfFunction Name="ifdeathcheck4_1" PositionY="450" PositionX="260" MethodName="wh::rpgmodule::DeathCheck" DeclaringType="wh::rpgmodule">
+					<Asset Name="Souls" Alias="zink" />
+					<Edge From="ifdeathcheck2.False" To="Exec" />
+				</IfFunction>
+				<streamprofileshandling Name="streamprofileshandling" PositionY="300" PositionX="990" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="standinZink" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="BonkaAndZink.OnBothDead" To="streamprofiles" />
+					<Edge From="BonkaAndZink.OnZinkDead" To="streamprofiles" />
+				</streamprofileshandling>
+				<streamprofileshandling Name="streamprofileshandling_1" PositionY="0" PositionX="990" Namespace="utils.streaming">
+					<Asset Name="profiles" Alias="standinBonka" />
+					<Constant Name="autodeactivatenotificationafterstream" Value="false" />
+					<Edge From="BonkaAndZink.OnBothDead" To="streamprofiles" />
+					<Edge From="BonkaAndZink.OnBonkaDead" To="streamprofiles" />
+				</streamprofileshandling>
+				<TriggerSequence Name="triggersequence18" PositionY="780" PositionX="900">
+					<Edge From="if15.True" To="Exec">
+						<Vertex>Upt2KKLp</Vertex>
+						<Vertex>bJaopJnQ</Vertex>
+					</Edge>
+					<Edge From="if17.True" To="Exec">
+						<Vertex>W60bK3Fu</Vertex>
+						<Vertex>9DobnyrA</Vertex>
+					</Edge>
+					<Edge From="if16.True" To="Exec">
+						<Vertex>SWBuCLY2</Vertex>
+						<Vertex>8E3jcwtd</Vertex>
+					</Edge>
+					<Edge From="BonkaAndZink.OnNooneDied" To="Exec" />
+					<Edge From="if14.True" To="Exec">
+						<Vertex>gwNWTbQv</Vertex>
+						<Vertex>n71cHUsu</Vertex>
+					</Edge>
+				</TriggerSequence>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="3rfHtsfX" PositionY="559" PositionX="1543" />
+				<EdgeVertex Name="8E3jcwtd" PositionY="1010" PositionX="880" />
+				<EdgeVertex Name="8MvIv9nd" PositionY="950" PositionX="1440" />
+				<EdgeVertex Name="9DobnyrA" PositionY="1020" PositionX="860" />
+				<EdgeVertex Name="bJaopJnQ" PositionY="980" PositionX="910" />
+				<EdgeVertex Name="DMB4bwq0" PositionY="600" PositionX="982" />
+				<EdgeVertex Name="gwNWTbQv" PositionY="970" PositionX="1470" />
+				<EdgeVertex Name="JrA4EuhG" PositionY="310" PositionX="1270" />
+				<EdgeVertex Name="n71cHUsu" PositionY="970" PositionX="930" />
+				<EdgeVertex Name="SWBuCLY2" PositionY="1010" PositionX="1780" />
+				<EdgeVertex Name="tseRGsbn" PositionY="295" PositionX="1565" />
+				<EdgeVertex Name="Upt2KKLp" PositionY="980" PositionX="1520" />
+				<EdgeVertex Name="W60bK3Fu" PositionY="1030" PositionX="1790" />
+				<EdgeVertex Name="XJfRtn8T" PositionY="602" PositionX="1290" />
+				<EdgeVertex Name="yezq58J2" PositionY="317" PositionX="946" />
+				<EdgeVertex Name="Ytdd1krK" PositionY="940" PositionX="120" />
+			</EdgeVertices>
+			<Text StringName="fader_stream_UCDx" Text="StreamReplacements" />
+		</Module>
+	</Skald>
+</Database>

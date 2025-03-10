@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Scene Name="pista_a_okno_obsolete" IsLocked="true">
+			<Ports>
+				<Port Name="hrac_pistu_proste_zabije" Direction="In" Type="trigger">
+					<DesignName StringName="pista_a_o_hrac_pistu_pros_qFel" Text="Hráč Pištu prostě zabije" />
+				</Port>
+			</Ports>
+			<Text StringName="pista_a_okno_H4lF" Text="Pišta a okno OBSOLETE" />
+			<Elements>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_hrac_se_rozhodl_Dkfa" Text="Jindra přistoupí o krok blíž k Pištovi a za zády si nenápadně vezme nůž ze stolu. Chvíli se na sebe koukají. Je to takový stand-off. První se pohne Pišta směrem k meči." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_jindra_je_ale_p_EBOO" Text="Jindra je ale připraven a vrhne se dopředu. Bodne Pištovi nůž do břicha. Následně ho natlačí do výklenku okna." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_tady_zacina_spo_bMdp" Text="&lt;tady začíná společná část CS&gt;" />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_oba_jsou_si_bli_FlGT" Text="Oba jsou si blízko (záběr je na horní půlku těl abychom neviděli, čím je Pišta probodnut)." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="pista_a_o_seq1_w9OL" Text="seq1" />
+									<Elements>
+										<Response Role="PISTA">
+											<Parenthetical>
+												<Text StringName="pist_pista_bojuje_s_boles_JIkL" Text="bojuje s bolestí" />
+											</Parenthetical>
+											<Text StringName="pist_pista_nakonec__zjist_ZgO7" Text="Nakonec ... zjistíš, že ... sem měl pravdu ..." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_jindra_se_na_ne_KXBp" Text="Jindra se na něj dívá zblízka. Neví co chce říct." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="pista_a_o_seq1_Dkv5" Text="seq1" />
+									<Elements>
+										<Response Role="PISTA">
+											<Parenthetical>
+												<Text StringName="pist_pista_bojuje_s_boles_G0sE" Text="bojuje s bolestí" />
+											</Parenthetical>
+											<Text StringName="pist_pista__ze_silnejsi_p_BkqY" Text="... že silnější pes mrdá!" />
+										</Response>
+										<Response Role="PISTA">
+											<Parenthetical>
+												<Text StringName="pist_pista_bublave_MIES" Text="bublavě" />
+											</Parenthetical>
+											<Text StringName="pist_pista_he___xuZP" Text="He ... " />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="pista_a_o_jindra_zatlaci__06RM" Text="Jindra zatlačí a strčí Pištu přes okraj. Vidíme jak padá. Jeho křik zamaskuje hrom. Bouře se přibližuje. Jindra vycouvá z výklenku, podívá se na meč svého otce, prohlédne si značku a pak si ho konečně vezme." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text Text="" />
+				</SceneActionElement>
+			</Elements>
+		</Scene>
+	</Skald>
+</Database>

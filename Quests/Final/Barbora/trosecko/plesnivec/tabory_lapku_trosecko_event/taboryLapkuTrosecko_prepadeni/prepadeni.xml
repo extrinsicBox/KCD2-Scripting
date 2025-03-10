@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<RandomEventVariant Name="prepadeni" Weight="1.5" IsGuaranteed="true" MapTimeout="60s">
+			<Ports>
+				<Port Name="afterdialog" Direction="Out" Type="trigger">
+					<DesignName StringName="prepadeni_afterdialog_qf0Z" Text="afterDialog" />
+				</Port>
+				<Port Name="banditi_se_vzdavaji" Direction="Out" Type="trigger">
+					<DesignName StringName="prepadeni_banditi_se_vzda_tLU6" Text="banditi se vzdávají" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="prepadeni/plesnivcovi_muzi_na_zacatku_prepadeni.xml" />
+				<Definition File="prepadeni/plesnivcuv_clovek_se_vzdava_jindrovi.xml" />
+				<Definition File="prepadeni/startfight.xml" />
+				<Definition File="prepadeni/plesnicuv_muz_vidi_henryho.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="add121145179" PositionY="-640" PositionX="3210" MethodName="math::integer::Add" DeclaringType="math::integer">
+					<Edge From="state121145175.State" To="A" />
+					<Edge From="state121145175_2.State" To="B" />
+					<Edge From="state121145175_1.State" To="C" />
+					<Edge From="state121145173.State" To="D" />
+				</Function>
+				<AddFactionRelation Name="addfactionrelation2_1" PositionY="540" PositionX="2490">
+					<Constant Name="RelationValue" Value="1" />
+					<Edge From="getfaction3_2.Faction" To="Faction" />
+					<Edge From="isoulproperties51.FactionNode" To="RelationTarget" />
+					<Edge From="ambushersSurrenderState.Surrender" To="IsActive">
+						<Vertex>vertex64</Vertex>
+						<Vertex>vertex65</Vertex>
+					</Edge>
+				</AddFactionRelation>
+				<AddFactionRelation Name="addfactionrelation2_1_1" PositionY="760" PositionX="2490">
+					<Constant Name="RelationValue" Value="1" />
+					<Edge From="ambushersSurrenderState.Surrender" To="IsActive">
+						<Vertex>vertex64</Vertex>
+						<Vertex>vertex65</Vertex>
+					</Edge>
+					<Edge From="getfaction3_2.Faction" To="RelationTarget" />
+					<Edge From="isoulproperties51.FactionNode" To="Faction" />
+				</AddFactionRelation>
+				<AddFactionRelationBetweenArrays Name="addfactionrelationbetweenarrays121145187" PositionY="-1460" PositionX="1550">
+					<Constant Name="RelationValue" Value="-1" />
+					<Asset Name="SoulArray0" Alias="bandits" />
+					<Asset Name="SoulArray1" Alias="player" />
+					<Edge From="ambushersSurrenderState.Fight" To="IsActive" />
+				</AddFactionRelationBetweenArrays>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification121145195" PositionY="10" PositionX="50" NotificationName="hitReactionNotification">
+					<Asset Name="victim_value_filter" Alias="Monk" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification121145195_2" PositionY="270" PositionX="50" NotificationName="hitReactionNotification">
+					<Asset Name="victim_value_filter" Alias="bandit_1" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification121145195_3" PositionY="480" PositionX="50" NotificationName="hitReactionNotification">
+					<Asset Name="victim_value_filter" Alias="bandit_2" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<AIConceptSignalTrigger Name="aiconceptsignaltriggerhitreactionnotification121145195_4" PositionY="690" PositionX="50" NotificationName="hitReactionNotification">
+					<Asset Name="victim_value_filter" Alias="bandit_3" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</AIConceptSignalTrigger>
+				<State Name="ambushersSurrenderState" PositionY="-260" PositionX="550" TypeT="AmbushProgress">
+					<Edge From="OnSpawn" To="SetFight" />
+					<Edge From="plesnivcuv_clovek_se_vzdava_jindrovi.jindra_vi_kde_je_plesnivcuv_tabor" To="SetAfter">
+						<Vertex>vertex32</Vertex>
+						<Vertex>vertex33</Vertex>
+					</Edge>
+					<Edge From="ifcompare40.True" To="SetCanSurrender">
+						<Vertex>vertex58</Vertex>
+						<Vertex>vertex59</Vertex>
+					</Edge>
+					<Edge From="entitycontexttrigger8.OnContextAdded" To="SetSurrender">
+						<Vertex>vertex72</Vertex>
+						<Vertex>vertex73</Vertex>
+						<Vertex>vertex74</Vertex>
+						<Vertex>vertex75</Vertex>
+					</Edge>
+					<Edge From="entitycontexttrigger49.OnContextAdded" To="SetSurrender">
+						<Vertex>vertex72</Vertex>
+						<Vertex>vertex73</Vertex>
+						<Vertex>vertex74</Vertex>
+						<Vertex>vertex75</Vertex>
+					</Edge>
+				</State>
+				<SoulDeathTrigger Name="deathtrigger36" PositionY="-1040" PositionX="1550">
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="ambushersSurrenderState.Fight" To="IsActive" />
+				</SoulDeathTrigger>
+				<DistanceTrigger Name="distancetrigger26" PositionY="-1290" PositionX="-740">
+					<Asset Name="Origin" Alias="Monk" />
+					<Asset Name="Target" Alias="player" />
+					<Constant Name="Operator" Value="LessEquals" />
+					<Constant Name="Distance" Value="8" />
+					<Edge From="wasPlayerSeenState.Barking" To="IsActive" />
+				</DistanceTrigger>
+				<ElementAt Name="elementat121145171" PositionY="-740" PositionX="2150" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="Array" Alias="bandits" />
+					<Constant Name="Index" Value="0" />
+				</ElementAt>
+				<ElementAt Name="elementat121145171_1" PositionY="-600" PositionX="2150" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="Array" Alias="bandits" />
+					<Constant Name="Index" Value="1" />
+				</ElementAt>
+				<ElementAt Name="elementat121145171_2" PositionY="-460" PositionX="2150" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="Array" Alias="bandits" />
+					<Constant Name="Index" Value="2" />
+				</ElementAt>
+				<ElementAt Name="elementat121145171_3" PositionY="-320" PositionX="2150" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="Array" Alias="bandits" />
+					<Constant Name="Index" Value="3" />
+				</ElementAt>
+				<EnableBehavior Name="enablebehavior121145194" PositionY="-660" PositionX="250" Signature="" EventSet="">
+					<Constant Name="Behavior" Value="monk_ambush" />
+					<Asset Name="SmartEntity" Alias="eventSO" />
+					<Asset Name="NPC" Alias="Monk" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</EnableBehavior>
+				<EnableBehavior Name="enablebehavioremptyendnotification52" PositionY="-520" PositionX="-830" Signature="empty" EventSet="endNotification">
+					<Constant Name="Behavior" Value="monk_ambushBark" />
+					<Asset Name="SmartEntity" Alias="eventSO" />
+					<Asset Name="NPC" Alias="Monk" />
+					<Edge From="wasPlayerSeenState.PlayerSeen" To="IsActive" />
+				</EnableBehavior>
+				<EntityContextTrigger Name="entitycontexttrigger49" PositionY="160" PositionX="1520">
+					<Constant Name="Context" Value="crime_interruptMercy" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="ambushersSurrenderState.CanSurrender" To="IsActive" />
+				</EntityContextTrigger>
+				<EntityContextTrigger Name="entitycontexttrigger8" PositionY="-80" PositionX="1520">
+					<Constant Name="Context" Value="combat_surrender" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="ambushersSurrenderState.CanSurrender" To="IsActive" />
+				</EntityContextTrigger>
+				<fightconfiguration_surrendering Name="fightconfiguration_surrendering" PositionY="-860" PositionX="1550" Namespace="utils.combat">
+					<Asset Name="souls" Alias="bandits" />
+					<Constant Name="neversurrenderorflee" Value="true" />
+					<Constant Name="neveracceptsurrender" Value="true" />
+					<Constant Name="decentmercy" Value="false" />
+					<Constant Name="alwaysmercy" Value="false" />
+					<Edge From="ambushersSurrenderState.Fight" To="isactive" />
+				</fightconfiguration_surrendering>
+				<fightconfiguration_surrendering Name="fightconfiguration_surrendering_1" PositionY="-600" PositionX="1550" Namespace="utils.combat">
+					<Asset Name="souls" Alias="bandits" />
+					<Constant Name="neversurrenderorflee" Value="false" />
+					<Constant Name="neveracceptsurrender" Value="true" />
+					<Constant Name="decentmercy" Value="false" />
+					<Constant Name="alwaysmercy" Value="true" />
+					<Edge From="ambushersSurrenderState.CanSurrender" To="isactive" />
+				</fightconfiguration_surrendering>
+				<Function Name="getfaction3_2" PositionY="200" PositionX="2040" MethodName="wh::rpgmodule::GetFaction" DeclaringType="wh::rpgmodule">
+					<Constant Name="FactionID" Value="player" />
+				</Function>
+				<IfFunction Name="ifcompare121145172" PositionY="-920" PositionX="2500" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="elementat121145171.Value" To="ValueB" />
+					<Edge From="deathtrigger36.Soul" To="ValueA">
+						<Vertex>vertex76</Vertex>
+						<Vertex>vertex77</Vertex>
+					</Edge>
+					<Edge From="deathtrigger36.OnDeath" To="Exec">
+						<Vertex>vertex78</Vertex>
+						<Vertex>vertex79</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifcompare121145172_1" PositionY="-720" PositionX="2500" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="elementat121145171_1.Value" To="ValueB" />
+					<Edge From="deathtrigger36.Soul" To="ValueA">
+						<Vertex>vertex76</Vertex>
+						<Vertex>vertex77</Vertex>
+					</Edge>
+					<Edge From="deathtrigger36.OnDeath" To="Exec">
+						<Vertex>vertex78</Vertex>
+						<Vertex>vertex79</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifcompare121145172_2" PositionY="-520" PositionX="2500" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="elementat121145171_2.Value" To="ValueB" />
+					<Edge From="deathtrigger36.Soul" To="ValueA">
+						<Vertex>vertex76</Vertex>
+						<Vertex>vertex77</Vertex>
+					</Edge>
+					<Edge From="deathtrigger36.OnDeath" To="Exec">
+						<Vertex>vertex78</Vertex>
+						<Vertex>vertex79</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifcompare121145172_3" PositionY="-320" PositionX="2500" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Edge From="elementat121145171_3.Value" To="ValueB" />
+					<Edge From="deathtrigger36.Soul" To="ValueA">
+						<Vertex>vertex76</Vertex>
+						<Vertex>vertex77</Vertex>
+					</Edge>
+					<Edge From="deathtrigger36.OnDeath" To="Exec">
+						<Vertex>vertex78</Vertex>
+						<Vertex>vertex79</Vertex>
+					</Edge>
+				</IfFunction>
+				<IfFunction Name="ifcompare40" PositionY="-1120" PositionX="2220" TypeT="int" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="GreaterEquals" />
+					<Constant Name="ValueB" Value="3" />
+					<Edge From="numberOfDeadBandits.OnIncrease" To="Exec" />
+					<Edge From="numberOfDeadBandits.State" To="ValueA" />
+				</IfFunction>
+				<ObjectProperties Name="isoulproperties51" PositionY="500" PositionX="2100" DeclaringType="wh::rpgmodule::I_Soul">
+					<Edge From="switch121145181.Value1" To="I_Soul">
+						<Vertex>vertex94</Vertex>
+						<Vertex>vertex93</Vertex>
+					</Edge>
+				</ObjectProperties>
+				<MakeArray Name="makearray121145196" PositionY="-930" PositionX="-280" TypeT="wh::rpgmodule::Souls">
+					<Asset Name="A" Alias="bandit_1" />
+					<Asset Name="B" Alias="bandit_2" />
+					<Asset Name="C" Alias="bandit_3" />
+				</MakeArray>
+				<State Name="numberOfDeadBandits" PositionY="-1120" PositionX="1890" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Constant Name="Value" Value="0" />
+					<Edge From="deathtrigger36.OnDeath" To="Increment" />
+				</State>
+				<Function Name="or121145183" PositionY="260" PositionX="1160" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="ambushersSurrenderState.Fight" To="A" />
+					<Edge From="ambushersSurrenderState.CanSurrender" To="B" />
+				</Function>
+				<Function Name="or121145184" PositionY="-740" PositionX="-280" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="wasPlayerSeenState.Barking" To="A" />
+					<Edge From="wasPlayerSeenState.PlayerDistance" To="B" />
+					<Edge From="wasPlayerSeenState.PlayerSeen" To="C" />
+				</Function>
+				<Function Name="or50" PositionY="-280" PositionX="1500" MethodName="math::boolean::Or" DeclaringType="math::boolean">
+					<Edge From="ambushersSurrenderState.CanSurrender" To="A" />
+					<Edge From="ambushersSurrenderState.Surrender" To="B" />
+				</Function>
+				<Output Name="Output">
+					<Edge From="entitycontexttrigger49.OnContextAdded" To="banditi_se_vzdavaji">
+						<Vertex>vertex72</Vertex>
+						<Vertex>vertex73</Vertex>
+						<Vertex>vertex83</Vertex>
+					</Edge>
+					<Edge From="plesnivcuv_clovek_se_vzdava_jindrovi.jindra_vi_kde_je_plesnivcuv_tabor" To="afterdialog">
+						<Vertex>vertex71</Vertex>
+						<Vertex>vertex70</Vertex>
+						<Vertex>M7qP1k5E</Vertex>
+						<Vertex>cdmmjsHI</Vertex>
+					</Edge>
+					<Edge From="entitycontexttrigger8.OnContextAdded" To="banditi_se_vzdavaji">
+						<Vertex>vertex72</Vertex>
+						<Vertex>vertex73</Vertex>
+						<Vertex>vertex83</Vertex>
+					</Edge>
+				</Output>
+				<PerceptionTrigger Name="perceptiontrigger32" PositionY="-1040" PositionX="-830">
+					<Asset Name="PerceivingSouls" Alias="Monk" />
+					<Asset Name="PerceptibleSouls" Alias="player" />
+					<Edge From="wasPlayerSeenState.PlayerDistance" To="IsActive" />
+				</PerceptionTrigger>
+				<PerceptionTrigger Name="perceptiontrigger32_1" PositionY="-1290" PositionX="250">
+					<Asset Name="PerceptibleSouls" Alias="player" />
+					<Edge From="makearray121145196.Array" To="PerceivingSouls" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</PerceptionTrigger>
+				<plesnicuv_muz_vidi_henryho Name="plesnicuv_muz_vidi_henryho_1" PositionY="-870" PositionX="670" />
+				<plesnivcovi_muzi_na_zacatku_prepadeni Name="plesnivcovi_muzi_na_zacatku_prepadeni" PositionY="-710" PositionX="600" />
+				<plesnivcuv_clovek_se_vzdava_jindrovi Name="plesnivcuv_clovek_se_vzdava_jindrovi" PositionY="680" PositionX="1480">
+					<Edge From="ambushersSurrenderState.Surrender" To="active" />
+				</plesnivcuv_clovek_se_vzdava_jindrovi>
+				<SetEntityContext Name="setentitycontext121145182" PositionY="500" PositionX="1520">
+					<Constant Name="Context" Value="combat_fightInQuestSkirmish" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="or121145183.bool" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext121145185" PositionY="-1020" PositionX="250">
+					<Constant Name="Context" Value="ForceForbidAutoTorch" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext121145188" PositionY="-840" PositionX="250">
+					<Constant Name="Context" Value="crime_suppressNearTrespassStimulus" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="or121145184.bool" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext121145197" PositionY="-1830" PositionX="1550">
+					<Constant Name="Context" Value="combat_forceMelee" />
+					<Asset Name="Souls" Alias="bandit_2" />
+					<Edge From="ambushersSurrenderState.Fight" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext121145197_1" PositionY="-1650" PositionX="1550">
+					<Constant Name="Context" Value="combat_forceMelee" />
+					<Asset Name="Souls" Alias="bandit_3" />
+					<Edge From="ambushersSurrenderState.Fight" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext5" PositionY="-1240" PositionX="1550">
+					<Constant Name="Context" Value="combat_alwaysJoinSkirmish" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="ambushersSurrenderState.Fight" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext5_2_2_1" PositionY="-280" PositionX="1820">
+					<Constant Name="Context" Value="crime_questMercy" />
+					<Asset Name="Souls" Alias="bandits" />
+					<Edge From="or50.bool" To="IsActive" />
+				</SetEntityContext>
+				<startfight Name="startfight" PositionY="-460" PositionX="-280">
+					<Edge From="enablebehavioremptyendnotification52.OnFinished" To="start" />
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195.OnNotification" To="start">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_2.OnNotification" To="start">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_3.OnNotification" To="start">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_4.OnNotification" To="start">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+					</Edge>
+					<Edge From="perceptiontrigger32_1.OnSeenShortCone" To="start">
+						<Vertex>qrK2jJYR</Vertex>
+						<Vertex>0paQTynG</Vertex>
+					</Edge>
+				</startfight>
+				<State Name="state121145173" PositionY="-260" PositionX="2830" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Constant Name="Value" Value="8" />
+					<Edge From="ifcompare121145172_3.True" To="Exec" />
+				</State>
+				<State Name="state121145175" PositionY="-980" PositionX="2830" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Constant Name="Value" Value="1" />
+					<Edge From="ifcompare121145172.True" To="Exec" />
+				</State>
+				<State Name="state121145175_1" PositionY="-500" PositionX="2830" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Constant Name="Value" Value="4" />
+					<Edge From="ifcompare121145172_2.True" To="Exec" />
+				</State>
+				<State Name="state121145175_2" PositionY="-740" PositionX="2830" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Constant Name="Value" Value="2" />
+					<Edge From="ifcompare121145172_1.True" To="Exec" />
+				</State>
+				<State Name="state121145180" PositionY="-700" PositionX="3500" TypeT="int">
+					<Constant Name="DefaultValue" Value="0" />
+					<Edge From="add121145179.int" To="Value" />
+					<Edge From="state121145175.OnExec" To="Exec">
+						<Vertex>vertex80</Vertex>
+						<Vertex>vertex81</Vertex>
+					</Edge>
+					<Edge From="state121145175_2.OnExec" To="Exec">
+						<Vertex>vertex80</Vertex>
+						<Vertex>vertex81</Vertex>
+					</Edge>
+					<Edge From="state121145175_1.OnExec" To="Exec">
+						<Vertex>vertex80</Vertex>
+						<Vertex>vertex81</Vertex>
+					</Edge>
+					<Edge From="state121145173.OnExec" To="Exec">
+						<Vertex>vertex80</Vertex>
+						<Vertex>vertex81</Vertex>
+					</Edge>
+				</State>
+				<Switch Name="switch121145181" PositionY="-660" PositionX="3810" TypeT="int" ValueTypes="wh::rpgmodule::I_Soul*" SwitchValues="14 13 11">
+					<Edge From="state121145180.State" To="Switch" />
+					<Edge From="elementat121145171.Value" To="14Value1">
+						<Vertex>vertex88</Vertex>
+						<Vertex>vertex92</Vertex>
+					</Edge>
+					<Edge From="elementat121145171_1.Value" To="13Value1">
+						<Vertex>vertex87</Vertex>
+						<Vertex>vertex90</Vertex>
+					</Edge>
+					<Edge From="elementat121145171_2.Value" To="11Value1">
+						<Vertex>vertex86</Vertex>
+						<Vertex>vertex91</Vertex>
+					</Edge>
+					<Edge From="elementat121145171_3.Value" To="DefaultValue1">
+						<Vertex>vertex82</Vertex>
+						<Vertex>vertex89</Vertex>
+					</Edge>
+				</Switch>
+				<TemporaryFactionEffect Name="temporaryfaction36" PositionY="340" PositionX="2490">
+					<Asset Name="Souls" Alias="bandits" />
+					<Constant Name="Faction" Value="trosecko_allies_newBuddies" />
+					<Edge From="ambushersSurrenderState.Surrender" To="IsActive">
+						<Vertex>vertex64</Vertex>
+						<Vertex>vertex65</Vertex>
+					</Edge>
+				</TemporaryFactionEffect>
+				<State Name="wasPlayerSeenState" PositionY="-980" PositionX="-1430" TypeT="MonkProgress">
+					<Edge From="OnSpawn" To="SetBarking" />
+					<Edge From="distancetrigger26.OnMatch" To="SetPlayerDistance">
+						<Vertex>vertex50</Vertex>
+						<Vertex>vertex51</Vertex>
+					</Edge>
+					<Edge From="perceptiontrigger32.OnSeenShortCone" To="SetPlayerSeen">
+						<Vertex>vertex52</Vertex>
+						<Vertex>vertex53</Vertex>
+					</Edge>
+					<Edge From="enablebehavioremptyendnotification52.OnFinished" To="SetAttack">
+						<Vertex>vertex66</Vertex>
+						<Vertex>vertex67</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195.OnNotification" To="SetAttack">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+						<Vertex>0unKIoc1</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_2.OnNotification" To="SetAttack">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+						<Vertex>0unKIoc1</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_3.OnNotification" To="SetAttack">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+						<Vertex>0unKIoc1</Vertex>
+					</Edge>
+					<Edge From="aiconceptsignaltriggerhitreactionnotification121145195_4.OnNotification" To="SetAttack">
+						<Vertex>hJ2MtaAY</Vertex>
+						<Vertex>A6uMpatP</Vertex>
+						<Vertex>0unKIoc1</Vertex>
+					</Edge>
+					<Edge From="perceptiontrigger32_1.OnSeenShortCone" To="SetAttack">
+						<Vertex>qrK2jJYR</Vertex>
+						<Vertex>0paQTynG</Vertex>
+						<Vertex>XjYX3BtR</Vertex>
+					</Edge>
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="0paQTynG" PositionY="-1340" PositionX="-320" />
+				<EdgeVertex Name="0unKIoc1" PositionY="240" PositionX="-1350" />
+				<EdgeVertex Name="A6uMpatP" PositionY="240" PositionX="-240" />
+				<EdgeVertex Name="cdmmjsHI" PositionY="160" PositionX="3890" />
+				<EdgeVertex Name="hJ2MtaAY" PositionY="240" PositionX="380" />
+				<EdgeVertex Name="M7qP1k5E" PositionY="160" PositionX="2840" />
+				<EdgeVertex Name="qrK2jJYR" PositionY="-1330" PositionX="600" />
+				<EdgeVertex Name="vertex32" PositionY="420" PositionX="1800" />
+				<EdgeVertex Name="vertex33" PositionY="420" PositionX="580" />
+				<EdgeVertex Name="vertex50" PositionY="-200" PositionX="-520" />
+				<EdgeVertex Name="vertex51" PositionY="-200" PositionX="-1410" />
+				<EdgeVertex Name="vertex52" PositionY="-220" PositionX="-540" />
+				<EdgeVertex Name="vertex53" PositionY="-220" PositionX="-1380" />
+				<EdgeVertex Name="vertex58" PositionY="460" PositionX="2270" />
+				<EdgeVertex Name="vertex59" PositionY="460" PositionX="540" />
+				<EdgeVertex Name="vertex64" PositionY="480" PositionX="960" />
+				<EdgeVertex Name="vertex65" PositionY="480" PositionX="2390" />
+				<EdgeVertex Name="vertex66" PositionY="-240" PositionX="-560" />
+				<EdgeVertex Name="vertex67" PositionY="-240" PositionX="-1350" />
+				<EdgeVertex Name="vertex70" PositionY="1040" PositionX="2710" />
+				<EdgeVertex Name="vertex71" PositionY="1040" PositionX="2110" />
+				<EdgeVertex Name="vertex72" PositionY="120" PositionX="2030" />
+				<EdgeVertex Name="vertex73" PositionY="120" PositionX="2260" />
+				<EdgeVertex Name="vertex74" PositionY="440" PositionX="2220" />
+				<EdgeVertex Name="vertex75" PositionY="440" PositionX="560" />
+				<EdgeVertex Name="vertex76" PositionY="-800" PositionX="1930" />
+				<EdgeVertex Name="vertex77" PositionY="-800" PositionX="2400" />
+				<EdgeVertex Name="vertex78" PositionY="-820" PositionX="1930" />
+				<EdgeVertex Name="vertex79" PositionY="-820" PositionX="2400" />
+				<EdgeVertex Name="vertex80" PositionY="-900" PositionX="3130" />
+				<EdgeVertex Name="vertex81" PositionY="-900" PositionX="3410" />
+				<EdgeVertex Name="vertex82" PositionY="100" PositionX="2460" />
+				<EdgeVertex Name="vertex83" PositionY="120" PositionX="3890" />
+				<EdgeVertex Name="vertex86" PositionY="80" PositionX="2480" />
+				<EdgeVertex Name="vertex87" PositionY="60" PositionX="2500" />
+				<EdgeVertex Name="vertex88" PositionY="40" PositionX="2520" />
+				<EdgeVertex Name="vertex89" PositionY="100" PositionX="3560" />
+				<EdgeVertex Name="vertex90" PositionY="60" PositionX="3520" />
+				<EdgeVertex Name="vertex91" PositionY="80" PositionX="3540" />
+				<EdgeVertex Name="vertex92" PositionY="40" PositionX="3500" />
+				<EdgeVertex Name="vertex93" PositionY="140" PositionX="2070" />
+				<EdgeVertex Name="vertex94" PositionY="140" PositionX="3890" />
+				<EdgeVertex Name="XjYX3BtR" PositionY="-1340" PositionX="-1390" />
+			</EdgeVertices>
+			<Types>
+				<Type TypeName="MonkProgress">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Barking" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="PlayerDistance" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="PlayerSeen" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Attack" ObjectiveValueType="None" />
+				</Type>
+				<Type TypeName="AmbushProgress">
+					<StateTypeEnumeration Name="None" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Fight" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="CanSurrender" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="Surrender" ObjectiveValueType="None" />
+					<StateTypeEnumeration Name="After" ObjectiveValueType="None" />
+				</Type>
+			</Types>
+			<Text StringName="prepadeni_aHjD" Text="přepadení" />
+			<EventInitiatedFastTravelData MapIcon="Quest" OptionSet="Wanderer">
+				<Caption StringName="prepadeni__event_caption_79Gc" Text="Žebravý mnich" />
+				<Description StringName="prepadeni__event_descript_e7RO" Text="Na cestě si potkal žebravého mnicha." />
+			</EventInitiatedFastTravelData>
+			<NpcGroups>
+				<NpcGroup SoulPool="taboryLapkuTrosecko_prepadeni" TagPoints="spawnPoint" NpcAssetName="Bandit" SchedulerProxy="schedulerProxy" Count="3" CountStandardDeviation="0" CountDifficultyAddPerNPC="0" />
+				<NpcGroup SoulPool="taboryLapkuTrosecko_prepadeni_mnich" TagPoints="spawnPointMonk" NpcAssetName="Monk" SchedulerProxy="monkProxy" Count="1" CountStandardDeviation="0" CountDifficultyAddPerNPC="0" />
+			</NpcGroups>
+			<PlayerInitiatedFastTravelData MapIcon="Quest" OptionSet="Wanderer">
+				<Caption StringName="prepadeni__player_caption_g97y" Text="Žebravý mnich" />
+				<Description StringName="prepadeni__player_descrip_9L6p" Text="Na cestě si potkal žebravého mnicha." />
+			</PlayerInitiatedFastTravelData>
+		</RandomEventVariant>
+	</Skald>
+</Database>

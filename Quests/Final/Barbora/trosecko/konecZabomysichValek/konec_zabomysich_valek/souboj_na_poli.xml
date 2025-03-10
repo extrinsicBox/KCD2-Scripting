@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="souboj_na_poli">
+			<Ports>
+				<Port Name="skupina_1" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="souboj_na_skupina_1_m0Da" Text="skupina 1" />
+				</Port>
+				<Port Name="skupina_2" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="souboj_na_skupina_2_kblb" Text="skupina 2" />
+				</Port>
+				<Port Name="stav_souboje" Direction="Out" Type="Progress">
+					<DesignName StringName="souboj_na_souboj_probiha_vGci" Text="stav souboje" />
+				</Port>
+				<Port Name="souboj_na_strane_vesnice" Direction="Out" Type="SkirmishOnField">
+					<DesignName StringName="souboj_na_souboj_na_stran_FjqT" Text="souboj na straně vesnice" />
+				</Port>
+				<Port Name="start_souboje" Direction="In" Type="trigger">
+					<DesignName StringName="souboj_na_start_souboje_mHbf" Text="start souboje" />
+				</Port>
+				<Port Name="kotva" Direction="In" Type="wh::xgenaimodule::LinkableObjects">
+					<DesignName StringName="souboj_na_kotva_Psdz" Text="kotva" />
+				</Port>
+				<Port Name="konec_souboje" Direction="Out" Type="trigger">
+					<DesignName StringName="souboj_na_konec_souboje_MrW4" Text="konec souboje" />
+				</Port>
+				<Port Name="v_souboji_vytazena_zbran" Direction="Out" Type="trigger">
+					<DesignName StringName="souboj_na_v_souboji_vytaz_Fn3K" Text="v souboji vytažena zbraň" />
+				</Port>
+				<Port Name="debug_jindrich_na_vitezne_strane" Direction="In" Type="trigger">
+					<DesignName StringName="souboj_na_debug_jindrich__UbDi" Text="debug jindřich na vítězné straně" />
+				</Port>
+				<Port Name="debug_jindrich_na_porazene_strane" Direction="In" Type="trigger">
+					<DesignName StringName="souboj_na_debug_jindrich__RbSz" Text="debug jindřich na poražené straně" />
+				</Port>
+				<Port Name="debug_jindrich_utekl" Direction="In" Type="trigger">
+					<DesignName StringName="souboj_na_debug_jindrich__oLFf" Text="debug jindřich utekl" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="souboj_na_poli/vyleceni_vsech_na_louce_krome_hrace.xml" />
+			</Definitions>
+			<Nodes>
+				<EnableAllowedWeaponsInQAM Name="enableallowedweaponsinqam15" PositionY="2290" PositionX="680">
+					<Constant Name="RequireMainHandEmpty" Value="true" />
+					<Constant Name="RequireOffHandEmpty" Value="true" />
+					<Asset Name="PlayerSouls" Alias="player" />
+					<Edge From="skirmishResult.Started" To="IsActive">
+						<Vertex>quYVRzl4</Vertex>
+					</Edge>
+				</EnableAllowedWeaponsInQAM>
+				<fightconfiguration_indifference Name="fightconfiguration_indifference" PositionY="-540" PositionX="310" Namespace="utils.combat">
+					<Constant Name="unarmedonly" Value="false" />
+					<Edge From="joinarrays1.Array" To="souls" />
+					<Edge From="skirmishControler.Active" To="isactive" />
+				</fightconfiguration_indifference>
+				<fightconfiguration_reputation Name="fightconfiguration_reputation" PositionY="-740" PositionX="310" Namespace="utils.combat">
+					<Constant Name="suppressreputationpenalties" Value="true" />
+					<Edge From="joinarrays1.Array" To="souls" />
+					<Edge From="skirmishControler.Active" To="isactive" />
+				</fightconfiguration_reputation>
+				<fightconfiguration_surrendering Name="fightconfiguration_surrendering" PositionY="-1010" PositionX="310" Namespace="utils.combat">
+					<Constant Name="neversurrenderorflee" Value="true" />
+					<Constant Name="neveracceptsurrender" Value="true" />
+					<Constant Name="decentmercy" Value="false" />
+					<Constant Name="alwaysmercy" Value="false" />
+					<Edge From="joinarrays1.Array" To="souls" />
+					<Edge From="skirmishControler.Active" To="isactive" />
+				</fightconfiguration_surrendering>
+				<FilterInput Name="filterinput1_1" PositionY="-1780" PositionX="300">
+					<Edge From="makearray2_1.Array" To="Filters" />
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</FilterInput>
+				<If Name="if18" PositionY="1590" PositionX="670">
+					<Edge From="skirmishResult.FledButTheFightIsStillOn" To="Condition" />
+					<Edge From="skirmish.souls1won" To="Exec">
+						<Vertex>L7oKPVIa</Vertex>
+					</Edge>
+					<Edge From="skirmish.souls2won" To="Exec">
+						<Vertex>L7oKPVIa</Vertex>
+					</Edge>
+				</If>
+				<If Name="if20" PositionY="940" PositionX="-520">
+					<Edge From="skirmishResult.Started" To="Condition">
+						<Vertex>Fk2qx5th</Vertex>
+						<Vertex>PrWCKcLg</Vertex>
+					</Edge>
+					<Edge From="skirmish.souls1won" To="Exec">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+				</If>
+				<If Name="if20_1" PositionY="1130" PositionX="-520">
+					<Edge From="skirmish.souls2won" To="Exec">
+						<Vertex>RpEnfg2b</Vertex>
+						<Vertex>PwHeWEpD</Vertex>
+					</Edge>
+					<Edge From="skirmishResult.Started" To="Condition">
+						<Vertex>Fk2qx5th</Vertex>
+						<Vertex>PrWCKcLg</Vertex>
+					</Edge>
+				</If>
+				<IfFunction Name="ifcompare21" PositionY="1200" PositionX="1050" TypeT="wh::rpgmodule::I_Soul*" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Asset Name="ValueB" Alias="player" />
+					<Edge From="skirmishtrigger12_1.OnEvent" To="Exec" />
+					<Edge From="skirmishtrigger12_1.EventSoul" To="ValueA" />
+				</IfFunction>
+				<Function Name="joinarrays1" PositionY="-380" PositionX="-50" TypeT="wh::rpgmodule::Souls" MethodName="utilities::array::JoinArrays" DeclaringType="utilities::array">
+					<Edge From="skupina_1" To="A" />
+					<Edge From="skupina_2" To="B" />
+				</Function>
+				<LinkEffectNoData Name="linkeffectnodata3" PositionY="-1410" PositionX="310">
+					<Constant Name="Tag" Value="combat_anchor" />
+					<Edge From="joinarrays1.Array" To="From" />
+					<Edge From="kotva" To="To">
+						<Vertex>vertex6</Vertex>
+					</Edge>
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</LinkEffectNoData>
+				<MakeArray Name="makearray2_1" PositionY="-1780" PositionX="30" TypeT="Strings">
+					<Constant Name="A" Value="no_dog" />
+				</MakeArray>
+				<Output Name="Output">
+					<Edge From="skirmishResult.State" To="souboj_na_strane_vesnice">
+						<Vertex>vertex20</Vertex>
+					</Edge>
+					<Edge From="triggersequence10_1.B" To="v_souboji_vytazena_zbran" />
+					<Edge From="triggersequence10_1_1.B" To="konec_souboje" />
+					<Edge From="skirmishControler.State" To="stav_souboje">
+						<Vertex>5hDwrLv8</Vertex>
+					</Edge>
+				</Output>
+				<SetEntityContext Name="setentitycontext14" PositionY="-1620" PositionX="300">
+					<Constant Name="Context" Value="combat_arrangedFight" />
+					<Edge From="joinarrays1.Array" To="Souls" />
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</SetEntityContext>
+				<SetEntityContext Name="setentitycontext2" PositionY="-328" PositionX="305">
+					<Constant Name="Context" Value="combat_forceUnarmedWhileInUnarmedSkirmish" />
+					<Edge From="joinarrays1.Array" To="Souls" />
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</SetEntityContext>
+				<skirmish Name="skirmish" PositionY="-80" PositionX="370" Namespace="utils.combat">
+					<Edge From="skupina_1" To="souls1" />
+					<Edge From="skupina_2" To="souls2" />
+					<Edge From="skirmishControler.Active" To="isactive" />
+				</skirmish>
+				<State Name="skirmishControler" PositionY="80" PositionX="-60" TypeT="Progress">
+					<Edge From="start_souboje" To="SetActive" />
+					<Edge From="skirmish.souls1won" To="SetDone">
+						<Vertex>L7oKPVIa</Vertex>
+						<Vertex>T4BeE5Q2</Vertex>
+					</Edge>
+					<Edge From="skirmish.souls2won" To="SetDone">
+						<Vertex>L7oKPVIa</Vertex>
+						<Vertex>T4BeE5Q2</Vertex>
+					</Edge>
+					<Edge From="unconscioustrigger9.OnUnconscious" To="SetDone">
+						<Vertex>vertex14</Vertex>
+						<Vertex>vertex15</Vertex>
+					</Edge>
+				</State>
+				<State Name="skirmishResult" PositionY="730" PositionX="-90" RequiredForOutput="trosecko" TypeT="SkirmishOnField">
+					<Edge From="debug_jindrich_na_vitezne_strane" To="SetWon" />
+					<Edge From="debug_jindrich_na_porazene_strane" To="SetLost" />
+					<Edge From="debug_jindrich_utekl" To="SetFledButTheFightIsStillOn" />
+					<Edge From="unconscioustrigger9.OnUnconscious" To="SetLost">
+						<Vertex>vertex14</Vertex>
+						<Vertex>vertex15</Vertex>
+					</Edge>
+					<Edge From="skirmishtrigger12.OnEvent" To="SetFledButTheFightIsStillOn">
+						<Vertex>vertex26</Vertex>
+						<Vertex>vertex27</Vertex>
+					</Edge>
+					<Edge From="start_souboje" To="SetStarted" />
+					<Edge From="if18.True" To="SetFled">
+						<Vertex>S0hb8p0W</Vertex>
+						<Vertex>94QmNmF4</Vertex>
+					</Edge>
+					<Edge From="if20.True" To="SetWon" />
+					<Edge From="if20_1.True" To="SetLost" />
+					<Edge From="ifcompare21.True" To="SetStarted">
+						<Vertex>1N75MBP6</Vertex>
+						<Vertex>ea36NtcM</Vertex>
+					</Edge>
+				</State>
+				<SkirmishTrigger Name="skirmishtrigger12" PositionY="930" PositionX="680">
+					<Constant Name="EventType" Value="PlayerFlee" />
+					<Edge From="joinarrays1.Array" To="Souls">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex28</Vertex>
+					</Edge>
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</SkirmishTrigger>
+				<SkirmishTrigger Name="skirmishtrigger12_1" PositionY="1200" PositionX="680">
+					<Constant Name="EventType" Value="SoulAdded" />
+					<Asset Name="ReferenceSoul" Alias="player" />
+					<Edge From="joinarrays1.Array" To="Souls">
+						<Vertex>vertex18</Vertex>
+						<Vertex>vertex28</Vertex>
+					</Edge>
+					<Edge From="skirmishResult.FledButTheFightIsStillOn" To="IsActive" />
+				</SkirmishTrigger>
+				<Function Name="stopfight2" PositionY="-240" PositionX="1600" MethodName="wh::rpgmodule::StopFight" DeclaringType="wh::rpgmodule">
+					<Edge From="joinarrays1.Array" To="Souls">
+						<Vertex>vertex18</Vertex>
+					</Edge>
+					<Edge From="triggersequence10_1.A" To="Exec" />
+					<Edge From="triggersequence10_1_1.A" To="Exec" />
+				</Function>
+				<TriggerSequence Name="triggersequence10_1" PositionY="1080" PositionX="1340">
+					<Edge From="skirmishResult.OnDrawnWeapon" To="Exec">
+						<Vertex>vertex23</Vertex>
+					</Edge>
+				</TriggerSequence>
+				<TriggerSequence Name="triggersequence10_1_1" PositionY="270" PositionX="1170">
+					<Edge From="skirmishControler.OnDone" To="Exec" />
+				</TriggerSequence>
+				<SoulUnconsciousTrigger Name="unconscioustrigger9" PositionY="2020" PositionX="680">
+					<Asset Name="Souls" Alias="player" />
+					<Edge From="skirmishControler.Active" To="IsActive" />
+				</SoulUnconsciousTrigger>
+				<vyleceni_vsech_na_louce_krome_hrace Name="vyleceni_vsech_na_louce_krome_hrace" PositionY="-1170" PositionX="310">
+					<Edge From="joinarrays1.Array" To="bojovnici" />
+					<Edge From="start_souboje" To="start_souboje" />
+				</vyleceni_vsech_na_louce_krome_hrace>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="1N75MBP6" PositionY="600" PositionX="1210" />
+				<EdgeVertex Name="5hDwrLv8" PositionY="180" PositionX="1810" />
+				<EdgeVertex Name="94QmNmF4" PositionY="1830" PositionX="-60" />
+				<EdgeVertex Name="ea36NtcM" PositionY="600" PositionX="-60" />
+				<EdgeVertex Name="Fk2qx5th" PositionY="700" PositionX="320" />
+				<EdgeVertex Name="L7oKPVIa" PositionY="450" PositionX="540" />
+				<EdgeVertex Name="PrWCKcLg" PositionY="698" PositionX="-468" />
+				<EdgeVertex Name="PwHeWEpD" PositionY="1470" PositionX="-500" />
+				<EdgeVertex Name="quYVRzl4" PositionY="2380" PositionX="330" />
+				<EdgeVertex Name="RpEnfg2b" PositionY="1470" PositionX="530" />
+				<EdgeVertex Name="S0hb8p0W" PositionY="1824" PositionX="840" />
+				<EdgeVertex Name="T4BeE5Q2" PositionY="450" PositionX="-20" />
+				<EdgeVertex Name="vertex1" PositionY="1440" PositionX="510" />
+				<EdgeVertex Name="vertex14" PositionY="2620" PositionX="910" />
+				<EdgeVertex Name="vertex15" PositionY="2620" PositionX="-10" />
+				<EdgeVertex Name="vertex18" PositionY="-120" PositionX="220" />
+				<EdgeVertex Name="vertex2" PositionY="1440" PositionX="-510" />
+				<EdgeVertex Name="vertex20" PositionY="850" PositionX="1850" />
+				<EdgeVertex Name="vertex23" PositionY="1170" PositionX="310" />
+				<EdgeVertex Name="vertex26" PositionY="1500" PositionX="930" />
+				<EdgeVertex Name="vertex27" PositionY="1500" PositionX="-80" />
+				<EdgeVertex Name="vertex28" PositionY="1050" PositionX="460" />
+				<EdgeVertex Name="vertex6" PositionY="-1240" PositionX="-420" />
+			</EdgeVertices>
+			<Text StringName="souboj_na_poli_RzNl" Text="souboj na poli" />
+		</Module>
+	</Skald>
+</Database>

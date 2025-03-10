@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<FaderDialog Name="ptacek_zadava_quest">
+			<Ports>
+				<Port Name="je_spravny_cas_na_lov" Direction="In" Type="bool">
+					<DesignName StringName="ptacek_za_neni_spravny_ca_c80Y" Text="Je správny čas na lov" />
+				</Port>
+				<Port Name="jde_se_lovit" Direction="Out" Type="trigger">
+					<DesignName StringName="ptacek_za_jde_se_lovit_yXhJ" Text="jde se lovit!" />
+				</Port>
+				<Port Name="dialog_aspon_jednou_zacat" Direction="Out" Type="trigger">
+					<DesignName StringName="ptacek_za_dialog_aspon_je_0oy3" Text="Dialóg aspoň jednou začat" />
+				</Port>
+				<Port Name="jindra_vi_o_loveckem_tabore" Direction="In" Type="bool">
+					<DesignName StringName="ptacek_za_jindra_vi_o_kar_AEti" Text="jindra ví o loveckém táboře" />
+				</Port>
+				<Port Name="rovnou_do_questu_z_dialogu" Direction="In" Type="bool">
+					<DesignName StringName="ptacek_za_rovnou_do_quest_PGii" Text="rovnou do questu z dialogu" />
+				</Port>
+				<Port Name="jindra_sel_nejdriv_na_polylog" Direction="In" Type="bool">
+					<DesignName StringName="ptacek_za_jindra_sel_nejd_OlVM" Text="Jindra šel nejdřív na polylog" />
+				</Port>
+			</Ports>
+			<Text StringName="ptacek_zadava_quest_i9sI" Text="Ptáček zadává quest" />
+			<ReviewNotesConcept>
+				<Item Date="2023-05-15 15:05:07" UserName="david.horak" Text="Tady to chce přepsat, aby to navazovalo na úvodní megalog na Čertovce v M44a.&#xD;&#xA;Nebál bych se toho teleportnout Ptáčka ven, kde se opře o zeď a na Jindru volá. Každopádně hráč ví, že Ptáček bude lovit zvěř pro nové žoldáky, takže úvodní repliky jsou divný a nenavazují na to, co ses dozvěděl v megalogu. Dal bych něco ryze krátkýho: &quot;Nechceš se ke mně přidat na ten lov? / Ale musím do zikmundova tábora / Ten ti nikam neuteče.&quot; Podobně by chtěl předělat UI promt &quot;Zase chceš pytlačit?&quot; na něco ve stylu: &quot;To pytlačení tě dostane do hrobu.&quot; Samozřejmě líp, sekám to tu z první dobrý :-)" AcceptState="Accepted" />
+			</ReviewNotesConcept>
+			<Elements>
+				<GameplayActionElement>
+					<Text StringName="ptacek_za_zadani_questu_v_FXKB" Text="zadání questu včetně návratovky - prioritní dialog" />
+				</GameplayActionElement>
+			</Elements>
+			<MapVizLocation MapName="kutnohorsko" PositionX="2925" PositionY="2949" />
+			<Dialogue TechnicalStatus="Enabled" AllowFarewell="false" AllowGreeting="false">
+				<SelectedSouls>
+					<SelectedSoul Role="PTACEK" Voice="fejk" Type="Computed" Language="WHS" />
+					<SelectedSoul Role="HENRY" Voice="fejk" Type="Computed" Language="WHS" />
+				</SelectedSouls>
+				<Decision Name="dec1" Priority="SideQuestAssignment">
+					<Sequences>
+						<Sequence EntryCondition="!SequenceUsed('prvni_prubeh_ukoncen') AND !ThisSequenceUsed() AND Port('jindra_sel_nejdriv_na_polylog')" EndType="Decision" Visibility="Internal" Name="prvni">
+							<DesignName StringName="ptacek_za_seq1_Jc9u" Text="prvni" />
+							<UiPrompt StringName="ui_ptacek_za_seq1_8chZ" Text="Potřebuješ něco?" />
+							<Elements>
+								<Response Role="PTACEK">
+									<Text StringName="ptac_ptacek_jindrichu_pri_dCwN" Text="Jindřichu! Příteli můj nejvěrnější!" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="HENRY">
+									<Parenthetical>
+										<Text StringName="ptac_henry_smeje_se_v_zer_Jho2" Text="směje se, v žertu" />
+									</Parenthetical>
+									<Text StringName="ptac_henry_co_se_deje_GlJv" Text="A jéje, zníš nějak moc mile. Ty něco potřebuješ, viď?" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_maze_mu_med_k_j08t" Text="maže mu med kolem huby" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_hele_co_takhl_rje6" Text="Já? Ne... " />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK">
+									<Text StringName="ptac_ptacek_ale_ty_jo_BvtW" Text="Ale ty jo!" />
+								</Response>
+								<Response Role="PTACEK">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_ostychave_zsCr" Text="ostýchavě" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_vyrazime_na_l_MDnY" Text="Musíš se trochu uvolnit! Pobavit se! A tak mě napadlo... Jestli bys nejel se mnou na lov." />
+								</Response>
+								<Response Role="HENRY">
+									<Parenthetical>
+										<Text StringName="ptac_henry_v_zertu_YlOd" Text="v žertu" />
+									</Parenthetical>
+									<Text StringName="ptac_henry_myslis_pytlacit_8t1G" Text="Myslíš pytlačit." />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_mavne_rukou_N0rn" Text="mávne rukou" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_pytlacit_muzo_7gS6" Text="Pytlačit můžou jen kmáni, já ne!" />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+								<Response Role="PTACEK">
+									<Parenthetical>
+										<Text StringName="ptac_ptacek_premlouva_u0lB" Text="přemlouvá" />
+									</Parenthetical>
+									<Text StringName="ptac_ptacek_slibili_jsme__97vJ" Text="No tak! Slíbili jsme přece Žižkovi, že seženeme maso pro žoldáky." />
+								</Response>
+							</Elements>
+							<Decision Name="dec2" Priority="SideQuestSubmission" DesignName="jindrův názor na lov" Alias="lovSPtackem_ptacekZadavaQuest" Included="true">
+								<Sequences>
+									<Sequence EndType="GoTo" GoToDecision="dec8" Name="seq17">
+										<DesignName StringName="ptacek_za_seq17_KSjM" Text="seq17" />
+										<UiPrompt StringName="ui_ptacek_za_seq17_9FzR" Text="Lovit jsi slíbil ty, ne já." />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="ptac_henry_zasmeje_se_TP5Q" Text="zasměje se" />
+												</Parenthetical>
+												<Text StringName="ptac_henry_ale_tos_mu_sli_WRhS" Text="No počkej, že půjdeš na lov jsi Žižkovi slíbil ty, ne já!" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="PTACEK">
+												<Parenthetical>
+													<Text StringName="ptac_ptacek_v_zertu_hraje_xSF3" Text="v žertu, hraje si na šlechtice" />
+												</Parenthetical>
+												<Text StringName="ptac_ptacek_ale_ty_ses_mo_kHnc" Text="Jenže ty seš moje páže, takže můj slib je i tvůj!" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="PTACEK">
+												<Parenthetical>
+													<Text StringName="ptac_ptacek_kamaradsky_pr_66tD" Text="kamarádsky, přemlouvá" />
+												</Parenthetical>
+												<Text StringName="ptac_ptacek_no_tak_kamara_Orep" Text="Přece se nenecháš prosit. Však on ti ten zikmundův tábor nikam neuteče." />
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="GoTo" GoToDecision="dec8" Name="seq18">
+										<DesignName StringName="ptacek_za_seq18_Lcru" Text="seq18" />
+										<UiPrompt StringName="ui_ptacek_za_seq18_owhY" Text="Já mám ale práci v táboře." />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="ptac_henry_nechce_se_mu_Zf4A" Text="nechce se mu" />
+												</Parenthetical>
+												<Text StringName="ptac_henry_no_ale_ja_mam__jCKn" Text="No ale já mám ale práci v tom Zikmundově táboře." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="PTACEK">
+												<Text StringName="ptac_ptacek_ale_ten_ti_pr_gvQW" Text="Ále, ten ti nikam neuteče! Pojeď." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+									<Sequence EndType="Decision" Name="seq11">
+										<DesignName StringName="ptacek_za_seq11_vD3U" Text="seq11" />
+										<UiPrompt StringName="ui_ptacek_za_seq11_woTa" Text="Šibenice na Troskách ti nestačila?" />
+										<Elements>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="ptac_henry_ironicky_poucu_6Prt" Text="ironicky poučuje" />
+												</Parenthetical>
+												<Text StringName="ptac_henry_a_vzpominas_ze_QFE3" Text="To tě vážně ani šibenice na Troskách nepoučila?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="PTACEK" ReferenceLength="4">
+												<Parenthetical>
+													<Text StringName="ptac_ptacek_mavne_rukou_v_37TL" Text="mávne rukou, vyznívá jako ale notak" />
+												</Parenthetical>
+												<Text StringName="ptac_ptacek_jindro_nebude_qFV3" Text="Ále... Nebudem přece z jedný malý události hned dělat tradici, ne?" />
+												<Commands>
+													<AnimationCommand Delay="0.19" FragmentId="ADLG_Emphasis" />
+													<AnimationCommand Delay="3.83" FragmentId="ADLG_Frustration" />
+													<CameraCommand />
+												</Commands>
+												<ReviewNotesConcept>
+													<Item Date="2022-08-23 13:49:37" UserName="ondrej.szlauer" Text="To Smůla se nás... bych vyhodil. Ta první věta má dobrý ráz sama o sobě." AcceptState="Accepted" />
+												</ReviewNotesConcept>
+											</Response>
+											<Response Role="HENRY">
+												<Parenthetical>
+													<Text StringName="ptac_henry_zavrci_zuF5" Text="zavrčí" />
+												</Parenthetical>
+												<Text StringName="ptac_henry_hmm_4SqT" Text="Hmm..." />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+											<Response Role="PTACEK">
+												<Parenthetical>
+													<Text StringName="ptac_ptacek_mala_pauza_na_vjdf" Text="malá pauza na začátku" />
+												</Parenthetical>
+												<Text StringName="ptac_ptacek_niceho_se_neb_JWP2" Text="No tak, provětráme si hlavu, protáhnem starý kosti... Co říkáš?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+										<Decision Name="dec8" Priority="SideQuestSubmission">
+											<Sequences>
+												<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq14">
+													<DesignName StringName="ptacek_za_seq14_TJ2M" Text="seq14" />
+													<UiPrompt StringName="ui_ptacek_za_seq14_OxsC" Text="Přece tě v tom nenechám." />
+													<Elements>
+														<Response Role="HENRY">
+															<Parenthetical>
+																<Text StringName="ptac_henry_pratelsky_2Gj1" Text="přátelsky" />
+															</Parenthetical>
+															<Text StringName="ptac_henry_tak_dobre_O4bx" Text="Ach jo, tak dobře. Přece tě v tom nenechám." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="PTACEK">
+															<Text StringName="ptac_ptacek_to_je_slovo_c_IJVm" Text="To je slovo chlapa! Tak poslouchej..." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq16">
+													<DesignName StringName="ptacek_za_seq16_bMIH" Text="seq16" />
+													<UiPrompt StringName="ui_ptacek_za_seq16_askC" Text="Co když nás chytí?" />
+													<Elements>
+														<Response Role="HENRY">
+															<Text StringName="ptac_henry_co_kdyz_nas_ch_qnR6" Text="A co když nás chytí?" />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="PTACEK">
+															<Text StringName="ptac_ptacek_tak_nic_slech_rlRH" Text="No tak jim urozený pan Ptáček z Pirkštejna vysvětlí, že se svým pobočníkem loví v revíru místního pána." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="PTACEK">
+															<Text StringName="ptac_ptacek_nestrachuj_se_tTHc" Text="Nestrachuj se pořád a poslouchej..." />
+														</Response>
+													</Elements>
+												</Sequence>
+												<Sequence EndType="Decision" Name="seq13">
+													<DesignName StringName="ptacek_za_seq13_yOiA" Text="seq13" />
+													<UiPrompt StringName="ui_ptacek_za_seq13_Am2M" Text="Ty jsi nepoučitelný..." />
+													<Elements>
+														<Response Role="HENRY">
+															<Parenthetical>
+																<Text StringName="ptac_henry_rezignovane_al_Kovn" Text="rezignovaně ale kamarádsky oddechne " />
+															</Parenthetical>
+															<Text StringName="ptac_henry_ses_nepoucitel_63KH" Text="Ty seš nepoučitelnej." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+														<Response Role="PTACEK">
+															<Parenthetical>
+																<Text StringName="ptac_ptacek_pratelsky_VMrE" Text="přátelsky" />
+															</Parenthetical>
+															<Text StringName="ptac_ptacek_jo_ja_vim_nec_vL6z" Text="Kázání nech laskavě na Bohutovi a poslouchej..." />
+															<Commands>
+																<CameraCommand />
+															</Commands>
+														</Response>
+													</Elements>
+													<Decision Name="dec3" Priority="SideQuestSubmission" Autoselect="true">
+														<Sequences>
+															<Sequence EntryCondition="!Port('jindra_vi_o_loveckem_tabore')" EndType="Decision" Name="seq21">
+																<DesignName StringName="ptacek_za_seq21_HIWU" Text="seq21" />
+																<Elements>
+																	<Response Role="PTACEK">
+																		<Parenthetical>
+																			<Text StringName="ptac_ptacek_potesene_DRUt" Text="potěšeně" />
+																		</Parenthetical>
+																		<Text StringName="ptac_ptacek_slysel_jsem_o_CDIM" Text="V lese poblíž Bohouňovic jsem našel takový moc šikovný místo. Opuštěnej loveckej tábor! " />
+																		<Commands>
+																			<CameraCommand />
+																		</Commands>
+																		<ReviewNotesConcept>
+																			<Item Date="2022-08-23 13:52:19" UserName="ondrej.szlauer" Text="nejdřív bych to místo vychválil a pak řekl, je to sice kousek od zikmundova ležení, ale co se může stát?" AcceptState="Accepted" />
+																		</ReviewNotesConcept>
+																	</Response>
+																</Elements>
+																<Decision Name="dec10" Priority="SideQuestSubmission" Autoselect="true">
+																	<Sequences>
+																		<Sequence EndType="Decision" Visibility="Internal" Name="seq4">
+																			<DesignName StringName="ptacek_za_seq4_sSeh" Text="seq4" />
+																			<Triggers>
+																				<Port Name="dialog_aspon_jednou_zacat" />
+																			</Triggers>
+																			<Elements>
+																				<Response Role="PTACEK">
+																					<Parenthetical>
+																						<Text StringName="ptac_ptacek_vytahuje_se_cI1v" Text="přemlouvá" />
+																					</Parenthetical>
+																					<Text StringName="ptac_ptacek_puvodne_jsem__58cV" Text="Napadlo mě, jestli bys tam se mnou nezajel... Popijeme, poklábosíme, zalovíme si..." />
+																					<Commands>
+																						<CameraCommand />
+																					</Commands>
+																				</Response>
+																				<Response Role="PTACEK">
+																					<Text StringName="ptac_ptacek_je_tam_loveck_dPUZ" Text="Navíc je to po cestě do toho zikmundova ležení!" />
+																				</Response>
+																			</Elements>
+																			<Decision Name="dec5" Priority="SideQuestSubmission">
+																				<Sequences>
+																					<Sequence EntryCondition="Port('je_spravny_cas_na_lov') AND &#xD;&#xA;!SequenceUsed('prvni_prubeh_ukoncen')" EndType="EndDialogue" Name="seq7">
+																						<DesignName StringName="ptacek_za_seq7_SioI" Text="seq7" />
+																						<UiPrompt StringName="ui_ptacek_za_seq7_BsXD" Text="Jedeme!" />
+																						<Triggers>
+																							<Port Name="jde_se_lovit" />
+																						</Triggers>
+																						<Elements>
+																							<Response Role="HENRY" ReferenceLength="6">
+																								<Text StringName="ptac_henry_pojedu_rad_asp_iKXN" Text="Tak jedeme." />
+																								<Commands>
+																									<AnimationCommand Delay="0.27" FragmentId="ADLG_Nod" />
+																									<CameraCommand />
+																								</Commands>
+																								<ReviewNotesConcept>
+																									<Item Date="2022-08-23 14:02:44" UserName="ondrej.szlauer" Text="Podle mě by Jindra spíš měl reagovat ve stylu &quot;OK přemluvil si mě&quot; V těch předchozích dialozích reagoval vždycky spíš negativně, neměl by říct, že jede rád." AcceptState="Accepted" />
+																									<Item Date="2022-08-23 14:03:06" UserName="ondrej.szlauer" Text="Jo a asi bych nepsal za starých časů :D znají se tak 2 měsíce" AcceptState="Accepted" />
+																								</ReviewNotesConcept>
+																							</Response>
+																							<Response Role="PTACEK" ReferenceLength="3">
+																								<Parenthetical>
+																									<Text StringName="ptac_ptacek_radostne_KbMd" Text="radostně" />
+																								</Parenthetical>
+																								<Text StringName="ptac_ptacek_tak_vzhuru_ke_xDa7" Text="Výborně! Sedlej koně a připrav se, cítím pořádnej úlovek!" />
+																								<Commands>
+																									<AnimationCommand Delay="0.38" FragmentId="ADLG_Agree" />
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																						</Elements>
+																					</Sequence>
+																					<Sequence EntryCondition="!SequenceUsed('prvni_prubeh_ukoncen')" EndType="Decision" Name="henry_nemuze">
+																						<DesignName StringName="ptacek_za_henry_nemuze_0fyf" Text="henry nemůže" />
+																						<UiPrompt StringName="ui_ptacek_za_henry_nemuze_tJlW" Text="Teď nemůžu." />
+																						<Elements>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_jeste_potrebuj_7R7w" Text="Musím si ještě něco zařídit." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Parenthetical>
+																									<Text StringName="ptac_ptacek_smirlive_x73S" Text="smířlivě" />
+																								</Parenthetical>
+																								<Text StringName="ptac_ptacek_chapu_ale_neo_t9NE" Text="Pořád v jednom kole, co?" />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Text StringName="ptac_ptacek_tak_se_zastav_9uEX" Text="Tak se zastav, až budeš mít čas." />
+																							</Response>
+																						</Elements>
+																						<Decision Name="dec9" Priority="SideQuestSubmission" DesignName="Ukončení prvního průchodu">
+																							<Sequences>
+																								<Sequence EndType="EndDialogue" Visibility="Internal" Name="prvni_prubeh_ukoncen">
+																									<DesignName StringName="ptacek_za_prvni_prubeh_uk_CuL2" Text="První průběh ukončen" />
+																									<Elements>
+																										<Response Role="HENRY" />
+																									</Elements>
+																								</Sequence>
+																							</Sequences>
+																						</Decision>
+																					</Sequence>
+																					<Sequence EntryCondition="!Port('je_spravny_cas_na_lov') AND&#xD;&#xA;!SequenceUsed('prvni_prubeh_ukoncen')" EndType="GoTo" GoToDecision="dec9" Name="neni_vhodna_doba">
+																						<DesignName StringName="ptacek_za_seq10_qCmd" Text="není vhodná doba" />
+																						<UiPrompt StringName="ui_ptacek_za_seq10_O6O6" Text="Jedeme!" />
+																						<Elements>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_muzeme_vyrazit_3rl8" Text="Tak jedeme." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																								<ReviewNotesConcept>
+																									<Item Date="2022-08-23 14:08:06" UserName="ondrej.szlauer" Text="Kratší. Vyrazíme hned! nebo Jedem hned!" AcceptState="Accepted" />
+																								</ReviewNotesConcept>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Parenthetical>
+																									<Text StringName="ptac_ptacek_potesene_RgIc" Text="potěšeně" />
+																								</Parenthetical>
+																								<Text StringName="ptac_ptacek_vyborne_vyraz_4XqM" Text="Výborně, ale vyrazíme až za světla, teď bysme nic neulovili. Zastav se pozdějc." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																						</Elements>
+																					</Sequence>
+																					<Sequence EntryCondition="Port('je_spravny_cas_na_lov') AND &#xD;&#xA;SequenceUsed('prvni_prubeh_ukoncen')" EndType="EndDialogue" Name="seq10">
+																						<DesignName StringName="ptacek_za_seq10_GCAu" Text="seq10" />
+																						<UiPrompt StringName="ui_ptacek_za_seq10_I1S4" Text="Můžeme vyrazit." />
+																						<Triggers>
+																							<Port Name="jde_se_lovit" />
+																						</Triggers>
+																						<Elements>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_muzem_vyrazit_tVrr" Text="Můžem vyrazit." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Text StringName="ptac_ptacek_to_rad_slysim_RBu1" Text="To rád slyším!" />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Text StringName="ptac_ptacek_sedlej_kone_j_0pJ0" Text="Sedlej koně, Jindro, cejtím pořádnej úlovek!" />
+																							</Response>
+																						</Elements>
+																					</Sequence>
+																					<Sequence EntryCondition="SequenceUsed('prvni_prubeh_ukoncen')" EndType="EndDialogue" Visibility="Internal" Name="henry_nemuze_2">
+																						<DesignName StringName="ptacek_za_henry_nemuze_2_5zmH" Text="henry nemůže 2" />
+																						<UiPrompt StringName="ui_ptacek_za_henry_nemuze_wCtw" Text="Ještě si musím něco zařídit." />
+																						<Elements>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_vlastne_si_mus_NQvG" Text="Vlastně si musím ještě něco zařídit." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																						</Elements>
+																					</Sequence>
+																					<Sequence EntryCondition="!Port('je_spravny_cas_na_lov') AND&#xD;&#xA;SequenceUsed('prvni_prubeh_ukoncen')" EndType="EndDialogue" Visibility="Internal" Name="neni_vhodna_doba_2">
+																						<DesignName StringName="ptacek_za_neni_vhodna_dob_xQjb" Text="není vhodná doba 2" />
+																						<UiPrompt StringName="ui_ptacek_za_neni_vhodna__wBqr" Text="Můžeme vyrazit." />
+																						<Elements>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_muzeme_vyrazit_ThTc" Text="Můžeme vyrazit." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Parenthetical>
+																									<Text StringName="ptac_ptacek_rozmrzele_eXG4" Text="rozmrzele" />
+																								</Parenthetical>
+																								<Text StringName="ptac_ptacek_rikal_jsem_ze_naUS" Text="A to jdem na světlušky, nebo co?" />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="HENRY">
+																								<Text StringName="ptac_henry_no_1tJA" Text="No..." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																							<Response Role="PTACEK">
+																								<Text StringName="ptac_ptacek_prijd_pres_den_83vk" Text="Přijď přes den." />
+																								<Commands>
+																									<CameraCommand />
+																								</Commands>
+																							</Response>
+																						</Elements>
+																					</Sequence>
+																				</Sequences>
+																			</Decision>
+																		</Sequence>
+																	</Sequences>
+																</Decision>
+															</Sequence>
+															<Sequence EntryCondition="Port('jindra_vi_o_loveckem_tabore')" EndType="GoTo" GoToDecision="dec10" Name="seq20">
+																<DesignName StringName="ptacek_za_seq20_MNMc" Text="seq20" />
+																<Elements>
+																	<Response Role="PTACEK">
+																		<Text StringName="ptac_ptacek_pamatujes_si__Cn7M" Text="Pamatuješ si na ten loveckej tábor u Bohouňovic, o kterým jsem ti vyprávěl?" />
+																		<Commands>
+																			<CameraCommand />
+																		</Commands>
+																	</Response>
+																	<Response Role="HENRY">
+																		<Parenthetical>
+																			<Text StringName="ptac_henry_zasmeje_se_aQQz" Text="zasměje se" />
+																		</Parenthetical>
+																		<Text StringName="ptac_henry_myslis_tu_co_l_uAkT" Text="Ten jak jsi tam tý holce vysvětloval, proč ti říkaj Ptáček?" />
+																		<Commands>
+																			<CameraCommand />
+																		</Commands>
+																	</Response>
+																	<Response Role="PTACEK">
+																		<Text StringName="ptac_ptacek_presne_tu_Yccf" Text="Přesně ten!" />
+																		<Commands>
+																			<CameraCommand />
+																		</Commands>
+																	</Response>
+																</Elements>
+															</Sequence>
+														</Sequences>
+													</Decision>
+												</Sequence>
+											</Sequences>
+										</Decision>
+									</Sequence>
+									<Sequence EndType="GoTo" GoToDecision="dec3" Name="seq12">
+										<DesignName StringName="ptacek_za_seq12_m6K7" Text="seq12" />
+										<UiPrompt StringName="ui_ptacek_za_seq12_Kdtz" Text="To je dobrý nápad." />
+										<Elements>
+											<Response Role="HENRY">
+												<Text StringName="ptac_henry_to_je_dobrej_n_ejUv" Text="To je vlastně dobrej nápad! Kam vyrazíme?" />
+												<Commands>
+													<CameraCommand />
+												</Commands>
+											</Response>
+										</Elements>
+									</Sequence>
+								</Sequences>
+							</Decision>
+						</Sequence>
+						<Sequence EntryCondition="SequenceUsed('prvni') OR SequenceUsed('seq19') OR SequenceUsed('seq4')" EndType="GoTo" GoToDecision="dec5" Name="druhy">
+							<DesignName StringName="ptacek_za_seq9_MCEA" Text="druhy" />
+							<UiPrompt StringName="ui_ptacek_za_seq9_bwvq" Text="Ohledně toho lovu..." />
+							<Elements>
+								<Response Role="HENRY">
+									<Text StringName="ptac_henry_ohledne_toho_l_wYaA" Text="Ohledně toho lovu..." />
+									<Commands>
+										<CameraCommand />
+									</Commands>
+								</Response>
+							</Elements>
+						</Sequence>
+						<Sequence EntryCondition="!ThisSequenceUsed() AND Port('rovnou_do_questu_z_dialogu') AND !SequenceUsed('prvni_prubeh_ukoncen') AND SequenceUsed('seq4')" EndType="GoTo" GoToDecision="dec2" Visibility="Internal" Name="seq19">
+							<DesignName StringName="ptacek_za_seq19_B0u9" Text="seq19" />
+							<UiPrompt StringName="ui_ptacek_za_seq19_8jmI" Text="Ohledně lovu..." />
+							<Elements>
+								<Response Role="HENRY" />
+							</Elements>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</FaderDialog>
+	</Skald>
+</Database>

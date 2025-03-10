@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="track" HibernateMode="Script">
+			<Ports>
+				<Port Name="trackarea" Direction="In" Type="wh::xgenaimodule::Areas">
+					<DesignName StringName="track_trackarea_hwPr" Text="TrackArea" />
+				</Port>
+				<Port Name="actionprompt" Direction="In" Type="wh::framework::LocalizedString">
+					<DesignName StringName="track_actionprompt_swHV" Text="ActionPrompt" />
+				</Port>
+				<Port Name="decisionalias" Direction="In" Type="wh::dialogmodule::DecisionAlias">
+					<DesignName StringName="track_decisionalias_49US" Text="DecisionAlias" />
+				</Port>
+				<Port Name="focuscameratarget" Direction="In" Type="wh::xgenaimodule::LinkableObject*">
+					<DesignName StringName="track_focuscameratarget_zacZ" Text="FocusCameraTarget" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<AreaTrigger Name="areatrigger2" PositionY="120" PositionX="-70">
+					<Asset Name="Souls" Alias="player" />
+					<Edge From="Awake" To="IsActive" />
+					<Edge From="trackarea" To="Areas" />
+				</AreaTrigger>
+				<FocusCamera Name="focuscamera7" PositionY="440" PositionX="970">
+					<Constant Name="HorizontalLimits" Value="0.5,0.5" />
+					<Constant Name="VerticalLimits" Value="0.5,0.5" />
+					<Edge From="infiniteholdinteractiontrigger3.IsPressed" To="IsActive" />
+					<Edge From="focuscameratarget" To="Target">
+						<Vertex>vertex7</Vertex>
+					</Edge>
+				</FocusCamera>
+				<InfiniteHoldInteractionTrigger Name="infiniteholdinteractiontrigger3" PositionY="240" PositionX="610">
+					<Edge From="playerIEnteredArea.State" To="IsActive" />
+					<Edge From="actionprompt" To="StartActionPrompt">
+						<Vertex>vertex2</Vertex>
+						<Vertex>vertex1</Vertex>
+					</Edge>
+				</InfiniteHoldInteractionTrigger>
+				<State Name="playerIEnteredArea" PositionY="160" PositionX="270" TypeT="bool">
+					<Edge From="areatrigger2.OnEnter" To="SetTrue" />
+					<Edge From="areatrigger2.OnLeave" To="SetFalse" />
+				</State>
+				<Function Name="requestmonologue6" PositionY="430" PositionX="1410" MethodName="wh::xgenaimodule::RequestMonologue" DeclaringType="wh::xgenaimodule">
+					<Asset Name="Souls" Alias="player" />
+					<Edge From="decisionalias" To="DecisionAlias">
+						<Vertex>vertex6</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="focuscamera7.OnEnter" To="Exec" />
+				</Function>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="451" PositionX="566" />
+				<EdgeVertex Name="vertex2" PositionY="447" PositionX="-158" />
+				<EdgeVertex Name="vertex5" PositionY="730" PositionX="1310" />
+				<EdgeVertex Name="vertex6" PositionY="740" PositionX="-160" />
+				<EdgeVertex Name="vertex7" PositionY="561" PositionX="-165" />
+			</EdgeVertices>
+			<Assets>
+				<TriggerAreaAsset Name="oldOakArea" />
+				<TagPointAsset Name="oldOakTrack" />
+			</Assets>
+			<Text StringName="track_TYww" Text="Track" />
+		</Module>
+	</Skald>
+</Database>

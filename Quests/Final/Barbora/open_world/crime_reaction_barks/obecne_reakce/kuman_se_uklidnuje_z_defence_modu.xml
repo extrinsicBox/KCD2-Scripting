@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Dialog Name="kuman_se_uklidnuje_z_defence_modu">
+			<Text StringName="kuman_se_uklidnuje_z_defe_zgI0" Text="Kumán se uklidňuje z defence modu" />
+			<Dialogue Type="ingame monolog" TechnicalStatus="Enabled" Initiator="NonPlayer" ClashPriority="Crime" GesturesNotNeeded="true">
+				<Decision Name="dec1">
+					<Sequences>
+						<Sequence EndType="EndDialogue" Name="seq1">
+							<DesignName StringName="kuman_se__seq1_3BoM" Text="seq1" />
+							<Elements>
+								<Response Role="KUMAN_SE_UKLIDNUJE_Z_DEFENCE_MODU" />
+							</Elements>
+							<IncludedDecisions>
+								<IncludedDecision Decision="dialogsToInclude_npcVyhaniKuman" />
+							</IncludedDecisions>
+						</Sequence>
+					</Sequences>
+				</Decision>
+			</Dialogue>
+		</Dialog>
+	</Skald>
+</Database>

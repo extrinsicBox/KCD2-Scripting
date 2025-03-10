@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="tutorial_m02_t11_combat_icon">
+			<Ports>
+				<Port Name="active" Direction="In" Type="bool">
+					<DesignName StringName="tutorial__active_O2iS" Text="Active" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<DisplayTutorial Name="displaytutorial3" PositionY="-10" PositionX="380">
+					<Constant Name="Tutorial" Value="M02_T11_SilverSwordsIcon" />
+					<Edge From="threatstrigger1.OnThreatsActive" To="Show" />
+				</DisplayTutorial>
+				<SoulThreatsTrigger Name="threatstrigger1" PositionY="-80" PositionX="-10">
+					<Asset Name="Souls" Alias="player_any" />
+					<Edge From="active" To="IsActive" />
+				</SoulThreatsTrigger>
+			</Nodes>
+			<Text StringName="tutorial_m02_t11_combat_i_AR17" Text="Tutoriál M02_T11, combat icon" />
+		</Gameplay>
+	</Skald>
+</Database>

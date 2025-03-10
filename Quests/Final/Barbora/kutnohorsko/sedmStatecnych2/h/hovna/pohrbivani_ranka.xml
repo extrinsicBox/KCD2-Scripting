@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="pohrbivani_ranka">
+			<Definitions>
+				<Definition File="pohrbivani_ranka/jindra_nad_hrobem_ranka.xml" />
+			</Definitions>
+			<Nodes>
+				<InteractorOverride Name="interactoroverride1" PositionY="-20" PositionX="-170">
+					<Asset Name="Object" Alias="deadBody" />
+					<Constant Name="Type" Value="Hold" />
+					<Constant Name="ActionPrompt" Value="pohrbivan_pohrbit__wcM2" />
+					<Edge From="state4.Started" To="IsActive" />
+				</InteractorOverride>
+				<jindra_nad_hrobem_ranka Name="jindra_nad_hrobem_ranka" PositionY="390" PositionX="-180" />
+				<pohrbi_ranka Name="objectiveVisual5" PositionY="-240" PositionX="-170" RequiredForOutput="kutnohorsko">
+					<Edge From="state4.State" To="Progress" />
+				</pohrbi_ranka>
+				<State Name="state4" PositionY="-20" PositionX="-600" RequiredForOutput="kutnohorsko" TypeT="ProgressAbortable" />
+			</Nodes>
+			<Text StringName="pohrbivani_ranka_663a" Text="Pohřbívání Raňka" />
+			<Elements>
+				<ActionPromptElement>
+					<Text StringName="pohrbivan_pohrbit__wcM2" Text="Pohřbít " />
+				</ActionPromptElement>
+			</Elements>
+		</Gameplay>
+	</Skald>
+</Database>

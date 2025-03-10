@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="smrt_dulezitych_postav">
+			<Ports>
+				<Port Name="nekdo_dulezity_umrel" Direction="Out" Type="trigger">
+					<DesignName StringName="smrt_dule_nekdo_dulezity__PNLy" Text="někdo důležitý umřel" />
+				</Port>
+				<Port Name="quest_je_nastartovany" Direction="In" Type="bool">
+					<DesignName StringName="smrt_dule_quest_je_nastar_kY9s" Text="quest je nastartovaný" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<SoulDeathTrigger Name="deathtrigger2" PositionY="170" PositionX="-140">
+					<Edge From="joinarrays3.Array" To="Souls" />
+					<Edge From="quest_je_nastartovany" To="IsActive" />
+				</SoulDeathTrigger>
+				<Function Name="joinarrays3" PositionY="270" PositionX="-430" TypeT="wh::rpgmodule::Souls" MethodName="utilities::array::JoinArrays" DeclaringType="utilities::array">
+					<Asset Name="A" Alias="tachovImportantSouls" />
+					<Asset Name="B" Alias="zelejovImportantSouls" />
+				</Function>
+				<dulezita_postava_je_mrtva Name="objectiveVisual8" PositionY="-80" PositionX="610" RequiredForOutput="trosecko">
+					<Edge From="state7.State" To="Progress" />
+					<Edge From="state7.Death" To="SomeoneIsDead" />
+				</dulezita_postava_je_mrtva>
+				<Output Name="Output">
+					<Edge From="state7.OnDeath" To="nekdo_dulezity_umrel">
+						<Vertex>vertex1</Vertex>
+					</Edge>
+				</Output>
+				<State Name="state7" PositionY="-80" PositionX="140" RequiredForOutput="trosecko" TypeT="KonecZabomysichValek_killingImportantPeople">
+					<Edge From="deathtrigger2.OnDeath" To="SetDeath" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="141" PositionX="904" />
+			</EdgeVertices>
+			<Text StringName="smrt_dulezitych_postav_TOi3" Text="Smrt duležitých postav" />
+		</Module>
+	</Skald>
+</Database>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="odmena">
+			<Ports>
+				<Port Name="odmena" Direction="In" Type="trigger">
+					<DesignName StringName="odmena_odmena_Ktqb" Text="Odměna" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="odmena/penezni_odmena.xml" />
+			</Definitions>
+			<Nodes>
+				<AddReward Name="expSerm" PositionY="-200" PositionX="40">
+					<Edge From="odmena" To="AddReward" />
+					<Rewards>
+						<SkillReward Type="fencing" ExperienceChange="4-normal" />
+					</Rewards>
+				</AddReward>
+				<penezni_odmena Name="penezni_odmena" PositionY="110" PositionX="-10">
+					<Constant Name="amount" Value="50" />
+					<Edge From="odmena" To="exec" />
+				</penezni_odmena>
+			</Nodes>
+			<Text StringName="odmena_dOab" Text="Odměna" />
+		</Module>
+	</Skald>
+</Database>

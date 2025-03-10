@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="nastaveni_pro_dialog_po_konci_souteze">
+			<Ports>
+				<Port Name="misto_pro_rozhodciho" Direction="In" Type="wh::entitymodule::TagPoint*">
+					<DesignName StringName="nastaveni_misto_pro_rozho_P1Pc" Text="místo pro rozhodčího" />
+				</Port>
+				<Port Name="referee" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="nastaveni_referee_6kDb" Text="rozhodčí" />
+				</Port>
+				<Port Name="hrac_vyhral_1" Direction="Out" Type="wh::dialogmodule::DialogParams*">
+					<DesignName StringName="nastaveni_hrac_vyhral_1_Moc9" Text="dialogParams" />
+				</Port>
+				<Port Name="dialogueholder" Direction="Out" Type="wh::entitymodule::DialogueHolder*">
+					<DesignName StringName="nastaveni_dialogueholder_u6gk" Text="dialogueHolder" />
+				</Port>
+				<Port Name="dialogueholder_1" Direction="In" Type="wh::entitymodule::DialogueHolder*">
+					<DesignName StringName="nastaveni_dialogueholder_1_QfID" Text="dialogueHolder" />
+				</Port>
+				<Port Name="start_souteze" Direction="In" Type="trigger">
+					<DesignName StringName="nastaveni_start_souteze_Eevo" Text="start soutěže" />
+				</Port>
+				<Port Name="konec_souteze" Direction="In" Type="trigger">
+					<DesignName StringName="nastaveni_konec_souteze_t9Gn" Text="konec soutěže" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="createdialogparams2" PositionY="430" PositionX="10" MethodName="wh::dialogmodule::CreateDialogParams" DeclaringType="wh::dialogmodule">
+					<Edge From="referee" To="Participants" />
+				</Function>
+				<LinkEffectNoData Name="linkeffectnodata54" PositionY="-720" PositionX="110">
+					<Constant Name="Tag" Value="setting" />
+					<Edge From="makearray4.Array" To="From" />
+					<Edge From="referee" To="To" />
+					<Edge From="state5.State" To="IsActive" />
+				</LinkEffectNoData>
+				<MakeArray Name="makearray4" PositionY="-720" PositionX="-230" TypeT="wh::xgenaimodule::LinkableObjects">
+					<Edge From="misto_pro_rozhodciho" To="A" />
+				</MakeArray>
+				<Output Name="Output">
+					<Edge From="createdialogparams2.DialogParams" To="hrac_vyhral_1" />
+					<Edge From="dialogueholder_1" To="dialogueholder" />
+				</Output>
+				<SetEntityContext Name="setentitycontext6" PositionY="-230" PositionX="480">
+					<Constant Name="Context" Value="shootingRange_isOpen" />
+					<Edge From="referee" To="Souls" />
+					<Edge From="timer7.Running" To="IsActive" />
+				</SetEntityContext>
+				<State Name="state5" PositionY="-980" PositionX="-230" TypeT="bool">
+					<Edge From="start_souteze" To="SetTrue" />
+					<Edge From="konec_souteze" To="SetFalse" />
+				</State>
+				<Timer Name="timer7" PositionY="-480" PositionX="110">
+					<Constant Name="Duration" Value="3s" />
+					<Constant Name="TimeType" Value="GameTime" />
+					<Edge From="konec_souteze" To="SetRunning" />
+				</Timer>
+			</Nodes>
+			<Notes>
+				<Note Name="note8" PositionY="-310" PositionX="460">
+					<Text StringName="nastaveni_note8_trYP" Text="aby byl dostupný promt o střelnici po obdržení odměny" />
+				</Note>
+				<Note Name="note9" PositionY="-780" PositionX="110">
+					<Text StringName="nastaveni_note9_UDJM" Text="teleport do odměňovacího dialogu" />
+				</Note>
+			</Notes>
+			<Text StringName="nastaveni_pro_dialog_po_k_P627" Text="nastavení pro dialog po konci soutěže" />
+		</Module>
+	</Skald>
+</Database>

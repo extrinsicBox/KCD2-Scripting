@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Scene Name="po_dialogu_s_certem">
+			<Text StringName="po_dialogu_s_certem_5GOh" Text="Po dialogu s Čertem" />
+			<Elements>
+				<DescriptionElement>
+					<Text StringName="po_dialog_po_dialogu_nebo_diSJ" Text="PO DIALOGU nebo SOUBOJI - VARIANTY A), B), C) podle vyústění" />
+				</DescriptionElement>
+				<ImageElement>
+					<Image Filename="malesov_afterduel.png">
+						<Description StringName="po_dialog_malesov_afterdu_tnAE" Text="malesov_afterduel" />
+					</Image>
+				</ImageElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_a_jindra_vyhral_rUUV" Text="A) JINDRA VYHRÁL SOUBOJ" />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_sermirska_vymen_WZr8" Text="Šermířská výměna, při které Čert prohrává a nakonec po hráčově úspěšném výpadu padá na zem. Jindřich ho má pod kontrolou s mečem připraveným k finálnímu úderu, ale zastavil se. Dřív než něco stačí říct, Čert promluví sám. Nejdřív si ale odplivne, nikoliv pohrdavě, ale prostě má hubu plnou slepených slin." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_SvFt" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_no_vida_b_jXLz" Text="No vida. Bastard naučil Čerta skákat..." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_chvili_na_nej_h_ubMi" Text="Chvíli na něj hledí a zkoumá nějakou emoci v jeho obličeji. Jindřich se tváří drsně a neoblomně. Hlouček mužů okolo je dost napjatý a nevědí co mají dělat. " />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_l6fs" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_no_co_vyh_zafG" Text="No co. Vyhráls. Silnější pes mrdá. Ať je po tvým." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_jindrich_je_tro_24KB" Text="Jindřich je trochu překvapený, ale stahuje meč. Čert se těžce zvedá. " />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_g9B9" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_nechame_h_8pYM" Text="Necháme hnojokydy naživu. " />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_pak_prijde_bliz_ZtZc" Text="Pak přijde blízko k Jindrovi a vyzývavě mu tlumeným hlasem jen mezi nimi vmete do obličeje." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_toeF" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_ale_doufa_wVhI" Text="Ale doufám, že víš co děláš a že místo pár vidláků kvůli tobě neskape nikdo z našich. Protože to by byla jenom tvoje vina!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_jindrich_s_kame_k7ht" Text="Jindřich s kamennou tváří nic neřekne. Pak se Čert otočí na poněkud překvapené muže." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_Fuuy" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_co_cumite_JFER" Text="Co čumíte? Nikdy jste neviděli někoho dostat přes držku? Uděláme to tady podle mladýho. Bez zábavy. " />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_pri_tom_kyvne_s_oVlA" Text="Při tom kývne směrem k vesnici. Všichni jsou překvapení, že akceptoval prohru. Najednou ale Hans zvedne ruku a ukáže kamsi za Čerta a Jindru. Tam stojí ve vysoké trávě na kraji lesa muž - vesničan, je docela daleko. (Vidíme jeho tvář: je poďobaný od neštovic, a podle jeho oddění a luku na zádech poznáme, že je to lovčí.) Stojí jako zkamenělý a s otevřenou hubou nevěřícně pozoruje naší skupinku. Čert se na něj otočí. Někdo z mužů pozvedne kuši, ale nestač zacílití. Vesničan si uvědomí, že ho viděli a zděšeně začne prchat. Velmi rychle zmizí v lese. Všichni se otočí na Čerta, jestli ho mají pronásledovat. Čert mávne rukou a pak se jízlivě podívá na Henryho." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_QHWc" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_jen_ho_ne_koF2" Text="Jen ho nechte, ať si běží." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_pak_ukaze_smere_FBSz" Text="Pak ukáže směrem k jejich cíli." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_GjDO" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_seberte_s_HmF5" Text="Seberte se, obejdeme vesnici a jdeme za Žižkou. Nenápadně!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_konec_varianty__J5mS" Text="Konec varianty A - navazuje gameplay." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_b_jindra_prohra_nVqp" Text="B) JINDRA PROHRÁL SOUBOJ" />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_sermirska_vymen_pKrD" Text="Šermířská výměna, při které Jindra prohrává a nakonec po Čertově úspěšném výpadu padá na zem. Čert ho má pod kontrolou s mečem připraveným k finálnímu úderu, ale zastavil se. Čert promluví. Nejdřív si ale odplivne, nikoliv pohrdavě, ale prostě má hubu plnou slepených slin." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_aaQK" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_myslel_si_hspb" Text="Myslel sis, že budeš poroučet starýmu Čertovi? " />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_zachechta_se_a__aIPI" Text="Zachechtá se a skloní se vyzývavě k Jindrovi." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_v5uX" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_omyl_tady_sttY" Text="Omyl! Tady se bude dělat to, co řeknu já..." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_pak_se_narovna__FjNz" Text="Pak se narovná a teatrálně mluví na půl k Jindrovi a napůl k mužům." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_1xLL" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_ale_musim_4Egw" Text="Ale musím říct, že máš kuráž. Takže na tohle všichni zapomeneme jako by se to nikdy nestalo. Jasný?" />
+											<ReviewNotesStylistic>
+												<Item Date="2023-06-07 12:20:21" UserName="david.horak" Text="2x to samý - zapomeneme+budem dělat" AcceptState="Accepted" />
+											</ReviewNotesStylistic>
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_vsichni_na_nej__naKL" Text="Všichni na něj trochu pobaveně koukají. Jindřich se ztěžka zvedá ze země. " />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_varianta_b_pokr_1PDM" Text="Varianta B) pokračuje variantou C)" />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_c_jindra_souhla_GON7" Text="C) JINDRA SOUHLASIL S ÚTOKEM NA VESNICI" />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_uher_najednou_z_j9Xr" Text="Uher najednou zvedne ruku a ukáže kamsi za Čerta. Tam stojí ve vysoké trávě na kraji lesa  muž - vesničan, je docela daleko. (Vidíme jeho tvář: je poďobaný od neštovic, a podle jeho oddění a luku na zádech poznáme, že je to lovčí.) Stojí jako zkamenělý a s otevřenou hubou nevěřícně pozoruje naší skupinku. Čert se na něj otočí. Někdo z mužů pozvedne kuši, ale nestač zacílit. Vesničan si uvědomí, že ho viděli a zděšeně začne prchat. Velmi rychle zmizí v lese. Všichni se otočí na Čerta, jestli ho mají pronásledovat. Čert mávne rukou." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_KQJ0" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_jen_ho_ne_BJmu" Text="Jen ho nechte, ať si běží. Ten už nikomu nepomůže." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_pak_ukaze_na_ve_rdO2" Text="Pak ukáže na vesnici." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_F7Pn" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_no_co_cum_1lHy" Text="No co čumíte. Máme tady nějakou práci, tak do toho." />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_podiva_se_na_ji_9tIP" Text="Podívá se na Jindřicha." />
+				</SceneActionElement>
+				<LinearDialogueElement>
+					<Dialogue>
+						<Decision Name="dec1" Priority="MainQuestSubmission">
+							<Sequences>
+								<Sequence Name="seq1">
+									<DesignName StringName="po_dialog_seq1_leiE" Text="seq1" />
+									<Elements>
+										<Response Role="SUCHY_CERT">
+											<Text StringName="po_d_suchy_cert_a_na_tebe_JL9u" Text="A na tebe si dám pozor! Koukej dělat co máš!" />
+										</Response>
+									</Elements>
+								</Sequence>
+							</Sequences>
+						</Decision>
+					</Dialogue>
+				</LinearDialogueElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_muzi_zapaluji_p_sUuO" Text="Muži zapalují pochodně a rozbíhají se k vesnici. Vidíme je z dálky, kamera je úrovni terénu a výhled trochu zakrývá rozmazaná vysoká tráva. Muži přibíhají s křikem k vesnici a házejí pochodně na střechy domů. Do toho akční fps kamera, sledující někoho jak běží mezi domy a křičí. Z domu vybíhají překvpení vesničané a ihned dostávají smrtící rány. Všechno je v pohybu. Samotné hoření domů vidíme jen zpočátku z dálky a pak až po sérii rozklepaných detailů, kdy už je vše v plném proudu. Hráč pak stojí na kraji vesnice a před ním začínají jatka. Ingame ho Čert buzeruje, aby něco dělal." />
+				</SceneActionElement>
+				<SceneActionElement>
+					<Text StringName="po_dialog_konec_variant_b_xEG3" Text="Konec variant B) i C)." />
+				</SceneActionElement>
+			</Elements>
+		</Scene>
+	</Skald>
+</Database>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<DialogWrapper Name="uplatek_konselovi" HibernateMode="Script">
+			<Ports>
+				<Port Name="konsel_byl_uplacen" Direction="Out" Type="trigger">
+					<DesignName StringName="uplatek_k_konsel_byl_upla_csQC" Text="konšel byl uplacen" />
+				</Port>
+				<Port Name="polner_podplacen" Direction="Out" Type="bool">
+					<DesignName StringName="uplatek_k_polner_podplacen_WRDy" Text="Polner podplacen" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="uplatek_konselovi/uplatek_konselovi.xml" />
+			</Definitions>
+			<Nodes>
+				<expectedeffect Name="expectedeffect" PositionY="310" PositionX="-20" Namespace="utils.crime.trespass">
+					<Asset Name="npcs" Alias="polner" />
+					<Constant Name="extenduntilplayerleavestrespass" Value="true" />
+					<Edge From="Awake" To="isactive" />
+				</expectedeffect>
+				<Output Name="Output">
+					<Edge From="uplatek_konselovi.uplatek_success" To="konsel_byl_uplacen" />
+					<Edge From="uplatek_konselovi.uplaceno" To="polner_podplacen" />
+				</Output>
+				<payment Name="payment" PositionY="-370" PositionX="-10" Namespace="utils.speech">
+					<Constant Name="moneysettings" Value="5000" />
+					<Edge From="uplatek_konselovi.uplatek_success" To="pay" />
+					<Edge From="uplatek_konselovi.ONDREJ_POLNER" To="recipient" />
+				</payment>
+				<uplatek_konselovi Name="uplatek_konselovi" PositionY="-10" PositionX="-20">
+					<Edge From="payment.playerhasmoney" To="ma_na_uplatek" />
+					<Edge From="payment.money" To="Payment_seq3" />
+				</uplatek_konselovi>
+			</Nodes>
+			<MapVizLocation MapName="kutnohorsko" PositionX="3164" PositionY="717" />
+		</DialogWrapper>
+	</Skald>
+</Database>

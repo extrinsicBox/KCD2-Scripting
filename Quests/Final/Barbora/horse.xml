@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="horse" HasteNamespace="true">
+			<Ports>
+				<Port Name="playercamefromtrosecko_debug_without_horse" Direction="In" Type="trigger">
+					<DesignName StringName="horse_playercamefromtrose_iUu5" Text="PlayerCameFromTrosecko (debug without horse)" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Function Name="executeconsolestring8" PositionY="-220" PositionX="600" MethodName="wh::conceptmodule::ExecuteConsoleString" DeclaringType="wh::conceptmodule">
+					<Constant Name="Command" Value="#player.player:SetPlayerHorse(System.GetEntityByName(&quot;haste_horse&quot;).id)" />
+					<Edge From="profilestatetrigger7.OnLoaded" To="Exec" />
+				</Function>
+				<HasteTrigger Name="horse_streamOnly" PositionY="170" PositionX="-500" />
+				<HasteTrigger Name="horse_streamUnstream" PositionY="-30" PositionX="-560" />
+				<Function Name="not6" PositionY="70" PositionX="110" MethodName="math::boolean::Not" DeclaringType="math::boolean">
+					<Edge From="state5.State" To="Value">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+				</Function>
+				<Layer Name="profile4" PositionY="-50" PositionX="730">
+					<Asset Name="Profiles" Alias="haste_horseProfile" />
+					<Edge From="state5.State" To="IsActive" />
+				</Layer>
+				<ProfileStateTrigger Name="profilestatetrigger7" PositionY="-220" PositionX="230">
+					<Asset Name="Profiles" Alias="haste_horseProfile" />
+					<Edge From="state9.State" To="IsActive" />
+				</ProfileStateTrigger>
+				<State Name="state5" PositionY="-30" PositionX="390" TypeT="bool">
+					<Edge From="not6.bool" To="Value" />
+					<Edge From="horse_streamUnstream.OnTrigger" To="Exec" />
+					<Edge From="horse_streamOnly.OnTrigger" To="SetTrue">
+						<Vertex>vertex3</Vertex>
+					</Edge>
+					<Edge From="playercamefromtrosecko_debug_without_horse" To="SetTrue" />
+				</State>
+				<State Name="state9" PositionY="-210" PositionX="-150" TypeT="bool">
+					<Edge From="horse_streamUnstream.OnTrigger" To="SetTrue" />
+					<Edge From="horse_streamOnly.OnTrigger" To="SetTrue" />
+					<Edge From="playercamefromtrosecko_debug_without_horse" To="SetTrue" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="220" PositionX="580" />
+				<EdgeVertex Name="vertex2" PositionY="220" PositionX="130" />
+				<EdgeVertex Name="vertex3" PositionY="260" PositionX="290" />
+			</EdgeVertices>
+			<Assets>
+				<ProfileAsset Name="haste_horseProfile" AssetProfiles="haste_horse" />
+			</Assets>
+			<Text StringName="horse_Gika" Text="horse" />
+		</Module>
+	</Skald>
+</Database>

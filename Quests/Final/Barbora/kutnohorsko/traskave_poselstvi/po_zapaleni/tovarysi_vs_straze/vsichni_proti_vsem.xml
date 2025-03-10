@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Module Name="vsichni_proti_vsem">
+			<Ports>
+				<Port Name="combat" Direction="In" Type="trigger">
+					<DesignName StringName="vsichni_p_combat_4PZN" Text="Combat" />
+				</Port>
+				<Port Name="combat_probiha" Direction="Out" Type="bool">
+					<DesignName StringName="vsichni_p_combat_probiha_0PGh" Text="Combat probíhá" />
+				</Port>
+				<Port Name="tovarysstvo" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="vsichni_p_tovarysstvo_6Tk0" Text="Tovaryšstvo" />
+				</Port>
+				<Port Name="straze" Direction="In" Type="wh::rpgmodule::Souls">
+					<DesignName StringName="vsichni_p_straze_9Lpi" Text="Stráže" />
+				</Port>
+			</Ports>
+			<Nodes>
+				<Output Name="Output">
+					<Edge From="state102.Active" To="combat_probiha" />
+				</Output>
+				<SetRelationContext Name="setrelationcontext101" PositionY="0" PositionX="600">
+					<Constant Name="Context" Value="combat_forcedTarget" />
+					<Asset Name="From" Alias="Vazoun" />
+					<Asset Name="To" Alias="player" />
+					<Edge From="state102.Active" To="IsActive" />
+				</SetRelationContext>
+				<SetRelationContext Name="setrelationcontext101_1" PositionY="220" PositionX="600">
+					<Constant Name="Context" Value="combat_forcedTarget" />
+					<Asset Name="From" Alias="commander" />
+					<Asset Name="To" Alias="player" />
+					<Edge From="state102.Active" To="IsActive" />
+				</SetRelationContext>
+				<skirmish Name="skirmish_2" PositionY="380" PositionX="340" Namespace="utils.combat">
+					<Edge From="state102.Active" To="isactive" />
+					<Edge From="tovarysstvo" To="souls1" />
+					<Edge From="straze" To="souls2" />
+				</skirmish>
+				<State Name="state102" PositionY="160" PositionX="0" TypeT="Progress">
+					<Edge From="skirmish_2.souls1won" To="SetDone">
+						<Vertex>vertex1</Vertex>
+						<Vertex>vertex2</Vertex>
+					</Edge>
+					<Edge From="skirmish_2.souls2won" To="SetDone">
+						<Vertex>vertex3</Vertex>
+						<Vertex>vertex4</Vertex>
+					</Edge>
+					<Edge From="combat" To="SetActive" />
+				</State>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex1" PositionY="660" PositionX="510" />
+				<EdgeVertex Name="vertex2" PositionY="664" PositionX="-6" />
+				<EdgeVertex Name="vertex3" PositionY="680" PositionX="490" />
+				<EdgeVertex Name="vertex4" PositionY="686" PositionX="-14" />
+			</EdgeVertices>
+			<Text StringName="vsichni_proti_vsem_3FcG" Text="Všichni proti všem" />
+		</Module>
+	</Skald>
+</Database>

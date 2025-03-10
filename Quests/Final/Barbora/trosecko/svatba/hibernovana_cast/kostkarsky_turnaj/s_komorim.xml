@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="brambora">
+	<Skald>
+		<Gameplay Name="s_komorim">
+			<Ports>
+				<Port Name="hrac_si_muze_zahrat_s_komorim" Direction="In" Type="trigger">
+					<DesignName StringName="s_komorim_hrac_si_muze_za_qXkW" Text="hráč si může zahrát s Komořím" />
+				</Port>
+				<Port Name="hrac_ziskal_odznacek_od_komoriho" Direction="Out" Type="trigger">
+					<DesignName StringName="s_komorim_hrac_ziskal_odz_06Ky" Text="Hráč získal odznáček od Komořího" />
+				</Port>
+				<Port Name="hrac_porazil_komoriho" Direction="Out" Type="bool">
+					<DesignName StringName="s_komorim_hrac_porazil_ko_H6gD" Text="Hráč porazil Komořího" />
+				</Port>
+				<Port Name="faze" Direction="In" Type="WaitForBergov">
+					<DesignName StringName="s_komorim_faze_dPgb" Text="fáze" />
+				</Port>
+				<Port Name="komori_zrovna_hleda_kurtizanu" Direction="In" Type="bool">
+					<DesignName StringName="s_komorim_komori_zrovna_h_fJFc" Text="komoří zrovna hledá kurtizánu" />
+				</Port>
+				<Port Name="zacala_rvacka" Direction="In" Type="trigger">
+					<DesignName StringName="s_komorim_zacala_rvacka_PqDl" Text="začala rvačka" />
+				</Port>
+				<Port Name="jindra_nasel_kurtizanu" Direction="In" Type="bool">
+					<DesignName StringName="s_komorim_jindra_nasel_ku_Wroi" Text="Jindra našel kurtizánu" />
+				</Port>
+			</Ports>
+			<Definitions>
+				<Definition File="s_komorim/komori_zrovna_tanci.xml" />
+				<Definition File="s_komorim/zacatek_s_komorim.xml" />
+				<Definition File="s_komorim/vysledek_s_komorim.xml" />
+			</Definitions>
+			<Nodes>
+				<Function Name="compare18" PositionY="520" PositionX="360" TypeT="WaitForBergov" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="SecondPhase" />
+					<Edge From="faze" To="ValueA">
+						<Vertex>vertex14</Vertex>
+					</Edge>
+				</Function>
+				<Function Name="compare19" PositionY="310" PositionX="360" TypeT="WaitForBergov" MethodName="Control::Compare" DeclaringType="Control">
+					<Constant Name="Op" Value="Equals" />
+					<Constant Name="ValueB" Value="FifthPhase" />
+					<Edge From="faze" To="ValueA">
+						<Vertex>vertex14</Vertex>
+					</Edge>
+				</Function>
+				<EventFunction Name="createplayerreward21" PositionY="420" PositionX="2150" MethodName="wh::entitymodule::CreatePlayerReward" DeclaringType="wh::entitymodule">
+					<Constant Name="ItemClass" Value="a16e6c86-2970-4106-a25b-9f4ffa181972" />
+					<Edge From="vysledek_s_komorim.jindra_ziskal_odznacek" To="Exec" />
+				</EventFunction>
+				<If Name="if20" PositionY="40" PositionX="90">
+					<Edge From="zacala_rvacka" To="Exec" />
+					<Edge From="letsPlayChamberlain.Started" To="Condition">
+						<Vertex>vertex17</Vertex>
+						<Vertex>vertex18</Vertex>
+					</Edge>
+				</If>
+				<jindrich_se_napije Name="jindrich_se_napije" PositionY="220" PositionX="2160" Namespace="svatba">
+					<Constant Name="mnozstvi" Value="1" />
+					<Edge From="vysledek_s_komorim.jindra_pije" To="napit_se" />
+				</jindrich_se_napije>
+				<komori_zrovna_tanci Name="komori_zrovna_tanci" PositionY="400" PositionX="840">
+					<Edge From="compare18.bool" To="n2_faze" />
+				</komori_zrovna_tanci>
+				<State Name="letsPlayChamberlain" PositionY="-220" PositionX="360" RequiredForOutput="trosecko" TypeT="ProgressAbortable">
+					<Edge From="hrac_si_muze_zahrat_s_komorim" To="SetStarted" />
+					<Edge From="vysledek_s_komorim.jindra_ziskal_odznacek" To="SetCompleted">
+						<Vertex>vertex4</Vertex>
+						<Vertex>vertex5</Vertex>
+					</Edge>
+					<Edge From="if20.True" To="SetAborted" />
+				</State>
+				<ziskej_odznacek_od_komoriho Name="objectiveVisual1" PositionY="-300" PositionX="680" RequiredForOutput="trosecko">
+					<Edge From="letsPlayChamberlain.State" To="Progress" />
+				</ziskej_odznacek_od_komoriho>
+				<Output Name="Output">
+					<Edge From="letsPlayChamberlain.OnCompleted" To="hrac_ziskal_odznacek_od_komoriho">
+						<Vertex>vertex6</Vertex>
+					</Edge>
+					<Edge From="letsPlayChamberlain.Completed" To="hrac_porazil_komoriho">
+						<Vertex>vertex8</Vertex>
+					</Edge>
+				</Output>
+				<spusteni_a_vyhodnoceni_kostek Name="spusteni_a_vyhodnoceni_kostek" PositionY="100" PositionX="1290" Namespace="svatba">
+					<Asset Name="protihrac" Alias="komori" />
+					<Asset Name="stul" Alias="diceTable" />
+					<Edge From="zacatek_s_komorim.zacatek_kostek" To="start_minihry" />
+				</spusteni_a_vyhodnoceni_kostek>
+				<vysledek_s_komorim Name="vysledek_s_komorim" PositionY="160" PositionX="1740">
+					<Edge From="spusteni_a_vyhodnoceni_kostek.minihra_skoncila" To="EnqueueDialogue" />
+					<Edge From="spusteni_a_vyhodnoceni_kostek.dialog_params" To="DialogParams" />
+					<Edge From="spusteni_a_vyhodnoceni_kostek.hrac_vyhral" To="jindra_vyhral" />
+					<Edge From="spusteni_a_vyhodnoceni_kostek.hrac_prohral" To="jindra_prohral" />
+					<Edge From="compare19.bool" To="komori_uz_vi_ze_se_kurtizana_nevrati">
+						<Vertex>vertex15</Vertex>
+						<Vertex>vertex16</Vertex>
+					</Edge>
+				</vysledek_s_komorim>
+				<zacatek_s_komorim Name="zacatek_s_komorim" PositionY="140" PositionX="840">
+					<Edge From="komori_zrovna_hleda_kurtizanu" To="komori_zrovna_hleda_kurtizanu">
+						<Vertex>vertex9</Vertex>
+					</Edge>
+					<Edge From="letsPlayChamberlain.Started" To="hrac_muze_vyzvat_komoriho" />
+					<Edge From="compare19.bool" To="komori_uz_vi_ze_se_kurtizana_nevrati">
+						<Vertex>vertex15</Vertex>
+					</Edge>
+					<Edge From="jindra_nasel_kurtizanu" To="jindra_nasel_kurtizanu">
+						<Vertex>vertex19</Vertex>
+					</Edge>
+				</zacatek_s_komorim>
+			</Nodes>
+			<EdgeVertices>
+				<EdgeVertex Name="vertex14" PositionY="527" PositionX="231" />
+				<EdgeVertex Name="vertex15" PositionY="400" PositionX="720" />
+				<EdgeVertex Name="vertex16" PositionY="399" PositionX="1625" />
+				<EdgeVertex Name="vertex17" PositionY="260" PositionX="590" />
+				<EdgeVertex Name="vertex18" PositionY="260" PositionX="130" />
+				<EdgeVertex Name="vertex19" PositionY="228" PositionX="-19" />
+				<EdgeVertex Name="vertex4" PositionY="-400" PositionX="1880" />
+				<EdgeVertex Name="vertex5" PositionY="-390" PositionX="380" />
+				<EdgeVertex Name="vertex6" PositionY="60" PositionX="2770" />
+				<EdgeVertex Name="vertex8" PositionY="80" PositionX="2770" />
+				<EdgeVertex Name="vertex9" PositionY="200" PositionX="-10" />
+			</EdgeVertices>
+			<Text StringName="s_komorim_0cef" Text="S Komořím" />
+		</Gameplay>
+	</Skald>
+</Database>

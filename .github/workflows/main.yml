@@ -1,34 +1,36 @@
-name: Extract and Push ZIP Contents
+name: XX Extract ZIP and Push Contents
 
 on:
-  workflow_dispatch:  # This allows you to run it manually from the Actions tab
+  workflow_dispatch: # Manual trigger from GitHub interface
 
 jobs:
-  extract_zip_and_push:
+  extract-zip:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repo
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Download ZIP from URL (or skip if uploading)
+      - name: Download ZIP from raw link
         run: |
-          curl -L -o archive.zip https://github.com/extrinsicBox/KCD2-Scripting/blob/main/KCD2_Scripts.zip
+          curl -L -o archive.zip https://raw.githubusercontent.com/extrinsicBox/KCD2-Scripting/main/KCD2_Scripts.zip
 
-      - name: Unzip Files
+      - name: Unzip the archive
         run: |
-          unzip my_files.zip -d temp_folder
-          ls temp_folder
+          unzip archive.zip -d extracted_files
+          ls extracted_files
 
-      - name: Move Extracted Files to Repo
+      - name: Move files into repo
         run: |
-          mv temp_folder/* .
-          rm -rf temp_folder
+          mv extracted_files/* .
+          rm -rf extracted_files
 
-      - name: Commit and Push Changes
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Extracted and added files from ZIP"
+          git diff --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Extracted and added files from zip"
           git push origin main
